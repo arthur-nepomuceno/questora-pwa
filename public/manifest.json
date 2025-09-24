@@ -1,6 +1,6 @@
 {
-  "name": "Questora - Quiz Interativo",
-  "short_name": "Questora",
+  "name": "Show do Milênio - Quiz Interativo",
+  "short_name": "Show do Milênio",
   "description": "Plataforma de perguntas e respostas com design inspirado no Show do Milhão",
   "start_url": "/",
   "display": "standalone",

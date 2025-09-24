@@ -16,7 +16,7 @@ export default function InstallPrompt() {
       <div className="install-content">
         <div className="install-icon">📱</div>
         <div className="install-text">
-          <h3>Instalar Questora</h3>
+          <h3>Instalar Show do Milênio</h3>
           <p>Adicione à tela inicial para acesso rápido!</p>
         </div>
         <div className="install-actions">

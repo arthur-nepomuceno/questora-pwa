@@ -1,4 +1,4 @@
-const CACHE_NAME = 'questora-v1.0.0';
+const CACHE_NAME = 'show-milenio-v1.0.0';
 const STATIC_CACHE_URLS = [
   '/',
   '/manifest.json',

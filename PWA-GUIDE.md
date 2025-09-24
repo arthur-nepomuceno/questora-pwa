@@ -1,4 +1,4 @@
-# 🚀 Guia PWA - Questora
+# 🚀 Guia PWA - Show do Milênio
 
 ## 📱 O que é um PWA?
 
@@ -33,14 +33,14 @@
 ## 📱 Como Instalar no Celular
 
 ### **Android (Chrome/Samsung Internet):**
-1. Abra o Questora no navegador
+1. Abra o Show do Milênio no navegador
 2. Aguarde o prompt de instalação aparecer
 3. Toque em "Instalar" ou "Adicionar à tela inicial"
 4. Confirme a instalação
 5. O app aparecerá na tela inicial
 
 ### **iOS (Safari):**
-1. Abra o Questora no Safari
+1. Abra o Show do Milênio no Safari
 2. Toque no botão de compartilhar (📤)
 3. Selecione "Adicionar à Tela Inicial"
 4. Confirme o nome e toque em "Adicionar"
@@ -140,4 +140,4 @@ Para dúvidas sobre PWA:
 
 ---
 
-**🎯 Questora PWA - Instale no seu celular e teste seus conhecimentos!**
+**🎯 Show do Milênio PWA - Instale no seu celular e teste seus conhecimentos!**

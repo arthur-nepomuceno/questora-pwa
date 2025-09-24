@@ -96,8 +96,8 @@ export const usePWA = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Questora - Quiz Interativo',
-          text: 'Teste seus conhecimentos com o Questora!',
+          title: 'Show do Milênio - Quiz Interativo',
+          text: 'Teste seus conhecimentos com o Show do Milênio!',
           url: window.location.href,
         });
       } catch (error) {

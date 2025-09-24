@@ -172,8 +172,8 @@ body {
   min-height: 100vh;
 }
 
-/* Logo do Questora no estilo Show do Milhão */
-.questora-logo {
+/* Logo do Show do Milênio no estilo Show do Milhão */
+.show-milenio-logo {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,7 +185,7 @@ body {
   border: 3px solid #ffeb3b;
 }
 
-.questora-logo h1 {
+.show-milenio-logo h1 {
   color: #ffeb3b;
   font-size: 3rem;
   font-weight: bold;
@@ -196,7 +196,7 @@ body {
   margin-right: 15px;
 }
 
-.questora-logo .coin-icon {
+.show-milenio-logo .coin-icon {
   width: 60px;
   height: 60px;
   background: linear-gradient(135deg, #ffeb3b, #ffc107);
@@ -797,11 +797,11 @@ body {
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .questora-logo h1 {
+  .show-milenio-logo h1 {
     font-size: 2rem;
   }
   
-  .questora-logo .coin-icon {
+  .show-milenio-logo .coin-icon {
     width: 40px;
     height: 40px;
     font-size: 1rem;
@@ -897,11 +897,11 @@ body {
 }
 
 @media (max-width: 480px) {
-  .questora-logo {
+  .show-milenio-logo {
     padding: 15px 25px;
   }
   
-  .questora-logo h1 {
+  .show-milenio-logo h1 {
     font-size: 1.5rem;
   }
   

@@ -11,9 +11,9 @@ export default function ReviewScreen({ quizState, setScreen }: ReviewScreenProps
 
   return (
     <>
-      {/* Logo Questora no estilo Show do Milhão */}
-      <div className="questora-logo">
-        <h1>🎯 QUESTORA</h1>
+      {/* Logo Show do Milênio no estilo Show do Milhão */}
+      <div className="show-milenio-logo">
+        <h1>🎯 SHOW DO MILÊNIO</h1>
         <div className="coin-icon">
           📋
         </div>

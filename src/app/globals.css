@@ -513,6 +513,18 @@ body {
   margin-bottom: 30px;
 }
 
+/* Estilos para a tela Coming Soon */
+.coming-soon-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #ffeb3b;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.coming-soon-actions {
+  margin-top: 30px;
+}
+
 .welcome-card, .credits-card, .results-card {
   background: linear-gradient(135deg, #1a237e, #283593);
   border: 3px solid #ffeb3b;

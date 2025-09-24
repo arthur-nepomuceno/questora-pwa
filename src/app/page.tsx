@@ -1,6 +1,8 @@
 "use client";
 import { useQuiz } from "@/hooks/useQuiz";
-import StartScreen from "@/components/StartScreen";
+import ModalidadeScreen from "@/components/ModalidadeScreen";
+import CategoryScreen from "@/components/CategoryScreen";
+import ComingSoonScreen from "@/components/ComingSoonScreen";
 import CreditsScreen from "@/components/CreditsScreen";
 import QuizScreen from "@/components/QuizScreen";
 import ResultsScreen from "@/components/ResultsScreen";
@@ -12,7 +14,14 @@ export default function Home() {
 
   return (
     <div className="quiz-container">
-      {quizHook.currentScreen === "start" && <StartScreen {...quizHook} />}
+      {quizHook.currentScreen === "modalidade" && <ModalidadeScreen selectModalidade={quizHook.selectModalidade} />}
+      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} />}
+      {quizHook.currentScreen === "coming-soon" && (
+        <ComingSoonScreen 
+          modalidade={quizHook.selectedModalidade || ""} 
+          goBack={quizHook.goBackToModalidade} 
+        />
+      )}
       {quizHook.currentScreen === "credits" && <CreditsScreen {...quizHook} />}
       {quizHook.currentScreen === "quiz" && (
         <QuizScreen 

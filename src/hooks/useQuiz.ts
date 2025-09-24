@@ -35,12 +35,13 @@ const getAvailableQuestions = (
 };
 
 export const useQuiz = () => {
-  const [currentScreen, setCurrentScreen] = useState<Screen>('start');
+  const [currentScreen, setCurrentScreen] = useState<Screen>('modalidade');
   const [quizState, setQuizState] = useState<QuizState>(initialQuizState);
   const [timeRemaining, setTimeRemaining] = useState(60);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [shouldNextBeEasy, setShouldNextBeEasy] = useState(false);
+  const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
 
   const selectRandomQuestions = useCallback((category: string, forceEasy: boolean = false): Question[] => {
@@ -104,6 +105,16 @@ export const useQuiz = () => {
     if (timerInterval.current) {
       clearInterval(timerInterval.current);
       timerInterval.current = null;
+    }
+  }, []);
+
+  const selectModalidade = useCallback((modalidade: string) => {
+    setSelectedModalidade(modalidade);
+    
+    if (modalidade === 'livre') {
+      setCurrentScreen('start');
+    } else {
+      setCurrentScreen('coming-soon');
     }
   }, []);
 
@@ -237,12 +248,18 @@ export const useQuiz = () => {
     setCurrentScreen('results');
   }, [stopTimer]);
 
+  const goBackToModalidade = useCallback(() => {
+    setCurrentScreen('modalidade');
+    setSelectedModalidade(null);
+  }, []);
+
   const restartQuiz = useCallback(() => {
     stopTimer();
     setQuizState(initialQuizState);
     setSelectedOption(null);
     setShowFeedback(false);
-    setCurrentScreen('start');
+    setCurrentScreen('modalidade');
+    setSelectedModalidade(null);
   }, [stopTimer]);
 
   const setScreen = useCallback((screen: Screen) => {
@@ -267,8 +284,11 @@ export const useQuiz = () => {
     timeRemaining,
     selectedOption,
     showFeedback,
+    selectedModalidade,
     setScreen,
     setSelectedCredits,
+    selectModalidade,
+    goBackToModalidade,
     startQuiz,
     startQuizWithCredits,
     selectOption,

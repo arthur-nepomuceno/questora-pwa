@@ -12,7 +12,7 @@ export default function CategoryScreen({ startQuiz }: CategoryScreenProps) {
       <div className="show-milenio-logo">
         <h1>🎯 SHOW DO MILÊNIO</h1>
         <div className="coin-icon">
-          🎮
+          🏆
         </div>
       </div>
 

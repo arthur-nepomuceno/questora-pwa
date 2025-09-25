@@ -33,7 +33,7 @@ export default function ComingSoonScreen({ modalidade, goBack }: ComingSoonScree
   };
 
   return (
-    <>
+    <div className="blue-theme">
       {/* Logo Show do Milênio no estilo Show do Milhão */}
       <div className="show-milenio-logo">
         <h1>🎯 SHOW DO MILÊNIO</h1>
@@ -59,6 +59,6 @@ export default function ComingSoonScreen({ modalidade, goBack }: ComingSoonScree
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

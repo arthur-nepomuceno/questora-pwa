@@ -214,8 +214,9 @@ body {
 
 /* Caixa da pergunta */
 .question-box {
-  background: linear-gradient(to bottom, #d32f2f, #f44336);
-  border: 3px solid #ffeb3b;
+  background: linear-gradient(to bottom, #8B0000, #FF4500);
+  border: 3px solid #1976d2;
+  border-top: 4px solid #D2B48C;
   border-radius: 20px;
   padding: 7px;
   margin-bottom: 8px;
@@ -278,8 +279,9 @@ body {
 
 /* Caixa de alternativa */
 .alternative-box {
-  background: linear-gradient(to bottom, #d32f2f, #f44336);
+  background: linear-gradient(to bottom, #8B0000, #FF4500);
   border: 2px solid #1976d2;
+  border-top: 3px solid #D2B48C;
   border-radius: 15px;
   padding: 4px;
   display: flex;
@@ -298,6 +300,7 @@ body {
     0 6px 20px rgba(0, 0, 0, 0.3),
     inset 0 1px 3px rgba(255, 255, 255, 0.2);
   border-color: #ffeb3b;
+  border-top-color: #ffeb3b;
 }
 
 /* Círculo numerado */
@@ -338,8 +341,9 @@ body {
 }
 
 .wrong-feedback {
-  background: linear-gradient(to bottom, #ff9800, #f57c00) !important;
+  background: linear-gradient(to bottom, #8B0000, #FF4500) !important;
   border-color: #ff6f00 !important;
+  border-top-color: #D2B48C !important;
   transform: scale(0.98);
 }
 
@@ -525,6 +529,248 @@ body {
   margin-top: 30px;
 }
 
+/* Estilos azuis futuristas para todas as páginas */
+.blue-theme .show-milenio-logo {
+  background: linear-gradient(135deg, #0D1421, #1A237E);
+  border: 3px solid #00BFFF;
+  box-shadow: 
+    0 8px 25px rgba(0, 191, 255, 0.3),
+    0 0 20px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .welcome-card,
+.blue-theme .credits-card,
+.blue-theme .results-card {
+  background: linear-gradient(135deg, #0D1421, #1A237E);
+  border: 3px solid #00BFFF;
+  box-shadow: 
+    0 8px 25px rgba(0, 191, 255, 0.3),
+    0 0 20px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .category-card {
+  background: linear-gradient(to bottom, #0D1421, #00BFFF);
+  border: 2px solid #00BFFF;
+  border-top: 3px solid #87CEEB;
+  box-shadow: 
+    0 4px 15px rgba(0, 191, 255, 0.3),
+    0 0 10px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 20px rgba(0, 191, 255, 0.4),
+    0 0 15px rgba(0, 191, 255, 0.3);
+  border-color: #87CEEB;
+  border-top-color: #87CEEB;
+}
+
+.blue-theme .category-icon {
+  color: #87CEEB;
+  text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+.blue-theme .credit-card {
+  background: linear-gradient(to bottom, #0D1421, #00BFFF);
+  border: 2px solid #00BFFF;
+  border-top: 3px solid #87CEEB;
+  box-shadow: 
+    0 4px 10px rgba(0, 191, 255, 0.3),
+    0 0 8px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .credit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 15px rgba(0, 191, 255, 0.4),
+    0 0 12px rgba(0, 191, 255, 0.3);
+  border-color: #87CEEB;
+  border-top-color: #87CEEB;
+}
+
+.blue-theme .btn {
+  background: linear-gradient(to bottom, #0D1421, #00BFFF);
+  border: 2px solid #00BFFF;
+  border-top: 3px solid #87CEEB;
+  box-shadow: 
+    0 4px 10px rgba(0, 191, 255, 0.3),
+    0 0 8px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .btn:hover {
+  background: linear-gradient(to bottom, #1A237E, #00BFFF);
+  border-color: #87CEEB;
+  border-top-color: #87CEEB;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 15px rgba(0, 191, 255, 0.4),
+    0 0 12px rgba(0, 191, 255, 0.3);
+}
+
+.blue-theme .question-box {
+  background: linear-gradient(to bottom, #0D1421, #00BFFF);
+  border: 3px solid #00BFFF;
+  border-top: 4px solid #87CEEB;
+  box-shadow: 
+    0 8px 25px rgba(0, 191, 255, 0.3),
+    0 0 15px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .alternative-box {
+  background: linear-gradient(to bottom, #0D1421, #00BFFF);
+  border: 2px solid #00BFFF;
+  border-top: 3px solid #87CEEB;
+  box-shadow: 
+    0 4px 15px rgba(0, 191, 255, 0.3),
+    0 0 8px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .alternative-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(0, 191, 255, 0.4),
+    0 0 12px rgba(0, 191, 255, 0.3);
+  border-color: #87CEEB;
+  border-top-color: #87CEEB;
+}
+
+.blue-theme .review-item {
+  background: linear-gradient(to bottom, #0D1421, #00BFFF);
+  border: 2px solid #00BFFF;
+  border-top: 3px solid #87CEEB;
+  box-shadow: 
+    0 4px 15px rgba(0, 191, 255, 0.3),
+    0 0 8px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .wrong-feedback {
+  background: linear-gradient(to bottom, #ff6f00, #e65100) !important;
+  border-color: #ff6f00 !important;
+  border-top-color: #ff6f00 !important;
+}
+
+/* Botão "Fazer Novo Quiz" na tela de resultados */
+.blue-theme .btn-primary {
+  color: white !important;
+}
+
+/* Caixas de indicadores do quiz com fundo azul */
+.blue-theme .question-indicator {
+  background: linear-gradient(135deg, #0D1421, #1A237E);
+  border: 3px solid #00BFFF;
+  box-shadow: 
+    0 6px 20px rgba(0, 191, 255, 0.3),
+    0 0 15px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .timer-display {
+  background: linear-gradient(135deg, #0D1421, #1A237E);
+  color: #87CEEB;
+  border: 3px solid #00BFFF;
+  box-shadow: 
+    0 6px 20px rgba(0, 191, 255, 0.3),
+    0 0 15px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .current-multiplier {
+  background: linear-gradient(135deg, #0D1421, #1A237E);
+  border: 3px solid #00BFFF;
+  box-shadow: 
+    0 6px 20px rgba(0, 191, 255, 0.3),
+    0 0 15px rgba(0, 191, 255, 0.2);
+}
+
+.blue-theme .accumulated-value {
+  background: linear-gradient(135deg, #0D1421, #1A237E);
+  border: 3px solid #00BFFF;
+  box-shadow: 
+    0 6px 20px rgba(0, 191, 255, 0.3),
+    0 0 15px rgba(0, 191, 255, 0.2);
+}
+
+/* Cores dos textos nos indicadores */
+.blue-theme .indicator-text {
+  color: #87CEEB;
+  text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+.blue-theme .timer-text {
+  color: #87CEEB;
+  text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+.blue-theme .multiplier-label {
+  color: #87CEEB;
+  text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+.blue-theme .multiplier-value {
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.blue-theme .accumulated-label {
+  color: #87CEEB;
+  text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+.blue-theme .accumulated-value-number {
+  color: #87CEEB;
+  text-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+}
+
+/* Efeito de brilho azul elétrico para todas as páginas */
+.blue-theme::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 20%, rgba(0, 191, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Animação sutil de brilho */
+.blue-theme .category-card,
+.blue-theme .credit-card,
+.blue-theme .alternative-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.blue-theme .category-card::before,
+.blue-theme .credit-card::before,
+.blue-theme .alternative-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(0, 191, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+}
+
+.blue-theme .category-card:hover::before,
+.blue-theme .credit-card:hover::before,
+.blue-theme .alternative-box:hover::before {
+  opacity: 1;
+  animation: shimmer 1.5s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
 .welcome-card, .credits-card, .results-card {
   background: linear-gradient(135deg, #1a237e, #283593);
   border: 3px solid #ffeb3b;
@@ -578,8 +824,9 @@ body {
 }
 
 .category-card {
-  background: linear-gradient(to bottom, #d32f2f, #f44336);
-  border: 2px solid #ffeb3b;
+  background: linear-gradient(to bottom, #8B0000, #FF4500);
+  border: 2px solid #1976d2;
+  border-top: 3px solid #D2B48C;
   padding: 25px 20px;
   text-align: center;
   cursor: pointer;
@@ -593,6 +840,7 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   border-color: #ffc107;
+  border-top-color: #ffc107;
 }
 
 .category-icon {
@@ -622,8 +870,9 @@ body {
 }
 
 .credit-card {
-  background: linear-gradient(to bottom, #d32f2f, #f44336);
-  border: 2px solid #ffeb3b;
+  background: linear-gradient(to bottom, #8B0000, #FF4500);
+  border: 2px solid #1976d2;
+  border-top: 3px solid #D2B48C;
   padding: 20px 15px;
   text-align: center;
   cursor: pointer;
@@ -637,6 +886,7 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   border-color: #ffc107;
+  border-top-color: #ffc107;
 }
 
 .credit-icon {
@@ -661,8 +911,9 @@ body {
 
 .btn {
   padding: 15px 30px;
-  border: 2px solid #ffeb3b;
-  background: linear-gradient(to bottom, #d32f2f, #f44336);
+  border: 2px solid #1976d2;
+  border-top: 3px solid #D2B48C;
+  background: linear-gradient(to bottom, #8B0000, #FF4500);
   color: white;
   font-size: 1rem;
   cursor: pointer;
@@ -678,8 +929,9 @@ body {
 }
 
 .btn:hover {
-  background: linear-gradient(to bottom, #f44336, #ff5722);
+  background: linear-gradient(to bottom, #A52A2A, #FF6347);
   border-color: #ffc107;
+  border-top-color: #ffc107;
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
@@ -722,8 +974,9 @@ body {
 }
 
 .review-item {
-  background: linear-gradient(to bottom, #d32f2f, #f44336);
-  border: 2px solid #ffeb3b;
+  background: linear-gradient(to bottom, #8B0000, #FF4500);
+  border: 2px solid #1976d2;
+  border-top: 3px solid #D2B48C;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);

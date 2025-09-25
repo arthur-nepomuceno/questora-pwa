@@ -1,8 +1,10 @@
 "use client";
 
+import { Screen } from '@/types/quiz';
+
 interface CategoryScreenProps {
   startQuiz: (category: string) => void;
-  setScreen: (screen: string) => void;
+  setScreen: (screen: Screen) => void;
 }
 
 export default function CategoryScreen({ startQuiz, setScreen }: CategoryScreenProps) {

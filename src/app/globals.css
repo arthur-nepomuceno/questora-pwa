@@ -1,4 +1,4 @@
-/* Reset e configurações básicas */
+/* Reset e configurações básicas - FORÇANDO RECOMPILAÇÃO */
 * {
   margin: 0;
   padding: 0;
@@ -199,17 +199,14 @@ body {
 .show-milenio-logo .coin-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #ffeb3b, #ffc107);
-  border-radius: 50%;
+  background: transparent;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 3rem;
   font-weight: bold;
-  color: #1a237e;
-  box-shadow: 
-    inset 0 2px 4px rgba(255, 255, 255, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #ffeb3b;
 }
 
 /* Caixa da pergunta */
@@ -967,6 +964,19 @@ body {
 }
 
 /* Review Screen */
+.review-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.review-header h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
 .review-list {
   display: flex;
   flex-direction: column;
@@ -1069,7 +1079,7 @@ body {
   .show-milenio-logo .coin-icon {
     width: 40px;
     height: 40px;
-    font-size: 1rem;
+    font-size: 2rem;
   }
   
   .question-text {
@@ -1103,6 +1113,26 @@ body {
   /* Esconder sidebar desktop no mobile */
   .desktop-only {
     display: none;
+  }
+  
+  /* Reorganizar layout: multiplicador e acumulado embaixo das alternativas */
+  .quiz-content-left {
+    order: 1;
+  }
+  
+  .quiz-sidebar-right {
+    order: 2;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 0;
+  }
+  
+  .quiz-sidebar-right .multiplier,
+  .quiz-sidebar-right .accumulated-value {
+    flex: 1;
+    margin: 0;
   }
   
   /* Mostrar indicadores mobile lado a lado */
@@ -1170,6 +1200,12 @@ body {
     font-size: 1.5rem;
   }
   
+  .show-milenio-logo .coin-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem;
+  }
+  
   .question-box {
     padding: 20px;
   }
@@ -1184,6 +1220,19 @@ body {
     height: 35px;
     font-size: 1rem;
     margin-right: 15px;
+  }
+  
+  /* Reorganizar layout mobile: multiplicador e acumulado embaixo das alternativas */
+  .quiz-sidebar-right {
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  .quiz-sidebar-right .multiplier,
+  .quiz-sidebar-right .accumulated-value {
+    flex: 1;
+    padding: 10px;
   }
   
   .credits-options {

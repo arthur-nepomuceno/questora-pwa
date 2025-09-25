@@ -2,9 +2,10 @@
 
 interface CategoryScreenProps {
   startQuiz: (category: string) => void;
+  setScreen: (screen: string) => void;
 }
 
-export default function CategoryScreen({ startQuiz }: CategoryScreenProps) {
+export default function CategoryScreen({ startQuiz, setScreen }: CategoryScreenProps) {
 
   return (
     <div className="blue-theme">
@@ -41,6 +42,14 @@ export default function CategoryScreen({ startQuiz }: CategoryScreenProps) {
             <h3>Novelas</h3>
           </div>
         </div>
+
+        {/* Back Button */}
+        <button
+          className="btn btn-secondary"
+          onClick={() => setScreen("modalidade")}
+        >
+          Voltar
+        </button>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="quiz-container">
       {quizHook.currentScreen === "modalidade" && <ModalidadeScreen selectModalidade={quizHook.selectModalidade} />}
-      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} />}
+      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} />}
       {quizHook.currentScreen === "coming-soon" && (
         <ComingSoonScreen 
           modalidade={quizHook.selectedModalidade || ""} 

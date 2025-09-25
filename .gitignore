@@ -40,6 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Ignore tsbuildinfo files
+**/*.tsbuildinfo
+
 # Exclude other project folders
 ../perguntas/
 ../questora-vanilla/

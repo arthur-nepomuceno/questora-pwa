@@ -8,6 +8,18 @@ Este documento explica como configurar o sistema de competição com autenticaç
 2. **Projeto Google Cloud** - Para OAuth (opcional, pode usar apenas email/senha)
 3. **Node.js** versão 18+ instalado
 
+## ⚡ Configuração Mínima (Recomendada)
+
+Se você quer começar rapidamente, siga apenas estes passos:
+
+1. ✅ **Configure o Supabase** (obrigatório)
+2. ✅ **Configure OAuth Consent Screen** (obrigatório para Google OAuth)
+3. ✅ **Crie credenciais OAuth** (obrigatório para Google OAuth)
+4. ✅ **Configure no Supabase** (obrigatório)
+5. ✅ **Configure variáveis de ambiente** (obrigatório)
+
+> **💡 Dica**: Você pode pular a ativação de APIs específicas. O OAuth funcionará mesmo sem elas.
+
 ## 🚀 Configuração do Supabase
 
 ### 1. Criar Projeto no Supabase
@@ -50,9 +62,23 @@ Este documento explica como configurar o sistema de competição com autenticaç
 
 1. Acesse [Google Cloud Console](https://console.cloud.google.com)
 2. Crie um novo projeto ou selecione um existente
-3. Ative a **Google+ API**
+3. **Ative as APIs necessárias** (veja seção abaixo)
 
-### 2. Configurar OAuth Consent Screen
+### 2. Ativar APIs Necessárias
+
+1. Vá para **APIs & Services** > **Library**
+2. **Procure e ative estas APIs**:
+   - ✅ **Google Identity Services API** (recomendado)
+   - ✅ **Google OAuth2 API** (essencial)
+   - ✅ **Google+ API** (se disponível)
+
+3. **NÃO ative**:
+   - ❌ **Cloud Identity API** (não é necessário)
+   - ❌ **Cloud Identity-Aware Proxy API** (não é necessário)
+
+> **💡 Dica**: Se não encontrar essas APIs específicas, você pode pular este passo. O OAuth funcionará mesmo sem APIs específicas ativadas.
+
+### 3. Configurar OAuth Consent Screen
 
 1. Vá para **APIs & Services** > **OAuth consent screen**
 2. Escolha "External" e clique "Create"
@@ -63,7 +89,7 @@ Este documento explica como configurar o sistema de competição com autenticaç
 4. Adicione seu domínio nas **Authorized domains**
 5. Salve e continue
 
-### 3. Criar Credenciais OAuth
+### 4. Criar Credenciais OAuth
 
 1. Vá para **APIs & Services** > **Credentials**
 2. Clique em **Create Credentials** > **OAuth 2.0 Client IDs**
@@ -77,7 +103,7 @@ Este documento explica como configurar o sistema de competição com autenticaç
      - `https://seu-projeto.supabase.co/auth/v1/callback`
 5. Copie o **Client ID** e **Client Secret**
 
-### 4. Configurar no Supabase
+### 5. Configurar no Supabase
 
 1. No painel do Supabase, vá para **Authentication** > **Providers**
 2. Ative o provider "Google"
@@ -176,6 +202,27 @@ GOOGLE_CLIENT_SECRET=seu_google_client_secret_aqui
 4. **Usuário não é criado:**
    - Verifique se o trigger está funcionando
    - Confirme se as políticas RLS permitem inserção
+
+### Problemas com APIs do Google
+
+1. **"Cloud Identity" em vez de "Google Identity":**
+   - ❌ **Cloud Identity** é para empresas, não para OAuth
+   - ✅ **Google Identity Services API** é o correto
+   - Se não encontrar, pule a ativação de APIs
+
+2. **APIs não encontradas:**
+   - Procure por **"OAuth"** na biblioteca de APIs
+   - Ative qualquer API relacionada a OAuth
+   - Ou pule completamente este passo
+
+3. **"Google+ API" descontinuada:**
+   - Use **Google Identity Services API** em vez disso
+   - Ou configure apenas email/senha no Supabase
+
+4. **OAuth não funciona mesmo sem APIs:**
+   - Verifique se o OAuth Consent Screen está configurado
+   - Confirme se as credenciais estão corretas
+   - Teste com email/senha primeiro
 
 ### Logs e Debug
 

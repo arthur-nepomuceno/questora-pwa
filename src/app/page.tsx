@@ -7,6 +7,8 @@ import CreditsScreen from "@/components/CreditsScreen";
 import QuizScreen from "@/components/QuizScreen";
 import ResultsScreen from "@/components/ResultsScreen";
 import ReviewScreen from "@/components/ReviewScreen";
+import AuthScreen from "@/components/AuthScreen";
+import CompetitionScreen from "@/components/CompetitionScreen";
 import InstallPrompt from "@/components/InstallPrompt";
 
 export default function Home() {
@@ -35,6 +37,17 @@ export default function Home() {
       )}
       {quizHook.currentScreen === "results" && <ResultsScreen {...quizHook} />}
       {quizHook.currentScreen === "review" && <ReviewScreen {...quizHook} />}
+      {quizHook.currentScreen === "auth" && (
+        <AuthScreen 
+          onAuthSuccess={quizHook.goToCompetition}
+        />
+      )}
+      {quizHook.currentScreen === "competition" && (
+        <CompetitionScreen 
+          startQuiz={quizHook.startQuiz}
+          onBack={quizHook.goBackToAuth}
+        />
+      )}
       
       {/* PWA Install Prompt */}
       <InstallPrompt />

@@ -3,6 +3,8 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { QuizState, Question, UserAnswer, Screen } from '@/types/quiz';
 import { questionsData } from '@/data/questions';
+import { supabase } from '@/lib/supabase';
+import { useAuth } from './useAuth';
 
 const MULTIPLIERS = [0.10, 0.20, 0.30, 0.40, 0.60, 1.00, 1.40, 2.00, 3.00, 6.00];
 
@@ -42,7 +44,9 @@ export const useQuiz = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [shouldNextBeEasy, setShouldNextBeEasy] = useState(false);
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
+  const [isCompetitionMode, setIsCompetitionMode] = useState(false);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const { user, updateUserCredits } = useAuth();
 
   const selectRandomQuestions = useCallback((category: string, forceEasy: boolean = false): Question[] => {
     const categoryQuestions = questionsData[category];
@@ -113,10 +117,47 @@ export const useQuiz = () => {
     
     if (modalidade === 'livre') {
       setCurrentScreen('start');
+      setIsCompetitionMode(false);
+    } else if (modalidade === 'competicao') {
+      setCurrentScreen('auth');
+      setIsCompetitionMode(true);
     } else {
       setCurrentScreen('coming-soon');
+      setIsCompetitionMode(false);
     }
   }, []);
+
+  // Função para salvar partida no banco de dados
+  const savePartida = useCallback(async (acertos: number, erros: number, creditosGanhos: number) => {
+    if (!user || !isCompetitionMode) return;
+
+    try {
+      const creditosFinal = (user.creditos || 0) + creditosGanhos;
+
+      // Salvar partida no banco
+      const { data, error } = await supabase
+        .from('partidas')
+        .insert({
+          usuario_id: user.id,
+          acertos,
+          erros,
+          creditos_ganhos: creditosGanhos,
+          creditos_final: creditosFinal
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      // Atualizar créditos do usuário
+      await updateUserCredits(creditosFinal);
+
+      return data;
+    } catch (error) {
+      console.error('Erro ao salvar partida:', error);
+      throw error;
+    }
+  }, [user, isCompetitionMode, updateUserCredits]);
 
   const startQuiz = useCallback((category: string) => {
     const selectedQuestions = selectRandomQuestions(category);
@@ -225,6 +266,14 @@ export const useQuiz = () => {
       setQuizState(prev => {
         if (prev.currentErrors >= prev.maxErrors) {
           stopTimer();
+          
+          // Se estiver no modo competição, salvar partida
+          if (isCompetitionMode && user) {
+            const creditosGanhos = Math.round(prev.accumulatedScore);
+            savePartida(prev.correctAnswers, prev.wrongAnswers, creditosGanhos)
+              .catch(error => console.error('Erro ao salvar partida:', error));
+          }
+          
           setCurrentScreen('results');
           return prev;
         } else {
@@ -232,6 +281,14 @@ export const useQuiz = () => {
           const newIndex = prev.currentQuestionIndex + 1;
           if (newIndex > prev.selectedQuestions.length - 1) {
             stopTimer();
+            
+            // Se estiver no modo competição, salvar partida
+            if (isCompetitionMode && user) {
+              const creditosGanhos = Math.round(prev.accumulatedScore);
+              savePartida(prev.correctAnswers, prev.wrongAnswers, creditosGanhos)
+                .catch(error => console.error('Erro ao salvar partida:', error));
+            }
+            
             setCurrentScreen('results');
             return prev;
           }
@@ -243,10 +300,21 @@ export const useQuiz = () => {
   }, [quizState.maxErrors, quizState.selectedQuestions, quizState.currentQuestionIndex, shouldNextBeEasy, stopTimer]);
 
 
-  const endQuizByTime = useCallback(() => {
+  const endQuizByTime = useCallback(async () => {
     stopTimer();
+    
+    // Se estiver no modo competição, salvar partida
+    if (isCompetitionMode && user) {
+      try {
+        const creditosGanhos = Math.round(quizState.accumulatedScore);
+        await savePartida(quizState.correctAnswers, quizState.wrongAnswers, creditosGanhos);
+      } catch (error) {
+        console.error('Erro ao salvar partida:', error);
+      }
+    }
+    
     setCurrentScreen('results');
-  }, [stopTimer]);
+  }, [stopTimer, isCompetitionMode, user, quizState.accumulatedScore, quizState.correctAnswers, quizState.wrongAnswers, savePartida]);
 
   const goBackToModalidade = useCallback(() => {
     setCurrentScreen('modalidade');
@@ -260,7 +328,16 @@ export const useQuiz = () => {
     setShowFeedback(false);
     setCurrentScreen('modalidade');
     setSelectedModalidade(null);
+    setIsCompetitionMode(false);
   }, [stopTimer]);
+
+  const goToCompetition = useCallback(() => {
+    setCurrentScreen('competition');
+  }, []);
+
+  const goBackToAuth = useCallback(() => {
+    setCurrentScreen('auth');
+  }, []);
 
   const setScreen = useCallback((screen: Screen) => {
     setCurrentScreen(screen);
@@ -285,6 +362,7 @@ export const useQuiz = () => {
     selectedOption,
     showFeedback,
     selectedModalidade,
+    isCompetitionMode,
     setScreen,
     setSelectedCredits,
     selectModalidade,
@@ -293,6 +371,8 @@ export const useQuiz = () => {
     startQuizWithCredits,
     selectOption,
     restartQuiz,
+    goToCompetition,
+    goBackToAuth,
     MULTIPLIERS,
   };
 };

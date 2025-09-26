@@ -106,9 +106,35 @@ Se você quer começar rapidamente, siga apenas estes passos:
 ### 5. Configurar no Supabase
 
 1. No painel do Supabase, vá para **Authentication** > **Providers**
-2. Ative o provider "Google"
-3. Cole o **Client ID** e **Client Secret** do Google
-4. Salve as configurações
+2. Encontre **"Google"** na lista de providers
+3. Clique no **toggle** para ativar o provider Google
+4. **Cole as credenciais** nos campos que aparecerão:
+   - **Client ID**: Cole o Client ID copiado do Google Cloud Console
+   - **Client Secret**: Cole o Client Secret copiado do Google Cloud Console
+5. Clique em **"Save"** para salvar as configurações
+
+> **📍 Localização exata**: Após ativar o toggle do Google, você verá dois campos de texto:
+> - Um campo para **Client ID** 
+> - Um campo para **Client Secret**
+> 
+> Cole as credenciais copiadas do Google Cloud Console nesses campos.
+
+#### **Passo a Passo Visual:**
+
+1. **Acesse**: Supabase Dashboard → Authentication → Providers
+2. **Encontre**: A linha com "Google" na lista
+3. **Ative**: Clique no toggle (botão deslizante) do Google
+4. **Aparecerão**: Dois campos de texto:
+   ```
+   ┌─────────────────────────────────────┐
+   │ Client ID: [campo vazio]            │
+   └─────────────────────────────────────┘
+   ┌─────────────────────────────────────┐
+   │ Client Secret: [campo vazio]        │
+   └─────────────────────────────────────┘
+   ```
+5. **Cole**: As credenciais copiadas do Google Cloud Console
+6. **Salve**: Clique no botão "Save" no final da página
 
 ## ⚙️ Configuração das Variáveis de Ambiente
 
@@ -223,6 +249,16 @@ GOOGLE_CLIENT_SECRET=seu_google_client_secret_aqui
    - Verifique se o OAuth Consent Screen está configurado
    - Confirme se as credenciais estão corretas
    - Teste com email/senha primeiro
+
+5. **Campos de credenciais não aparecem no Supabase:**
+   - Certifique-se de que o toggle do Google está **ATIVADO** (azul/verde)
+   - Recarregue a página se os campos não aparecerem
+   - Verifique se você está na seção correta: Authentication → Providers
+
+6. **Erro "Invalid client" no Supabase:**
+   - Verifique se o Client ID está correto (sem espaços extras)
+   - Confirme se o Client Secret está correto
+   - Certifique-se de que as credenciais foram copiadas completamente
 
 ### Logs e Debug
 

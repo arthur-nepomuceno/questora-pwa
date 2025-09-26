@@ -106,10 +106,6 @@ LEFT JOIN partidas p ON u.id = p.usuario_id
 GROUP BY u.id, u.nome, u.email, u.creditos
 ORDER BY u.creditos DESC, precisao_percentual DESC;
 
--- Política para a view de ranking (todos podem ver)
-CREATE POLICY "Ranking público" ON ranking_usuarios
-  FOR SELECT USING (true);
-
 -- Comentários para documentação
 COMMENT ON TABLE usuarios IS 'Tabela de usuários do sistema de competição';
 COMMENT ON TABLE partidas IS 'Histórico de partidas dos usuários';

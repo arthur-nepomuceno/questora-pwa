@@ -35,8 +35,15 @@ Se você quer começar rapidamente, siga apenas estes passos:
 
 1. No painel do Supabase, vá para **SQL Editor**
 2. Clique em **New Query**
-3. Copie e cole o conteúdo do arquivo `supabase-schema.sql`
-4. Clique em **Run** para executar o script
+3. **Execute o script principal**:
+   - Copie e cole o conteúdo do arquivo `supabase-schema.sql`
+   - Clique em **Run** para executar o script
+4. **Execute as políticas das views** (opcional):
+   - Crie uma nova query
+   - Copie e cole o conteúdo do arquivo `supabase-view-policies.sql`
+   - Clique em **Run** para executar
+
+> **⚠️ Importante**: Se você receber erro sobre "ranking_usuarios is not a table", execute apenas o `supabase-schema.sql` primeiro, depois execute o `supabase-view-policies.sql` em uma query separada.
 
 ### 3. Obter Chaves da API
 
@@ -259,6 +266,16 @@ GOOGLE_CLIENT_SECRET=seu_google_client_secret_aqui
    - Verifique se o Client ID está correto (sem espaços extras)
    - Confirme se o Client Secret está correto
    - Certifique-se de que as credenciais foram copiadas completamente
+
+7. **Erro "ranking_usuarios is not a table" no SQL:**
+   - Execute apenas o `supabase-schema.sql` primeiro
+   - Depois execute o `supabase-view-policies.sql` em uma query separada
+   - Ou pule o arquivo `supabase-view-policies.sql` (não é obrigatório)
+
+8. **Erro de permissão no banco de dados:**
+   - Verifique se você tem permissão de administrador no projeto
+   - Certifique-se de que o RLS está ativado corretamente
+   - Execute os scripts na ordem correta
 
 ### Logs e Debug
 

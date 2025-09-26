@@ -161,10 +161,8 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
         <div className="auth-benefits">
           <h3>🎁 Benefícios da Competição:</h3>
           <ul>
-            <li>💰 100 créditos iniciais grátis</li>
+            <li>💰 100 créditos iniciais ao se cadastrar</li>
             <li>🏆 Ranking de jogadores</li>
-            <li>📊 Histórico de partidas</li>
-            <li>🎯 Multiplicadores de pontuação</li>
           </ul>
         </div>
       </div>

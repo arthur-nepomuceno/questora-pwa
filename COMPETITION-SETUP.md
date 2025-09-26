@@ -38,12 +38,10 @@ Se você quer começar rapidamente, siga apenas estes passos:
 3. **Execute o script principal**:
    - Copie e cole o conteúdo do arquivo `supabase-schema.sql`
    - Clique em **Run** para executar o script
-4. **Execute as políticas das views** (opcional):
+4. **Execute a view de ranking** (opcional):
    - Crie uma nova query
    - Copie e cole o conteúdo do arquivo `supabase-view-policies.sql`
    - Clique em **Run** para executar
-
-> **⚠️ Importante**: Se você receber erro sobre "ranking_usuarios is not a table", execute apenas o `supabase-schema.sql` primeiro, depois execute o `supabase-view-policies.sql` em uma query separada.
 
 ### 3. Obter Chaves da API
 
@@ -53,7 +51,23 @@ Se você quer começar rapidamente, siga apenas estes passos:
    - **anon public** key (NEXT_PUBLIC_SUPABASE_ANON_KEY)
    - **service_role** key (SUPABASE_SERVICE_ROLE_KEY) - mantenha em segredo!
 
-### 4. Configurar Autenticação
+### 4. Como Usar o Ranking no Código
+
+Para obter o ranking de usuários no seu código, use a função `get_ranking_usuarios()`:
+
+```typescript
+// Exemplo de uso no código
+const { data: ranking, error } = await supabase
+  .rpc('get_ranking_usuarios');
+
+if (error) {
+  console.error('Erro ao buscar ranking:', error);
+} else {
+  console.log('Ranking:', ranking);
+}
+```
+
+### 5. Configurar Autenticação
 
 1. No painel do Supabase, vá para **Authentication** > **Providers**
 2. **Para Google OAuth:**
@@ -147,6 +161,11 @@ Se você quer começar rapidamente, siga apenas estes passos:
 
 ### 1. Criar arquivo .env.local
 
+**Opção A: Copiar do template**
+1. Copie o arquivo `env-template.txt` para `.env.local`
+2. Substitua os valores pelos seus dados reais do Supabase
+
+**Opção B: Criar manualmente**
 Crie um arquivo `.env.local` na raiz do projeto com o seguinte conteúdo:
 
 ```env
@@ -159,6 +178,8 @@ SUPABASE_SERVICE_ROLE_KEY=sua_chave_service_role_aqui
 GOOGLE_CLIENT_ID=seu_google_client_id_aqui
 GOOGLE_CLIENT_SECRET=seu_google_client_secret_aqui
 ```
+
+> **⚠️ Importante**: O arquivo `.env.local` não deve ser commitado no Git por segurança.
 
 ### 2. Substituir os valores
 
@@ -268,11 +289,26 @@ GOOGLE_CLIENT_SECRET=seu_google_client_secret_aqui
    - Certifique-se de que as credenciais foram copiadas completamente
 
 7. **Erro "ranking_usuarios is not a table" no SQL:**
-   - Execute apenas o `supabase-schema.sql` primeiro
-   - Depois execute o `supabase-view-policies.sql` em uma query separada
-   - Ou pule o arquivo `supabase-view-policies.sql` (não é obrigatório)
+   - **Problema resolvido**: O `supabase-schema.sql` foi corrigido e não contém mais a view problemática
+   - **Execute apenas**: O `supabase-schema.sql` primeiro
+   - **Depois execute**: O `supabase-view-policies.sql` em uma query separada (opcional)
 
-8. **Erro de permissão no banco de dados:**
+8. **Erro "relation ranking_usuarios already exists":**
+   - **Problema**: A view já foi criada anteriormente
+   - **Solução**: O script `supabase-view-policies.sql` agora usa `CREATE OR REPLACE` e pode ser executado múltiplas vezes
+   - **Execute novamente**: O `supabase-view-policies.sql` sem problemas
+
+9. **Erro "ranking_usuarios is not a table" (RLS em views):**
+   - **Problema**: Views não suportam RLS diretamente no Supabase
+   - **Solução**: Criada função `get_ranking_usuarios()` que funciona como uma view segura
+   - **Uso**: Execute `SELECT * FROM get_ranking_usuarios();` para obter o ranking
+
+10. **Erro "return type mismatch in function declared to return record":**
+   - **Problema**: Incompatibilidade de tipos na função (UUID vs INTEGER)
+   - **Solução**: Corrigido o tipo de retorno da função para `INTEGER` (tipo correto do campo `id`)
+   - **Execute novamente**: O `supabase-view-policies.sql` com os tipos corretos
+
+11. **Erro de permissão no banco de dados:**
    - Verifique se você tem permissão de administrador no projeto
    - Certifique-se de que o RLS está ativado corretamente
    - Execute os scripts na ordem correta

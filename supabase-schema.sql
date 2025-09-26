@@ -85,26 +85,8 @@ CREATE TRIGGER on_auth_user_login
   AFTER UPDATE OF last_sign_in_at ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.update_last_login();
 
--- View para ranking de usuários
-CREATE VIEW ranking_usuarios AS
-SELECT 
-  u.id,
-  u.nome,
-  u.email,
-  u.creditos,
-  COUNT(p.id) as total_partidas,
-  COALESCE(SUM(p.acertos), 0) as total_acertos,
-  COALESCE(SUM(p.erros), 0) as total_erros,
-  CASE 
-    WHEN COALESCE(SUM(p.acertos + p.erros), 0) > 0 
-    THEN ROUND((COALESCE(SUM(p.acertos), 0)::DECIMAL / COALESCE(SUM(p.acertos + p.erros), 1)) * 100, 2)
-    ELSE 0 
-  END as precisao_percentual,
-  COALESCE(SUM(p.creditos_ganhos), 0) as creditos_ganhos_total
-FROM usuarios u
-LEFT JOIN partidas p ON u.id = p.usuario_id
-GROUP BY u.id, u.nome, u.email, u.creditos
-ORDER BY u.creditos DESC, precisao_percentual DESC;
+-- View para ranking de usuários (removida para evitar conflitos)
+-- A view será criada separadamente se necessário
 
 -- Comentários para documentação
 COMMENT ON TABLE usuarios IS 'Tabela de usuários do sistema de competição';

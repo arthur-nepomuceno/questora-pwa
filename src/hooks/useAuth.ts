@@ -190,6 +190,26 @@ export const useAuth = () => {
     }
   };
 
+  const resendEmailVerification = async (): Promise<{ success: boolean; error?: string }> => {
+    try {
+      if (!auth.currentUser) {
+        return { success: false, error: 'Usuário não logado' };
+      }
+      
+      await sendEmailVerification(auth.currentUser);
+      return { 
+        success: true, 
+        error: 'Email de verificação reenviado! Verifique sua caixa de entrada e spam.' 
+      };
+    } catch (error: any) {
+      let errorMessage = 'Erro ao reenviar email';
+      if (error.code === 'auth/too-many-requests') {
+        errorMessage = 'Muitas tentativas. Aguarde alguns minutos antes de tentar novamente.';
+      }
+      return { success: false, error: errorMessage };
+    }
+  };
+
   const updateCredits = async (newCredits: number) => {
     if (!authState.user) return;
     
@@ -255,6 +275,7 @@ export const useAuth = () => {
     login,
     signup,
     logout,
+    resendEmailVerification,
     updateCredits,
     saveMatch,
   };

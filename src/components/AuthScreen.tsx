@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { LoginCredentials, SignupCredentials } from '@/types/auth';
+import EmailVerificationScreen from './EmailVerificationScreen';
 
 interface AuthScreenProps {
   onAuthSuccess: () => void;
@@ -13,6 +14,8 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
   const [loginForm, setLoginForm] = useState<LoginCredentials>({ email: '', password: '' });
   const [signupForm, setSignupForm] = useState<SignupCredentials>({ name: '', email: '', password: '' });
   const [error, setError] = useState<string>('');
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState<string>('');
   
   const { login, signup, isLoading } = useAuth();
 
@@ -34,11 +37,36 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
     
     const result = await signup(signupForm);
     if (result.success) {
-      onAuthSuccess();
+      // Mostrar tela de verificação de email em vez de ir direto para o app
+      setPendingEmail(signupForm.email);
+      setShowEmailVerification(true);
     } else {
       setError(result.error || 'Erro ao criar conta');
     }
   };
+
+  const handleBackFromVerification = () => {
+    setShowEmailVerification(false);
+    setPendingEmail('');
+    setError('');
+  };
+
+  const handleEmailVerified = () => {
+    setShowEmailVerification(false);
+    setPendingEmail('');
+    onAuthSuccess();
+  };
+
+  // Se estiver mostrando a tela de verificação de email
+  if (showEmailVerification) {
+    return (
+      <EmailVerificationScreen
+        userEmail={pendingEmail}
+        onVerified={handleEmailVerified}
+        onBack={handleBackFromVerification}
+      />
+    );
+  }
 
   return (
     <div className="auth-container">
@@ -67,6 +95,12 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
           {error && (
             <div className="error-message">
               {error}
+              {error.includes('confirme seu email') && (
+                <div className="spam-instructions">
+                  <p><strong>💡 Dica:</strong> Verifique também sua caixa de <strong>spam/lixo eletrônico</strong>!</p>
+                  <p>O email de verificação pode ter ido para lá. Procure por "Firebase" ou "Show do Milênio".</p>
+                </div>
+              )}
             </div>
           )}
 
@@ -156,6 +190,27 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
           </ul>
         </div>
       </div>
+
+      <style jsx>{`
+        .spam-instructions {
+          background: #e3f2fd;
+          border: 1px solid #2196f3;
+          border-radius: 8px;
+          padding: 15px;
+          margin-top: 15px;
+          text-align: left;
+        }
+
+        .spam-instructions p {
+          margin: 5px 0;
+          color: #1565c0;
+          font-size: 0.9rem;
+        }
+
+        .spam-instructions strong {
+          color: #0d47a1;
+        }
+      `}</style>
     </div>
   );
 }

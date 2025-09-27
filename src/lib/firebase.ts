@@ -4,13 +4,13 @@ import { getFirestore } from 'firebase/firestore';
 
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAFmYo6-iLe2eRf8dAuVx5-GvL5kmUzyDc",
-  authDomain: "show-do-milenio-competicao.firebaseapp.com",
-  projectId: "show-do-milenio-competicao",
-  storageBucket: "show-do-milenio-competicao.firebasestorage.app",
-  messagingSenderId: "178033739661",
-  appId: "1:178033739661:web:c6a2d7991748ff36b4dfc4",
-  measurementId: "G-TGF2PQ52C5"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Inicializar Firebase

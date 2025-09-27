@@ -27,6 +27,21 @@ const nextConfig = {
         aggregateTimeout: 300,
       };
     }
+    
+    // Configuração para Firebase
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+    };
+    
+    // Ignorar módulos problemáticos do Firebase
+    config.externals = config.externals || [];
+    config.externals.push({
+      'undici': 'commonjs undici'
+    });
+    
     return config;
   }
 };

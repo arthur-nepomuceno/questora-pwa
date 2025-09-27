@@ -113,9 +113,15 @@ export const useQuiz = () => {
     
     if (modalidade === 'livre') {
       setCurrentScreen('start');
+    } else if (modalidade === 'competicao') {
+      setCurrentScreen('auth');
     } else {
       setCurrentScreen('coming-soon');
     }
+  }, []);
+
+  const goToCompetition = useCallback(() => {
+    setCurrentScreen('start'); // Após autenticação, vai para seleção de categoria
   }, []);
 
   const startQuiz = useCallback((category: string) => {
@@ -289,6 +295,7 @@ export const useQuiz = () => {
     setSelectedCredits,
     selectModalidade,
     goBackToModalidade,
+    goToCompetition,
     startQuiz,
     startQuizWithCredits,
     selectOption,

@@ -7,6 +7,7 @@ import CreditsScreen from "@/components/CreditsScreen";
 import QuizScreen from "@/components/QuizScreen";
 import ResultsScreen from "@/components/ResultsScreen";
 import ReviewScreen from "@/components/ReviewScreen";
+import AuthScreen from "@/components/AuthScreen";
 import InstallPrompt from "@/components/InstallPrompt";
 
 export default function Home() {
@@ -15,6 +16,11 @@ export default function Home() {
   return (
     <div className="quiz-container">
       {quizHook.currentScreen === "modalidade" && <ModalidadeScreen selectModalidade={quizHook.selectModalidade} />}
+      {quizHook.currentScreen === "auth" && (
+        <AuthScreen 
+          onAuthSuccess={quizHook.goToCompetition}
+        />
+      )}
       {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} />}
       {quizHook.currentScreen === "coming-soon" && (
         <ComingSoonScreen 

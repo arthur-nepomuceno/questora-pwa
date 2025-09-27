@@ -27,4 +27,4 @@ export interface UserAnswer {
   isCorrect: boolean;
 }
 
-export type Screen = 'modalidade' | 'start' | 'credits' | 'quiz' | 'results' | 'review' | 'coming-soon';
+export type Screen = 'modalidade' | 'start' | 'credits' | 'quiz' | 'results' | 'review' | 'coming-soon' | 'auth';

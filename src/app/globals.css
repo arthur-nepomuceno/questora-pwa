@@ -357,6 +357,7 @@ body {
     6px 6px 10px rgba(0, 0, 0, 0.5);
   letter-spacing: 2px;
   margin-right: 15px;
+  white-space: nowrap;
 }
 
 .show-milenio-logo .coin-icon {

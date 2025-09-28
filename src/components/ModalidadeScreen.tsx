@@ -27,36 +27,6 @@ export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenP
         </div>
       </div>
 
-      {/* User Info */}
-      {user && !isLoading && (
-        <div className="user-info">
-          <div className="user-email">
-            <span className="user-icon">👤</span>
-            <span>{user.email}</span>
-          </div>
-          <button
-            className="logout-btn"
-            onClick={handleLogout}
-            title="Sair da conta"
-          >
-            🚪 Sair
-          </button>
-        </div>
-      )}
-      
-      {/* Loading placeholder */}
-      {isLoading && (
-        <div className="user-info loading">
-          <div className="user-email">
-            <span className="user-icon">👤</span>
-            <span>Carregando...</span>
-          </div>
-          <div className="logout-btn loading-btn">
-            🚪 Sair
-          </div>
-        </div>
-      )}
-
       {/* Main Card */}
       <div className="welcome-card">
         <h2>Bem-vindo ao Show do Milênio!</h2>
@@ -92,6 +62,43 @@ export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenP
           </div>
         </div>
       </div>
+
+      {/* User Info */}
+      {user && !isLoading ? (
+        <div className="user-info">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>{user.email}</span>
+          </div>
+          <button
+            className="logout-btn"
+            onClick={handleLogout}
+            title="Sair da conta"
+          >
+            🚪 Sair
+          </button>
+        </div>
+      ) : (
+        <div className="user-info">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>Participante não logado.</span>
+          </div>
+        </div>
+      )}
+      
+      {/* Loading placeholder */}
+      {isLoading && (
+        <div className="user-info loading">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>Carregando...</span>
+          </div>
+          <div className="logout-btn loading-btn">
+            🚪 Sair
+          </div>
+        </div>
+      )}
 
       <style jsx>{`
         .user-info {
@@ -146,6 +153,12 @@ export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenP
 
         .loading-btn:hover {
           background: #666 !important;
+        }
+
+        .logout-btn:disabled {
+          background: #666 !important;
+          cursor: not-allowed;
+          opacity: 0.6;
         }
       `}</style>
     </div>

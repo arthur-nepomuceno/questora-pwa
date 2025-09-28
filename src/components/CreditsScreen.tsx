@@ -36,36 +36,6 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits }: Credi
         </div>
       </div>
 
-      {/* User Info */}
-      {user && !isLoading && (
-        <div className="user-info">
-          <div className="user-email">
-            <span className="user-icon">👤</span>
-            <span>{user.email}</span>
-          </div>
-          <button
-            className="logout-btn"
-            onClick={handleLogout}
-            title="Sair da conta"
-          >
-            🚪 Sair
-          </button>
-        </div>
-      )}
-      
-      {/* Loading placeholder */}
-      {isLoading && (
-        <div className="user-info loading">
-          <div className="user-email">
-            <span className="user-icon">👤</span>
-            <span>Carregando...</span>
-          </div>
-          <div className="logout-btn loading-btn">
-            🚪 Sair
-          </div>
-        </div>
-      )}
-
       {/* Main Card */}
       <div className="credits-card">
         <h2>Escolha os créditos da rodada</h2>
@@ -93,6 +63,43 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits }: Credi
           Voltar
         </button>
       </div>
+
+      {/* User Info */}
+      {user && !isLoading ? (
+        <div className="user-info">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>{user.email}</span>
+          </div>
+          <button
+            className="logout-btn"
+            onClick={handleLogout}
+            title="Sair da conta"
+          >
+            🚪 Sair
+          </button>
+        </div>
+      ) : (
+        <div className="user-info">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>Participante não logado.</span>
+          </div>
+        </div>
+      )}
+      
+      {/* Loading placeholder */}
+      {isLoading && (
+        <div className="user-info loading">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>Carregando...</span>
+          </div>
+          <div className="logout-btn loading-btn">
+            🚪 Sair
+          </div>
+        </div>
+      )}
 
       <style jsx>{`
         .user-info {

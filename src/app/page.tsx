@@ -19,9 +19,10 @@ export default function Home() {
       {quizHook.currentScreen === "auth" && (
         <AuthScreen 
           onAuthSuccess={quizHook.goToCompetition}
+          onBack={quizHook.goBackToModalidade}
         />
       )}
-      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} />}
+      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} goBackToModalidade={quizHook.goBackToModalidade} />}
       {quizHook.currentScreen === "coming-soon" && (
         <ComingSoonScreen 
           modalidade={quizHook.selectedModalidade || ""} 

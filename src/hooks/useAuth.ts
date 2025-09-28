@@ -32,12 +32,32 @@ export const useAuth = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
       if (firebaseUser) {
-        // Usuário logado - buscar dados do Firestore
+        // Primeiro, mostrar o usuário básico imediatamente (só com email)
+        const basicUser: User = {
+          id: firebaseUser.uid,
+          email: firebaseUser.email!,
+          name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
+          credits: 50, // valor padrão
+          totalMatches: 0,
+          totalScore: 0,
+          bestScore: 0,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+        
+        // Mostrar usuário imediatamente
+        setAuthState({
+          user: basicUser,
+          isLoading: false,
+          isAuthenticated: true,
+        });
+
+        // Depois, buscar dados completos do Firestore em background
         try {
           const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
           if (userDoc.exists()) {
             const userData = userDoc.data();
-            const user: User = {
+            const completeUser: User = {
               id: firebaseUser.uid,
               email: firebaseUser.email!,
               name: userData.name,
@@ -49,44 +69,23 @@ export const useAuth = () => {
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
             
+            // Atualizar com dados completos
             setAuthState({
-              user,
+              user: completeUser,
               isLoading: false,
               isAuthenticated: true,
             });
           } else {
             // Criar documento do usuário se não existir
-            const newUser: User = {
-              id: firebaseUser.uid,
-              email: firebaseUser.email!,
-              name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
-              credits: 50,
-              totalMatches: 0,
-              totalScore: 0,
-              bestScore: 0,
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            };
-            
             await setDoc(doc(db, 'users', firebaseUser.uid), {
-              ...newUser,
+              ...basicUser,
               createdAt: serverTimestamp(),
               updatedAt: serverTimestamp(),
-            });
-            
-            setAuthState({
-              user: newUser,
-              isLoading: false,
-              isAuthenticated: true,
             });
           }
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
-          setAuthState({
-            user: null,
-            isLoading: false,
-            isAuthenticated: false,
-          });
+          // Manter o usuário básico em caso de erro
         }
       } else {
         // Usuário não logado
@@ -122,14 +121,52 @@ export const useAuth = () => {
       setAuthState(prev => ({ ...prev, isLoading: false }));
       
       let errorMessage = 'Erro ao fazer login';
-      if (error.code === 'auth/user-not-found') {
-        errorMessage = 'Usuário não encontrado';
-      } else if (error.code === 'auth/wrong-password') {
-        errorMessage = 'Senha incorreta';
-      } else if (error.code === 'auth/invalid-email') {
-        errorMessage = 'Email inválido';
-      } else if (error.code === 'auth/too-many-requests') {
-        errorMessage = 'Muitas tentativas. Tente novamente mais tarde';
+      
+      // Tratamento específico de erros do Firebase
+      switch (error.code) {
+        case 'auth/user-not-found':
+          errorMessage = 'Usuário não cadastrado. Clique em "Cadastrar" para fazer seu cadastro.';
+          break;
+        case 'auth/invalid-credential':
+        case 'auth/invalid-login-credentials':
+          // Para estes erros, precisamos verificar se o usuário existe
+          // Tentamos criar uma conta temporária para verificar se o email já existe
+          try {
+            await createUserWithEmailAndPassword(auth, credentials.email, 'temp_password_check_123456');
+            // Se chegou aqui, o email não estava cadastrado
+            errorMessage = 'Usuário não cadastrado. Clique em "Cadastrar" para fazer seu cadastro.';
+            // Deletar a conta temporária
+            if (auth.currentUser) {
+              await auth.currentUser.delete();
+            }
+          } catch (createError: any) {
+            if (createError.code === 'auth/email-already-in-use') {
+              // Email já existe, então é senha incorreta
+              errorMessage = 'Email ou Senha incorreto.';
+            } else {
+              // Outro erro, assumir que é senha incorreta
+              errorMessage = 'Email ou Senha incorreto.';
+            }
+          }
+          break;
+        case 'auth/wrong-password':
+          errorMessage = 'Email ou Senha incorreto.';
+          break;
+        case 'auth/invalid-email':
+          errorMessage = 'Email inválido';
+          break;
+        case 'auth/too-many-requests':
+          errorMessage = 'Muitas tentativas. Tente novamente mais tarde';
+          break;
+        case 'auth/user-disabled':
+          errorMessage = 'Conta desabilitada';
+          break;
+        case 'auth/network-request-failed':
+          errorMessage = 'Erro de conexão. Verifique sua internet';
+          break;
+        default:
+          // Se não reconhecer o erro, mostra o erro original
+          errorMessage = error.message || 'Erro ao fazer login';
       }
       
       return { success: false, error: errorMessage };

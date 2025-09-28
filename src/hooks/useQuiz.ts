@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { QuizState, Question, UserAnswer, Screen } from '@/types/quiz';
 import { questionsData } from '@/data/questions';
+import { useAuth } from '@/hooks/useAuth';
 
 const MULTIPLIERS = [0.10, 0.20, 0.30, 0.40, 0.60, 1.00, 1.40, 2.00, 3.00, 6.00];
 
@@ -43,6 +44,7 @@ export const useQuiz = () => {
   const [shouldNextBeEasy, setShouldNextBeEasy] = useState(false);
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const { isAuthenticated, isLoading } = useAuth();
 
   const selectRandomQuestions = useCallback((category: string, forceEasy: boolean = false): Question[] => {
     const categoryQuestions = questionsData[category];
@@ -114,11 +116,16 @@ export const useQuiz = () => {
     if (modalidade === 'livre') {
       setCurrentScreen('start');
     } else if (modalidade === 'competicao') {
-      setCurrentScreen('auth');
+      // Se já está autenticado, vai direto para a seleção de categoria
+      if (isAuthenticated) {
+        setCurrentScreen('start');
+      } else {
+        setCurrentScreen('auth');
+      }
     } else {
       setCurrentScreen('coming-soon');
     }
-  }, []);
+  }, [isAuthenticated]);
 
   const goToCompetition = useCallback(() => {
     setCurrentScreen('start'); // Após autenticação, vai para seleção de categoria
@@ -255,8 +262,8 @@ export const useQuiz = () => {
   }, [stopTimer]);
 
   const goBackToModalidade = useCallback(() => {
-    setCurrentScreen('modalidade');
     setSelectedModalidade(null);
+    setCurrentScreen('modalidade');
   }, []);
 
   const restartQuiz = useCallback(() => {
@@ -283,6 +290,7 @@ export const useQuiz = () => {
       }
     };
   }, []);
+
 
   return {
     currentScreen,

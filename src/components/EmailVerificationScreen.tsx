@@ -111,7 +111,7 @@ export default function EmailVerificationScreen({
               onClick={onBack}
               className="back-btn"
             >
-              ← Voltar
+              ← Fazer Login
             </button>
           </div>
 

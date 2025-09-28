@@ -1,12 +1,20 @@
 "use client";
 
+import { useAuth } from '@/hooks/useAuth';
+
 interface ModalidadeScreenProps {
   selectModalidade: (modalidade: string) => void;
 }
 
 export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenProps) {
+  const { user, logout, isLoading } = useAuth();
+
   const handleModalidadeClick = (modalidade: string) => {
     selectModalidade(modalidade);
+  };
+
+  const handleLogout = async () => {
+    await logout();
   };
 
   return (
@@ -18,6 +26,36 @@ export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenP
           🏆
         </div>
       </div>
+
+      {/* User Info */}
+      {user && !isLoading && (
+        <div className="user-info">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>{user.email}</span>
+          </div>
+          <button
+            className="logout-btn"
+            onClick={handleLogout}
+            title="Sair da conta"
+          >
+            🚪 Sair
+          </button>
+        </div>
+      )}
+      
+      {/* Loading placeholder */}
+      {isLoading && (
+        <div className="user-info loading">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>Carregando...</span>
+          </div>
+          <div className="logout-btn loading-btn">
+            🚪 Sair
+          </div>
+        </div>
+      )}
 
       {/* Main Card */}
       <div className="welcome-card">
@@ -54,6 +92,62 @@ export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenP
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .user-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 15px 20px;
+          border-radius: 12px;
+          margin: 20px auto;
+          max-width: 500px;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-email {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: white;
+          font-weight: 500;
+        }
+
+        .user-icon {
+          font-size: 1.2rem;
+        }
+
+        .logout-btn {
+          background: #1976d2;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s;
+          font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+          background: #1565c0;
+        }
+
+        .user-info.loading {
+          opacity: 0.7;
+        }
+
+        .loading-btn {
+          background: #666 !important;
+          cursor: not-allowed;
+        }
+
+        .loading-btn:hover {
+          background: #666 !important;
+        }
+      `}</style>
     </div>
   );
 }

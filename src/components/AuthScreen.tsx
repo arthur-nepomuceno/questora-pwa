@@ -7,9 +7,10 @@ import EmailVerificationScreen from './EmailVerificationScreen';
 
 interface AuthScreenProps {
   onAuthSuccess: () => void;
+  onBack?: () => void;
 }
 
-export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
+export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const [isLogin, setIsLogin] = useState(true);
   const [loginForm, setLoginForm] = useState<LoginCredentials>({ email: '', password: '' });
   const [signupForm, setSignupForm] = useState<SignupCredentials>({ name: '', email: '', password: '' });
@@ -133,6 +134,16 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
               <button type="submit" className="auth-btn" disabled={isLoading}>
                 {isLoading ? 'Entrando...' : 'Entrar'}
               </button>
+              
+              {onBack && (
+                <button 
+                  type="button" 
+                  className="back-btn"
+                  onClick={onBack}
+                >
+                  ← Voltar
+                </button>
+              )}
             </form>
           ) : (
             <form onSubmit={handleSignup} className="auth-form">
@@ -176,6 +187,16 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
               <button type="submit" className="auth-btn" disabled={isLoading}>
                 {isLoading ? 'Criando conta...' : 'Criar Conta'}
               </button>
+              
+              {onBack && (
+                <button 
+                  type="button" 
+                  className="back-btn"
+                  onClick={onBack}
+                >
+                  ← Voltar
+                </button>
+              )}
             </form>
           )}
         </div>
@@ -185,8 +206,6 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
           <ul>
             <li>✅ Sistema de créditos</li>
             <li>✅ Ranking de jogadores</li>
-            <li>✅ Premiações especiais</li>
-            <li>✅ Competição entre usuários</li>
           </ul>
         </div>
       </div>
@@ -209,6 +228,23 @@ export default function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
 
         .spam-instructions strong {
           color: #0d47a1;
+        }
+
+        .back-btn {
+          background: #1976d2;
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s;
+          margin-top: 15px;
+          width: 100%;
+        }
+
+        .back-btn:hover {
+          background: #1565c0;
         }
       `}</style>
     </div>

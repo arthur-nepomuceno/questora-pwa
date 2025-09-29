@@ -136,8 +136,14 @@ export const useQuiz = () => {
   }, [isAuthenticated]);
 
   const goToCompetition = useCallback(() => {
-    setCurrentScreen('start'); // Após autenticação, vai para seleção de categoria
-  }, []);
+    // Se a modalidade já foi selecionada, vai direto para seleção de categoria
+    if (selectedModalidade === 'competicao') {
+      setCurrentScreen('start');
+    } else {
+      // Caso contrário, volta para seleção de modalidade
+      setCurrentScreen('modalidade');
+    }
+  }, [selectedModalidade]);
 
   const startQuiz = useCallback((category: string) => {
     const selectedQuestions = selectRandomQuestions(category);

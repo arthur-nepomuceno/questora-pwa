@@ -35,14 +35,17 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
         
         {/* Modalidade Selection */}
         <div className="category-selection">
-          <div 
-            className="category-card"
-            onClick={() => handleModalidadeClick("livre")}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="category-icon">🎯</div>
-            <h3>Livre</h3>
-          </div>
+          {/* Modalidade "Livre" - apenas para usuários não logados */}
+          {!user && (
+            <div 
+              className="category-card"
+              onClick={() => handleModalidadeClick("livre")}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className="category-icon">🎯</div>
+              <h3>Livre</h3>
+            </div>
+          )}
           
           <div 
             className="category-card"

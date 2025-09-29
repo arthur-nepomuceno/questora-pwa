@@ -195,7 +195,7 @@ export const useQuiz = () => {
         newState.correctAnswers++;
         const currentMultiplier = MULTIPLIERS[newState.currentMultiplierIndex];
         const pointsEarned = newState.selectedCredits * currentMultiplier;
-        newState.accumulatedScore += pointsEarned;
+        newState.accumulatedScore = Math.round(newState.accumulatedScore + pointsEarned);
         
         if (newState.currentMultiplierIndex < MULTIPLIERS.length - 1) {
           newState.currentMultiplierIndex++;
@@ -209,7 +209,7 @@ export const useQuiz = () => {
       } else {
         newState.wrongAnswers++;
         newState.currentErrors++;
-        newState.accumulatedScore = Math.round(newState.accumulatedScore / 2 * 100) / 100;
+        newState.accumulatedScore = Math.round(newState.accumulatedScore / 2);
         newState.currentMultiplierIndex = 0;
         
         // Se errou, marca que a próxima pergunta deve ser fácil

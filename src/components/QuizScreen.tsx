@@ -47,7 +47,7 @@ export default function QuizScreen({
   };
 
   const formatScore = (score: number) => {
-    return score.toFixed(2);
+    return Math.round(score).toString();
   };
 
   return (

@@ -44,7 +44,7 @@ export const useQuiz = () => {
   const [shouldNextBeEasy, setShouldNextBeEasy] = useState(false);
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user, updateCredits } = useAuth();
 
   const selectRandomQuestions = useCallback((category: string, forceEasy: boolean = false): Question[] => {
     const categoryQuestions = questionsData[category];
@@ -141,11 +141,34 @@ export const useQuiz = () => {
     setCurrentScreen('credits');
   }, [selectRandomQuestions]);
 
-  const startQuizWithCredits = useCallback((credits: number) => {
+  const startQuizWithCredits = useCallback(async (credits: number) => {
     setQuizState(prev => ({ ...prev, selectedCredits: credits }));
+    
+    // Debitar créditos imediatamente
+    if (user) {
+      const newCredits = user.credits - credits;
+      await updateCredits(newCredits);
+      // Armazenar o valor dos créditos após o débito para uso posterior
+      setQuizState(prev => ({ ...prev, creditsAfterDebit: newCredits }));
+    }
+    
     startTimer();
     setCurrentScreen('quiz');
-  }, [startTimer]);
+  }, [startTimer, user, updateCredits]);
+
+  const recalculateCredits = useCallback(async () => {
+    if (user && quizState.creditsAfterDebit !== undefined) {
+      // Usar os créditos após o débito armazenados no estado
+      const newCredits = quizState.creditsAfterDebit + quizState.accumulatedScore + timeRemaining;
+      console.log('Recálculo de créditos:', {
+        creditsAfterDebit: quizState.creditsAfterDebit,
+        accumulatedScore: quizState.accumulatedScore,
+        timeRemaining: timeRemaining,
+        newCredits: newCredits
+      });
+      await updateCredits(newCredits);
+    }
+  }, [user, quizState.creditsAfterDebit, quizState.accumulatedScore, timeRemaining, updateCredits]);
 
   const selectOption = useCallback((option: string) => {
     const currentQuestion = quizState.selectedQuestions[quizState.currentQuestionIndex];
@@ -238,6 +261,8 @@ export const useQuiz = () => {
       setQuizState(prev => {
         if (prev.currentErrors >= prev.maxErrors) {
           stopTimer();
+          // Recalcular créditos antes de ir para resultados
+          recalculateCredits();
           setCurrentScreen('results');
           return prev;
         } else {
@@ -245,6 +270,8 @@ export const useQuiz = () => {
           const newIndex = prev.currentQuestionIndex + 1;
           if (newIndex > prev.selectedQuestions.length - 1) {
             stopTimer();
+            // Recalcular créditos antes de ir para resultados
+            recalculateCredits();
             setCurrentScreen('results');
             return prev;
           }
@@ -253,13 +280,13 @@ export const useQuiz = () => {
         }
       });
     }, 500);
-  }, [quizState.maxErrors, quizState.selectedQuestions, quizState.currentQuestionIndex, shouldNextBeEasy, stopTimer]);
+  }, [quizState.maxErrors, quizState.selectedQuestions, quizState.currentQuestionIndex, shouldNextBeEasy, stopTimer, recalculateCredits]);
 
-
-  const endQuizByTime = useCallback(() => {
+  const endQuizByTime = useCallback(async () => {
     stopTimer();
+    await recalculateCredits();
     setCurrentScreen('results');
-  }, [stopTimer]);
+  }, [stopTimer, recalculateCredits]);
 
   const goBackToModalidade = useCallback(() => {
     setSelectedModalidade(null);

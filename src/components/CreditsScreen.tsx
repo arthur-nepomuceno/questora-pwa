@@ -12,10 +12,10 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
   const { user, logout, isLoading } = useAuth();
 
   const creditOptions = [
-    { value: 1, icon: "💰", label: "1 Crédito" },
-    { value: 2, icon: "💰", label: "2 Créditos" },
-    { value: 5, icon: "💎", label: "5 Créditos" },
-    { value: 10, icon: "🏆", label: "10 Créditos" }
+    { value: 100, icon: "💰", label: "100 Créditos" },
+    { value: 500, icon: "💰", label: "500 Créditos" },
+    { value: 700, icon: "💎", label: "700 Créditos" },
+    { value: 1000, icon: "🏆", label: "1000 Créditos" }
   ];
 
   const handleCreditSelect = (credits: number) => {
@@ -40,7 +40,7 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
       {/* Main Card */}
       <div className="credits-card">
         <h2>Escolha os créditos da rodada</h2>
-        <p>Selecione com quanto deseja participar nesta rodada:</p>
+        <p>Selecione quanto deseja investir nesta rodada:</p>
         
         {/* Credit Options */}
         <div className="credits-options">

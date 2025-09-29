@@ -90,9 +90,9 @@ export default function OptionsScreen({ setScreen }: OptionsScreenProps) {
         <div className="options-actions">
           <button
             className="btn btn-primary"
-            onClick={handleBack}
+            disabled
           >
-            Voltar ao Menu
+            Ver Ranking
           </button>
         </div>
       </div>

@@ -49,7 +49,7 @@ export default function ResultsScreen({
         <h2>🎉 Quiz Finalizado!</h2>
         <p className="quiz-end-message">☝️ {getEndMessage()}</p>
 
-        {/* Statistics Grid - Layout 2x2 fixo */}
+        {/* Statistics Grid - Layout 2x2 + 1 centralizado */}
         <div className="results-details">
           {/* Primeira linha: Acertos e Erros */}
           <div className="result-square result-acertos">
@@ -82,6 +82,15 @@ export default function ResultsScreen({
             <div className="result-info">
               <span className="result-label">Tempo Restante</span>
               <span className="result-value">{formatTime(timeRemaining)}</span>
+            </div>
+          </div>
+          
+          {/* Terceira linha: Total de Créditos Ganhos (centralizado) */}
+          <div className="result-square result-creditos-ganhos">
+            <div className="result-icon">🎯</div>
+            <div className="result-info">
+              <span className="result-label">Créditos Ganhos</span>
+              <span className="result-value credits-earned">{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
             </div>
           </div>
         </div>

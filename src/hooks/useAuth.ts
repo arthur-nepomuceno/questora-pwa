@@ -61,7 +61,7 @@ export const useAuth = () => {
               id: firebaseUser.uid,
               email: firebaseUser.email!,
               name: userData.name,
-              credits: userData.credits || 7000,
+              credits: userData.credits || 0,
               totalMatches: userData.totalMatches || 0,
               totalScore: userData.totalScore || 0,
               bestScore: userData.bestScore || 0,
@@ -185,6 +185,7 @@ export const useAuth = () => {
       // Criar documento do usuário no Firestore
       const userData = {
         name: credentials.name,
+        email: credentials.email,
         credits: 7000,
         totalMatches: 0,
         totalScore: 0,

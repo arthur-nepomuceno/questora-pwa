@@ -19,6 +19,7 @@ export interface QuizState {
   currentMultiplierIndex: number;
   maxErrors: number;
   currentErrors: number;
+  creditsAfterDebit?: number;
 }
 
 export interface UserAnswer {

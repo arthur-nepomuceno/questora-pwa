@@ -97,8 +97,7 @@ export default function QuizScreen({
               <div 
                 className={`difficulty-badge difficulty-${currentQuestion.dificuldade}`}
               >
-                {currentQuestion.dificuldade === 'facil' ? 'FÁCIL' : 
-                 currentQuestion.dificuldade === 'medio' ? 'MÉDIO' : 'DIFÍCIL'}
+                {currentQuestion.pontuacao} PONTO{currentQuestion.pontuacao > 1 ? 'S' : ''}
               </div>
               <div className="question-text">
                 {currentQuestion.pergunta}

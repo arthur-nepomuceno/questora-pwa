@@ -1,56 +1,752 @@
 [
-  {"id":1,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual novela apresentou o personagem Roque Santeiro?","opcoes":["Roque Santeiro","Tieta","O Bem-Amado","Selva de Pedra","Vale Tudo"],"correta":"Roque Santeiro"},
-  {"id":2,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual novela tinha a personagem Viúva Porcina?","opcoes":["Roque Santeiro","Tieta","O Salvador da Pátria","Explode Coração","Fera Ferida"],"correta":"Roque Santeiro"},
-  {"id":3,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual novela consagrou a personagem Tieta?","opcoes":["Tieta","Gabriela","Vale Tudo","Senhora do Destino","Porto dos Milagres"],"correta":"Tieta"},
-  {"id":4,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual atriz interpretou Dona Armênia em Rainha da Sucata?","opcoes":["Aracy Balabanian","Fernanda Montenegro","Susana Vieira","Irene Ravache","Claudia Raia"],"correta":"Aracy Balabanian"},
-  {"id":5,"categoria":"Novelas","dificuldade":"facil","pergunta":"Em qual novela a personagem Nazaré Tedesco se destacou?","opcoes":["Senhora do Destino","Vale Tudo","Mulheres de Areia","Fina Estampa","A Favorita"],"correta":"Senhora do Destino"},
-  {"id":6,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual novela exibiu a música 'Vale Tudo' como tema de abertura?","opcoes":["Vale Tudo","Roque Santeiro","Celebridade","Explode Coração","Avenida Brasil"],"correta":"Vale Tudo"},
-  {"id":7,"categoria":"Novelas","dificuldade":"facil","pergunta":"Quem era a vilã Carminha em Avenida Brasil?","opcoes":["Adriana Esteves","Deborah Secco","Glória Pires","Claudia Raia","Giovanna Antonelli"],"correta":"Adriana Esteves"},
-  {"id":8,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual novela popularizou a personagem Odete Roitman?","opcoes":["Vale Tudo","Tieta","O Clone","Explode Coração","Belíssima"],"correta":"Vale Tudo"},
-  {"id":9,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual novela tinha como tema a clonagem humana?","opcoes":["O Clone","Caminho das Índias","América","Avenida Brasil","Explode Coração"],"correta":"O Clone"},
-  {"id":10,"categoria":"Novelas","dificuldade":"facil","pergunta":"Qual novela consagrou a música 'Amor e Poder' de Rosana?","opcoes":["Mandala","Selva de Pedra","Baila Comigo","Explode Coração","Vamp"],"correta":"Mandala"},
-
-  {"id":11,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela exibiu a famosa cena do último capítulo com o bordão 'Me serve, Odete'?","opcoes":["Vale Tudo","Celebridade","Senhora do Destino","Explode Coração","Belíssima"],"correta":"Vale Tudo"},
-  {"id":12,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual ator interpretou Félix em Amor à Vida?","opcoes":["Mateus Solano","Reynaldo Gianecchini","Murilo Benício","Cauã Reymond","Tony Ramos"],"correta":"Mateus Solano"},
-  {"id":13,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela de Glória Perez abordou a cultura cigana?","opcoes":["Explode Coração","O Clone","América","Caminho das Índias","Salve Jorge"],"correta":"Explode Coração"},
-  {"id":14,"categoria":"Novelas","dificuldade":"medio","pergunta":"Em qual novela Susana Vieira viveu Maria do Carmo?","opcoes":["Senhora do Destino","Mulheres de Areia","Vale Tudo","Por Amor","A Regra do Jogo"],"correta":"Senhora do Destino"},
-  {"id":15,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela de 1992 foi ambientada no fictício 'Tocaia Grande'?","opcoes":["Deus nos Acuda","Pedra sobre Pedra","Renascer","O Rei do Gado","Fera Ferida"],"correta":"Pedra sobre Pedra"},
-  {"id":16,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela popularizou o personagem Tonho da Lua?","opcoes":["Mulheres de Areia","A Indomada","Fera Ferida","Tieta","Torre de Babel"],"correta":"Mulheres de Areia"},
-  {"id":17,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela tinha como protagonista o fazendeiro Bruno Mezenga?","opcoes":["O Rei do Gado","Terra Nostra","América","Renascer","Pantanal"],"correta":"O Rei do Gado"},
-  {"id":18,"categoria":"Novelas","dificuldade":"medio","pergunta":"Quem interpretou a vilã Flora em A Favorita?","opcoes":["Patrícia Pillar","Claudia Raia","Glória Menezes","Giovanna Antonelli","Susana Vieira"],"correta":"Patrícia Pillar"},
-  {"id":19,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela de 1998 tinha um triângulo amoroso entre Eduarda, Helena e Atílio?","opcoes":["Por Amor","Laços de Família","Mulheres Apaixonadas","A Próxima Vítima","Celebridade"],"correta":"Por Amor"},
-  {"id":20,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela apresentou o núcleo fictício de 'Ilhéus'?","opcoes":["Gabriela","Tieta","Porto dos Milagres","Corpo a Corpo","A Indomada"],"correta":"Gabriela"},
-
-  {"id":21,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela exibiu a cena da escada envolvendo a vilã Nazaré?","opcoes":["Senhora do Destino","Vale Tudo","Explode Coração","A Favorita","O Clone"],"correta":"Senhora do Destino"},
-  {"id":22,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela tinha Jade e Lucas como protagonistas?","opcoes":["O Clone","América","Caminho das Índias","Salve Jorge","Explode Coração"],"correta":"O Clone"},
-  {"id":23,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela de Benedito Ruy Barbosa apresentou o personagem Zé Leôncio?","opcoes":["Pantanal","O Rei do Gado","Terra Nostra","Cabocla","Renascer"],"correta":"Pantanal"},
-  {"id":24,"categoria":"Novelas","dificuldade":"medio","pergunta":"Em qual novela Tony Ramos viveu o indiano Opash?","opcoes":["Caminho das Índias","O Clone","América","Explode Coração","Esperança"],"correta":"Caminho das Índias"},
-  {"id":25,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela teve como tema central a cafeicultura no início do século XX?","opcoes":["Terra Nostra","Esperança","O Rei do Gado","Cabocla","Sinhá Moça"],"correta":"Esperança"},
-  {"id":26,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela de 2003 apresentou o romance de Helena e Miguel?","opcoes":["Mulheres Apaixonadas","Laços de Família","Páginas da Vida","Celebridade","Por Amor"],"correta":"Mulheres Apaixonadas"},
-  {"id":27,"categoria":"Novelas","dificuldade":"medio","pergunta":"Quem foi o autor de Vale Tudo?","opcoes":["Gilberto Braga","Manoel Carlos","Glória Perez","Aguinaldo Silva","Benedito Ruy Barbosa"],"correta":"Gilberto Braga"},
-  {"id":28,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela da Globo em 2004 teve como abertura a música 'Celebration' do Kool & The Gang?","opcoes":["Da Cor do Pecado","Senhora do Destino","Celebridade","Belíssima","Alma Gêmea"],"correta":"Da Cor do Pecado"},
-  {"id":29,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela apresentou o bordão 'Cada mergulho é um flash'?","opcoes":["Celebridade","Senhora do Destino","O Clone","Explode Coração","Belíssima"],"correta":"Celebridade"},
-  {"id":30,"categoria":"Novelas","dificuldade":"medio","pergunta":"Qual novela foi protagonizada por Regina Duarte como Helena, mãe de Camila?","opcoes":["Laços de Família","Por Amor","Mulheres Apaixonadas","Viver a Vida","História de Amor"],"correta":"Laços de Família"},
-
-  {"id":31,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de 1976 apresentou a personagem Carina, vivida por Elizabeth Savalla?","opcoes":["Estúpido Cupido","Gabriela","Dancin' Days","Pai Herói","Selva de Pedra"],"correta":"Estúpido Cupido"},
-  {"id":32,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela da Manchete, de 1989, teve destaque por abordar o garimpo?","opcoes":["Pantanal","Tocaia Grande","A História de Ana Raio e Zé Trovão","Kananga do Japão","Pedra sobre Pedra"],"correta":"Kananga do Japão"},
-  {"id":33,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela teve uma versão original em 1973 e um remake em 2013?","opcoes":["Saramandaia","Gabriela","Mulheres de Areia","Sinhá Moça","Cabocla"],"correta":"Saramandaia"},
-  {"id":34,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de 1975 foi marcada pela censura e pelo corte de seu último capítulo?","opcoes":["Roque Santeiro","O Rebu","Selva de Pedra","O Grito","Escalada"],"correta":"Roque Santeiro"},
-  {"id":35,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de Ivani Ribeiro teve a atriz Cláudia Raia como vilã Andreia?","opcoes":["Rainha da Sucata","A Próxima Vítima","A Indomada","Fera Ferida","Hipertensão"],"correta":"Hipertensão"},
-  {"id":36,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela marcou a estreia de Tony Ramos na TV Globo em 1977?","opcoes":["Espelho Mágico","Pai Herói","O Astro","Dancin' Days","Selva de Pedra"],"correta":"Espelho Mágico"},
-  {"id":37,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela tinha o personagem Tião Galinha?","opcoes":["Renascer","O Rei do Gado","Cabocla","Pantanal","Tieta"],"correta":"Renascer"},
-  {"id":38,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela da TV Tupi foi a primeira transmitida em cores no Brasil?","opcoes":["O Bem-Amado","A Moreninha","Irmãos Coragem","Bandeira 2","Minha Doce Namorada"],"correta":"O Bem-Amado"},
-  {"id":39,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de Janete Clair teve o personagem Cristiano Vilhena?","opcoes":["Selva de Pedra","O Astro","O Semideus","Pai Herói","Irmãos Coragem"],"correta":"Selva de Pedra"},
-  {"id":40,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de 1988 apresentou a música 'Chico Mineiro' na abertura?","opcoes":["Vida Nova","Cabocla","Pantanal","Pacto de Sangue","Fera Ferida"],"correta":"Pacto de Sangue"},
-
-  {"id":41,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela exibida em 1973 tinha como tema a exploração do petróleo no Recôncavo Baiano?","opcoes":["O Bem-Amado","Bandeira 2","O Rebu","Escalada","Assim na Terra como no Céu"],"correta":"Bandeira 2"},
-  {"id":42,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de 1982 foi marcada pelo núcleo de ciganos?","opcoes":["Coração Alado","Coração de Estudante","Explode Coração","Louco Amor","Parabéns pra Você"],"correta":"Louco Amor"},
-  {"id":43,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela teve como trilha a música 'Explode Coração' de Gonzaguinha, mas não era homônima?","opcoes":["Partido Alto","Sinal de Alerta","O Homem Proibido","Eu Prometo","O Outro"],"correta":"Partido Alto"},
-  {"id":44,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de 1990 teve Lima Duarte como Zé do Burro?","opcoes":["Meu Bem, Meu Mal","Pedra sobre Pedra","Araponga","Deus nos Acuda","O Salvador da Pátria"],"correta":"O Salvador da Pátria"},
-  {"id":45,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela teve como protagonista a personagem Ana Raio?","opcoes":["A História de Ana Raio e Zé Trovão","Kananga do Japão","Pantanal","Tocaia Grande","Xica da Silva"],"correta":"A História de Ana Raio e Zé Trovão"},
-  {"id":46,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de 1972 apresentou a personagem Vitória, vivida por Regina Duarte?","opcoes":["Selva de Pedra","Minha Doce Namorada","Escalada","Irmãos Coragem","Bandeira 2"],"correta":"Selva de Pedra"},
-  {"id":47,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela da TV Manchete retratou o garimpo em Serra Pelada?","opcoes":["Pantanal","Kananga do Japão","Amazônia","Tocaia Grande","Pacto de Sangue"],"correta":"Amazônia"},
-  {"id":48,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de Dias Gomes foi exibida em 1976, logo após o sucesso de O Bem-Amado?","opcoes":["Saramandaia","Roque Santeiro","Escalada","Pai Herói","O Rebu"],"correta":"Saramandaia"},
-  {"id":49,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela da Globo foi protagonizada por Bruna Lombardi em 1981?","opcoes":["Louco Amor","Mágica","Os Gigantes","A Deusa Vencida","Baila Comigo"],"correta":"Os Gigantes"},
-  {"id":50,"categoria":"Novelas","dificuldade":"dificil","pergunta":"Qual novela de 1979 tinha como trama central o desaparecimento de um cadáver?","opcoes":["O Rebu","Água Viva","Dancin' Days","Corpo a Corpo","Eu Prometo"],"correta":"O Rebu"}
+  {
+    "id": 1,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela apresentou o personagem Roque Santeiro?",
+    "opcoes": [
+      "Roque Santeiro",
+      "Tieta",
+      "O Bem-Amado",
+      "Selva de Pedra",
+      "Vale Tudo"
+    ],
+    "correta": "Roque Santeiro",
+    "pontuacao": 1
+  },
+  {
+    "id": 2,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha a personagem Viúva Porcina?",
+    "opcoes": [
+      "Roque Santeiro",
+      "Tieta",
+      "O Salvador da Pátria",
+      "Explode Coração",
+      "Fera Ferida"
+    ],
+    "correta": "Roque Santeiro",
+    "pontuacao": 1
+  },
+  {
+    "id": 3,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela consagrou a personagem Tieta?",
+    "opcoes": [
+      "Tieta",
+      "Gabriela",
+      "Vale Tudo",
+      "Senhora do Destino",
+      "Porto dos Milagres"
+    ],
+    "correta": "Tieta",
+    "pontuacao": 1
+  },
+  {
+    "id": 4,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual atriz interpretou Dona Armênia em Rainha da Sucata?",
+    "opcoes": [
+      "Aracy Balabanian",
+      "Fernanda Montenegro",
+      "Susana Vieira",
+      "Irene Ravache",
+      "Claudia Raia"
+    ],
+    "correta": "Aracy Balabanian",
+    "pontuacao": 1
+  },
+  {
+    "id": 5,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em qual novela a personagem Nazaré Tedesco se destacou?",
+    "opcoes": [
+      "Senhora do Destino",
+      "Vale Tudo",
+      "Mulheres de Areia",
+      "Fina Estampa",
+      "A Favorita"
+    ],
+    "correta": "Senhora do Destino",
+    "pontuacao": 1
+  },
+  {
+    "id": 6,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela exibiu a música 'Vale Tudo' como tema de abertura?",
+    "opcoes": [
+      "Vale Tudo",
+      "Roque Santeiro",
+      "Celebridade",
+      "Explode Coração",
+      "Avenida Brasil"
+    ],
+    "correta": "Vale Tudo",
+    "pontuacao": 1
+  },
+  {
+    "id": 7,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Quem era a vilã Carminha em Avenida Brasil?",
+    "opcoes": [
+      "Adriana Esteves",
+      "Deborah Secco",
+      "Glória Pires",
+      "Claudia Raia",
+      "Giovanna Antonelli"
+    ],
+    "correta": "Adriana Esteves",
+    "pontuacao": 1
+  },
+  {
+    "id": 8,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela popularizou a personagem Odete Roitman?",
+    "opcoes": [
+      "Vale Tudo",
+      "Tieta",
+      "O Clone",
+      "Explode Coração",
+      "Belíssima"
+    ],
+    "correta": "Vale Tudo",
+    "pontuacao": 1
+  },
+  {
+    "id": 9,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha como tema a clonagem humana?",
+    "opcoes": [
+      "O Clone",
+      "Caminho das Índias",
+      "América",
+      "Avenida Brasil",
+      "Explode Coração"
+    ],
+    "correta": "O Clone",
+    "pontuacao": 1
+  },
+  {
+    "id": 10,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela consagrou a música 'Amor e Poder' de Rosana?",
+    "opcoes": [
+      "Mandala",
+      "Selva de Pedra",
+      "Baila Comigo",
+      "Explode Coração",
+      "Vamp"
+    ],
+    "correta": "Mandala",
+    "pontuacao": 1
+  },
+  {
+    "id": 11,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela exibiu a famosa cena do último capítulo com o bordão 'Me serve, Odete'?",
+    "opcoes": [
+      "Vale Tudo",
+      "Celebridade",
+      "Senhora do Destino",
+      "Explode Coração",
+      "Belíssima"
+    ],
+    "correta": "Vale Tudo",
+    "pontuacao": 2
+  },
+  {
+    "id": 12,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual ator interpretou Félix em Amor à Vida?",
+    "opcoes": [
+      "Mateus Solano",
+      "Reynaldo Gianecchini",
+      "Murilo Benício",
+      "Cauã Reymond",
+      "Tony Ramos"
+    ],
+    "correta": "Mateus Solano",
+    "pontuacao": 2
+  },
+  {
+    "id": 13,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de Glória Perez abordou a cultura cigana?",
+    "opcoes": [
+      "Explode Coração",
+      "O Clone",
+      "América",
+      "Caminho das Índias",
+      "Salve Jorge"
+    ],
+    "correta": "Explode Coração",
+    "pontuacao": 2
+  },
+  {
+    "id": 14,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela Susana Vieira viveu Maria do Carmo?",
+    "opcoes": [
+      "Senhora do Destino",
+      "Mulheres de Areia",
+      "Vale Tudo",
+      "Por Amor",
+      "A Regra do Jogo"
+    ],
+    "correta": "Senhora do Destino",
+    "pontuacao": 2
+  },
+  {
+    "id": 15,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1992 foi ambientada no fictício 'Tocaia Grande'?",
+    "opcoes": [
+      "Deus nos Acuda",
+      "Pedra sobre Pedra",
+      "Renascer",
+      "O Rei do Gado",
+      "Fera Ferida"
+    ],
+    "correta": "Pedra sobre Pedra",
+    "pontuacao": 2
+  },
+  {
+    "id": 16,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela popularizou o personagem Tonho da Lua?",
+    "opcoes": [
+      "Mulheres de Areia",
+      "A Indomada",
+      "Fera Ferida",
+      "Tieta",
+      "Torre de Babel"
+    ],
+    "correta": "Mulheres de Areia",
+    "pontuacao": 2
+  },
+  {
+    "id": 17,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela tinha como protagonista o fazendeiro Bruno Mezenga?",
+    "opcoes": [
+      "O Rei do Gado",
+      "Terra Nostra",
+      "América",
+      "Renascer",
+      "Pantanal"
+    ],
+    "correta": "O Rei do Gado",
+    "pontuacao": 2
+  },
+  {
+    "id": 18,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Quem interpretou a vilã Flora em A Favorita?",
+    "opcoes": [
+      "Patrícia Pillar",
+      "Claudia Raia",
+      "Glória Menezes",
+      "Giovanna Antonelli",
+      "Susana Vieira"
+    ],
+    "correta": "Patrícia Pillar",
+    "pontuacao": 2
+  },
+  {
+    "id": 19,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1998 tinha um triângulo amoroso entre Eduarda, Helena e Atílio?",
+    "opcoes": [
+      "Por Amor",
+      "Laços de Família",
+      "Mulheres Apaixonadas",
+      "A Próxima Vítima",
+      "Celebridade"
+    ],
+    "correta": "Por Amor",
+    "pontuacao": 2
+  },
+  {
+    "id": 20,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela apresentou o núcleo fictício de 'Ilhéus'?",
+    "opcoes": [
+      "Gabriela",
+      "Tieta",
+      "Porto dos Milagres",
+      "Corpo a Corpo",
+      "A Indomada"
+    ],
+    "correta": "Gabriela",
+    "pontuacao": 2
+  },
+  {
+    "id": 21,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela exibiu a cena da escada envolvendo a vilã Nazaré?",
+    "opcoes": [
+      "Senhora do Destino",
+      "Vale Tudo",
+      "Explode Coração",
+      "A Favorita",
+      "O Clone"
+    ],
+    "correta": "Senhora do Destino",
+    "pontuacao": 2
+  },
+  {
+    "id": 22,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela tinha Jade e Lucas como protagonistas?",
+    "opcoes": [
+      "O Clone",
+      "América",
+      "Caminho das Índias",
+      "Salve Jorge",
+      "Explode Coração"
+    ],
+    "correta": "O Clone",
+    "pontuacao": 2
+  },
+  {
+    "id": 23,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de Benedito Ruy Barbosa apresentou o personagem Zé Leôncio?",
+    "opcoes": [
+      "Pantanal",
+      "O Rei do Gado",
+      "Terra Nostra",
+      "Cabocla",
+      "Renascer"
+    ],
+    "correta": "Pantanal",
+    "pontuacao": 2
+  },
+  {
+    "id": 24,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela Tony Ramos viveu o indiano Opash?",
+    "opcoes": [
+      "Caminho das Índias",
+      "O Clone",
+      "América",
+      "Explode Coração",
+      "Esperança"
+    ],
+    "correta": "Caminho das Índias",
+    "pontuacao": 2
+  },
+  {
+    "id": 25,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve como tema central a cafeicultura no início do século XX?",
+    "opcoes": [
+      "Terra Nostra",
+      "Esperança",
+      "O Rei do Gado",
+      "Cabocla",
+      "Sinhá Moça"
+    ],
+    "correta": "Esperança",
+    "pontuacao": 2
+  },
+  {
+    "id": 26,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2003 apresentou o romance de Helena e Miguel?",
+    "opcoes": [
+      "Mulheres Apaixonadas",
+      "Laços de Família",
+      "Páginas da Vida",
+      "Celebridade",
+      "Por Amor"
+    ],
+    "correta": "Mulheres Apaixonadas",
+    "pontuacao": 2
+  },
+  {
+    "id": 27,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o autor de Vale Tudo?",
+    "opcoes": [
+      "Gilberto Braga",
+      "Manoel Carlos",
+      "Glória Perez",
+      "Aguinaldo Silva",
+      "Benedito Ruy Barbosa"
+    ],
+    "correta": "Gilberto Braga",
+    "pontuacao": 2
+  },
+  {
+    "id": 28,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela da Globo em 2004 teve como abertura a música 'Celebration' do Kool & The Gang?",
+    "opcoes": [
+      "Da Cor do Pecado",
+      "Senhora do Destino",
+      "Celebridade",
+      "Belíssima",
+      "Alma Gêmea"
+    ],
+    "correta": "Da Cor do Pecado",
+    "pontuacao": 2
+  },
+  {
+    "id": 29,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela apresentou o bordão 'Cada mergulho é um flash'?",
+    "opcoes": [
+      "Celebridade",
+      "Senhora do Destino",
+      "O Clone",
+      "Explode Coração",
+      "Belíssima"
+    ],
+    "correta": "Celebridade",
+    "pontuacao": 2
+  },
+  {
+    "id": 30,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela foi protagonizada por Regina Duarte como Helena, mãe de Camila?",
+    "opcoes": [
+      "Laços de Família",
+      "Por Amor",
+      "Mulheres Apaixonadas",
+      "Viver a Vida",
+      "História de Amor"
+    ],
+    "correta": "Laços de Família",
+    "pontuacao": 2
+  },
+  {
+    "id": 31,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1976 apresentou a personagem Carina, vivida por Elizabeth Savalla?",
+    "opcoes": [
+      "Estúpido Cupido",
+      "Gabriela",
+      "Dancin' Days",
+      "Pai Herói",
+      "Selva de Pedra"
+    ],
+    "correta": "Estúpido Cupido",
+    "pontuacao": 3
+  },
+  {
+    "id": 32,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela da Manchete, de 1989, teve destaque por abordar o garimpo?",
+    "opcoes": [
+      "Pantanal",
+      "Tocaia Grande",
+      "A História de Ana Raio e Zé Trovão",
+      "Kananga do Japão",
+      "Pedra sobre Pedra"
+    ],
+    "correta": "Kananga do Japão",
+    "pontuacao": 3
+  },
+  {
+    "id": 33,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela teve uma versão original em 1973 e um remake em 2013?",
+    "opcoes": [
+      "Saramandaia",
+      "Gabriela",
+      "Mulheres de Areia",
+      "Sinhá Moça",
+      "Cabocla"
+    ],
+    "correta": "Saramandaia",
+    "pontuacao": 3
+  },
+  {
+    "id": 34,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1975 foi marcada pela censura e pelo corte de seu último capítulo?",
+    "opcoes": [
+      "Roque Santeiro",
+      "O Rebu",
+      "Selva de Pedra",
+      "O Grito",
+      "Escalada"
+    ],
+    "correta": "Roque Santeiro",
+    "pontuacao": 3
+  },
+  {
+    "id": 35,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Ivani Ribeiro teve a atriz Cláudia Raia como vilã Andreia?",
+    "opcoes": [
+      "Rainha da Sucata",
+      "A Próxima Vítima",
+      "A Indomada",
+      "Fera Ferida",
+      "Hipertensão"
+    ],
+    "correta": "Hipertensão",
+    "pontuacao": 3
+  },
+  {
+    "id": 36,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela marcou a estreia de Tony Ramos na TV Globo em 1977?",
+    "opcoes": [
+      "Espelho Mágico",
+      "Pai Herói",
+      "O Astro",
+      "Dancin' Days",
+      "Selva de Pedra"
+    ],
+    "correta": "Espelho Mágico",
+    "pontuacao": 3
+  },
+  {
+    "id": 37,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela tinha o personagem Tião Galinha?",
+    "opcoes": [
+      "Renascer",
+      "O Rei do Gado",
+      "Cabocla",
+      "Pantanal",
+      "Tieta"
+    ],
+    "correta": "Renascer",
+    "pontuacao": 3
+  },
+  {
+    "id": 38,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela da TV Tupi foi a primeira transmitida em cores no Brasil?",
+    "opcoes": [
+      "O Bem-Amado",
+      "A Moreninha",
+      "Irmãos Coragem",
+      "Bandeira 2",
+      "Minha Doce Namorada"
+    ],
+    "correta": "O Bem-Amado",
+    "pontuacao": 3
+  },
+  {
+    "id": 39,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Janete Clair teve o personagem Cristiano Vilhena?",
+    "opcoes": [
+      "Selva de Pedra",
+      "O Astro",
+      "O Semideus",
+      "Pai Herói",
+      "Irmãos Coragem"
+    ],
+    "correta": "Selva de Pedra",
+    "pontuacao": 3
+  },
+  {
+    "id": 40,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1988 apresentou a música 'Chico Mineiro' na abertura?",
+    "opcoes": [
+      "Vida Nova",
+      "Cabocla",
+      "Pantanal",
+      "Pacto de Sangue",
+      "Fera Ferida"
+    ],
+    "correta": "Pacto de Sangue",
+    "pontuacao": 3
+  },
+  {
+    "id": 41,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela exibida em 1973 tinha como tema a exploração do petróleo no Recôncavo Baiano?",
+    "opcoes": [
+      "O Bem-Amado",
+      "Bandeira 2",
+      "O Rebu",
+      "Escalada",
+      "Assim na Terra como no Céu"
+    ],
+    "correta": "Bandeira 2",
+    "pontuacao": 3
+  },
+  {
+    "id": 42,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1982 foi marcada pelo núcleo de ciganos?",
+    "opcoes": [
+      "Coração Alado",
+      "Coração de Estudante",
+      "Explode Coração",
+      "Louco Amor",
+      "Parabéns pra Você"
+    ],
+    "correta": "Louco Amor",
+    "pontuacao": 3
+  },
+  {
+    "id": 43,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela teve como trilha a música 'Explode Coração' de Gonzaguinha, mas não era homônima?",
+    "opcoes": [
+      "Partido Alto",
+      "Sinal de Alerta",
+      "O Homem Proibido",
+      "Eu Prometo",
+      "O Outro"
+    ],
+    "correta": "Partido Alto",
+    "pontuacao": 3
+  },
+  {
+    "id": 44,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1990 teve Lima Duarte como Zé do Burro?",
+    "opcoes": [
+      "Meu Bem, Meu Mal",
+      "Pedra sobre Pedra",
+      "Araponga",
+      "Deus nos Acuda",
+      "O Salvador da Pátria"
+    ],
+    "correta": "O Salvador da Pátria",
+    "pontuacao": 3
+  },
+  {
+    "id": 45,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela teve como protagonista a personagem Ana Raio?",
+    "opcoes": [
+      "A História de Ana Raio e Zé Trovão",
+      "Kananga do Japão",
+      "Pantanal",
+      "Tocaia Grande",
+      "Xica da Silva"
+    ],
+    "correta": "A História de Ana Raio e Zé Trovão",
+    "pontuacao": 3
+  },
+  {
+    "id": 46,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1972 apresentou a personagem Vitória, vivida por Regina Duarte?",
+    "opcoes": [
+      "Selva de Pedra",
+      "Minha Doce Namorada",
+      "Escalada",
+      "Irmãos Coragem",
+      "Bandeira 2"
+    ],
+    "correta": "Selva de Pedra",
+    "pontuacao": 3
+  },
+  {
+    "id": 47,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela da TV Manchete retratou o garimpo em Serra Pelada?",
+    "opcoes": [
+      "Pantanal",
+      "Kananga do Japão",
+      "Amazônia",
+      "Tocaia Grande",
+      "Pacto de Sangue"
+    ],
+    "correta": "Amazônia",
+    "pontuacao": 3
+  },
+  {
+    "id": 48,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Dias Gomes foi exibida em 1976, logo após o sucesso de O Bem-Amado?",
+    "opcoes": [
+      "Saramandaia",
+      "Roque Santeiro",
+      "Escalada",
+      "Pai Herói",
+      "O Rebu"
+    ],
+    "correta": "Saramandaia",
+    "pontuacao": 3
+  },
+  {
+    "id": 49,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela da Globo foi protagonizada por Bruna Lombardi em 1981?",
+    "opcoes": [
+      "Louco Amor",
+      "Mágica",
+      "Os Gigantes",
+      "A Deusa Vencida",
+      "Baila Comigo"
+    ],
+    "correta": "Os Gigantes",
+    "pontuacao": 3
+  },
+  {
+    "id": 50,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1979 tinha como trama central o desaparecimento de um cadáver?",
+    "opcoes": [
+      "O Rebu",
+      "Água Viva",
+      "Dancin' Days",
+      "Corpo a Corpo",
+      "Eu Prometo"
+    ],
+    "correta": "O Rebu",
+    "pontuacao": 3
+  }
 ]

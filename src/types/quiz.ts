@@ -5,6 +5,7 @@ export interface Question {
   pergunta: string;
   opcoes: string[];
   correta: string;
+  pontuacao: number;
 }
 
 export interface QuizState {

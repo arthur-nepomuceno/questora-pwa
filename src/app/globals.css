@@ -1623,3 +1623,43 @@ body {
     font-size: 1.1rem;
   }
 }
+
+/* Estilos para botão de créditos */
+.credits-btn {
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  color: white;
+  border: 2px solid #00BFFF;
+  border-top: 3px solid #87CEEB;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+  margin-right: 10px;
+}
+
+.credits-btn:hover {
+  background: linear-gradient(135deg, #1565c0, #1976d2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
+  border-color: #87CEEB;
+}
+
+.user-info .logout-btn {
+  background: transparent !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.user-info .logout-btn:hover {
+  background: #d32f2f !important;
+  transform: translateY(-1px);
+}

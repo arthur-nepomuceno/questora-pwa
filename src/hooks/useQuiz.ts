@@ -14,7 +14,7 @@ const initialQuizState: QuizState = {
   correctAnswers: 0,
   wrongAnswers: 0,
   selectedCategory: null,
-  selectedCredits: 1,
+  selectedCredits: 100,
   accumulatedScore: 0,
   currentMultiplierIndex: 0,
   maxErrors: 3,

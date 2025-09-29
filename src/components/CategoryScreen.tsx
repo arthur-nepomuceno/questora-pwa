@@ -71,8 +71,14 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
         <div className="user-info">
           <div className="user-email">
             <span className="user-icon">👤</span>
-            <span>{user.email}</span>
+            <span>{user.email.split('@')[0]}</span>
           </div>
+          <button
+            className="credits-btn"
+            title="Ver créditos e pontuação"
+          >
+            Créditos e Pontuação
+          </button>
           <button 
             className="logout-btn"
             onClick={handleLogout}

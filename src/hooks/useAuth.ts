@@ -37,7 +37,7 @@ export const useAuth = () => {
           id: firebaseUser.uid,
           email: firebaseUser.email!,
           name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
-          credits: 50, // valor padrão
+          credits: 7000, // valor padrão
           totalMatches: 0,
           totalScore: 0,
           bestScore: 0,
@@ -61,7 +61,7 @@ export const useAuth = () => {
               id: firebaseUser.uid,
               email: firebaseUser.email!,
               name: userData.name,
-              credits: userData.credits || 50,
+              credits: userData.credits || 7000,
               totalMatches: userData.totalMatches || 0,
               totalScore: userData.totalScore || 0,
               bestScore: userData.bestScore || 0,
@@ -185,7 +185,7 @@ export const useAuth = () => {
       // Criar documento do usuário no Firestore
       const userData = {
         name: credentials.name,
-        credits: 50,
+        credits: 7000,
         totalMatches: 0,
         totalScore: 0,
         bestScore: 0,

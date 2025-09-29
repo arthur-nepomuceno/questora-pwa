@@ -54,6 +54,7 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
           >
             <div className="category-icon">🏆</div>
             <h3>Competição</h3>
+            <p>(Iniciar sessão)</p>
           </div>
 
           <div 
@@ -63,6 +64,7 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
           >
             <div className="category-icon">🪙</div>
             <h3>Premiação</h3>
+            <p>(Iniciar sessão)</p>
           </div>
         </div>
       </div>

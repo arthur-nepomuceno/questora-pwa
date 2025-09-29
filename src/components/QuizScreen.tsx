@@ -34,10 +34,20 @@ export default function QuizScreen({
     setShowValues(true);
   }, [quizState.currentQuestionIndex, MULTIPLIERS, quizState.currentMultiplierIndex, quizState.accumulatedScore]);
 
-  // Randomizar as opções para cada pergunta
+  // Randomizar as opções para cada pergunta usando Fisher-Yates shuffle
   const shuffledOptions = React.useMemo(() => {
     if (!currentQuestion) return [];
-    return [...currentQuestion.opcoes].sort(() => Math.random() - 0.5);
+    
+    const shuffleArray = (array: string[]) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+    
+    return shuffleArray(currentQuestion.opcoes);
   }, [currentQuestion]);
 
   const formatTime = (seconds: number) => {

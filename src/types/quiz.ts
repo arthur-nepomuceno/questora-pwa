@@ -20,6 +20,7 @@ export interface QuizState {
   maxErrors: number;
   currentErrors: number;
   creditsAfterDebit?: number;
+  creditsAlreadyRecalculated?: boolean;
 }
 
 export interface UserAnswer {

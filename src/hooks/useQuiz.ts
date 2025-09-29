@@ -44,6 +44,7 @@ export const useQuiz = () => {
   const [shouldNextBeEasy, setShouldNextBeEasy] = useState(false);
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
+  const creditsRecalculatedRef = useRef(false);
   const { isAuthenticated, isLoading, user, updateCredits } = useAuth();
 
   const selectRandomQuestions = useCallback((category: string, forceEasy: boolean = false): Question[] => {
@@ -52,7 +53,14 @@ export const useQuiz = () => {
     const mediumQuestions = categoryQuestions.filter(q => q.dificuldade === 'medio');
     const hardQuestions = categoryQuestions.filter(q => q.dificuldade === 'dificil');
 
-    const shuffle = (array: Question[]) => array.sort(() => Math.random() - 0.5);
+    const shuffle = (array: Question[]) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
     
     if (forceEasy) {
       // Se deve forçar fácil, retorna uma pergunta fácil aleatória
@@ -142,33 +150,73 @@ export const useQuiz = () => {
   }, [selectRandomQuestions]);
 
   const startQuizWithCredits = useCallback(async (credits: number) => {
+    console.log('🚀 startQuizWithCredits chamado:', {
+      credits,
+      user: !!user,
+      userCredits: user?.credits,
+      timestamp: new Date().toISOString()
+    });
+    
     setQuizState(prev => ({ ...prev, selectedCredits: credits }));
+    
+    // Resetar flag de recálculo para novo quiz
+    creditsRecalculatedRef.current = false;
     
     // Debitar créditos imediatamente
     if (user) {
       const newCredits = user.credits - credits;
+      console.log('💳 Debitando créditos:', {
+        oldCredits: user.credits,
+        debitAmount: credits,
+        newCredits: newCredits
+      });
       await updateCredits(newCredits);
       // Armazenar o valor dos créditos após o débito para uso posterior
       setQuizState(prev => ({ ...prev, creditsAfterDebit: newCredits }));
     }
     
+    console.log('⏰ Iniciando timer e mudando para tela quiz');
     startTimer();
     setCurrentScreen('quiz');
   }, [startTimer, user, updateCredits]);
 
-  const recalculateCredits = useCallback(async () => {
-    if (user && quizState.creditsAfterDebit !== undefined) {
-      // Usar os créditos após o débito armazenados no estado
-      const newCredits = quizState.creditsAfterDebit + quizState.accumulatedScore + timeRemaining;
-      console.log('Recálculo de créditos:', {
-        creditsAfterDebit: quizState.creditsAfterDebit,
-        accumulatedScore: quizState.accumulatedScore,
+  const recalculateCredits = useCallback(async (currentAccumulatedScore?: number) => {
+    // Usar o valor passado como parâmetro ou o valor atual do estado
+    const accumulatedScore = currentAccumulatedScore !== undefined ? currentAccumulatedScore : quizState.accumulatedScore;
+    
+    console.log('🔍 recalculateCredits chamado:', {
+      user: !!user,
+      creditsRecalculatedRef: creditsRecalculatedRef.current,
+      userCredits: user?.credits,
+      accumulatedScore: accumulatedScore,
+      timeRemaining: timeRemaining,
+      timestamp: new Date().toISOString()
+    });
+    
+    if (user && !creditsRecalculatedRef.current) {
+      console.log('✅ Executando recálculo de créditos');
+      
+      // Marcar como já recalculado ANTES (síncrono, imediato)
+      creditsRecalculatedRef.current = true;
+      
+      // Adicionar accumulatedScore + tempo restante aos créditos atuais (uma vez só)
+      const newCredits = user.credits + accumulatedScore + timeRemaining;
+      console.log('💰 Cálculo final:', {
+        userCredits: user.credits,
+        accumulatedScore: accumulatedScore,
         timeRemaining: timeRemaining,
-        newCredits: newCredits
+        newCredits: newCredits,
+        formula: `${user.credits} + ${accumulatedScore} + ${timeRemaining} = ${newCredits}`
       });
+      
       await updateCredits(newCredits);
+      console.log('✅ updateCredits concluído');
+    } else {
+      console.log('❌ recalculateCredits bloqueado:', {
+        reason: !user ? 'sem usuário' : 'já recalculado'
+      });
     }
-  }, [user, quizState.creditsAfterDebit, quizState.accumulatedScore, timeRemaining, updateCredits]);
+  }, [user, timeRemaining, updateCredits]);
 
   const selectOption = useCallback((option: string) => {
     const currentQuestion = quizState.selectedQuestions[quizState.currentQuestionIndex];
@@ -195,7 +243,15 @@ export const useQuiz = () => {
         newState.correctAnswers++;
         const currentMultiplier = MULTIPLIERS[newState.currentMultiplierIndex];
         const pointsEarned = newState.selectedCredits * currentMultiplier;
+        const oldAccumulated = newState.accumulatedScore;
         newState.accumulatedScore = Math.round(newState.accumulatedScore + pointsEarned);
+        console.log('📈 Acumulado atualizado (acerto):', {
+          oldAccumulated,
+          pointsEarned,
+          newAccumulated: newState.accumulatedScore,
+          multiplier: currentMultiplier,
+          selectedCredits: newState.selectedCredits
+        });
         
         if (newState.currentMultiplierIndex < MULTIPLIERS.length - 1) {
           newState.currentMultiplierIndex++;
@@ -209,7 +265,12 @@ export const useQuiz = () => {
       } else {
         newState.wrongAnswers++;
         newState.currentErrors++;
+        const oldAccumulated = newState.accumulatedScore;
         newState.accumulatedScore = Math.round(newState.accumulatedScore / 2);
+        console.log('📉 Acumulado atualizado (erro):', {
+          oldAccumulated,
+          newAccumulated: newState.accumulatedScore
+        });
         newState.currentMultiplierIndex = 0;
         
         // Se errou, marca que a próxima pergunta deve ser fácil
@@ -262,7 +323,8 @@ export const useQuiz = () => {
         if (prev.currentErrors >= prev.maxErrors) {
           stopTimer();
           // Recalcular créditos antes de ir para resultados
-          recalculateCredits();
+          console.log('🚨 Chamando recalculateCredits por LIMITE DE ERROS');
+          recalculateCredits(prev.accumulatedScore);
           setCurrentScreen('results');
           return prev;
         } else {
@@ -271,7 +333,8 @@ export const useQuiz = () => {
           if (newIndex > prev.selectedQuestions.length - 1) {
             stopTimer();
             // Recalcular créditos antes de ir para resultados
-            recalculateCredits();
+            console.log('🏁 Chamando recalculateCredits por FIM DAS PERGUNTAS');
+            recalculateCredits(prev.accumulatedScore);
             setCurrentScreen('results');
             return prev;
           }
@@ -284,7 +347,8 @@ export const useQuiz = () => {
 
   const endQuizByTime = useCallback(async () => {
     stopTimer();
-    await recalculateCredits();
+    console.log('⏰ Chamando recalculateCredits por TEMPO ESGOTADO');
+    await recalculateCredits(quizState.accumulatedScore);
     setCurrentScreen('results');
   }, [stopTimer, recalculateCredits]);
 
@@ -300,6 +364,8 @@ export const useQuiz = () => {
     setShowFeedback(false);
     setCurrentScreen('modalidade');
     setSelectedModalidade(null);
+    // Resetar flag de recálculo
+    creditsRecalculatedRef.current = false;
   }, [stopTimer]);
 
   const setScreen = useCallback((screen: Screen) => {

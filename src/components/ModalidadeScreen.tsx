@@ -68,7 +68,17 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
       </div>
 
       {/* User Info */}
-      {user && !isLoading ? (
+      {isLoading ? (
+        <div className="user-info loading">
+          <div className="user-email">
+            <span className="user-icon">👤</span>
+            <span>Carregando...</span>
+          </div>
+          <div className="logout-btn loading-btn">
+            🚪 Sair
+          </div>
+        </div>
+      ) : user ? (
         <div className="user-info">
           <div className="user-email">
             <span className="user-icon">👤</span>
@@ -94,19 +104,6 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
           <div className="user-email">
             <span className="user-icon">👤</span>
             <span>Sessão não iniciada.</span>
-          </div>
-        </div>
-      )}
-      
-      {/* Loading placeholder */}
-      {isLoading && (
-        <div className="user-info loading">
-          <div className="user-email">
-            <span className="user-icon">👤</span>
-            <span>Carregando...</span>
-          </div>
-          <div className="logout-btn loading-btn">
-            🚪 Sair
           </div>
         </div>
       )}

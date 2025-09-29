@@ -1600,6 +1600,18 @@ body {
   text-shadow: 2px 2px 4px rgba(76, 175, 80, 0.3);
 }
 
+.result-creditos-ganhos .credits-message {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.result-creditos-ganhos .credits-message small {
+  color: #ffeb3b;
+  font-size: 0.8rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
 /* Responsividade para os quadrados de resultados */
 @media (max-width: 768px) {
   .results-details {
@@ -1630,6 +1642,10 @@ body {
   
   .result-creditos-ganhos .result-value.credits-earned {
     font-size: 1.6rem;
+  }
+  
+  .result-creditos-ganhos .credits-message small {
+    font-size: 0.7rem;
   }
 }
 
@@ -1667,6 +1683,10 @@ body {
   
   .result-creditos-ganhos .result-value.credits-earned {
     font-size: 1.4rem;
+  }
+  
+  .result-creditos-ganhos .credits-message small {
+    font-size: 0.65rem;
   }
 }
 

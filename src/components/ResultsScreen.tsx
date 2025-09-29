@@ -5,13 +5,15 @@ interface ResultsScreenProps {
   timeRemaining: number;
   setScreen: (screen: any) => void;
   restartQuiz: () => void;
+  selectedModalidade: string | null;
 }
 
 export default function ResultsScreen({ 
   quizState,
   timeRemaining,
   setScreen,
-  restartQuiz
+  restartQuiz,
+  selectedModalidade
 }: ResultsScreenProps) {
 
   const formatTime = (seconds: number) => {
@@ -91,6 +93,11 @@ export default function ResultsScreen({
             <div className="result-info">
               <span className="result-label">Créditos Ganhos</span>
               <span className="result-value credits-earned">{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
+              {selectedModalidade === 'livre' && (
+                <div className="credits-message">
+                  <small>(Inicie sessão para acumular créditos)</small>
+                </div>
+              )}
             </div>
           </div>
         </div>

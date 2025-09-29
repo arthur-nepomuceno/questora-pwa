@@ -85,7 +85,7 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
         <div className="user-info">
           <div className="user-email">
             <span className="user-icon">👤</span>
-            <span>Participante não logado.</span>
+            <span>Sessão não iniciada.</span>
           </div>
         </div>
       )}

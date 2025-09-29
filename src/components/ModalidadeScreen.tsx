@@ -82,7 +82,7 @@ export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenP
         <div className="user-info">
           <div className="user-email">
             <span className="user-icon">👤</span>
-            <span>Participante não logado.</span>
+            <span>Sessão não iniciada.</span>
           </div>
         </div>
       )}

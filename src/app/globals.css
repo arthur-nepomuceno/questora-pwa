@@ -1224,6 +1224,56 @@ body {
   margin-bottom: 15px;
 }
 
+/* Mobile Score Boxes - Multiplicador e Acumulado */
+.mobile-score-boxes {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.mobile-multiplier-box,
+.mobile-accumulated-box {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #1a237e, #283593);
+  border: 2px solid #00BFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.2);
+  gap: 15px;
+}
+
+.mobile-multiplier-box .multiplier-icon,
+.mobile-accumulated-box .accumulated-icon {
+  font-size: 1.8rem;
+  min-width: 40px;
+  text-align: center;
+}
+
+.mobile-multiplier-box .multiplier-text,
+.mobile-accumulated-box .accumulated-text {
+  flex: 1;
+  color: #ffffff;
+}
+
+.mobile-multiplier-box .multiplier-label,
+.mobile-accumulated-box .accumulated-label {
+  font-size: 0.9rem;
+  color: #00BFFF;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mobile-multiplier-box .multiplier-value,
+.mobile-accumulated-box .accumulated-value-number {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffeb3b;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .mobile-indicator {
   flex: 1;
   min-width: 0;
@@ -1232,6 +1282,23 @@ body {
 /* Desktop Only Sidebar */
 .desktop-only {
   display: flex;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* Mostrar caixas do multiplicador e acumulado em tablets */
+  .mobile-score-boxes {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    align-self: center;
+  }
+  
+  .mobile-multiplier-box,
+  .mobile-accumulated-box {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* Responsividade */
@@ -1302,6 +1369,21 @@ body {
   /* Mostrar indicadores mobile lado a lado */
   .mobile-indicators-row {
     display: flex;
+  }
+  
+  /* Mostrar caixas do multiplicador e acumulado em mobile/tablet */
+  .mobile-score-boxes {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    align-self: center;
+  }
+  
+  /* Ajustar largura das caixas para ser igual à do show-milenio-logo */
+  .mobile-multiplier-box,
+  .mobile-accumulated-box {
+    width: 100%;
+    max-width: 100%;
   }
   
   /* Estilos para indicadores mobile */

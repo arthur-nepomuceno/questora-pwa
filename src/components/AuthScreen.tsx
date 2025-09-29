@@ -73,7 +73,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>Questora</h1>
+          <h1>Show do Milênio</h1>
           <p>Entre na competição e teste seus conhecimentos!</p>
         </div>
 

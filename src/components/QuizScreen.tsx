@@ -79,28 +79,6 @@ export default function QuizScreen({
               <div className="timer-icon">⏰</div>
               <div className="timer-text">{formatTime(timeRemaining)}</div>
             </div>
-
-            {/* Multiplicador atual */}
-            <div className="current-multiplier mobile-indicator">
-              <div className="multiplier-icon">💰</div>
-              <div className="multiplier-text">
-                <div className="multiplier-label">Mult</div>
-                <div className="multiplier-value">
-                  {showValues ? `${currentMultiplier}x` : '---'}
-                </div>
-              </div>
-            </div>
-
-            {/* Valor Acumulado */}
-            <div className="accumulated-value mobile-indicator">
-              <div className="accumulated-icon">🏆</div>
-              <div className="accumulated-text">
-                <div className="accumulated-label">Acum</div>
-                <div className="accumulated-value-number">
-                  {showValues ? formatScore(currentAccumulated) : '---'}
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Caixa da pergunta */}
@@ -144,6 +122,31 @@ export default function QuizScreen({
                 </div>
               );
             })}
+          </div>
+
+          {/* Caixas do multiplicador e acumulado para mobile/tablet */}
+          <div className="mobile-score-boxes">
+            {/* Multiplicador */}
+            <div className="mobile-multiplier-box">
+              <div className="multiplier-icon">💰</div>
+              <div className="multiplier-text">
+                <div className="multiplier-label">Multiplicador</div>
+                <div className="multiplier-value">
+                  {showValues ? `${currentMultiplier}x` : '---'}
+                </div>
+              </div>
+            </div>
+
+            {/* Valor Acumulado */}
+            <div className="mobile-accumulated-box">
+              <div className="accumulated-icon">🏆</div>
+              <div className="accumulated-text">
+                <div className="accumulated-label">Acumulado</div>
+                <div className="accumulated-value-number">
+                  {showValues ? formatScore(currentAccumulated) : '---'}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

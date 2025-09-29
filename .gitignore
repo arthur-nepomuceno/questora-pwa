@@ -46,3 +46,6 @@ next-env.d.ts
 # Exclude other project folders
 ../perguntas/
 ../questora-vanilla/
+
+# Other files
+proximas-etapas.txt

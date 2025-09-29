@@ -1600,9 +1600,13 @@ body {
   text-shadow: 2px 2px 4px rgba(76, 175, 80, 0.3);
 }
 
+.result-creditos-ganhos .result-info {
+  gap: 2px;
+}
+
 .result-creditos-ganhos .credits-message {
-  margin-top: 2px;
-  margin-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
   text-align: center;
 }
 

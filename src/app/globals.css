@@ -1601,7 +1601,8 @@ body {
 }
 
 .result-creditos-ganhos .credits-message {
-  margin-top: 8px;
+  margin-top: 4px;
+  margin-bottom: 8px;
   text-align: center;
 }
 

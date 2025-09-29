@@ -92,12 +92,12 @@ export default function ResultsScreen({
             <div className="result-icon">🎯</div>
             <div className="result-info">
               <span className="result-label">Créditos Ganhos</span>
-              <span className="result-value credits-earned">{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
               {selectedModalidade === 'livre' && (
                 <div className="credits-message">
                   <small>(Inicie sessão para acumular créditos)</small>
                 </div>
               )}
+              <span className="result-value credits-earned">{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
             </div>
           </div>
         </div>

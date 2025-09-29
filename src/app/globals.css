@@ -1663,3 +1663,65 @@ body {
   background: #d32f2f !important;
   transform: translateY(-1px);
 }
+
+/* Estilos para tela de opções */
+.options-card {
+  background: linear-gradient(135deg, #1a237e, #283593);
+  border: 3px solid #ffeb3b;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+}
+
+.options-card h2 {
+  color: #ffeb3b;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.user-details {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 235, 59, 0.3);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #ffeb3b;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.detail-value {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.options-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.no-user {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}

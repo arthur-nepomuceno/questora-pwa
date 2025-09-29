@@ -279,6 +279,10 @@ export const useQuiz = () => {
     setCurrentScreen(screen);
   }, []);
 
+  const goToOptions = useCallback(() => {
+    setCurrentScreen('options');
+  }, []);
+
   const setSelectedCredits = useCallback((credits: number) => {
     setQuizState(prev => ({ ...prev, selectedCredits: credits }));
   }, []);
@@ -304,6 +308,7 @@ export const useQuiz = () => {
     selectModalidade,
     goBackToModalidade,
     goToCompetition,
+    goToOptions,
     startQuiz,
     startQuizWithCredits,
     selectOption,

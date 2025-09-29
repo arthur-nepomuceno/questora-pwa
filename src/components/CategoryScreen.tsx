@@ -7,9 +7,10 @@ interface CategoryScreenProps {
   startQuiz: (category: string) => void;
   setScreen: (screen: Screen) => void;
   goBackToModalidade?: () => void;
+  goToOptions: () => void;
 }
 
-export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade }: CategoryScreenProps) {
+export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade, goToOptions }: CategoryScreenProps) {
   const { user, logout, isLoading } = useAuth();
 
   const handleLogout = async () => {
@@ -76,8 +77,9 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
           <button
             className="credits-btn"
             title="Ver créditos e pontuação"
+            onClick={goToOptions}
           >
-            Créditos e Pontuação
+            Dados da Conta
           </button>
           <button 
             className="logout-btn"

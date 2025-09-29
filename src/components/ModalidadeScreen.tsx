@@ -4,9 +4,10 @@ import { useAuth } from '@/hooks/useAuth';
 
 interface ModalidadeScreenProps {
   selectModalidade: (modalidade: string) => void;
+  goToOptions: () => void;
 }
 
-export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenProps) {
+export default function ModalidadeScreen({ selectModalidade, goToOptions }: ModalidadeScreenProps) {
   const { user, logout, isLoading } = useAuth();
 
   const handleModalidadeClick = (modalidade: string) => {
@@ -73,8 +74,9 @@ export default function ModalidadeScreen({ selectModalidade }: ModalidadeScreenP
           <button
             className="credits-btn"
             title="Ver créditos e pontuação"
+            onClick={goToOptions}
           >
-            Créditos e Pontuação
+            Dados da Conta
           </button>
           <button
             className="logout-btn"

@@ -4,6 +4,7 @@ import ModalidadeScreen from "@/components/ModalidadeScreen";
 import CategoryScreen from "@/components/CategoryScreen";
 import ComingSoonScreen from "@/components/ComingSoonScreen";
 import CreditsScreen from "@/components/CreditsScreen";
+import OptionsScreen from "@/components/OptionsScreen";
 import QuizScreen from "@/components/QuizScreen";
 import ResultsScreen from "@/components/ResultsScreen";
 import ReviewScreen from "@/components/ReviewScreen";
@@ -15,14 +16,14 @@ export default function Home() {
 
   return (
     <div className="quiz-container">
-      {quizHook.currentScreen === "modalidade" && <ModalidadeScreen selectModalidade={quizHook.selectModalidade} />}
+      {quizHook.currentScreen === "modalidade" && <ModalidadeScreen selectModalidade={quizHook.selectModalidade} goToOptions={quizHook.goToOptions} />}
       {quizHook.currentScreen === "auth" && (
         <AuthScreen 
           onAuthSuccess={quizHook.goToCompetition}
           onBack={quizHook.goBackToModalidade}
         />
       )}
-      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} goBackToModalidade={quizHook.goBackToModalidade} />}
+      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} goBackToModalidade={quizHook.goBackToModalidade} goToOptions={quizHook.goToOptions} />}
       {quizHook.currentScreen === "coming-soon" && (
         <ComingSoonScreen 
           modalidade={quizHook.selectedModalidade || ""} 
@@ -30,6 +31,7 @@ export default function Home() {
         />
       )}
       {quizHook.currentScreen === "credits" && <CreditsScreen {...quizHook} />}
+      {quizHook.currentScreen === "options" && <OptionsScreen {...quizHook} />}
       {quizHook.currentScreen === "quiz" && (
         <QuizScreen 
           quizState={quizHook.quizState}

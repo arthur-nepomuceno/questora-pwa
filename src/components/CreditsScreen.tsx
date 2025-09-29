@@ -5,9 +5,10 @@ import { useAuth } from '@/hooks/useAuth';
 interface CreditsScreenProps {
   setScreen: (screen: any) => void;
   startQuizWithCredits: (credits: number) => void;
+  goToOptions: () => void;
 }
 
-export default function CreditsScreen({ setScreen, startQuizWithCredits }: CreditsScreenProps) {
+export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions }: CreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
 
   const creditOptions = [
@@ -74,8 +75,9 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits }: Credi
           <button
             className="credits-btn"
             title="Ver créditos e pontuação"
+            onClick={goToOptions}
           >
-            Créditos e Pontuação
+            Dados da Conta
           </button>
           <button
             className="logout-btn"

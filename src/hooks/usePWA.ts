@@ -36,7 +36,6 @@ export const usePWA = () => {
       if ('serviceWorker' in navigator) {
         try {
           const registration = await navigator.serviceWorker.register('/sw.js');
-          console.log('Service Worker registrado com sucesso:', registration);
         } catch (error) {
           console.error('Erro ao registrar Service Worker:', error);
         }
@@ -54,7 +53,6 @@ export const usePWA = () => {
       setIsInstalled(true);
       setIsInstallable(false);
       setDeferredPrompt(null);
-      console.log('PWA instalado com sucesso!');
     });
 
     window.addEventListener('online', updateOnlineStatus);
@@ -79,11 +77,6 @@ export const usePWA = () => {
       await deferredPrompt.prompt();
       const choiceResult = await deferredPrompt.userChoice;
       
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Usuário aceitou a instalação');
-      } else {
-        console.log('Usuário recusou a instalação');
-      }
       
       setDeferredPrompt(null);
       setIsInstallable(false);
@@ -101,7 +94,6 @@ export const usePWA = () => {
           url: window.location.href,
         });
       } catch (error) {
-        console.log('Compartilhamento cancelado ou não suportado');
       }
     } else {
       // Fallback para navegadores que não suportam Web Share API

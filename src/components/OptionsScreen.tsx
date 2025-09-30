@@ -8,12 +8,6 @@ interface OptionsScreenProps {
 export default function OptionsScreen({ setScreen }: OptionsScreenProps) {
   const { user, logout, isLoading } = useAuth();
   
-  // Log para verificar o estado atual do usuário
-  console.log('📊 OptionsScreen - Estado do usuário:', {
-    user: !!user,
-    credits: user?.credits,
-    timestamp: new Date().toISOString()
-  });
 
   const handleLogout = async () => {
     await logout();

@@ -45,11 +45,6 @@ export const useAuth = () => {
           updatedAt: new Date(),
         };
         
-        console.log('👤 Usuário básico criado:', {
-          userId: firebaseUser.uid,
-          credits: 7000,
-          timestamp: new Date().toISOString()
-        });
         
         // Mostrar usuário imediatamente
         setAuthState({
@@ -63,11 +58,6 @@ export const useAuth = () => {
           const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
           if (userDoc.exists()) {
             const userData = userDoc.data();
-            console.log('📄 Dados do Firestore encontrados:', {
-              userId: firebaseUser.uid,
-              firestoreCredits: userData.credits,
-              timestamp: new Date().toISOString()
-            });
             
             const completeUser: User = {
               id: firebaseUser.uid,
@@ -81,11 +71,6 @@ export const useAuth = () => {
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
             
-            console.log('🔄 Atualizando usuário com dados do Firestore:', {
-              userId: firebaseUser.uid,
-              finalCredits: completeUser.credits,
-              timestamp: new Date().toISOString()
-            });
             
             // Atualizar com dados completos
             setAuthState({
@@ -269,13 +254,6 @@ export const useAuth = () => {
   const updateCredits = async (newCredits: number) => {
     if (!authState.user) return;
     
-    console.log('💾 updateCredits chamado:', {
-      userId: authState.user.id,
-      oldCredits: authState.user.credits,
-      newCredits: newCredits,
-      difference: newCredits - authState.user.credits,
-      timestamp: new Date().toISOString()
-    });
     
     try {
       await updateDoc(doc(db, 'users', authState.user.id), {
@@ -288,8 +266,6 @@ export const useAuth = () => {
         user: prev.user ? { ...prev.user, credits: newCredits } : null,
       }));
       
-      console.log('✅ updateCredits concluído no banco');
-      console.log('🔄 Estado local atualizado para:', newCredits);
     } catch (error) {
       console.error('❌ Erro ao atualizar créditos:', error);
     }

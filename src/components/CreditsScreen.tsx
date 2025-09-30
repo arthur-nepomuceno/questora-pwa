@@ -19,11 +19,6 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
   ];
 
   const handleCreditSelect = (credits: number) => {
-    console.log('🎯 Botão de créditos clicado:', {
-      credits,
-      userCredits: user?.credits,
-      hasEnoughCredits: user ? user.credits >= credits : false
-    });
     
     if (user && user.credits < credits) {
       alert(`Créditos insuficientes! Você tem ${user.credits} créditos, mas precisa de ${credits}.`);

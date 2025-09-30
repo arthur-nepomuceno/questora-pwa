@@ -211,7 +211,7 @@ export default function EmailVerificationScreen({
         }
 
         .step-number {
-          background: #d32f2f;
+          background: #0E1525;
           color: white;
           width: 30px;
           height: 30px;
@@ -276,7 +276,7 @@ export default function EmailVerificationScreen({
         }
 
         .resend-btn {
-          background: #d32f2f;
+          background: #0E1525;
           color: white;
           border: none;
           padding: 12px 24px;
@@ -334,11 +334,11 @@ export default function EmailVerificationScreen({
           background: #f8f9fa;
           border-radius: 8px;
           padding: 20px;
-          border-left: 4px solid #d32f2f;
+          border-left: 4px solid #0E1525;
         }
 
         .help-section h4 {
-          color: #d32f2f;
+          color: #0E1525;
           margin-bottom: 15px;
         }
 

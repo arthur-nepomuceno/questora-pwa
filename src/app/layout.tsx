@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Show do Milênio - Quiz Interativo",
   description: "Plataforma de perguntas e respostas com design inspirado no Show do Milhão. Teste seus conhecimentos em futebol e novelas!",
   manifest: "/manifest.json",
-  themeColor: "#d32f2f",
+  themeColor: "#0E1525",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -47,7 +47,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Show do Milênio" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#d32f2f" />
+        <meta name="msapplication-TileColor" content="#0E1525" />
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
       <body>

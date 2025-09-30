@@ -76,7 +76,7 @@
 - Converter para PNG com ferramentas online
 
 ### **Cores:**
-- Tema principal: `#d32f2f` (vermelho)
+- Tema principal: `#0E1525` (azul escuro)
 - Cor de fundo: `#1a237e` (azul escuro)
 - Cor de destaque: `#ffeb3b` (amarelo)
 

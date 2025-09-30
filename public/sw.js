@@ -1,9 +1,8 @@
-const CACHE_NAME = 'show-milenio-v1.0.1';
+const CACHE_NAME = 'show-milenio-v1.0.2';
 const STATIC_CACHE_URLS = [
   '/',
   '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png',
+  '/icons/icon-base.svg',
   // Adicione aqui outras URLs estáticas que devem ser cacheadas
 ];
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'show-milenio-v1.0.0';
+const CACHE_NAME = 'show-milenio-v1.0.1';
 const STATIC_CACHE_URLS = [
   '/',
   '/manifest.json',
@@ -9,7 +9,7 @@ const STATIC_CACHE_URLS = [
 
 // Instalação do Service Worker
 self.addEventListener('install', (event) => {
-  console.log('Service Worker: Instalando...');
+  console.log('Service Worker: Instalando nova versão...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -20,6 +20,8 @@ self.addEventListener('install', (event) => {
         console.error('Service Worker: Erro ao instalar cache:', error);
       })
   );
+  // Força a ativação imediata do novo service worker
+  self.skipWaiting();
 });
 
 // Ativação do Service Worker
@@ -35,6 +37,9 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+      // Força a ativação imediata do novo service worker
+      return self.clients.claim();
     })
   );
 });

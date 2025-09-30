@@ -63,7 +63,7 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
           className="btn btn-secondary"
           onClick={() => goBackToModalidade ? goBackToModalidade() : setScreen("modalidade")}
         >
-          Voltar
+          {user ? "Trocar sessão" : "Voltar"}
         </button>
       </div>
 

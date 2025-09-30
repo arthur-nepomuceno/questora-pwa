@@ -44,6 +44,7 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
             >
               <div className="category-icon">🎯</div>
               <h3>Livre</h3>
+              <p>(Experimente o App)</p>
             </div>
           )}
           

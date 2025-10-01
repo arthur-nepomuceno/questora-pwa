@@ -1570,18 +1570,39 @@ body {
   text-shadow: 2px 2px 4px rgba(255, 152, 0, 0.3);
 }
 
-/* Estilo especial para a caixa de créditos ganhos */
-.result-creditos-ganhos {
-  grid-column: 1 / -1; /* Ocupa toda a largura */
+/* Estilo especial para a caixa de pontos */
+.result-pontos {
   background: linear-gradient(135deg, #2e7d32, #388e3c);
   border-color: #4caf50;
   justify-content: center;
+}
+
+/* Estilo especial para a caixa de créditos ganhos */
+.result-creditos-ganhos {
+  background: linear-gradient(135deg, #2e7d32, #388e3c);
+  border-color: #4caf50;
+  justify-content: center;
+}
+
+.result-pontos:hover {
+  border-color: #66bb6a;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
 }
 
 .result-creditos-ganhos:hover {
   border-color: #66bb6a;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.result-pontos .result-icon {
+  font-size: 2.5rem;
+}
+
+.result-pontos .result-label {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .result-creditos-ganhos .result-icon {
@@ -1593,11 +1614,22 @@ body {
   font-weight: 600;
 }
 
+.result-pontos .result-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .result-creditos-ganhos .result-value.credits-earned {
   font-size: 2rem;
   font-weight: 700;
-  color: #4caf50;
-  text-shadow: 2px 2px 4px rgba(76, 175, 80, 0.3);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.result-pontos .result-info {
+  gap: 2px;
 }
 
 .result-creditos-ganhos .result-info {
@@ -1641,8 +1673,16 @@ body {
     font-size: 1.3rem;
   }
   
+  .result-pontos .result-icon {
+    font-size: 2rem;
+  }
+  
   .result-creditos-ganhos .result-icon {
     font-size: 2rem;
+  }
+  
+  .result-pontos .result-value {
+    font-size: 1.6rem;
   }
   
   .result-creditos-ganhos .result-value.credits-earned {
@@ -1682,8 +1722,16 @@ body {
     font-size: 1.1rem;
   }
   
+  .result-pontos .result-icon {
+    font-size: 1.8rem;
+  }
+  
   .result-creditos-ganhos .result-icon {
     font-size: 1.8rem;
+  }
+  
+  .result-pontos .result-value {
+    font-size: 1.4rem;
   }
   
   .result-creditos-ganhos .result-value.credits-earned {

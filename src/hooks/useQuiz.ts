@@ -19,6 +19,7 @@ const initialQuizState: QuizState = {
   currentMultiplierIndex: 0,
   maxErrors: 3,
   currentErrors: 0,
+  totalPoints: 0,
 };
 
 // Função utilitária para verificar perguntas duplicadas
@@ -218,6 +219,9 @@ export const useQuiz = () => {
         const pointsEarned = newState.selectedCredits * currentMultiplier;
         const oldAccumulated = newState.accumulatedScore;
         newState.accumulatedScore = Math.round(newState.accumulatedScore + pointsEarned);
+        
+        // Adicionar pontos da questão ao total
+        newState.totalPoints += currentQuestion.pontuacao;
         
         if (newState.currentMultiplierIndex < MULTIPLIERS.length - 1) {
           newState.currentMultiplierIndex++;

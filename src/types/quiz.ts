@@ -22,6 +22,7 @@ export interface QuizState {
   currentErrors: number;
   creditsAfterDebit?: number;
   creditsAlreadyRecalculated?: boolean;
+  totalPoints: number;
 }
 
 export interface UserAnswer {

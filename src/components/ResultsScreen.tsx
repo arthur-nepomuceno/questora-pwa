@@ -87,7 +87,15 @@ export default function ResultsScreen({
             </div>
           </div>
           
-          {/* Terceira linha: Total de Créditos Ganhos (centralizado) */}
+          {/* Terceira linha: Pontos e Créditos Ganhos */}
+          <div className="result-square result-pontos">
+            <div className="result-icon">⭐</div>
+            <div className="result-info">
+              <span className="result-label">Pontos</span>
+              <span className="result-value">+{quizState.totalPoints}</span>
+            </div>
+          </div>
+          
           <div className="result-square result-creditos-ganhos">
             <div className="result-icon">🎯</div>
             <div className="result-info">
@@ -97,7 +105,7 @@ export default function ResultsScreen({
                   <small>(Inicie sessão para acumular créditos)</small>
                 </div>
               )}
-              <span className="result-value credits-earned">{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
+              <span className="result-value credits-earned">+{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
             </div>
           </div>
         </div>

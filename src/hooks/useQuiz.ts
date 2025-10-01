@@ -47,7 +47,7 @@ export const useQuiz = () => {
   const creditsRecalculatedRef = useRef(false);
   const { isAuthenticated, isLoading, user, updateCredits } = useAuth();
 
-  const selectRandomQuestions = useCallback((category: string, forceEasy: boolean = false): Question[] => {
+  const selectRandomQuestions = useCallback((category: string, forceMedium: boolean = false): Question[] => {
     const categoryQuestions = questionsData[category];
     const easyQuestions = categoryQuestions.filter(q => q.dificuldade === 'facil');
     const mediumQuestions = categoryQuestions.filter(q => q.dificuldade === 'medio');
@@ -62,10 +62,10 @@ export const useQuiz = () => {
       return shuffled;
     };
     
-    if (forceEasy) {
-      // Se deve forçar fácil, retorna uma pergunta fácil aleatória
-      const randomEasy = shuffle([...easyQuestions])[0];
-      return randomEasy ? [randomEasy] : [];
+    if (forceMedium) {
+      // Se deve forçar média, retorna uma pergunta média aleatória
+      const randomMedium = shuffle([...mediumQuestions])[0];
+      return randomMedium ? [randomMedium] : [];
     }
     
     // Garantir que temos perguntas suficientes de cada dificuldade
@@ -209,8 +209,8 @@ export const useQuiz = () => {
       const newState = { ...prev };
       newState.userAnswers = [...prev.userAnswers, userAnswer];
 
-      // Determina se a próxima pergunta deve ser fácil
-      let nextShouldBeEasy = shouldNextBeEasy;
+      // Determina se a próxima pergunta deve ser média
+      let nextShouldBeMedium = shouldNextBeEasy;
       
       if (isCorrect) {
         newState.correctAnswers++;
@@ -223,9 +223,9 @@ export const useQuiz = () => {
           newState.currentMultiplierIndex++;
         }
         
-        // Se acertou e estava marcado para próxima ser fácil, limpa o flag
+        // Se acertou e estava marcado para próxima ser média, limpa o flag
         if (shouldNextBeEasy) {
-          nextShouldBeEasy = false;
+          nextShouldBeMedium = false;
           setShouldNextBeEasy(false);
         }
       } else {
@@ -235,16 +235,16 @@ export const useQuiz = () => {
         newState.accumulatedScore = Math.round(newState.accumulatedScore / 2);
         newState.currentMultiplierIndex = 0;
         
-        // Se errou, marca que a próxima pergunta deve ser fácil
-        nextShouldBeEasy = true;
+        // Se errou, marca que a próxima pergunta deve ser média
+        nextShouldBeMedium = true;
         setShouldNextBeEasy(true);
       }
 
-      // Se a próxima pergunta deve ser fácil, substitui ela agora
+      // Se a próxima pergunta deve ser média, substitui ela agora
       const nextIndex = newState.currentQuestionIndex + 1;
-      if (nextShouldBeEasy && nextIndex < newState.selectedQuestions.length && newState.selectedQuestions[nextIndex]?.dificuldade !== 'facil') {
-        // Pegar todas as perguntas fáceis da categoria
-        const allEasyQuestions = questionsData[newState.selectedCategory!].filter(q => q.dificuldade === 'facil');
+      if (nextShouldBeMedium && nextIndex < newState.selectedQuestions.length && newState.selectedQuestions[nextIndex]?.dificuldade !== 'medio') {
+        // Pegar todas as perguntas médias da categoria
+        const allMediumQuestions = questionsData[newState.selectedCategory!].filter(q => q.dificuldade === 'medio');
         
         // Pegar IDs das perguntas já usadas (incluindo a atual e as já respondidas)
         const usedQuestionIds = new Set([
@@ -252,14 +252,14 @@ export const useQuiz = () => {
           ...newState.userAnswers.map(answer => answer.question.id)
         ]);
         
-        // Usar função utilitária para obter perguntas fáceis disponíveis
-        const availableEasyQuestions = getAvailableQuestions(allEasyQuestions, usedQuestionIds);
+        // Usar função utilitária para obter perguntas médias disponíveis
+        const availableMediumQuestions = getAvailableQuestions(allMediumQuestions, usedQuestionIds);
         
-        // Se ainda há perguntas fáceis disponíveis, escolher uma aleatória
-        if (availableEasyQuestions.length > 0) {
-          const randomEasy = availableEasyQuestions[Math.floor(Math.random() * availableEasyQuestions.length)];
+        // Se ainda há perguntas médias disponíveis, escolher uma aleatória
+        if (availableMediumQuestions.length > 0) {
+          const randomMedium = availableMediumQuestions[Math.floor(Math.random() * availableMediumQuestions.length)];
           const newQuestions = [...newState.selectedQuestions];
-          newQuestions[nextIndex] = randomEasy;
+          newQuestions[nextIndex] = randomMedium;
           newState.selectedQuestions = newQuestions;
           
           // Verificar se a nova seleção não tem duplicatas
@@ -269,7 +269,7 @@ export const useQuiz = () => {
             newState.selectedQuestions = [...newState.selectedQuestions];
           }
         }
-        // Se não há mais perguntas fáceis disponíveis, mantém a pergunta original
+        // Se não há mais perguntas médias disponíveis, mantém a pergunta original
       }
 
       return newState;

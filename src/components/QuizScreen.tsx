@@ -94,11 +94,6 @@ export default function QuizScreen({
           {/* Caixa da pergunta */}
           {currentQuestion && (
             <div className="question-box">
-              <div 
-                className={`difficulty-badge difficulty-${currentQuestion.dificuldade}`}
-              >
-                {currentQuestion.pontuacao} PONTO{currentQuestion.pontuacao > 1 ? 'S' : ''}
-              </div>
               <div className="question-text">
                 {currentQuestion.pergunta}
               </div>

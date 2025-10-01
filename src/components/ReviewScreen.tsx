@@ -41,6 +41,9 @@ export default function ReviewScreen({ quizState, setScreen }: ReviewScreenProps
             <div className="review-question">
               <div className="question-number">{index + 1}</div>
               <div className="question-text">{answer.question.pergunta}</div>
+              <div style={{ color: 'white', fontWeight: 'bold' }}>
+                {answer.question.pontuacao} PONTO{answer.question.pontuacao > 1 ? 'S' : ''}
+              </div>
             </div>
 
             {/* Answers */}

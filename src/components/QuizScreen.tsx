@@ -141,7 +141,7 @@ export default function QuizScreen({
               <div className="multiplier-text">
                 <div className="multiplier-label">Multiplicador</div>
                 <div className="multiplier-value">
-                  {showValues ? `${currentMultiplier}x` : '---'}
+                  {showValues ? `${currentMultiplier}x ${quizState.selectedCredits}` : '---'}
                 </div>
               </div>
             </div>
@@ -181,7 +181,7 @@ export default function QuizScreen({
             <div className="multiplier-text">
               <div className="multiplier-label">Multiplicador</div>
               <div className="multiplier-value">
-                {showValues ? `${currentMultiplier}x` : '---'}
+                {showValues ? `${currentMultiplier}x ${quizState.selectedCredits}` : '---'}
               </div>
             </div>
           </div>

@@ -123,7 +123,7 @@ export default function ResultsScreen({
             className="btn btn-secondary"
             onClick={() => setScreen("review")}
           >
-            Revisar Respostas
+            Revisar Resultados
           </button>
         </div>
       </div>

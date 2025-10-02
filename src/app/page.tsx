@@ -8,6 +8,7 @@ import OptionsScreen from "@/components/OptionsScreen";
 import QuizScreen from "@/components/QuizScreen";
 import ResultsScreen from "@/components/ResultsScreen";
 import ReviewScreen from "@/components/ReviewScreen";
+import CalculationsScreen from "@/components/CalculationsScreen";
 import AuthScreen from "@/components/AuthScreen";
 import InstallPrompt from "@/components/InstallPrompt";
 
@@ -44,6 +45,7 @@ export default function Home() {
       )}
       {quizHook.currentScreen === "results" && <ResultsScreen {...quizHook} />}
       {quizHook.currentScreen === "review" && <ReviewScreen {...quizHook} />}
+      {quizHook.currentScreen === "calculations" && <CalculationsScreen setScreen={quizHook.setScreen} />}
       
       {/* PWA Install Prompt */}
       <InstallPrompt />

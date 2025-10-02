@@ -244,7 +244,7 @@ export const useQuiz = () => {
         newState.accumulatedScore = Math.round(newState.accumulatedScore + pointsEarned);
         
         // Adicionar pontos da questão ao total
-        newState.totalPoints += currentQuestion.pontuacao;
+        newState.totalPoints += currentQuestion.pontuacao * (newState.selectedCredits / 100);
         
         if (newState.currentMultiplierIndex < MULTIPLIERS.length - 1) {
           newState.currentMultiplierIndex++;

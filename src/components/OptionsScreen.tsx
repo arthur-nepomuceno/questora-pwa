@@ -72,12 +72,12 @@ export default function OptionsScreen({ setScreen }: OptionsScreenProps) {
             
             <div className="detail-row">
               <span className="detail-label">Pontos:</span>
-              <span className="detail-value">{user.totalScore.toLocaleString()}</span>
+              <span className="detail-value">{user.totalPoints.toLocaleString()}</span>
             </div>
             
             <div className="detail-row">
               <span className="detail-label">Moedas:</span>
-              <span className="detail-value">{user.bestScore.toLocaleString()}</span>
+              <span className="detail-value">{user.moedas.toLocaleString()}</span>
             </div>
             
           </div>

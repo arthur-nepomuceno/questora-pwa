@@ -14,12 +14,10 @@ import {
   setDoc, 
   getDoc, 
   updateDoc, 
-  serverTimestamp,
-  collection,
-  addDoc
+  serverTimestamp
 } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
-import { User, AuthState, LoginCredentials, SignupCredentials, Match } from '@/types/auth';
+import { User, AuthState, LoginCredentials, SignupCredentials } from '@/types/auth';
 
 export const useAuth = () => {
   const [authState, setAuthState] = useState<AuthState>({
@@ -38,9 +36,10 @@ export const useAuth = () => {
           email: firebaseUser.email!,
           name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
           credits: 7000, // valor padrão
-          totalMatches: 0,
-          totalScore: 0,
-          bestScore: 0,
+          totalPoints: 0,
+          totalCorrect: 0,
+          totalWrong: 0,
+          moedas: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -64,9 +63,10 @@ export const useAuth = () => {
               email: firebaseUser.email!,
               name: userData.name,
               credits: userData.credits || 0,
-              totalMatches: userData.totalMatches || 0,
-              totalScore: userData.totalScore || 0,
-              bestScore: userData.bestScore || 0,
+              totalPoints: userData.totalPoints || 0,
+              totalCorrect: userData.totalCorrect || 0,
+              totalWrong: userData.totalWrong || 0,
+              moedas: userData.moedas || 0,
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
@@ -190,9 +190,10 @@ export const useAuth = () => {
         name: credentials.name,
         email: credentials.email,
         credits: 7000,
-        totalMatches: 0,
-        totalScore: 0,
-        bestScore: 0,
+        totalPoints: 0,
+        totalCorrect: 0,
+        totalWrong: 0,
+        moedas: 0,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
@@ -271,47 +272,54 @@ export const useAuth = () => {
     }
   };
 
-  const saveMatch = async (matchData: Omit<Match, 'id' | 'createdAt'>) => {
-    if (!authState.user) return null;
+  const updateTotalPoints = async (pointsToAdd: number) => {
+    if (!authState.user) return;
     
     try {
-      const matchRef = await addDoc(collection(db, 'matches'), {
-        ...matchData,
-        createdAt: serverTimestamp(),
-      });
-      
-      // Atualizar estatísticas do usuário
-      const newTotalMatches = authState.user.totalMatches + 1;
-      const newTotalScore = authState.user.totalScore + matchData.score;
-      const newBestScore = Math.max(authState.user.bestScore, matchData.score);
-      const newCredits = authState.user.credits - matchData.creditsUsed;
+      const newTotalPoints = authState.user.totalPoints + pointsToAdd;
       
       await updateDoc(doc(db, 'users', authState.user.id), {
-        totalMatches: newTotalMatches,
-        totalScore: newTotalScore,
-        bestScore: newBestScore,
-        credits: newCredits,
+        totalPoints: newTotalPoints,
         updatedAt: serverTimestamp(),
       });
       
-      // Atualizar estado local
       setAuthState(prev => ({
         ...prev,
-        user: prev.user ? {
-          ...prev.user,
-          totalMatches: newTotalMatches,
-          totalScore: newTotalScore,
-          bestScore: newBestScore,
-          credits: newCredits,
+        user: prev.user ? { ...prev.user, totalPoints: newTotalPoints } : null,
+      }));
+      
+    } catch (error) {
+      console.error('❌ Erro ao atualizar pontos:', error);
+    }
+  };
+
+  const updateGameStats = async (correctAnswers: number, wrongAnswers: number) => {
+    if (!authState.user) return;
+    
+    try {
+      const newTotalCorrect = authState.user.totalCorrect + correctAnswers;
+      const newTotalWrong = authState.user.totalWrong + wrongAnswers;
+      
+      await updateDoc(doc(db, 'users', authState.user.id), {
+        totalCorrect: newTotalCorrect,
+        totalWrong: newTotalWrong,
+        updatedAt: serverTimestamp(),
+      });
+      
+      setAuthState(prev => ({
+        ...prev,
+        user: prev.user ? { 
+          ...prev.user, 
+          totalCorrect: newTotalCorrect,
+          totalWrong: newTotalWrong
         } : null,
       }));
       
-      return matchRef.id;
     } catch (error) {
-      console.error('Erro ao salvar partida:', error);
-      return null;
+      console.error('❌ Erro ao atualizar estatísticas:', error);
     }
   };
+
 
   return {
     ...authState,
@@ -320,6 +328,7 @@ export const useAuth = () => {
     logout,
     resendEmailVerification,
     updateCredits,
-    saveMatch,
+    updateTotalPoints,
+    updateGameStats,
   };
 };

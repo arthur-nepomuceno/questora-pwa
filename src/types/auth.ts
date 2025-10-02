@@ -3,9 +3,10 @@ export interface User {
   email: string;
   name: string;
   credits: number;
-  totalMatches: number;
-  totalScore: number;
-  bestScore: number;
+  totalPoints: number;
+  totalCorrect: number;
+  totalWrong: number;
+  moedas: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,23 +28,11 @@ export interface SignupCredentials {
   password: string;
 }
 
-export interface Match {
-  id: string;
-  userId: string;
-  category: string;
-  score: number;
-  creditsUsed: number;
-  correctAnswers: number;
-  wrongAnswers: number;
-  timeSpent: number;
-  createdAt: Date;
-}
 
 export interface LeaderboardEntry {
   userId: string;
   userName: string;
-  totalScore: number;
-  totalMatches: number;
-  bestScore: number;
+  totalPoints: number;
+  totalCorrect: number;
   rank: number;
 }

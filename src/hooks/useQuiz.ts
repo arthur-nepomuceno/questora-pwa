@@ -46,7 +46,7 @@ export const useQuiz = () => {
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
   const creditsRecalculatedRef = useRef(false);
-  const { isAuthenticated, isLoading, user, updateCredits } = useAuth();
+  const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats } = useAuth();
 
   const selectRandomQuestions = useCallback((category: string, forceMedium: boolean = false): Question[] => {
     const categoryQuestions = questionsData[category];
@@ -203,6 +203,18 @@ export const useQuiz = () => {
     }
   }, [user, timeRemaining, updateCredits]);
 
+  const savePoints = useCallback(async () => {
+    if (user && quizState.totalPoints > 0) {
+      await updateTotalPoints(quizState.totalPoints);
+    }
+  }, [user, quizState.totalPoints, updateTotalPoints]);
+
+  const saveGameStats = useCallback(async () => {
+    if (user) {
+      await updateGameStats(quizState.correctAnswers, quizState.wrongAnswers);
+    }
+  }, [user, quizState.correctAnswers, quizState.wrongAnswers, updateGameStats]);
+
   const selectOption = useCallback((option: string) => {
     const currentQuestion = quizState.selectedQuestions[quizState.currentQuestionIndex];
     const isCorrect = option === currentQuestion.correta;
@@ -301,6 +313,10 @@ export const useQuiz = () => {
           stopTimer();
           // Recalcular créditos antes de ir para resultados
           recalculateCredits(prev.accumulatedScore);
+          // Salvar pontos antes de ir para resultados
+          savePoints();
+          // Salvar estatísticas antes de ir para resultados
+          saveGameStats();
           setCurrentScreen('results');
           return prev;
         } else {
@@ -310,6 +326,10 @@ export const useQuiz = () => {
             stopTimer();
             // Recalcular créditos antes de ir para resultados
             recalculateCredits(prev.accumulatedScore);
+            // Salvar pontos antes de ir para resultados
+            savePoints();
+            // Salvar estatísticas antes de ir para resultados
+            saveGameStats();
             setCurrentScreen('results');
             return prev;
           }
@@ -318,13 +338,15 @@ export const useQuiz = () => {
         }
       });
     }, 500);
-  }, [quizState.maxErrors, quizState.selectedQuestions, quizState.currentQuestionIndex, shouldNextBeEasy, stopTimer, recalculateCredits]);
+  }, [quizState.maxErrors, quizState.selectedQuestions, quizState.currentQuestionIndex, shouldNextBeEasy, stopTimer, recalculateCredits, savePoints, saveGameStats]);
 
   const endQuizByTime = useCallback(async () => {
     stopTimer();
     await recalculateCredits(quizState.accumulatedScore);
+    await savePoints();
+    await saveGameStats();
     setCurrentScreen('results');
-  }, [stopTimer, recalculateCredits, quizState.accumulatedScore]);
+  }, [stopTimer, recalculateCredits, quizState.accumulatedScore, savePoints, saveGameStats]);
 
   const goBackToModalidade = useCallback(() => {
     setSelectedModalidade(null);

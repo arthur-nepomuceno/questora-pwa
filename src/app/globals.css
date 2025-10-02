@@ -1601,8 +1601,8 @@ body {
 }
 
 .result-pontos .result-label {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .result-creditos-ganhos .result-icon {
@@ -1610,22 +1610,22 @@ body {
 }
 
 .result-creditos-ganhos .result-label {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .result-pontos .result-value {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: bold;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .result-creditos-ganhos .result-value.credits-earned {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: bold;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .result-pontos .result-info {
@@ -1682,11 +1682,11 @@ body {
   }
   
   .result-pontos .result-value {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
   }
   
   .result-creditos-ganhos .result-value.credits-earned {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
   }
   
   .result-creditos-ganhos .credits-message small {
@@ -1731,11 +1731,11 @@ body {
   }
   
   .result-pontos .result-value {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
   
   .result-creditos-ganhos .result-value.credits-earned {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
   
   .result-creditos-ganhos .credits-message small {

@@ -100,11 +100,22 @@ export const useQuiz = () => {
   }, []);
 
   const startTimer = useCallback(() => {
+    // Limpar timer anterior se existir
+    if (timerInterval.current) {
+      clearInterval(timerInterval.current);
+      timerInterval.current = null;
+    }
+    
     setTimeRemaining(60);
     timerInterval.current = setInterval(() => {
       setTimeRemaining(prev => {
         if (prev <= 1) {
-          endQuizByTime();
+          // Limpar timer e finalizar quiz
+          if (timerInterval.current) {
+            clearInterval(timerInterval.current);
+            timerInterval.current = null;
+          }
+          setCurrentScreen('results');
           return 0;
         }
         return prev - 1;
@@ -313,7 +324,7 @@ export const useQuiz = () => {
     stopTimer();
     await recalculateCredits(quizState.accumulatedScore);
     setCurrentScreen('results');
-  }, [stopTimer, recalculateCredits]);
+  }, [stopTimer, recalculateCredits, quizState.accumulatedScore]);
 
   const goBackToModalidade = useCallback(() => {
     setSelectedModalidade(null);
@@ -347,6 +358,7 @@ export const useQuiz = () => {
     return () => {
       if (timerInterval.current) {
         clearInterval(timerInterval.current);
+        timerInterval.current = null;
       }
     };
   }, []);

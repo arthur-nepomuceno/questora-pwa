@@ -105,7 +105,7 @@ export default function ResultsScreen({
                   <small>(Inicie sessão para acumular créditos)</small>
                 </div>
               )}
-              <span className="result-value credits-earned">+{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
+              <span className="result-value">+{formatScore(quizState.accumulatedScore + timeRemaining)}</span>
             </div>
           </div>
         </div>

@@ -11,6 +11,7 @@ import ReviewScreen from "@/components/ReviewScreen";
 import CalculationsScreen from "@/components/CalculationsScreen";
 import AuthScreen from "@/components/AuthScreen";
 import InstallPrompt from "@/components/InstallPrompt";
+import RankingScreen from "@/components/RankingScreen";
 
 export default function Home() {
   const quizHook = useQuiz();
@@ -46,6 +47,7 @@ export default function Home() {
       {quizHook.currentScreen === "results" && <ResultsScreen {...quizHook} />}
       {quizHook.currentScreen === "review" && <ReviewScreen {...quizHook} />}
       {quizHook.currentScreen === "calculations" && <CalculationsScreen setScreen={quizHook.setScreen} />}
+      {quizHook.currentScreen === "ranking" && <RankingScreen setScreen={quizHook.setScreen} />}
       
       {/* PWA Install Prompt */}
       <InstallPrompt />

@@ -91,7 +91,7 @@ export default function OptionsScreen({ setScreen }: OptionsScreenProps) {
         <div className="options-actions">
           <button
             className="btn btn-primary"
-            disabled
+            onClick={() => setScreen("ranking")}
           >
             Ver Ranking
           </button>

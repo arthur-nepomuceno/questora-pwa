@@ -7,6 +7,11 @@ export interface User {
   totalCorrect: number;
   totalWrong: number;
   moedas: number;
+  totalGames: number;
+  creditGames100: number;
+  creditGames500: number;
+  creditGames700: number;
+  creditGames1000: number;
   createdAt: Date;
   updatedAt: Date;
 }

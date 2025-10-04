@@ -40,6 +40,11 @@ export const useAuth = () => {
           totalCorrect: 0,
           totalWrong: 0,
           moedas: 0,
+          totalGames: 0,
+          creditGames100: 0,
+          creditGames500: 0,
+          creditGames700: 0,
+          creditGames1000: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -67,6 +72,11 @@ export const useAuth = () => {
               totalCorrect: userData.totalCorrect || 0,
               totalWrong: userData.totalWrong || 0,
               moedas: userData.moedas || 0,
+              totalGames: userData.totalGames || 0,
+              creditGames100: userData.creditGames100 || 0,
+              creditGames500: userData.creditGames500 || 0,
+              creditGames700: userData.creditGames700 || 0,
+              creditGames1000: userData.creditGames1000 || 0,
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
@@ -194,6 +204,11 @@ export const useAuth = () => {
         totalCorrect: 0,
         totalWrong: 0,
         moedas: 0,
+        totalGames: 0,
+        creditGames100: 0,
+        creditGames500: 0,
+        creditGames700: 0,
+        creditGames1000: 0,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
@@ -320,6 +335,76 @@ export const useAuth = () => {
     }
   };
 
+  const updateTotalGames = async () => {
+    if (!authState.user) return;
+    
+    try {
+      const newTotalGames = authState.user.totalGames + 1;
+      
+      await updateDoc(doc(db, 'users', authState.user.id), {
+        totalGames: newTotalGames,
+        updatedAt: serverTimestamp(),
+      });
+      
+      setAuthState(prev => ({
+        ...prev,
+        user: prev.user ? { 
+          ...prev.user, 
+          totalGames: newTotalGames
+        } : null,
+      }));
+      
+    } catch (error) {
+      console.error('❌ Erro ao atualizar total de partidas:', error);
+    }
+  };
+
+  const updateCreditGames = async (credits: number) => {
+    if (!authState.user) return;
+    
+    try {
+      let updateField: string;
+      let newValue: number;
+      
+      switch (credits) {
+        case 100:
+          updateField = 'creditGames100';
+          newValue = authState.user.creditGames100 + 1;
+          break;
+        case 500:
+          updateField = 'creditGames500';
+          newValue = authState.user.creditGames500 + 1;
+          break;
+        case 700:
+          updateField = 'creditGames700';
+          newValue = authState.user.creditGames700 + 1;
+          break;
+        case 1000:
+          updateField = 'creditGames1000';
+          newValue = authState.user.creditGames1000 + 1;
+          break;
+        default:
+          console.error('❌ Valor de créditos inválido:', credits);
+          return;
+      }
+      
+      await updateDoc(doc(db, 'users', authState.user.id), {
+        [updateField]: newValue,
+        updatedAt: serverTimestamp(),
+      });
+      
+      setAuthState(prev => ({
+        ...prev,
+        user: prev.user ? { 
+          ...prev.user, 
+          [updateField]: newValue
+        } : null,
+      }));
+      
+    } catch (error) {
+      console.error('❌ Erro ao atualizar partidas por créditos:', error);
+    }
+  };
 
   return {
     ...authState,
@@ -330,5 +415,7 @@ export const useAuth = () => {
     updateCredits,
     updateTotalPoints,
     updateGameStats,
+    updateTotalGames,
+    updateCreditGames,
   };
 };

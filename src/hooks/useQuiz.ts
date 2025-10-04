@@ -46,7 +46,7 @@ export const useQuiz = () => {
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
   const creditsRecalculatedRef = useRef(false);
-  const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats } = useAuth();
+  const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames } = useAuth();
 
   const selectRandomQuestions = useCallback((category: string, forceMedium: boolean = false): Question[] => {
     const categoryQuestions = questionsData[category];
@@ -178,13 +178,17 @@ export const useQuiz = () => {
     if (user) {
       const newCredits = user.credits - credits;
       await updateCredits(newCredits);
+      // Incrementar total de partidas
+      await updateTotalGames();
+      // Incrementar partidas por pacote de créditos
+      await updateCreditGames(credits);
       // Armazenar o valor dos créditos após o débito para uso posterior
       setQuizState(prev => ({ ...prev, creditsAfterDebit: newCredits }));
     }
     
     startTimer();
     setCurrentScreen('quiz');
-  }, [startTimer, user, updateCredits]);
+  }, [startTimer, user, updateCredits, updateTotalGames, updateCreditGames]);
 
   const recalculateCredits = useCallback(async (currentAccumulatedScore?: number) => {
     // Usar o valor passado como parâmetro ou o valor atual do estado

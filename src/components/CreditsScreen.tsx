@@ -20,8 +20,8 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
 
   const handleCreditSelect = (credits: number) => {
     
-    if (user && user.credits < credits) {
-      alert(`Créditos insuficientes! Você tem ${user.credits} créditos, mas precisa de ${credits}.`);
+    if (user && user.totalCredits < credits) {
+      alert(`Créditos insuficientes! Você tem ${user.totalCredits} créditos, mas precisa de ${credits}.`);
       return;
     }
     

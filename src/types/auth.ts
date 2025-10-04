@@ -2,16 +2,16 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  credits: number;
+  totalCredits: number;
   totalPoints: number;
   totalCorrect: number;
   totalWrong: number;
   moedas: number;
   totalGames: number;
-  creditGames100: number;
-  creditGames500: number;
-  creditGames700: number;
-  creditGames1000: number;
+  creditPackage100: number;
+  creditPackage500: number;
+  creditPackage700: number;
+  creditPackage1000: number;
   createdAt: Date;
   updatedAt: Date;
 }

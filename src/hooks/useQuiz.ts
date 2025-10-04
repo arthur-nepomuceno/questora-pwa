@@ -176,7 +176,7 @@ export const useQuiz = () => {
     
     // Debitar créditos imediatamente
     if (user) {
-      const newCredits = user.credits - credits;
+      const newCredits = user.totalCredits - credits;
       await updateCredits(newCredits);
       // Incrementar total de partidas
       await updateTotalGames();
@@ -200,7 +200,7 @@ export const useQuiz = () => {
       creditsRecalculatedRef.current = true;
       
       // Adicionar accumulatedScore + tempo restante aos créditos atuais (uma vez só)
-      const newCredits = user.credits + accumulatedScore + timeRemaining;
+      const newCredits = user.totalCredits + accumulatedScore + timeRemaining;
       
       await updateCredits(newCredits);
     } else {

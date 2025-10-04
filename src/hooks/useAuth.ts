@@ -35,16 +35,16 @@ export const useAuth = () => {
           id: firebaseUser.uid,
           email: firebaseUser.email!,
           name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
-          credits: 7000, // valor padrão
+          totalCredits: 7000, // valor padrão
           totalPoints: 0,
           totalCorrect: 0,
           totalWrong: 0,
           moedas: 0,
           totalGames: 0,
-          creditGames100: 0,
-          creditGames500: 0,
-          creditGames700: 0,
-          creditGames1000: 0,
+          creditPackage100: 0,
+          creditPackage500: 0,
+          creditPackage700: 0,
+          creditPackage1000: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -67,16 +67,16 @@ export const useAuth = () => {
               id: firebaseUser.uid,
               email: firebaseUser.email!,
               name: userData.name,
-              credits: userData.credits || 0,
+              totalCredits: userData.totalCredits || userData.credits || 0,
               totalPoints: userData.totalPoints || 0,
               totalCorrect: userData.totalCorrect || 0,
               totalWrong: userData.totalWrong || 0,
               moedas: userData.moedas || 0,
               totalGames: userData.totalGames || 0,
-              creditGames100: userData.creditGames100 || 0,
-              creditGames500: userData.creditGames500 || 0,
-              creditGames700: userData.creditGames700 || 0,
-              creditGames1000: userData.creditGames1000 || 0,
+              creditPackage100: userData.creditPackage100 || userData.creditGames100 || 0,
+              creditPackage500: userData.creditPackage500 || userData.creditGames500 || 0,
+              creditPackage700: userData.creditPackage700 || userData.creditGames700 || 0,
+              creditPackage1000: userData.creditPackage1000 || userData.creditGames1000 || 0,
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
@@ -199,16 +199,16 @@ export const useAuth = () => {
       const userData = {
         name: credentials.name,
         email: credentials.email,
-        credits: 7000,
+        totalCredits: 7000,
         totalPoints: 0,
         totalCorrect: 0,
         totalWrong: 0,
         moedas: 0,
         totalGames: 0,
-        creditGames100: 0,
-        creditGames500: 0,
-        creditGames700: 0,
-        creditGames1000: 0,
+        creditPackage100: 0,
+        creditPackage500: 0,
+        creditPackage700: 0,
+        creditPackage1000: 0,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
@@ -273,13 +273,13 @@ export const useAuth = () => {
     
     try {
       await updateDoc(doc(db, 'users', authState.user.id), {
-        credits: newCredits,
+        totalCredits: newCredits,
         updatedAt: serverTimestamp(),
       });
       
       setAuthState(prev => ({
         ...prev,
-        user: prev.user ? { ...prev.user, credits: newCredits } : null,
+        user: prev.user ? { ...prev.user, totalCredits: newCredits } : null,
       }));
       
     } catch (error) {
@@ -368,20 +368,20 @@ export const useAuth = () => {
       
       switch (credits) {
         case 100:
-          updateField = 'creditGames100';
-          newValue = authState.user.creditGames100 + 1;
+          updateField = 'creditPackage100';
+          newValue = authState.user.creditPackage100 + 1;
           break;
         case 500:
-          updateField = 'creditGames500';
-          newValue = authState.user.creditGames500 + 1;
+          updateField = 'creditPackage500';
+          newValue = authState.user.creditPackage500 + 1;
           break;
         case 700:
-          updateField = 'creditGames700';
-          newValue = authState.user.creditGames700 + 1;
+          updateField = 'creditPackage700';
+          newValue = authState.user.creditPackage700 + 1;
           break;
         case 1000:
-          updateField = 'creditGames1000';
-          newValue = authState.user.creditGames1000 + 1;
+          updateField = 'creditPackage1000';
+          newValue = authState.user.creditPackage1000 + 1;
           break;
         default:
           console.error('❌ Valor de créditos inválido:', credits);

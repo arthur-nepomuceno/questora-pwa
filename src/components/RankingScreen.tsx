@@ -18,7 +18,8 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
       
       const rankingData = querySnapshot.docs.map(doc => ({
         id: doc.id,
-        ...doc.data()
+        name: doc.data().name,
+        totalPoints: doc.data().totalPoints
       }));
       
       console.log('Dados do ranking:', rankingData);

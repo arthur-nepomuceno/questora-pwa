@@ -1,13 +1,43 @@
 'use client';
 
+import { useEffect } from 'react';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+
 interface RankingScreenProps {
   setScreen: (screen: any) => void;
 }
 
 export default function RankingScreen({ setScreen }: RankingScreenProps) {
+  
+  const fetchRankingData = async () => {
+    try {
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, orderBy('totalPoints', 'desc'), limit(50));
+      const querySnapshot = await getDocs(q);
+      
+      const rankingData = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      
+      console.log('Dados do ranking:', rankingData);
+      return rankingData;
+    } catch (error) {
+      console.error('Erro ao buscar ranking:', error);
+      return [];
+    }
+  };
+  
+  useEffect(() => {
+    fetchRankingData();
+  }, []);
+  
   const handleBack = () => {
     setScreen("options");
   };
+
+  
 
   return (
     <div className="blue-theme">

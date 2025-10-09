@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+// import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+// import { db } from '@/lib/firebase';
+import { adminDb } from '@/lib/firebase-admin';
 
 // Interfaces
 interface RankingUser {
@@ -55,9 +56,15 @@ function shouldUpdateCache(): boolean {
 // Função para buscar ranking do Firestore
 async function fetchRankingFromFireStore(): Promise<RankingUser[]> {
   try {
-    const usersRef = collection(db, 'users');
-    const q = query(usersRef, orderBy('totalPoints', 'desc'), limit(50));
-    const querySnapshot = await getDocs(q);
+    // const usersRef = collection(db, 'users');
+    // const q = query(usersRef, orderBy('totalPoints', 'desc'), limit(50));
+    // const querySnapshot = await getDocs(q);
+
+    const querySnapshot = await adminDb
+      .collection('users')
+      .orderBy('totalPoints', 'desc')
+      .limit(50)
+      .get();
     
     const rankingData = querySnapshot.docs.map(doc => ({
       id: doc.id,

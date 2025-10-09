@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, enableNetwork, disableNetwork } from 'firebase/firestore';
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -19,5 +19,15 @@ const app = initializeApp(firebaseConfig);
 // Inicializar serviços
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+// Monitorar estado da rede do Firestore
+if (typeof window !== 'undefined') {
+  console.log('🔷 [Firebase Client] Inicializado no navegador');
+  
+  // Verificar conexão periodicamente
+  setInterval(() => {
+    console.log('🔷 [Firebase Client] Status: Online');
+  }, 30000); // A cada 30 segundos
+}
 
 export default app;

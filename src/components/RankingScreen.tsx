@@ -12,21 +12,26 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
   
   const fetchRankingData = async () => {
     try {
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, orderBy('totalPoints', 'desc'), limit(50));
-      const querySnapshot = await getDocs(q);
+      // const usersRef = collection(db, 'users');
+      // const q = query(usersRef, orderBy('totalPoints', 'desc'), limit(50));
+      // const querySnapshot = await getDocs(q);
+      const response = await fetch('/api/ranking');
+      const result = await response.json();
+
+      // const rankingData = querySnapshot.docs.map(doc => ({
+      //   id: doc.id,
+      //   name: doc.data().name,
+      //   totalPoints: doc.data().totalPoints
+      // }));      
+      // console.log('Dados do ranking:', rankingData);
+      // return rankingData;
       
-      const rankingData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().name,
-        totalPoints: doc.data().totalPoints
-      }));
-      
-      console.log('Dados do ranking:', rankingData);
-      return rankingData;
+      console.log('Dados do ranking:', result);
+      return result;
     } catch (error) {
       console.error('Erro ao buscar ranking:', error);
-      return [];
+      //return [];
+      return null;
     }
   };
   

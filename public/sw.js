@@ -68,6 +68,7 @@ self.addEventListener('fetch', (event) => {
           });
         })
     );
+    return; // ← ADICIONAR ESTA LINHA
   }
   
   // Estratégia: Network First para dados dinâmicos
@@ -89,6 +90,7 @@ self.addEventListener('fetch', (event) => {
           return caches.match(event.request);
         })
     );
+    return; // ← ADICIONAR ESTA LINHA
   }
   
   // Para outras requests, usar network first
@@ -98,6 +100,7 @@ self.addEventListener('fetch', (event) => {
         return caches.match(event.request);
       })
   );
+  return; // ← ADICIONAR ESTA LINHA
 });
 
 // Mensagens do app

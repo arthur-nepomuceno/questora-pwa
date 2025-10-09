@@ -6,9 +6,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
-  experimental: {
-    esmExternals: false,
-  },
   webpack: (config, { dev }) => {
     if (dev) {
       // Desabilitar completamente o cache incremental

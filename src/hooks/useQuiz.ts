@@ -291,13 +291,13 @@ export const useQuiz = () => {
           const randomMedium = availableMediumQuestions[Math.floor(Math.random() * availableMediumQuestions.length)];
           const newQuestions = [...newState.selectedQuestions];
           newQuestions[nextIndex] = randomMedium;
-          newState.selectedQuestions = newQuestions;
           
-          // Verificar se a nova seleção não tem duplicatas
-          if (hasDuplicateQuestions(newState.selectedQuestions)) {
-            console.error('Pergunta duplicada detectada após substituição!');
-            // Reverter a mudança se houver duplicata
-            newState.selectedQuestions = [...newState.selectedQuestions];
+          // Verificar se a nova seleção não tem duplicatas ANTES de aplicar
+          if (!hasDuplicateQuestions(newQuestions)) {
+            newState.selectedQuestions = newQuestions;
+          } else {
+            console.error('Pergunta duplicada detectada após substituição! Mantendo pergunta original.');
+            // Manter a pergunta original se houver duplicata
           }
         }
         // Se não há mais perguntas médias disponíveis, mantém a pergunta original

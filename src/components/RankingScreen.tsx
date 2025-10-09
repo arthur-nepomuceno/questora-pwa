@@ -18,6 +18,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
   const [participant, setParticipant] = useState<RankingParticipant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [nextUpdate, setNextUpdate] = useState<string>('');
 
   // Contador de renders
   const renderCount = useRef(0);
@@ -47,6 +48,14 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
       if (result.data) {
         console.log('✅ [RANKING] Setando participant com', result.data.length, 'jogadores');
         setParticipant(result.data);
+        
+        // Formatar horário da próxima atualização
+        if (result.nextUpdate) {
+          setNextUpdate(new Date(result.nextUpdate).toLocaleTimeString('pt-BR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          }));
+        }
       } else {
         throw new Error(result.error || 'Erro desconhecido');
       }
@@ -93,8 +102,21 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
 
       {/* Main Card */}
       <div className="ranking-card">
-        <h2>🏆 Ranking dos Jogadores</h2>
-        <p>Veja como você se compara com outros jogadores!</p>
+
+        {/* Ranking Header */}
+        <h2>🏆 Ranking dos Participantes</h2>
+
+        {/* Ranking Description */}
+        {!loading && (
+          <div>
+            <p>
+              Exibindo os TOP 50 participantes! Continue acumulando pontos para subir de posição! 
+            </p>
+            <p>
+              Próxima atualização do Ranking ocorrerá às {nextUpdate}.
+            </p>
+          </div>
+        )}     
         
         
         {/* Loading */}
@@ -105,10 +127,23 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
           </div>
         )}
         
-        {/* Placeholder para o ranking */}
+        {/* Ranking List */}
         {!loading && (
-          <div className="ranking-placeholder">
-            <p>📊 Ranking será implementado aqui...</p>
+          <div className="ranking-list">
+            {participant.map((player, index) => (
+              <div key={player.id} className="ranking-item">
+                <div className={`ranking-position ${index >= 3 && index <= 9 ? 'number' : ''}`}>
+                  {index === 0 && '🥇'}
+                  {index === 1 && '🥈'}
+                  {index === 2 && '🥉'}
+                  {index > 2 && `${index + 1}º`}
+                </div>
+                <div className="ranking-info">
+                  <div className="ranking-name">{player.name}</div>
+                  <div className="ranking-points">{player.totalPoints} pontos</div>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>

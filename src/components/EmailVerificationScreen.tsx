@@ -58,7 +58,7 @@ export default function EmailVerificationScreen({
               <span className="step-number">1</span>
               <div className="step-content">
                 <strong>Verifique sua caixa de entrada</strong>
-                <p>Procure por um email do "Show do Milênio" ou "Firebase"</p>
+                <p>Procure por um email do &quot;Show do Milênio&quot; ou &quot;Firebase&quot;</p>
               </div>
             </div>
 
@@ -72,9 +72,9 @@ export default function EmailVerificationScreen({
                 <div className="spam-tips">
                   <p><strong>Dicas para encontrar o email:</strong></p>
                   <ul>
-                    <li>📁 Procure na pasta "Spam" ou "Lixo Eletrônico"</li>
-                    <li>🔍 Use a busca por "Firebase", "verificação" ou "Show do Milênio"</li>
-                    <li>📱 Se usar Gmail, verifique também a aba "Promoções"</li>
+                    <li>📁 Procure na pasta &quot;Spam&quot; ou &quot;Lixo Eletrônico&quot;</li>
+                    <li>🔍 Use a busca por &quot;Firebase&quot;, &quot;verificação&quot; ou &quot;Show do Milênio&quot;</li>
+                    <li>📱 Se usar Gmail, verifique também a aba &quot;Promoções&quot;</li>
                     <li>⏰ O email pode demorar alguns minutos para chegar</li>
                   </ul>
                 </div>
@@ -85,7 +85,7 @@ export default function EmailVerificationScreen({
               <span className="step-number">3</span>
               <div className="step-content">
                 <strong>Clique no link de verificação</strong>
-                <p>Abra o email e clique no botão "Confirmar Email" ou no link fornecido</p>
+                <p>Abra o email e clique no botão &quot;Confirmar Email&quot; ou no link fornecido</p>
               </div>
             </div>
 
@@ -127,7 +127,7 @@ export default function EmailVerificationScreen({
               Se você não recebeu o email após alguns minutos:
             </p>
             <ul>
-              <li>✅ Clique em "Reenviar Email" acima</li>
+              <li>✅ Clique em &quot;Reenviar Email&quot; acima</li>
               <li>🔍 Verifique novamente todas as pastas do seu email</li>
               <li>📧 Confirme se o endereço <strong>{userEmail}</strong> está correto</li>
               <li>⏰ Aguarde até 10 minutos - emails podem demorar para chegar</li>

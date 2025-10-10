@@ -99,7 +99,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
               {error.includes('confirme seu email') && (
                 <div className="spam-instructions">
                   <p><strong>💡 Dica:</strong> Verifique também sua caixa de <strong>spam/lixo eletrônico</strong>!</p>
-                  <p>O email de verificação pode ter ido para lá. Procure por "Firebase" ou "Show do Milênio".</p>
+                  <p>O email de verificação pode ter ido para lá. Procure por &quot;Firebase&quot; ou &quot;Show do Milênio&quot;.</p>
                 </div>
               )}
             </div>

@@ -56,6 +56,8 @@ function shouldUpdateCache(): boolean {
 // Função para buscar ranking do Firestore
 async function fetchRankingFromFireStore(): Promise<RankingUser[]> {
   try {
+    console.log('🔍 [Ranking API] Iniciando consulta ao Firestore...');
+    
     // const usersRef = collection(db, 'users');
     // const q = query(usersRef, orderBy('totalPoints', 'desc'), limit(50));
     // const querySnapshot = await getDocs(q);
@@ -66,26 +68,40 @@ async function fetchRankingFromFireStore(): Promise<RankingUser[]> {
       .limit(50)
       .get();
     
+    console.log(`✅ [Ranking API] Consulta concluída. Documentos encontrados: ${querySnapshot.docs.length}`);
+    
     const rankingData = querySnapshot.docs.map(doc => ({
       id: doc.id,
       name: doc.data().name,
       totalPoints: doc.data().totalPoints
     }));
     
+    const usersWithPoints = rankingData.filter(user => user.totalPoints > 0).length;
+    console.log(`📊 [Ranking API] Usuários com pontos: ${usersWithPoints} de ${rankingData.length}`);
     console.log('Dados do ranking:', rankingData);
+    
     return rankingData;
   } catch (error) {
-    console.error('Erro ao buscar ranking:', error);
+    console.error('❌ [Ranking API] Erro ao buscar ranking:', error);
+    console.error('❌ [Ranking API] Detalhes do erro:', JSON.stringify(error, null, 2));
     return [];
   }
 }
 
 export async function GET() {
   try {
+    console.log('🔍 [Ranking API] Requisição recebida');
+    console.log('🔍 [Ranking API] Cache atual:', rankingCache ? 'Existe' : 'Não existe');
+    console.log('🔍 [Ranking API] Precisa atualizar:', shouldUpdateCache());
+    
     // Verifica se o cache precisa ser atualizado
     if (shouldUpdateCache()) {
+      console.log('🔄 [Ranking API] Atualizando cache...');
+      
       // Cache inválido ou não existe - buscar novos dados
       const data = await fetchRankingFromFireStore();
+      
+      console.log(`📦 [Ranking API] Dados recebidos: ${data.length} usuários`);
       
       // Atualizar o cache
       rankingCache = {
@@ -93,6 +109,8 @@ export async function GET() {
         lastUpdate: new Date(),
         nextUpdate: getNextUpdateTime()
       };
+      
+      console.log('✅ [Ranking API] Cache atualizado com sucesso');
       
       // Retornar dados atualizados
       return NextResponse.json({
@@ -105,11 +123,14 @@ export async function GET() {
     
     // TypeScript safety check - para evitar erro de lint
     if (!rankingCache) {
+      console.error('❌ [Ranking API] Cache não disponível após verificação');
       return NextResponse.json(
         { error: 'Cache não disponível' },
         { status: 500 }
       );
     }
+    
+    console.log('✅ [Ranking API] Retornando dados do cache');
     
     // Cache válido - retornar dados do cache
     return NextResponse.json({
@@ -119,7 +140,8 @@ export async function GET() {
       rankingCameFromCached: true
     });
   } catch (error) {
-    console.error('Erro na API de ranking:', error);
+    console.error('❌ [Ranking API] Erro na API de ranking:', error);
+    console.error('❌ [Ranking API] Detalhes do erro:', JSON.stringify(error, null, 2));
     return NextResponse.json(
       { error: 'Erro ao processar requisição' },
       { status: 500 }

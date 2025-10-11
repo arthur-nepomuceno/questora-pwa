@@ -51,19 +51,23 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
         console.log('✅ [RANKING] Setando participant com', result.data.length, 'jogadores');
         setParticipant(result.data);
         
-        // Formatar horário da próxima atualização
+        // Formatar horário da próxima atualização (sem conversão de timezone)
         if (result.nextUpdate) {
-          setNextUpdate(new Date(result.nextUpdate).toLocaleTimeString('pt-BR', {
+          const nextUpdateDate = new Date(result.nextUpdate);
+          setNextUpdate(nextUpdateDate.toLocaleTimeString('pt-BR', {
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            timeZone: 'America/Sao_Paulo'
           }));
         }
         
-        // Formatar horário da última atualização
+        // Formatar horário da última atualização (sem conversão de timezone)
         if (result.lastUpdate) {
-          setLastUpdate(new Date(result.lastUpdate).toLocaleTimeString('pt-BR', {
+          const lastUpdateDate = new Date(result.lastUpdate);
+          setLastUpdate(lastUpdateDate.toLocaleTimeString('pt-BR', {
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            timeZone: 'America/Sao_Paulo'
           }));
         }
 
@@ -95,13 +99,13 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
     fetchRankingData();
     
     // Inicializar relógio
-    updateClock();
+    // updateClock();
     
     // Atualizar relógio a cada segundo
-    const clockInterval = setInterval(updateClock, 1000);
+    // const clockInterval = setInterval(updateClock, 1000);
     
     // Cleanup
-    return () => clearInterval(clockInterval);
+    // return () => clearInterval(clockInterval);
   }, []);
   
   const handleBack = () => {
@@ -131,9 +135,9 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
           </button>
         </div>
         
-        <div className="ranking-clock-side">
+        {/* <div className="ranking-clock-side">
           <div className="clock-time">{currentTime}</div>
-        </div>
+        </div> */}
       </div>
 
       {/* Main Card */}

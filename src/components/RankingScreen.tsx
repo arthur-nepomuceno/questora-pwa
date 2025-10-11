@@ -153,7 +153,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
             </p>
             <p>
               Próxima atualização do Ranking: {nextUpdate}.<br />
-              (Clique em "Voltar" e "Ver Ranking" para visualizar.)
+              (Clique em &quot;Voltar&quot; e &quot;Ver Ranking&quot; para visualizar.)
             </p>
           </div>
         )}     

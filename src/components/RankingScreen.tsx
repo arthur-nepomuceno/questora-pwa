@@ -18,8 +18,9 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
   const [participant, setParticipant] = useState<RankingParticipant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [nextUpdate, setNextUpdate] = useState<string>('');
   const [currentTime, setCurrentTime] = useState<string>('');
+  const [lastUpdate, setLastUpdate] = useState<string>('');
+  const [nextUpdate, setNextUpdate] = useState<string>('');
 
   // Contador de renders
   const renderCount = useRef(0);
@@ -57,6 +58,15 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
             minute: '2-digit'
           }));
         }
+        
+        // Formatar horário da última atualização
+        if (result.lastUpdate) {
+          setLastUpdate(new Date(result.lastUpdate).toLocaleTimeString('pt-BR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          }));
+        }
+
       } else {
         throw new Error(result.error || 'Erro desconhecido');
       }
@@ -139,7 +149,11 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
               Exibindo os TOP 50 participantes! Continue acumulando pontos para subir de posição! 
             </p>
             <p>
-              Próxima atualização do Ranking ocorrerá às {nextUpdate}.
+              Última atualização: {lastUpdate}.
+            </p>
+            <p>
+              Próxima atualização do Ranking: {nextUpdate}.<br />
+              (Clique em "Voltar" e "Ver Ranking" para visualizar.)
             </p>
           </div>
         )}     

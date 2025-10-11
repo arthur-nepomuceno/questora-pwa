@@ -20,7 +20,7 @@ interface CacheData {
 let rankingCache: CacheData | null = null;
 
 // Horários de atualização (em horas UTC)
-const UPDATE_HOURS = [8, 14, 20];
+const UPDATE_HOURS = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23];
 
 // Função para calcular próximo horário de atualização
 function getNextUpdateTime(): Date {

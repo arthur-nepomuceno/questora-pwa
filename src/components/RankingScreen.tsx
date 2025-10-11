@@ -19,6 +19,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [nextUpdate, setNextUpdate] = useState<string>('');
+  const [currentTime, setCurrentTime] = useState<string>('');
 
   // Contador de renders
   const renderCount = useRef(0);
@@ -69,9 +70,28 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
     }
   };
   
+  // Função para atualizar o relógio
+  const updateClock = () => {
+    const now = new Date();
+    setCurrentTime(now.toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }));
+  };
+
   useEffect(() => {
     console.log('🟣 [RANKING] useEffect executado');
     fetchRankingData();
+    
+    // Inicializar relógio
+    updateClock();
+    
+    // Atualizar relógio a cada segundo
+    const clockInterval = setInterval(updateClock, 1000);
+    
+    // Cleanup
+    return () => clearInterval(clockInterval);
   }, []);
   
   const handleBack = () => {
@@ -90,14 +110,20 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
         </div>
       </div>
 
-      {/* Botão Voltar */}
-      <div className="back-button-container">
-        <button
-          className="btn btn-secondary"
-          onClick={handleBack}
-        >
-          ← Voltar
-        </button>
+      {/* Botão Voltar e Relógio */}
+      <div className="ranking-controls">
+        <div className="back-button-container">
+          <button
+            className="btn btn-secondary"
+            onClick={handleBack}
+          >
+            ← Voltar
+          </button>
+        </div>
+        
+        <div className="ranking-clock-side">
+          <div className="clock-time">{currentTime}</div>
+        </div>
       </div>
 
       {/* Main Card */}

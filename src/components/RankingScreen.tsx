@@ -51,23 +51,19 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
         console.log('✅ [RANKING] Setando participant com', result.data.length, 'jogadores');
         setParticipant(result.data);
         
-        // Formatar horário da próxima atualização (sem conversão de timezone)
+        // Formatar horário da próxima atualização
         if (result.nextUpdate) {
-          const nextUpdateDate = new Date(result.nextUpdate);
-          setNextUpdate(nextUpdateDate.toLocaleTimeString('pt-BR', {
+          setNextUpdate(new Date(result.nextUpdate).toLocaleTimeString('pt-BR', {
             hour: '2-digit',
-            minute: '2-digit',
-            timeZone: 'America/Sao_Paulo'
+            minute: '2-digit'
           }));
         }
         
-        // Formatar horário da última atualização (sem conversão de timezone)
+        // Formatar horário da última atualização
         if (result.lastUpdate) {
-          const lastUpdateDate = new Date(result.lastUpdate);
-          setLastUpdate(lastUpdateDate.toLocaleTimeString('pt-BR', {
+          setLastUpdate(new Date(result.lastUpdate).toLocaleTimeString('pt-BR', {
             hour: '2-digit',
-            minute: '2-digit',
-            timeZone: 'America/Sao_Paulo'
+            minute: '2-digit'
           }));
         }
 

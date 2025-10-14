@@ -276,26 +276,6 @@ export default function EmailVerificationScreen({
         }
 
         .resend-btn {
-          background: #0E1525;
-          color: white;
-          border: none;
-          padding: 12px 24px;
-          border-radius: 8px;
-          font-weight: bold;
-          cursor: pointer;
-          transition: background 0.3s;
-        }
-
-        .resend-btn:hover:not(:disabled) {
-          background: #b71c1c;
-        }
-
-        .resend-btn:disabled {
-          background: #ccc;
-          cursor: not-allowed;
-        }
-
-        .back-btn {
           background: #666;
           color: white;
           border: none;
@@ -306,8 +286,28 @@ export default function EmailVerificationScreen({
           transition: background 0.3s;
         }
 
-        .back-btn:hover {
+        .resend-btn:hover:not(:disabled) {
           background: #555;
+        }
+
+        .resend-btn:disabled {
+          background: #ccc;
+          cursor: not-allowed;
+        }
+
+        .back-btn {
+          background: #0E1525;
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+          background: #b71c1c;
         }
 
         .resend-message {

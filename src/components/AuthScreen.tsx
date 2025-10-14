@@ -101,6 +101,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
     setShowEmailVerification(false);
     setPendingEmail('');
     setError('');
+    setIsLogin(true); // Direcionar para a tela de login
   };
 
   const handleEmailVerified = () => {

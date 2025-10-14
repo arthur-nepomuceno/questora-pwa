@@ -37,7 +37,8 @@ export const useAuth = () => {
           id: firebaseUser.uid,
           email: firebaseUser.email!,
           name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
-          totalCredits: 7000, // valor padrão
+          phone: '', // valor padrão
+          totalCredits: 5000, // valor padrão
           totalPoints: 0,
           totalCorrect: 0,
           totalWrong: 0,
@@ -72,6 +73,7 @@ export const useAuth = () => {
               id: firebaseUser.uid,
               email: firebaseUser.email!,
               name: userData.name,
+              phone: userData.phone || '',
               totalCredits: userData.totalCredits || userData.credits || 0,
               totalPoints: userData.totalPoints || 0,
               totalCorrect: userData.totalCorrect || 0,
@@ -202,11 +204,15 @@ export const useAuth = () => {
       // Enviar email de verificação
       await sendEmailVerification(userCredential.user);
       
+      // Combinar firstName e lastName em um único campo name
+      const fullName = `${credentials.firstName} ${credentials.lastName}`.trim();
+      
       // Criar documento do usuário no Firestore
       const userData = {
-        name: credentials.name,
+        name: fullName,
         email: credentials.email,
-        totalCredits: 7000,
+        phone: credentials.phone,
+        totalCredits: 5000,
         totalPoints: 0,
         totalCorrect: 0,
         totalWrong: 0,

@@ -13,12 +13,50 @@ interface AuthScreenProps {
 export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const [isLogin, setIsLogin] = useState(true);
   const [loginForm, setLoginForm] = useState<LoginCredentials>({ email: '', password: '' });
-  const [signupForm, setSignupForm] = useState<SignupCredentials>({ name: '', email: '', password: '' });
+  const [signupForm, setSignupForm] = useState<SignupCredentials>({ firstName: '', lastName: '', email: '', phone: '', password: '' });
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [showEmailVerification, setShowEmailVerification] = useState(false);
   const [pendingEmail, setPendingEmail] = useState<string>('');
   
   const { login, signup, isLoading } = useAuth();
+
+  // Função para validar se contém apenas letras (e espaços)
+  const isOnlyLetters = (str: string): boolean => {
+    return /^[A-Za-zÀ-ÿ\s]+$/.test(str);
+  };
+
+  // Handler para validar entrada de nome e sobrenome
+  const handleNameChange = (value: string, field: 'firstName' | 'lastName') => {
+    // Permite vazio (para poder apagar) ou apenas letras
+    if (value === '' || isOnlyLetters(value)) {
+      setSignupForm(prev => ({ ...prev, [field]: value }));
+    }
+  };
+
+  // Função para formatar celular brasileiro (XX) XXXXX-XXXX
+  const formatPhone = (value: string): string => {
+    // Remove tudo que não é dígito
+    const numbers = value.replace(/\D/g, '');
+    
+    // Limita a 11 dígitos (DDD + 9 dígitos)
+    const limited = numbers.slice(0, 11);
+    
+    // Aplica a máscara
+    if (limited.length <= 2) {
+      return limited;
+    } else if (limited.length <= 7) {
+      return `(${limited.slice(0, 2)}) ${limited.slice(2)}`;
+    } else {
+      return `(${limited.slice(0, 2)}) ${limited.slice(2, 7)}-${limited.slice(7)}`;
+    }
+  };
+
+  // Handler para validar e formatar entrada de celular
+  const handlePhoneChange = (value: string) => {
+    const formatted = formatPhone(value);
+    setSignupForm(prev => ({ ...prev, phone: formatted }));
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +73,19 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    
+    // Validar se as senhas coincidem
+    if (signupForm.password !== confirmPassword) {
+      setError('As senhas não coincidem. Por favor, verifique e tente novamente.');
+      return;
+    }
+    
+    // Validar celular (deve ter 10 ou 11 dígitos)
+    const phoneDigits = signupForm.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+      setError('Por favor, insira um número de celular válido com DDD.');
+      return;
+    }
     
     const result = await signup(signupForm);
     if (result.success) {
@@ -81,13 +132,21 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
           <div className="auth-tabs">
             <button 
               className={isLogin ? 'active' : ''} 
-              onClick={() => setIsLogin(true)}
+              onClick={() => {
+                setIsLogin(true);
+                setError('');
+                setConfirmPassword('');
+              }}
             >
               Entrar
             </button>
             <button 
               className={!isLogin ? 'active' : ''} 
-              onClick={() => setIsLogin(false)}
+              onClick={() => {
+                setIsLogin(false);
+                setError('');
+                setConfirmPassword('');
+              }}
             >
               Cadastrar
             </button>
@@ -148,13 +207,25 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
           ) : (
             <form onSubmit={handleSignup} className="auth-form">
               <div className="form-group">
-                <label htmlFor="signup-name">Nome</label>
+                <label htmlFor="signup-firstname">Nome</label>
                 <input
-                  id="signup-name"
+                  id="signup-firstname"
                   type="text"
-                  value={signupForm.name}
-                  onChange={(e) => setSignupForm(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Seu nome completo"
+                  value={signupForm.firstName}
+                  onChange={(e) => handleNameChange(e.target.value, 'firstName')}
+                  placeholder="Seu nome"
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="signup-lastname">Sobrenome</label>
+                <input
+                  id="signup-lastname"
+                  type="text"
+                  value={signupForm.lastName}
+                  onChange={(e) => handleNameChange(e.target.value, 'lastName')}
+                  placeholder="Seu sobrenome"
                   required
                 />
               </div>
@@ -172,6 +243,18 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
               </div>
               
               <div className="form-group">
+                <label htmlFor="signup-phone">Celular</label>
+                <input
+                  id="signup-phone"
+                  type="tel"
+                  value={signupForm.phone}
+                  onChange={(e) => handlePhoneChange(e.target.value)}
+                  placeholder="(00) 00000-0000"
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
                 <label htmlFor="signup-password">Senha</label>
                 <input
                   id="signup-password"
@@ -179,6 +262,19 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
                   value={signupForm.password}
                   onChange={(e) => setSignupForm(prev => ({ ...prev, password: e.target.value }))}
                   placeholder="Mínimo 6 caracteres"
+                  required
+                  minLength={6}
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="signup-confirm-password">Confirmar Senha</label>
+                <input
+                  id="signup-confirm-password"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Digite a senha novamente"
                   required
                   minLength={6}
                 />

@@ -2,6 +2,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  phone: string;
   totalCredits: number;
   totalPoints: number;
   totalCorrect: number;
@@ -28,8 +29,10 @@ export interface LoginCredentials {
 }
 
 export interface SignupCredentials {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
+  phone: string;
   password: string;
 }
 

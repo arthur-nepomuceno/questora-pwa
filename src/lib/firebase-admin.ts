@@ -1,5 +1,6 @@
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 
 // LOG: Verificar variáveis de ambiente
 console.log('🔍 [Firebase Admin] Diagnóstico de inicialização:');
@@ -26,5 +27,6 @@ if (!getApps().length) {
   console.log('ℹ️ [Firebase Admin] Já estava inicializado');
 }
 
-// Exportar instância do Firestore Admin
+// Exportar instâncias do Firebase Admin
 export const adminDb = getFirestore();
+export const admin = getAuth();

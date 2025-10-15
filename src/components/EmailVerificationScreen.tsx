@@ -370,10 +370,30 @@ export default function EmailVerificationScreen({
           .step {
             flex-direction: column;
             text-align: center;
+            align-items: center;
           }
           
           .step-number {
             align-self: center;
+            margin-bottom: 10px;
+          }
+          
+          .step-content {
+            text-align: center;
+            width: 100%;
+          }
+          
+          .step-content strong {
+            text-align: center;
+            display: block;
+          }
+          
+          .spam-tips {
+            text-align: left;
+          }
+          
+          .spam-tips p {
+            text-align: center;
           }
         }
       `}</style>

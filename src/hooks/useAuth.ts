@@ -205,24 +205,6 @@ export const useAuth = () => {
       // Combinar firstName e lastName em um único campo name
       const fullName = `${credentials.firstName} ${credentials.lastName}`.trim();
       
-      // Enviar cópia do link de verificação para admin
-      try {
-        await fetch('/api/send-verification', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId: userCredential.user.uid,
-            email: credentials.email,
-            name: fullName,
-            phone: credentials.phone
-          })
-        });
-      } catch (error) {
-        console.error('Erro ao enviar notificação para admin:', error);
-        // Não interrompe o fluxo se falhar
-      }
       
       // Criar documento do usuário no Firestore
       const userData = {
@@ -277,28 +259,40 @@ export const useAuth = () => {
     }
   };
 
-  const resendEmailVerification = async (): Promise<{ success: boolean; error?: string }> => {
+  const sendVerificationEmail = async (email: string, name: string): Promise<void> => {
     try {
-      if (!auth.currentUser) {
-        return { success: false, error: 'Usuário não logado' };
-      }
+      await fetch('/api/send-verification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          name
+        })
+      });
+    } catch (error) {
+      console.error('Erro ao enviar email de verificação:', error);
+    }
+  };
+
+  const resendEmailVerification = async (email: string, name: string): Promise<{ success: boolean; error?: string }> => {
+    try {
       
-      // Enviar email de verificação via API customizada
+      // Reenviar email de verificação via API customizada
       const response = await fetch('/api/send-verification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: auth.currentUser.uid,
-          email: auth.currentUser.email,
-          name: auth.currentUser.displayName || 'Usuário',
-          phone: 'N/A'
+          email,
+          name
         })
       });
 
       if (!response.ok) {
-        throw new Error('Erro ao enviar email de verificação');
+        throw new Error('Erro ao reenviar email de verificação');
       }
       return { 
         success: true, 
@@ -457,6 +451,7 @@ export const useAuth = () => {
     login,
     signup,
     logout,
+    sendVerificationEmail,
     resendEmailVerification,
     updateCredits,
     updateTotalPoints,

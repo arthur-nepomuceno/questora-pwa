@@ -18,8 +18,9 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const [error, setError] = useState<string>('');
   const [showEmailVerification, setShowEmailVerification] = useState(false);
   const [pendingEmail, setPendingEmail] = useState<string>('');
+  const [pendingUserName, setPendingUserName] = useState<string>('');
   
-  const { login, signup, isLoading } = useAuth();
+  const { login, signup, sendVerificationEmail, isLoading } = useAuth();
 
   // Função para validar se contém apenas letras (e espaços)
   const isOnlyLetters = (str: string): boolean => {
@@ -90,8 +91,13 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
     const result = await signup(signupForm);
     if (result.success) {
       // Mostrar tela de verificação de email em vez de ir direto para o app
+      const fullName = `${signupForm.firstName} ${signupForm.lastName}`.trim();
       setPendingEmail(signupForm.email);
+      setPendingUserName(fullName);
       setShowEmailVerification(true);
+      
+      // Enviar email de verificação em background
+      sendVerificationEmail(signupForm.email, fullName);
     } else {
       setError(result.error || 'Erro ao criar conta');
     }
@@ -100,6 +106,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const handleBackFromVerification = () => {
     setShowEmailVerification(false);
     setPendingEmail('');
+    setPendingUserName('');
     setError('');
     setIsLogin(true); // Direcionar para a tela de login
   };
@@ -107,6 +114,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const handleEmailVerified = () => {
     setShowEmailVerification(false);
     setPendingEmail('');
+    setPendingUserName('');
     onAuthSuccess();
   };
 
@@ -115,6 +123,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
     return (
       <EmailVerificationScreen
         userEmail={pendingEmail}
+        userName={pendingUserName}
         onVerified={handleEmailVerified}
         onBack={handleBackFromVerification}
       />

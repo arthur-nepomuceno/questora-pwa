@@ -5,12 +5,14 @@ import { useAuth } from '@/hooks/useAuth';
 
 interface EmailVerificationScreenProps {
   userEmail: string;
+  userName: string;
   onVerified: () => void;
   onBack: () => void;
 }
 
 export default function EmailVerificationScreen({ 
   userEmail, 
+  userName,
   onVerified, 
   onBack 
 }: EmailVerificationScreenProps) {
@@ -22,15 +24,20 @@ export default function EmailVerificationScreen({
     setIsResending(true);
     setResendMessage('');
     
-    const result = await resendEmailVerification();
-    
-    if (result.success) {
-      setResendMessage('✅ Email reenviado com sucesso!');
-    } else {
-      setResendMessage(`❌ ${result.error}`);
+    try {
+      const result = await resendEmailVerification(userEmail, userName);
+      
+      if (result.success) {
+        setResendMessage('✅ Email reenviado com sucesso!');
+      } else {
+        setResendMessage(`❌ ${result.error}`);
+      }
+    } catch (error) {
+      console.error('Erro ao reenviar email:', error);
+      setResendMessage('❌ Erro ao reenviar email');
+    } finally {
+      setIsResending(false);
     }
-    
-    setIsResending(false);
   };
 
   return (
@@ -58,7 +65,7 @@ export default function EmailVerificationScreen({
               <span className="step-number">1</span>
               <div className="step-content">
                 <strong>Verifique sua caixa de entrada</strong>
-                <p>Procure por um email do &quot;Show do Milênio&quot; ou &quot;Firebase&quot;</p>
+                <p>Procure por um email do &quot;Show do Milênio&quot;</p>
               </div>
             </div>
 
@@ -73,7 +80,7 @@ export default function EmailVerificationScreen({
                   <p><strong>Dicas para encontrar o email:</strong></p>
                   <ul>
                     <li>📁 Procure na pasta &quot;Spam&quot; ou &quot;Lixo Eletrônico&quot;</li>
-                    <li>🔍 Use a busca por &quot;Firebase&quot;, &quot;verificação&quot; ou &quot;Show do Milênio&quot;</li>
+                    <li>🔍 Use a busca por &quot;verificação&quot; ou &quot;Show do Milênio&quot;</li>
                     <li>📱 Se usar Gmail, verifique também a aba &quot;Promoções&quot;</li>
                     <li>⏰ O email pode demorar alguns minutos para chegar</li>
                   </ul>
@@ -85,7 +92,7 @@ export default function EmailVerificationScreen({
               <span className="step-number">3</span>
               <div className="step-content">
                 <strong>Clique no link de verificação</strong>
-                <p>Abra o email e clique no botão &quot;Confirmar Email&quot; ou no link fornecido</p>
+                <p>Abra o email e clique no botão &quot;Verificar Email&quot; ou no link fornecido</p>
               </div>
             </div>
 
@@ -255,6 +262,7 @@ export default function EmailVerificationScreen({
           margin-bottom: 10px;
           font-weight: bold;
           color: #1565c0;
+          text-align: left;
         }
 
         .spam-tips ul {
@@ -368,12 +376,29 @@ export default function EmailVerificationScreen({
           }
           
           .step {
-            flex-direction: column;
-            text-align: center;
+            flex-direction: row;
+            text-align: left;
+            align-items: flex-start;
           }
           
           .step-number {
-            align-self: center;
+            align-self: flex-start;
+          }
+          
+          .step-content {
+            text-align: left;
+          }
+          
+          .spam-tips {
+            text-align: left;
+          }
+          
+          .spam-tips p {
+            text-align: left;
+          }
+          
+          .spam-tips ul {
+            text-align: left;
           }
         }
       `}</style>

@@ -6,8 +6,8 @@ const nodemailer = require('nodemailer');
 export async function POST(request: NextRequest) {
   try {
     console.log('🔍 [API] Iniciando envio de verificação...');
-    const { userId, email, name, phone } = await request.json();
-    console.log('📧 [API] Dados recebidos:', { userId, email, name, phone });
+    const { email, name } = await request.json();
+    console.log('📧 [API] Dados recebidos:', { email, name });
 
     // Gerar link de verificação via Firebase Admin SDK
     console.log('🔗 [API] Gerando link de verificação...');

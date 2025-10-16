@@ -6,8 +6,7 @@ import {
   createUserWithEmailAndPassword, 
   signOut, 
   onAuthStateChanged,
-  User as FirebaseUser,
-  sendEmailVerification
+  User as FirebaseUser
 } from 'firebase/auth';
 import { 
   doc, 
@@ -202,10 +201,28 @@ export const useAuth = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
       
       // Enviar email de verificação
-      await sendEmailVerification(userCredential.user);
       
       // Combinar firstName e lastName em um único campo name
       const fullName = `${credentials.firstName} ${credentials.lastName}`.trim();
+      
+      // Enviar cópia do link de verificação para admin
+      try {
+        await fetch('/api/send-verification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userCredential.user.uid,
+            email: credentials.email,
+            name: fullName,
+            phone: credentials.phone
+          })
+        });
+      } catch (error) {
+        console.error('Erro ao enviar notificação para admin:', error);
+        // Não interrompe o fluxo se falhar
+      }
       
       // Criar documento do usuário no Firestore
       const userData = {
@@ -266,7 +283,23 @@ export const useAuth = () => {
         return { success: false, error: 'Usuário não logado' };
       }
       
-      await sendEmailVerification(auth.currentUser);
+      // Enviar email de verificação via API customizada
+      const response = await fetch('/api/send-verification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: auth.currentUser.uid,
+          email: auth.currentUser.email,
+          name: auth.currentUser.displayName || 'Usuário',
+          phone: 'N/A'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao enviar email de verificação');
+      }
       return { 
         success: true, 
         error: 'Email de verificação reenviado! Verifique sua caixa de entrada e spam.' 

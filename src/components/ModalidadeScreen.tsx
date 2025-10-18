@@ -1,6 +1,8 @@
 "use client";
 
 import { useAuth } from '@/hooks/useAuth';
+import { useCounter } from '@/hooks/useCounter';
+import { useEffect } from 'react';
 
 interface ModalidadeScreenProps {
   selectModalidade: (modalidade: string) => void;
@@ -9,6 +11,13 @@ interface ModalidadeScreenProps {
 
 export default function ModalidadeScreen({ selectModalidade, goToOptions }: ModalidadeScreenProps) {
   const { user, logout, isLoading } = useAuth();
+  const { incrementCounter } = useCounter();
+
+  useEffect(() => {
+    if (!user && !isLoading) {
+      incrementCounter();
+    }
+  }, [user, isLoading]);
 
   const handleModalidadeClick = (modalidade: string) => {
     selectModalidade(modalidade);

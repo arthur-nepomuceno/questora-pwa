@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSounds } from "@/hooks/useSounds";
+
 interface ResultsScreenProps {
   quizState: any;
   timeRemaining: number;
@@ -15,6 +18,14 @@ export default function ResultsScreen({
   restartQuiz,
   selectedModalidade
 }: ResultsScreenProps) {
+
+  // Hook de sons
+  const { playEndGame } = useSounds();
+
+  // Tocar som de fim de jogo quando componente monta
+  useEffect(() => {
+    playEndGame();
+  }, []);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);

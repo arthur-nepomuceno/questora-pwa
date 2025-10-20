@@ -44,10 +44,20 @@ export const useSounds = () => {
     }
   };
 
+  // Função para tocar som de fim de jogo
+  const playEndGame = () => {
+    if (!isMuted) {
+      const endGameAudio = new Audio('/sounds/end-game.m4a');
+      endGameAudio.volume = 0.3;
+      endGameAudio.play().catch(() => {});
+    }
+  };
+
   return {
     isMuted,
     playQuizMusic,
     stopQuizMusic,
     playCorrectAnswer,
+    playEndGame,
   };
 };

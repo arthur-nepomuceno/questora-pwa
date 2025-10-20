@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useSounds } from "@/hooks/useSounds";
 
 interface QuizScreenProps {
   quizState: any;
@@ -22,6 +23,9 @@ export default function QuizScreen({
   const currentQuestion = quizState.selectedQuestions[quizState.currentQuestionIndex];
   const totalQuestions = quizState.selectedQuestions.length;
   
+  // Hook de sons
+  const { isMuted, playQuizMusic, stopQuizMusic, toggleMute } = useSounds();
+  
   // Estado para controlar visibilidade dos valores
   const [showValues, setShowValues] = useState(true);
   const [currentMultiplier, setCurrentMultiplier] = useState(MULTIPLIERS[quizState.currentMultiplierIndex]);
@@ -33,6 +37,12 @@ export default function QuizScreen({
     setCurrentAccumulated(quizState.accumulatedScore);
     setShowValues(true);
   }, [quizState.currentQuestionIndex, MULTIPLIERS, quizState.currentMultiplierIndex, quizState.accumulatedScore]);
+
+  // Iniciar música quando componente monta
+  useEffect(() => {
+    playQuizMusic();
+    return () => stopQuizMusic();
+  }, []);
 
   // Randomizar as opções para cada pergunta usando Fisher-Yates shuffle
   const shuffledOptions = React.useMemo(() => {
@@ -68,6 +78,40 @@ export default function QuizScreen({
         <div className="coin-icon">
           🏆
         </div>
+      </div>
+
+      {/* Botão de controle de som */}
+      <div 
+        className="sound-control-button" 
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          zIndex: 1000,
+          background: 'rgba(0, 0, 0, 0.7)',
+          border: '2px solid #fff',
+          borderRadius: '50%',
+          width: '50px',
+          height: '50px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          fontSize: '20px',
+          color: '#fff',
+          transition: 'all 0.3s ease'
+        }}
+        onClick={toggleMute}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(0, 0, 0, 0.9)';
+          e.currentTarget.style.transform = 'scale(1.1)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
+          e.currentTarget.style.transform = 'scale(1)';
+        }}
+      >
+        {isMuted ? '🔇' : '🔊'}
       </div>
 
       {/* Layout principal com 67% esquerda e 33% direita */}

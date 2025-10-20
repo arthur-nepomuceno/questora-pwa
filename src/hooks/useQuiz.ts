@@ -4,6 +4,7 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import { QuizState, Question, UserAnswer, Screen } from '@/types/quiz';
 import { questionsData } from '@/data/questions';
 import { useAuth } from '@/hooks/useAuth';
+import { useSounds } from '@/hooks/useSounds';
 
 const MULTIPLIERS = [0.10, 0.20, 0.30, 0.40, 0.60, 1.00, 1.40, 2.00, 3.00, 6.00];
 
@@ -47,6 +48,7 @@ export const useQuiz = () => {
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
   const creditsRecalculatedRef = useRef(false);
   const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames } = useAuth();
+  const { playCorrectAnswer } = useSounds();
 
   const selectRandomQuestions = useCallback((category: string, forceMedium: boolean = false): Question[] => {
     const categoryQuestions = questionsData[category];
@@ -247,6 +249,9 @@ export const useQuiz = () => {
         const oldAccumulated = newState.accumulatedScore;
         newState.accumulatedScore = Math.round(newState.accumulatedScore + pointsEarned);
         
+        // Tocar som de resposta correta
+        playCorrectAnswer();
+        
         // Adicionar pontos da questão ao total
         newState.totalPoints += currentQuestion.pontuacao * (newState.selectedCredits / 100);
         
@@ -342,7 +347,7 @@ export const useQuiz = () => {
         }
       });
     }, 500);
-  }, [quizState.maxErrors, quizState.selectedQuestions, quizState.currentQuestionIndex, shouldNextBeEasy, stopTimer, recalculateCredits, savePoints, saveGameStats]);
+  }, [quizState.maxErrors, quizState.selectedQuestions, quizState.currentQuestionIndex, shouldNextBeEasy, stopTimer, recalculateCredits, savePoints, saveGameStats, playCorrectAnswer]);
 
   const endQuizByTime = useCallback(async () => {
     stopTimer();

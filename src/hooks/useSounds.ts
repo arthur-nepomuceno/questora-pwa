@@ -35,9 +35,19 @@ export const useSounds = () => {
     }
   };
 
+  // Função para tocar som de resposta correta
+  const playCorrectAnswer = () => {
+    if (!isMuted) {
+      const correctAudio = new Audio('/sounds/right-answer.mp3');
+      correctAudio.volume = 0.3;
+      correctAudio.play().catch(() => {});
+    }
+  };
+
   return {
     isMuted,
     playQuizMusic,
     stopQuizMusic,
+    playCorrectAnswer,
   };
 };

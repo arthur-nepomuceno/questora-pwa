@@ -6,6 +6,8 @@ import { useSoundContext } from '@/contexts/SoundContext';
 export const useSounds = () => {
   const { isMuted } = useSoundContext();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const buttonAudioRef = useRef<HTMLAudioElement | null>(null);
+  const endGameAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Atualizar volume quando mute muda
   useEffect(() => {
@@ -13,6 +15,17 @@ export const useSounds = () => {
       audioRef.current.volume = isMuted ? 0 : 0.3;
     }
   }, [isMuted]);
+
+  // Pré-carregar áudios para reduzir latência
+  useEffect(() => {
+    buttonAudioRef.current = new Audio('/sounds/press-button.mp3');
+    buttonAudioRef.current.volume = 0.2;
+    buttonAudioRef.current.preload = 'auto';
+    
+    endGameAudioRef.current = new Audio('/sounds/end-game.mp3');
+    endGameAudioRef.current.volume = 0.3;
+    endGameAudioRef.current.preload = 'auto';
+  }, []);
 
   // Função para tocar a música do quiz
   const playQuizMusic = () => {
@@ -46,10 +59,19 @@ export const useSounds = () => {
 
   // Função para tocar som de fim de jogo
   const playEndGame = () => {
-    if (!isMuted) {
-      const endGameAudio = new Audio('/sounds/end-game.m4a');
-      endGameAudio.volume = 0.3;
-      endGameAudio.play().catch(() => {});
+    if (!isMuted && endGameAudioRef.current) {
+      endGameAudioRef.current.currentTime = 0; // Reset para início
+      endGameAudioRef.current.play().catch(() => {});
+    }
+  };
+
+  // Função para tocar som de botão pressionado (otimizada)
+  const playButtonPress = () => {
+    if (!isMuted && buttonAudioRef.current) {
+      // Reset e play em uma operação
+      const audio = buttonAudioRef.current;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
     }
   };
 
@@ -59,5 +81,6 @@ export const useSounds = () => {
     stopQuizMusic,
     playCorrectAnswer,
     playEndGame,
+    playButtonPress,
   };
 };

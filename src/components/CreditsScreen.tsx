@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from '@/hooks/useAuth';
+import { useSounds } from '@/hooks/useSounds';
 
 interface CreditsScreenProps {
   setScreen: (screen: any) => void;
@@ -10,6 +11,7 @@ interface CreditsScreenProps {
 
 export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions }: CreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
+  const { playButtonPress } = useSounds();
 
   const creditOptions = [
     { value: 100, icon: "💰", label: "100 Créditos" },
@@ -19,6 +21,7 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
   ];
 
   const handleCreditSelect = (credits: number) => {
+    playButtonPress(); // Tocar som ao escolher créditos
     
     if (user && user.totalCredits < credits) {
       alert(`Créditos insuficientes! Você tem ${user.totalCredits} créditos, mas precisa de ${credits}.`);

@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { useCounter } from '@/hooks/useCounter';
+import { useSounds } from '@/hooks/useSounds';
 import { useEffect } from 'react';
 
 interface ModalidadeScreenProps {
@@ -12,6 +13,7 @@ interface ModalidadeScreenProps {
 export default function ModalidadeScreen({ selectModalidade, goToOptions }: ModalidadeScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { incrementCounter } = useCounter();
+  const { playButtonPress } = useSounds();
 
   useEffect(() => {
     if (!user && !isLoading) {
@@ -20,6 +22,7 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
   }, [user, isLoading]);
 
   const handleModalidadeClick = (modalidade: string) => {
+    playButtonPress(); // Tocar som ao escolher modalidade
     selectModalidade(modalidade);
   };
 

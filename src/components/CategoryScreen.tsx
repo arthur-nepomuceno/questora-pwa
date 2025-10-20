@@ -2,6 +2,7 @@
 
 import { Screen } from '@/types/quiz';
 import { useAuth } from '@/hooks/useAuth';
+import { useSounds } from '@/hooks/useSounds';
 
 interface CategoryScreenProps {
   startQuiz: (category: string) => void;
@@ -12,6 +13,7 @@ interface CategoryScreenProps {
 
 export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade, goToOptions }: CategoryScreenProps) {
   const { user, logout, isLoading } = useAuth();
+  const { playButtonPress } = useSounds();
 
   const handleLogout = async () => {
     await logout();
@@ -41,7 +43,10 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
         <div className="category-selection">
           <div 
             className="category-card"
-            onClick={() => startQuiz("futebol")}
+            onClick={() => {
+              playButtonPress();
+              startQuiz("futebol");
+            }}
             style={{ cursor: 'pointer' }}
           >
             <div className="category-icon">⚽</div>
@@ -50,7 +55,10 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
           
           <div 
             className="category-card"
-            onClick={() => startQuiz("novelas")}
+            onClick={() => {
+              playButtonPress();
+              startQuiz("novelas");
+            }}
             style={{ cursor: 'pointer' }}
           >
             <div className="category-icon">📺</div>

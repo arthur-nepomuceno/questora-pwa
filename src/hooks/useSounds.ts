@@ -1,22 +1,17 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { useSoundContext } from '@/contexts/SoundContext';
 
 export const useSounds = () => {
-  const [isMuted, setIsMuted] = useState(false);
+  const { isMuted } = useSoundContext();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Carregar preferência do localStorage
+  // Atualizar volume quando mute muda
   useEffect(() => {
-    const savedMute = localStorage.getItem('sounds-muted');
-    if (savedMute !== null) {
-      setIsMuted(JSON.parse(savedMute));
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : 0.3;
     }
-  }, []);
-
-  // Salvar preferência no localStorage
-  useEffect(() => {
-    localStorage.setItem('sounds-muted', JSON.stringify(isMuted));
   }, [isMuted]);
 
   // Função para tocar a música do quiz
@@ -40,20 +35,9 @@ export const useSounds = () => {
     }
   };
 
-  // Função para alternar mute
-  const toggleMute = () => {
-    const newMuted = !isMuted;
-    setIsMuted(newMuted);
-    
-    if (audioRef.current) {
-      audioRef.current.volume = newMuted ? 0 : 0.3;
-    }
-  };
-
   return {
     isMuted,
     playQuizMusic,
     stopQuizMusic,
-    toggleMute,
   };
 };

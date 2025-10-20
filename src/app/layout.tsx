@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SoundProvider } from "@/contexts/SoundContext";
+import GlobalMuteButton from "@/components/GlobalMuteButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NODE_ENV === 'production' 
@@ -54,7 +56,10 @@ export default function RootLayout({
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
       <body suppressHydrationWarning>
-        {children}
+        <SoundProvider>
+          {children}
+          <GlobalMuteButton />
+        </SoundProvider>
       </body>
     </html>
   );

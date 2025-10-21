@@ -6,7 +6,7 @@ import { questionsData } from '@/data/questions';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
 
-const MULTIPLIERS = [0.10, 0.20, 0.30, 0.40, 0.60, 1.00, 1.40, 2.00, 3.00, 6.00];
+const MULTIPLIERS = [.1, .2, .3, .4, .6, 1, 1.4, 2, 3, 6];
 
 const initialQuizState: QuizState = {
   selectedQuestions: [],

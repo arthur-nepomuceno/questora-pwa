@@ -49,7 +49,7 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
       {/* Main Card */}
       <div className="credits-card">
         <h2>Escolha os créditos da rodada</h2>
-        <p>Selecione quanto deseja investir nesta rodada:</p>
+        <p>Selecione um pacote de créditos:</p>
         
         {/* Credit Options */}
         <div className="credits-options">

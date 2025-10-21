@@ -1299,6 +1299,21 @@ body {
     width: 100%;
     max-width: 100%;
   }
+  
+  /* Mostrar indicadores mobile (timer e question indicator) em tablets */
+  .mobile-indicators-row {
+    display: flex;
+  }
+  
+  /* Ajustar tamanho da fonte do question-indicator para igualar ao timer-display em tablets */
+  .mobile-indicator .indicator-text {
+    font-size: 1rem;
+  }
+  
+  /* Esconder sidebar desktop em tablets para evitar duplicação */
+  .desktop-only {
+    display: none;
+  }
 }
 
 /* Responsividade */
@@ -1632,6 +1647,19 @@ body {
   gap: 2px;
 }
 
+.result-pontos .credits-message {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.result-pontos .credits-message small {
+  color: #ffeb3b;
+  font-size: 0.8rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
 .result-creditos-ganhos .result-info {
   gap: 2px;
 }
@@ -1689,6 +1717,10 @@ body {
     font-size: 1.3rem;
   }
   
+  .result-pontos .credits-message small {
+    font-size: 0.7rem;
+  }
+  
   .result-creditos-ganhos .credits-message small {
     font-size: 0.7rem;
   }
@@ -1736,6 +1768,10 @@ body {
   
   .result-creditos-ganhos .result-value.credits-earned {
     font-size: 1.1rem;
+  }
+  
+  .result-pontos .credits-message small {
+    font-size: 0.65rem;
   }
   
   .result-creditos-ganhos .credits-message small {

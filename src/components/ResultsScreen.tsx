@@ -102,7 +102,12 @@ export default function ResultsScreen({
           <div className="result-square result-pontos">
             <div className="result-icon">⭐</div>
             <div className="result-info">
-              <span className="result-label">Pontos</span>
+              <span className="result-label">+Pontos</span>
+              {selectedModalidade === 'livre' && (
+                <div className="credits-message">
+                  <small>(Cadastre-se para acumular pontos)</small>
+                </div>
+              )}
               <span className="result-value">+{quizState.totalPoints}</span>
             </div>
           </div>
@@ -110,10 +115,10 @@ export default function ResultsScreen({
           <div className="result-square result-creditos-ganhos">
             <div className="result-icon">🎯</div>
             <div className="result-info">
-              <span className="result-label">Créditos Ganhos</span>
+              <span className="result-label">+Créditos</span>
               {selectedModalidade === 'livre' && (
                 <div className="credits-message">
-                  <small>(Inicie sessão para acumular créditos)</small>
+                  <small>(Cadastre-se para acumular créditos)</small>
                 </div>
               )}
               <span className="result-value">+{formatScore(quizState.accumulatedScore + timeRemaining)}</span>

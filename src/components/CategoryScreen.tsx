@@ -66,13 +66,15 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
           </div>
         </div>
 
-        {/* Back Button */}
+        {/* Back Button - Comentado temporariamente */}
+        {/* 
         <button
           className="btn btn-secondary"
           onClick={() => goBackToModalidade ? goBackToModalidade() : setScreen("modalidade")}
         >
           {user ? "Trocar sessão" : "Voltar"}
         </button>
+        */}
       </div>
 
       {/* User Info */}

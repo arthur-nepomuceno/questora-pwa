@@ -14,8 +14,8 @@ export default function ComingSoonScreen({ modalidade, goBack }: ComingSoonScree
     switch (modalidade) {
       case "competicao":
         return "🏆";
-      case "premiacao":
-        return "🪙";
+      // case "premiacao": // Comentado temporariamente
+      //   return "🪙";
       default:
         return "🚧";
     }
@@ -25,8 +25,8 @@ export default function ComingSoonScreen({ modalidade, goBack }: ComingSoonScree
     switch (modalidade) {
       case "competicao":
         return "Competição";
-      case "premiacao":
-        return "Premiação";
+      // case "premiacao": // Comentado temporariamente
+      //   return "Premiação";
       default:
         return "Modalidade";
     }

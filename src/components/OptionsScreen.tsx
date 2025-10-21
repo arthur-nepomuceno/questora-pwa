@@ -15,7 +15,7 @@ export default function OptionsScreen({ setScreen }: OptionsScreenProps) {
   };
 
   const handleBack = () => {
-    setScreen("modalidade");
+    setScreen("start");
   };
 
   if (isLoading) {

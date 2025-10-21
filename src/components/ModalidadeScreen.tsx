@@ -70,6 +70,8 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
             <p>(Iniciar sessão)</p>
           </div>
 
+          {/* Modalidade "Premiação" - Comentada temporariamente */}
+          {/* 
           <div 
             className="category-card"
             onClick={() => handleModalidadeClick("premiacao")}
@@ -79,6 +81,7 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
             <h3>Premiação</h3>
             <p>(Iniciar sessão)</p>
           </div>
+          */}
         </div>
       </div>
 

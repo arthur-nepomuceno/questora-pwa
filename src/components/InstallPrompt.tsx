@@ -24,7 +24,7 @@ export default function InstallPrompt() {
             className="install-btn"
             onClick={installApp}
           >
-            Instalar
+            Baixar
           </button>
           <button 
             className="share-btn"

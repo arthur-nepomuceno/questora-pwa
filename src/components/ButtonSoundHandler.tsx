@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useSounds } from '@/hooks/useSounds';
 
 export default function ButtonSoundHandler() {
-  const { playButtonPress } = useSounds();
+  const { playButtonPress, isMuted } = useSounds();
   const isQuizScreenRef = useRef(false);
 
   useEffect(() => {
@@ -30,7 +30,10 @@ export default function ButtonSoundHandler() {
         target.getAttribute('role') === 'button' ||
         target.closest('[role="button"]')
       ) {
-        playButtonPress();
+        // Só tocar som se não estiver mutado
+        if (!isMuted) {
+          playButtonPress();
+        }
       }
     };
 
@@ -44,7 +47,7 @@ export default function ButtonSoundHandler() {
       document.removeEventListener('click', handleButtonClick);
       clearInterval(interval);
     };
-  }, []); // Sem dependências para evitar re-criação
+  }, [isMuted]); // Incluir isMuted como dependência para reagir a mudanças de mute
 
   return null;
 }

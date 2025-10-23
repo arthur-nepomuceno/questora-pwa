@@ -367,11 +367,19 @@ export const useQuiz = () => {
     setQuizState(initialQuizState);
     setSelectedOption(null);
     setShowFeedback(false);
-    setCurrentScreen('modalidade');
-    setSelectedModalidade(null);
+    
+    // Se o usuário estiver logado, vai direto para escolha de categoria
+    if (isAuthenticated) {
+      setCurrentScreen('start');
+    } else {
+      // Se não estiver logado, volta para modalidade
+      setCurrentScreen('modalidade');
+      setSelectedModalidade(null);
+    }
+    
     // Resetar flag de recálculo
     creditsRecalculatedRef.current = false;
-  }, [stopTimer]);
+  }, [stopTimer, isAuthenticated]);
 
   const setScreen = useCallback((screen: Screen) => {
     setCurrentScreen(screen);

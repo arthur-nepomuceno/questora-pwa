@@ -2,16 +2,19 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
+import { useDailyCredits } from '@/hooks/useDailyCredits';
 
 interface CreditsScreenProps {
   setScreen: (screen: any) => void;
   startQuizWithCredits: (credits: number) => void;
   goToOptions: () => void;
+  selectedModalidade?: string | null;
 }
 
-export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions }: CreditsScreenProps) {
+export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions, selectedModalidade }: CreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
+  const { dailyCreditsSpent, spendCredits, canSpendCredits, dailyLimit } = useDailyCredits(selectedModalidade);
 
   const creditOptions = [
     { value: 100, icon: "💰", label: "100 Créditos" },
@@ -28,6 +31,14 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
       return;
     }
     
+    // Verificar limite diário (só para modalidade competição)
+    if (selectedModalidade === 'competicao' && !canSpendCredits(credits)) {
+      alert(`Controle de vícios: só é permitido utilizar no máximo ${dailyLimit} créditos por dia.`);
+      return;
+    }
+    
+    // Gastar créditos diários
+    spendCredits(credits);
     startQuizWithCredits(credits);
   };
 
@@ -50,6 +61,16 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
       <div className="credits-card">
         <h2>Escolha os créditos da rodada</h2>
         <p>Selecione um pacote de créditos:</p>
+        
+        {/* Daily Credits Info - Só para modalidade Competição */}
+        {selectedModalidade === 'competicao' && (
+          <div className="daily-credits-info">
+            <span>💰 Créditos gastos hoje: {dailyCreditsSpent}</span>
+            <span className="remaining-credits">
+              Limite diário: {dailyLimit}
+            </span>
+          </div>
+        )}
         
         {/* Credit Options */}
         <div className="credits-options">
@@ -96,14 +117,21 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
             🚪 Sair
           </button>
         </div>
-      ) : (
+      ) : !isLoading ? (
         <div className="user-info">
           <div className="user-email">
             <span className="user-icon">👤</span>
             <span>Sessão não iniciada.</span>
           </div>
+          <button
+            className="logout-btn"
+            onClick={() => setScreen("modalidade")}
+            title="Voltar para escolha de modalidade"
+          >
+            Voltar
+          </button>
         </div>
-      )}
+      ) : null}
       
       {/* Loading placeholder */}
       {isLoading && (
@@ -171,6 +199,26 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
 
         .loading-btn:hover {
           background: #666 !important;
+        }
+
+        .daily-credits-info {
+          background: rgba(255, 255, 255, 0.1);
+          padding: 15px;
+          border-radius: 8px;
+          margin: 15px 0;
+          text-align: center;
+          color: white;
+          font-weight: 500;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .remaining-credits {
+          font-size: 0.9rem;
+          color: #4CAF50;
+          font-weight: 600;
         }
       `}</style>
     </div>

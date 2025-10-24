@@ -45,6 +45,7 @@ export const useQuiz = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [shouldNextBeEasy, setShouldNextBeEasy] = useState(false);
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
+  const [showLivreModal, setShowLivreModal] = useState(false);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
   const creditsRecalculatedRef = useRef(false);
   const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames } = useAuth();
@@ -188,9 +189,14 @@ export const useQuiz = () => {
       setQuizState(prev => ({ ...prev, creditsAfterDebit: newCredits }));
     }
     
-    startTimer();
-    setCurrentScreen('quiz');
-  }, [startTimer, user, updateCredits, updateTotalGames, updateCreditGames]);
+    // Verificar se deve mostrar modal para modalidade Livre com usuário não cadastrado
+    if (selectedModalidade === 'livre' && !isAuthenticated) {
+      setShowLivreModal(true);
+    } else {
+      startTimer();
+      setCurrentScreen('quiz');
+    }
+  }, [startTimer, user, updateCredits, updateTotalGames, updateCreditGames, selectedModalidade, isAuthenticated]);
 
   const recalculateCredits = useCallback(async (currentAccumulatedScore?: number) => {
     // Usar o valor passado como parâmetro ou o valor atual do estado
@@ -389,6 +395,12 @@ export const useQuiz = () => {
     setCurrentScreen('options');
   }, []);
 
+  const closeLivreModal = useCallback(() => {
+    setShowLivreModal(false);
+    startTimer();
+    setCurrentScreen('quiz');
+  }, [startTimer]);
+
   const setSelectedCredits = useCallback((credits: number) => {
     setQuizState(prev => ({ ...prev, selectedCredits: credits }));
   }, []);
@@ -410,6 +422,7 @@ export const useQuiz = () => {
     selectedOption,
     showFeedback,
     selectedModalidade,
+    showLivreModal,
     setScreen,
     setSelectedCredits,
     selectModalidade,
@@ -420,6 +433,7 @@ export const useQuiz = () => {
     startQuizWithCredits,
     selectOption,
     restartQuiz,
+    closeLivreModal,
     MULTIPLIERS,
   };
 };

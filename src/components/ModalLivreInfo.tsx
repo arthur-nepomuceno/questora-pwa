@@ -24,7 +24,7 @@ export default function ModalLivreInfo({ onClose }: ModalLivreInfoProps) {
         <div className="modal-body">
           <div className="info-icon">ℹ️</div>
           <p>
-            <strong>Importante:</strong> Na modalidade "Livre", a escolha de créditos 
+            <strong>Importante:</strong> Na modalidade &quot;Livre&quot;, a escolha de créditos 
             <strong> não contabiliza para acúmulo de pontos reais</strong>.
           </p>
           <p>

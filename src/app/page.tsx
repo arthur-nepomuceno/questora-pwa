@@ -13,6 +13,7 @@ import AuthScreen from "@/components/AuthScreen";
 import InstallPrompt from "@/components/InstallPrompt";
 import RankingScreen from "@/components/RankingScreen";
 import ModalLivreInfo from "@/components/ModalLivreInfo";
+import ConsentModal from "@/components/ConsentModal";
 
 export default function Home() {
   const quizHook = useQuiz();
@@ -52,6 +53,14 @@ export default function Home() {
       
       {/* Modal para modalidade Livre */}
       {quizHook.showLivreModal && <ModalLivreInfo onClose={quizHook.closeLivreModal} />}
+      
+      {/* Modal de Consentimento */}
+      {quizHook.showConsentModal && (
+        <ConsentModal
+          onConfirm={quizHook.handleConsentConfirm}
+          onCancel={quizHook.handleConsentCancel}
+        />
+      )}
       
       {/* PWA Install Prompt */}
       <InstallPrompt />

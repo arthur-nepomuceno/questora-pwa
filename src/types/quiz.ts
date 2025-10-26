@@ -8,6 +8,13 @@ export interface Question {
   pontuacao: number;
 }
 
+export interface ConsentData {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  isAdult: boolean;
+}
+
 export interface QuizState {
   selectedQuestions: Question[];
   currentQuestionIndex: number;
@@ -23,6 +30,7 @@ export interface QuizState {
   creditsAfterDebit?: number;
   creditsAlreadyRecalculated?: boolean;
   totalPoints: number;
+  consentData?: ConsentData;
 }
 
 export interface UserAnswer {

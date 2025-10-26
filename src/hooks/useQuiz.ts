@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { QuizState, Question, UserAnswer, Screen } from '@/types/quiz';
+import { QuizState, Question, UserAnswer, Screen, ConsentData } from '@/types/quiz';
 import { questionsData } from '@/data/questions';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
@@ -46,6 +46,8 @@ export const useQuiz = () => {
   const [shouldNextBeEasy, setShouldNextBeEasy] = useState(false);
   const [selectedModalidade, setSelectedModalidade] = useState<string | null>(null);
   const [showLivreModal, setShowLivreModal] = useState(false);
+  const [showConsentModal, setShowConsentModal] = useState(false);
+  const [pendingCategory, setPendingCategory] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
   const creditsRecalculatedRef = useRef(false);
   const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames } = useAuth();
@@ -161,14 +163,33 @@ export const useQuiz = () => {
   }, [selectedModalidade]);
 
   const startQuiz = useCallback((category: string) => {
-    const selectedQuestions = selectRandomQuestions(category);
-    setQuizState({
-      ...initialQuizState,
-      selectedQuestions,
-      selectedCategory: category,
-    });
-    setCurrentScreen('credits');
-  }, [selectRandomQuestions]);
+    setPendingCategory(category);
+    setShowConsentModal(true);
+  }, []);
+
+  const handleConsentConfirm = useCallback((consentData: ConsentData) => {
+    // Salvar dados de consentimento no estado do quiz
+    setQuizState(prev => ({ ...prev, consentData }));
+    setShowConsentModal(false);
+    
+    // Agora prosseguir com a seleção de perguntas e ir para créditos
+    if (pendingCategory) {
+      const selectedQuestions = selectRandomQuestions(pendingCategory);
+      setQuizState(prev => ({
+        ...prev,
+        selectedQuestions,
+        selectedCategory: pendingCategory,
+      }));
+      setCurrentScreen('credits');
+      setPendingCategory(null);
+    }
+  }, [pendingCategory, selectRandomQuestions]);
+
+  const handleConsentCancel = useCallback(() => {
+    setShowConsentModal(false);
+    setPendingCategory(null);
+    // Manter na tela de escolha de categoria
+  }, []);
 
   const startQuizWithCredits = useCallback(async (credits: number) => {
     
@@ -423,6 +444,9 @@ export const useQuiz = () => {
     showFeedback,
     selectedModalidade,
     showLivreModal,
+    showConsentModal,
+    handleConsentConfirm,
+    handleConsentCancel,
     setScreen,
     setSelectedCredits,
     selectModalidade,

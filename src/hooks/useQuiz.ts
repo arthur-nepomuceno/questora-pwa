@@ -165,9 +165,34 @@ export const useQuiz = () => {
   }, [selectedModalidade]);
 
   const startQuiz = useCallback((category: string) => {
+    // Verificar se já tem dados de consentimento salvos no localStorage
+    const savedConsentData = localStorage.getItem('consentData');
+    
+    if (savedConsentData) {
+      try {
+        const consentData = JSON.parse(savedConsentData);
+        // Se já tem dados salvos, pular o modal e ir direto para a seleção de perguntas
+        setQuizState(prev => ({ ...prev, consentData }));
+        
+        const selectedQuestions = selectRandomQuestions(category);
+        setQuizState(prev => ({
+          ...prev,
+          selectedQuestions,
+          selectedCategory: category,
+        }));
+        setCurrentScreen('credits');
+        return;
+      } catch (error) {
+        console.error('Erro ao parsear dados de consentimento:', error);
+        // Se houver erro, limpar dados inválidos e mostrar modal
+        localStorage.removeItem('consentData');
+      }
+    }
+    
+    // Se não tem dados salvos, mostrar modal
     setPendingCategory(category);
     setShowConsentModal(true);
-  }, []);
+  }, [selectRandomQuestions]);
 
   const handleConsentConfirm = useCallback(async (consentData: ConsentData) => {
     try {
@@ -187,6 +212,9 @@ export const useQuiz = () => {
       console.error('❌ Erro ao salvar dados na coleção preusers:', error);
       // Continuar mesmo se houver erro ao salvar
     }
+    
+    // Salvar dados de consentimento no localStorage para persistir
+    localStorage.setItem('consentData', JSON.stringify(consentData));
     
     // Salvar dados de consentimento no estado do quiz
     setQuizState(prev => ({ ...prev, consentData }));
@@ -209,6 +237,12 @@ export const useQuiz = () => {
     setShowConsentModal(false);
     setPendingCategory(null);
     // Manter na tela de escolha de categoria
+  }, []);
+
+  const clearConsentData = useCallback(() => {
+    localStorage.removeItem('consentData');
+    setQuizState(prev => ({ ...prev, consentData: undefined }));
+    console.log('✅ Dados de consentimento limpos');
   }, []);
 
   const startQuizWithCredits = useCallback(async (credits: number) => {
@@ -467,6 +501,7 @@ export const useQuiz = () => {
     showConsentModal,
     handleConsentConfirm,
     handleConsentCancel,
+    clearConsentData,
     setScreen,
     setSelectedCredits,
     selectModalidade,

@@ -66,7 +66,6 @@ export default function ResultsScreen({
         <div className="results-details">
           {/* Primeira linha: Acertos e Erros */}
           <div className="result-square result-acertos">
-            <div className="result-icon">✅</div>
             <div className="result-info">
               <span className="result-label">Acertos</span>
               <span className="result-value correct">{quizState.correctAnswers}</span>
@@ -74,7 +73,6 @@ export default function ResultsScreen({
           </div>
           
           <div className="result-square result-erros">
-            <div className="result-icon">❌</div>
             <div className="result-info">
               <span className="result-label">Erros</span>
               <span className="result-value wrong">{quizState.wrongAnswers}</span>
@@ -83,7 +81,6 @@ export default function ResultsScreen({
           
           {/* Segunda linha: Acumulado e Tempo Restante */}
           <div className="result-square result-acumulado">
-            <div className="result-icon">💰</div>
             <div className="result-info">
               <span className="result-label">Acumulado</span>
               <span className="result-value">{formatScore(quizState.accumulatedScore)}</span>
@@ -91,7 +88,6 @@ export default function ResultsScreen({
           </div>
           
           <div className="result-square result-tempo">
-            <div className="result-icon">⏱️</div>
             <div className="result-info">
               <span className="result-label">Tempo Restante</span>
               <span className="result-value">{formatTime(timeRemaining)}</span>
@@ -100,7 +96,6 @@ export default function ResultsScreen({
           
           {/* Terceira linha: Pontos e Créditos Ganhos */}
           <div className="result-square result-pontos">
-            <div className="result-icon">⭐</div>
             <div className="result-info">
               <span className="result-label">+Pontos</span>
               {selectedModalidade === 'livre' && (
@@ -113,7 +108,6 @@ export default function ResultsScreen({
           </div>
           
           <div className="result-square result-creditos-ganhos">
-            <div className="result-icon">🎯</div>
             <div className="result-info">
               <span className="result-label">+Créditos</span>
               {selectedModalidade === 'livre' && (

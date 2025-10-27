@@ -5,6 +5,8 @@ import { QuizState, Question, UserAnswer, Screen, ConsentData } from '@/types/qu
 import { questionsData } from '@/data/questions';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 const MULTIPLIERS = [.1, .2, .3, .4, .6, 1, 1.4, 2, 3, 6];
 
@@ -167,7 +169,25 @@ export const useQuiz = () => {
     setShowConsentModal(true);
   }, []);
 
-  const handleConsentConfirm = useCallback((consentData: ConsentData) => {
+  const handleConsentConfirm = useCallback(async (consentData: ConsentData) => {
+    try {
+      // Salvar dados na coleção 'preusers' no Firebase
+      await addDoc(collection(db, 'preusers'), {
+        firstName: consentData.firstName,
+        lastName: consentData.lastName,
+        phone: consentData.phone,
+        isAdult: consentData.isAdult,
+        category: pendingCategory,
+        timestamp: serverTimestamp(),
+        createdAt: new Date(),
+      });
+      
+      console.log('✅ Dados salvos na coleção preusers');
+    } catch (error) {
+      console.error('❌ Erro ao salvar dados na coleção preusers:', error);
+      // Continuar mesmo se houver erro ao salvar
+    }
+    
     // Salvar dados de consentimento no estado do quiz
     setQuizState(prev => ({ ...prev, consentData }));
     setShowConsentModal(false);

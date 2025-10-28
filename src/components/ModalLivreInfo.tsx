@@ -24,11 +24,11 @@ export default function ModalLivreInfo({ onClose }: ModalLivreInfoProps) {
         <div className="modal-body">
           <div className="info-icon">ℹ️</div>
           <p>
-            <strong>Importante:</strong> Na modalidade &quot;Livre&quot;, a escolha de créditos 
+            Importante: <strong>Na modalidade &quot;Livre&quot;</strong>, a escolha de créditos 
             <strong> não contabiliza para acúmulo de pontos reais</strong>.
           </p>
           <p>
-            Para que seus pontos sejam contabilizados e acumulados, você precisa 
+            Para receber <strong>R$50 em bônus e acumular pontos</strong>, você precisa 
             fazer o <strong>cadastro no app</strong>.
           </p>
           <p>

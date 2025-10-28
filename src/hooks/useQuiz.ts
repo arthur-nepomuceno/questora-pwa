@@ -480,6 +480,13 @@ export const useQuiz = () => {
     setQuizState(prev => ({ ...prev, selectedCredits: credits }));
   }, []);
 
+  // Redirecionar automaticamente para seleção de categoria quando a autenticação persistente carregar
+  useEffect(() => {
+    if (!isLoading && isAuthenticated && currentScreen === 'modalidade') {
+      setCurrentScreen('start');
+    }
+  }, [isLoading, isAuthenticated, currentScreen]);
+
   useEffect(() => {
     return () => {
       if (timerInterval.current) {

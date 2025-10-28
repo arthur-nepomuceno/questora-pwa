@@ -65,8 +65,8 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
             onClick={() => handleModalidadeClick("competicao")}
             style={{ cursor: 'pointer' }}
           >
-            <div className="category-icon">🏆</div>
-            <h3>Competição</h3>
+            <div className="category-icon">🪙</div>
+            <h3>Premiação</h3>
             <p>(Iniciar sessão)</p>
           </div>
 

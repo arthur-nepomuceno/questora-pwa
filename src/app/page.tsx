@@ -20,14 +20,14 @@ export default function Home() {
 
   return (
     <div className="quiz-container">
-      {quizHook.currentScreen === "modalidade" && <ModalidadeScreen selectModalidade={quizHook.selectModalidade} goToOptions={quizHook.goToOptions} />}
+      {quizHook.currentScreen === "modalidade" && <ModalidadeScreen selectModalidade={quizHook.selectModalidade} goToOptions={quizHook.goToOptions} setScreen={quizHook.setScreen} selectedModalidade={quizHook.selectedModalidade} />}
       {quizHook.currentScreen === "auth" && (
         <AuthScreen 
           onAuthSuccess={quizHook.goToCompetition}
           onBack={quizHook.goBackToModalidade}
         />
       )}
-      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} goBackToModalidade={quizHook.goBackToModalidade} goToOptions={quizHook.goToOptions} />}
+      {quizHook.currentScreen === "start" && <CategoryScreen startQuiz={quizHook.startQuiz} setScreen={quizHook.setScreen} goBackToModalidade={quizHook.goBackToModalidade} goToOptions={quizHook.goToOptions} selectedModalidade={quizHook.selectedModalidade} />}
       {quizHook.currentScreen === "coming-soon" && (
         <ComingSoonScreen 
           modalidade={quizHook.selectedModalidade || ""} 

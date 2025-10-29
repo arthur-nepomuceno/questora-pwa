@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import { QuizState, Screen, UserAnswer } from '@/types/quiz';
 
 interface ReviewScreenProps {
@@ -9,6 +10,14 @@ interface ReviewScreenProps {
 }
 
 export default function ReviewScreen({ quizState, setScreen, timeRemaining }: ReviewScreenProps) {
+  const [expandedItems, setExpandedItems] = useState<{ [key: string]: boolean }>({});
+
+  const toggleItem = (itemKey: string) => {
+    setExpandedItems(prev => ({
+      ...prev,
+      [itemKey]: !prev[itemKey]
+    }));
+  };
 
   return (
     <div className="blue-theme">
@@ -46,12 +55,19 @@ export default function ReviewScreen({ quizState, setScreen, timeRemaining }: Re
           <div className="review-question">
             <div className="question-number">ℹ️</div>
             <div className="question-text">
-              <div style={{ fontWeight: 'bold' }}>Créditos ganhos</div>
-              <div style={{ marginTop: '6px' }}>
-                <div>- Valor acumulado: {quizState.accumulatedScore}</div>
-                <div>- Segundos restantes: {timeRemaining}</div>
-                <div>- Total de Créditos Ganhos: {quizState.accumulatedScore + timeRemaining}</div>
+              <div 
+                style={{ fontWeight: 'bold', textAlign: 'center', cursor: 'pointer' }}
+                onClick={() => toggleItem('creditosGanhos')}
+              >
+                Créditos ganhos {expandedItems.creditosGanhos ? '▲' : '▼'}
               </div>
+              {expandedItems.creditosGanhos && (
+                <div style={{ marginTop: '6px' }}>
+                  <div>- Valor acumulado: {quizState.accumulatedScore}</div>
+                  <div>- Segundos restantes: {timeRemaining}</div>
+                  <div>- Total de Créditos Ganhos: {quizState.accumulatedScore + timeRemaining}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -61,12 +77,19 @@ export default function ReviewScreen({ quizState, setScreen, timeRemaining }: Re
           <div className="review-question">
             <div className="question-number">📊</div>
             <div className="question-text">
-              <div style={{ fontWeight: 'bold' }}>Pontos da Rodada</div>
-              <div style={{ marginTop: '6px' }}>
-                <div>- Pontos por Acertos: {quizState.userAnswers.filter(answer => answer.isCorrect).reduce((sum, answer) => sum + answer.question.pontuacao, 0)}</div>
-                <div>- Fator de Multiplicação: {quizState.selectedCredits / 100}</div>
-                <div>- Total de pontos da rodada: {quizState.userAnswers.filter(answer => answer.isCorrect).reduce((sum, answer) => sum + (answer.question.pontuacao * (quizState.selectedCredits / 100)), 0)}</div>
+              <div 
+                style={{ fontWeight: 'bold', textAlign: 'center', cursor: 'pointer' }}
+                onClick={() => toggleItem('pontosRodada')}
+              >
+                Pontos da Rodada {expandedItems.pontosRodada ? '▲' : '▼'}
               </div>
+              {expandedItems.pontosRodada && (
+                <div style={{ marginTop: '6px' }}>
+                  <div>- Pontos por Acertos: {quizState.userAnswers.filter(answer => answer.isCorrect).reduce((sum, answer) => sum + answer.question.pontuacao, 0)}</div>
+                  <div>- Fator de Multiplicação: {quizState.selectedCredits / 100}</div>
+                  <div>- Total de pontos da rodada: {quizState.userAnswers.filter(answer => answer.isCorrect).reduce((sum, answer) => sum + (answer.question.pontuacao * (quizState.selectedCredits / 100)), 0)}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>

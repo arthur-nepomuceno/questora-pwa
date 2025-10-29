@@ -9,9 +9,10 @@ interface CategoryScreenProps {
   setScreen: (screen: Screen) => void;
   goBackToModalidade?: () => void;
   goToOptions: () => void;
+  selectedModalidade?: string | null;
 }
 
-export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade, goToOptions }: CategoryScreenProps) {
+export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade, goToOptions, selectedModalidade }: CategoryScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
 
@@ -36,7 +37,7 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
 
       {/* Main Card */}
       <div className="welcome-card">
-        <h2>Bem-vindo ao Show do Milênio!</h2>
+        <h2>Bem-vindo!</h2>
         <p>Escolha uma categoria para começar:</p>
         
         {/* Category Selection */}
@@ -66,15 +67,19 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
           </div>
         </div>
 
-        {/* Back Button - Comentado temporariamente */}
-        {/* 
-        <button
-          className="btn btn-secondary"
-          onClick={() => goBackToModalidade ? goBackToModalidade() : setScreen("modalidade")}
-        >
-          {user ? "Trocar sessão" : "Voltar"}
-        </button>
-        */}
+        {/* Back Button - Apenas para modalidade Livre */}
+        {selectedModalidade === 'livre' && (
+          <button
+            className="btn btn-secondary"
+            onClick={() => {
+              playButtonPress();
+              goBackToModalidade ? goBackToModalidade() : setScreen("modalidade");
+            }}
+            style={{ marginTop: '20px' }}
+          >
+            Voltar
+          </button>
+        )}
       </div>
 
       {/* User Info */}
@@ -105,6 +110,15 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
             <span className="user-icon">👤</span>
             <span>Sessão não iniciada.</span>
           </div>
+          {selectedModalidade === 'livre' && (
+            <button
+              className="login-btn"
+              onClick={() => setScreen("auth")}
+              title="Iniciar sessão para modalidade Premiação"
+            >
+              Iniciar sessão
+            </button>
+          )}
         </div>
       )}
       
@@ -174,6 +188,22 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
 
         .loading-btn:hover {
           background: #666 !important;
+        }
+
+        .login-btn {
+          background: #1976d2;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s;
+          font-size: 0.9rem;
+        }
+
+        .login-btn:hover {
+          background: #1565c0;
         }
       `}</style>
     </div>

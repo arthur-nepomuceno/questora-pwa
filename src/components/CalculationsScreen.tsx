@@ -39,6 +39,27 @@ export default function CalculationsScreen({ setScreen }: CalculationsScreenProp
 
       {/* Calculations Content */}
       <div className="review-list" style={{ textAlign: 'left' }}>
+
+        {/* Total de Créditos Ganhos */}
+        <div className="review-item">
+          <div className="review-question">
+            <div className="question-number">🎯</div>
+            <div className="question-text">
+              <div 
+                style={{ fontWeight: 'bold', textAlign: 'center', cursor: 'pointer' }}
+                onClick={() => toggleItem('totalCreditos')}
+              >
+                Total de Créditos Ganhos {expandedItems.totalCreditos ? '▲' : '▼'}
+              </div>
+              {expandedItems.totalCreditos && (
+                <div style={{ marginTop: '6px', textAlign: 'left', textTransform: 'none' }}>
+                  <div>Fórmula: Valor Acumulado + Segundos Restantes</div>
+                  <div>• Exemplo: Se acumulou 250 créditos e restaram 43 segundos = 293 créditos</div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
         
         {/* Valor Acumulado */}
         <div className="review-item">
@@ -85,21 +106,22 @@ export default function CalculationsScreen({ setScreen }: CalculationsScreenProp
           </div>
         </div>
 
-        {/* Total de Créditos Ganhos */}
+        {/* Pontos da Rodada */}
         <div className="review-item">
           <div className="review-question">
-            <div className="question-number">🎯</div>
+            <div className="question-number">🏆</div>
             <div className="question-text">
               <div 
                 style={{ fontWeight: 'bold', textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => toggleItem('totalCreditos')}
+                onClick={() => toggleItem('pontosRodada')}
               >
-                Total de Créditos Ganhos {expandedItems.totalCreditos ? '▲' : '▼'}
+                Total de Pontos da Rodada {expandedItems.pontosRodada ? '▲' : '▼'}
               </div>
-              {expandedItems.totalCreditos && (
+              {expandedItems.pontosRodada && (
                 <div style={{ marginTop: '6px', textAlign: 'left', textTransform: 'none' }}>
-                  <div>Fórmula: Valor Acumulado + Segundos Restantes</div>
-                  <div>• Exemplo: Se acumulou 250 créditos e restaram 43 segundos = 293 créditos</div>
+                  <div>Fórmula: Pontos por Acertos × Fator de Multiplicação</div>
+                  <div>• Exemplo: 9 pontos por acertos × (pacote de 700 créditos / 100) = 9 × 7 = 63 pontos.</div>
+                  <div>• Exemplo: 11 pontos por acertos × (pacote de 500 créditos /100) = 11 × 5 = 55 pontos.</div>
                 </div>
               )}
             </div>
@@ -144,28 +166,6 @@ export default function CalculationsScreen({ setScreen }: CalculationsScreenProp
                   <div>• Pacote de 500 créditos = Fator 5.</div>
                   <div>• Pacote de 700 créditos = Fator 7.</div>
                   <div>• Pacote de 1000 créditos = Fator 10.</div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Pontos da Rodada */}
-        <div className="review-item">
-          <div className="review-question">
-            <div className="question-number">🏆</div>
-            <div className="question-text">
-              <div 
-                style={{ fontWeight: 'bold', textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => toggleItem('pontosRodada')}
-              >
-                Pontos da Rodada {expandedItems.pontosRodada ? '▲' : '▼'}
-              </div>
-              {expandedItems.pontosRodada && (
-                <div style={{ marginTop: '6px', textAlign: 'left', textTransform: 'none' }}>
-                  <div>Fórmula: Pontos por Acertos × Fator de Multiplicação</div>
-                  <div>• Exemplo: 9 pontos por acertos × (pacote de 700 créditos / 100) = 9 × 7 = 63 pontos.</div>
-                  <div>• Exemplo: 11 pontos por acertos × (pacote de 500 créditos /100) = 11 × 5 = 55 pontos.</div>
                 </div>
               )}
             </div>

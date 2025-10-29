@@ -4,13 +4,16 @@ import { useAuth } from '@/hooks/useAuth';
 import { useCounter } from '@/hooks/useCounter';
 import { useSounds } from '@/hooks/useSounds';
 import { useEffect } from 'react';
+import { Screen } from '@/types/quiz';
 
 interface ModalidadeScreenProps {
   selectModalidade: (modalidade: string) => void;
   goToOptions: () => void;
+  setScreen: (screen: Screen) => void;
+  selectedModalidade?: string | null;
 }
 
-export default function ModalidadeScreen({ selectModalidade, goToOptions }: ModalidadeScreenProps) {
+export default function ModalidadeScreen({ selectModalidade, goToOptions, setScreen, selectedModalidade }: ModalidadeScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { incrementCounter } = useCounter();
   const { playButtonPress } = useSounds();
@@ -42,7 +45,7 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
 
       {/* Main Card */}
       <div className="welcome-card">
-        <h2>Bem-vindo ao Show do Milênio!</h2>
+        <h2>Bem-vindo!</h2>
         <p>Escolha uma modalidade para participar:</p>
         
         {/* Modalidade Selection */}
@@ -65,7 +68,7 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
             onClick={() => handleModalidadeClick("competicao")}
             style={{ cursor: 'pointer' }}
           >
-            <div className="category-icon">🪙</div>
+            <div className="category-icon">🏆</div>
             <h3>Premiação</h3>
             <p>(Iniciar sessão)</p>
           </div>
@@ -123,6 +126,13 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
             <span className="user-icon">👤</span>
             <span>Sessão não iniciada.</span>
           </div>
+          <button
+            className="login-btn"
+            onClick={() => setScreen("auth")}
+            title="Iniciar sessão para modalidade Premiação"
+          >
+            Iniciar sessão
+          </button>
         </div>
       )}
 
@@ -185,6 +195,22 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions }: Moda
           background: #666 !important;
           cursor: not-allowed;
           opacity: 0.6;
+        }
+
+        .login-btn {
+          background: #1976d2;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s;
+          font-size: 0.9rem;
+        }
+
+        .login-btn:hover {
+          background: #1565c0;
         }
       `}</style>
     </div>

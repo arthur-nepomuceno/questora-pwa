@@ -124,11 +124,11 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
             <span>Sessão não iniciada.</span>
           </div>
           <button
-            className="logout-btn"
-            onClick={() => setScreen("modalidade")}
+            className="login-btn"
+            onClick={() => setScreen("auth")}
             title="Voltar para escolha de modalidade"
           >
-            Voltar
+            Iniciar sessão
           </button>
         </div>
       ) : null}
@@ -185,6 +185,22 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
         }
 
         .logout-btn:hover {
+          background: #1565c0;
+        }
+
+        .login-btn {
+          background: #1976d2;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background 0.3s;
+          font-size: 0.9rem;
+        }
+
+        .login-btn:hover {
           background: #1565c0;
         }
 

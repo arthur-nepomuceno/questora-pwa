@@ -483,6 +483,7 @@ export const useQuiz = () => {
   // Redirecionar automaticamente para seleção de categoria quando a autenticação persistente carregar
   useEffect(() => {
     if (!isLoading && isAuthenticated && currentScreen === 'modalidade') {
+      setSelectedModalidade('competicao');
       setCurrentScreen('start');
     }
   }, [isLoading, isAuthenticated, currentScreen]);

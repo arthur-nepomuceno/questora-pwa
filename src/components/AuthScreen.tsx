@@ -135,7 +135,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
       <div className="auth-card">
         <div className="auth-header">
           <h1>Show do Milênio</h1>
-          <p>Entre na competição e teste seus conhecimentos!</p>
+          <p>Responda perguntas para ganhar prêmios!</p>
         </div>
 
         <div className="auth-methods">
@@ -308,8 +308,10 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
         </div>
 
         <div className="auth-benefits">
-          <h3>🎯 Modalidade Competição</h3>
+          <h3>🏆 Modalidade Premiação 🏆</h3>
           <ul>
+            <li>✅ Prêmios em dinheiro</li>
+            <li>✅ Sistema de pontos</li>
             <li>✅ Sistema de créditos</li>
             <li>✅ Ranking de jogadores</li>
           </ul>

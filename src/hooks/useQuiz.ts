@@ -165,7 +165,19 @@ export const useQuiz = () => {
   }, [selectedModalidade]);
 
   const startQuiz = useCallback((category: string) => {
-    // Verificar se já tem dados de consentimento salvos no localStorage
+    // Mostrar consentimento apenas na modalidade "livre"
+    if (selectedModalidade !== 'livre') {
+      const selectedQuestions = selectRandomQuestions(category);
+      setQuizState(prev => ({
+        ...prev,
+        selectedQuestions,
+        selectedCategory: category,
+      }));
+      setCurrentScreen('credits');
+      return;
+    }
+
+    // Verificar se já tem dados de consentimento salvos no localStorage (somente "livre")
     const savedConsentData = localStorage.getItem('consentData');
     
     if (savedConsentData) {
@@ -189,10 +201,10 @@ export const useQuiz = () => {
       }
     }
     
-    // Se não tem dados salvos, mostrar modal
+    // Se não tem dados salvos, mostrar modal (somente "livre")
     setPendingCategory(category);
     setShowConsentModal(true);
-  }, [selectRandomQuestions]);
+  }, [selectRandomQuestions, selectedModalidade]);
 
   const handleConsentConfirm = useCallback(async (consentData: ConsentData) => {
     try {

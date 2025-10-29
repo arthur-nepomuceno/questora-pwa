@@ -43,31 +43,5 @@
       "type": "image/png",
       "form_factor": "narrow"
     }
-  ],
-  "shortcuts": [
-    {
-      "name": "Quiz Futebol",
-      "short_name": "Futebol",
-      "description": "Iniciar quiz de futebol",
-      "url": "/?category=futebol",
-      "icons": [
-        {
-          "src": "/icons/futebol-96x96.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "Quiz Novelas",
-      "short_name": "Novelas",
-      "description": "Iniciar quiz de novelas",
-      "url": "/?category=novelas",
-      "icons": [
-        {
-          "src": "/icons/novelas-96x96.png",
-          "sizes": "96x96"
-        }
-      ]
-    }
   ]
 }

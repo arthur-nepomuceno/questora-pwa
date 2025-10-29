@@ -4,6 +4,7 @@ import ModalidadeScreen from "@/components/ModalidadeScreen";
 import CategoryScreen from "@/components/CategoryScreen";
 import ComingSoonScreen from "@/components/ComingSoonScreen";
 import CreditsScreen from "@/components/CreditsScreen";
+import PurchaseCreditsScreen from "@/components/PurchaseCreditsScreen";
 import OptionsScreen from "@/components/OptionsScreen";
 import QuizScreen from "@/components/QuizScreen";
 import ResultsScreen from "@/components/ResultsScreen";
@@ -35,6 +36,7 @@ export default function Home() {
         />
       )}
       {quizHook.currentScreen === "credits" && <CreditsScreen {...quizHook} />}
+      {quizHook.currentScreen === "purchase-credits" && <PurchaseCreditsScreen {...quizHook} />}
       {quizHook.currentScreen === "options" && <OptionsScreen {...quizHook} />}
       {quizHook.currentScreen === "quiz" && (
         <QuizScreen 

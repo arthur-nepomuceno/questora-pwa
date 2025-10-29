@@ -65,10 +65,10 @@ export default function OptionsScreen({ setScreen }: OptionsScreenProps) {
               <span className="detail-value">{user.email}</span>
             </div>
             
-            <div className="detail-row">
+            {/*<div className="detail-row">
               <span className="detail-label">Moedas:</span>
               <span className="detail-value">{user.moedas.toLocaleString()}</span>
-            </div>
+            </div>*/}
 
             <div className="detail-row">
               <span className="detail-label">Pontos:</span>
@@ -94,6 +94,12 @@ export default function OptionsScreen({ setScreen }: OptionsScreenProps) {
             onClick={() => setScreen("ranking")}
           >
             Ver Ranking
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => setScreen("purchase-credits")}
+          >
+            Inserir Créditos
           </button>
         </div>
       </div>

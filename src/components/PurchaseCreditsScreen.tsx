@@ -2,45 +2,15 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
-import { useDailyCredits } from '@/hooks/useDailyCredits';
 
-interface CreditsScreenProps {
+interface PurchaseCreditsScreenProps {
   setScreen: (screen: any) => void;
-  startQuizWithCredits: (credits: number) => void;
   goToOptions: () => void;
-  selectedModalidade?: string | null;
 }
 
-export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions, selectedModalidade }: CreditsScreenProps) {
+export default function PurchaseCreditsScreen({ setScreen, goToOptions }: PurchaseCreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
-  const { dailyCreditsSpent, spendCredits, canSpendCredits, dailyLimit } = useDailyCredits(selectedModalidade);
-
-  const creditOptions = [
-    { value: 100, icon: "💰", label: "100 Créditos" },
-    { value: 500, icon: "💰", label: "500 Créditos" },
-    { value: 700, icon: "💎", label: "700 Créditos" },
-    { value: 1000, icon: "🏆", label: "1000 Créditos" }
-  ];
-
-  const handleCreditSelect = (credits: number) => {
-    playButtonPress(); // Tocar som ao escolher créditos
-    
-    if (user && user.totalCredits < credits) {
-      alert(`Créditos insuficientes! Você tem ${user.totalCredits} créditos, mas precisa de ${credits}.`);
-      return;
-    }
-    
-    // Verificar limite diário (só para modalidade competição)
-    if (selectedModalidade === 'competicao' && !canSpendCredits(credits)) {
-      alert(`Controle de vícios: só é permitido utilizar no máximo ${dailyLimit} créditos por dia.`);
-      return;
-    }
-    
-    // Gastar créditos diários
-    spendCredits(credits);
-    startQuizWithCredits(credits);
-  };
 
   const handleLogout = async () => {
     await logout();
@@ -59,44 +29,58 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
 
       {/* Main Card */}
       <div className="credits-card">
-        <h2>Escolha os créditos da rodada</h2>
-        <p>Selecione um pacote de créditos:</p>
+        <h2>Inserir créditos</h2>
+        <p>Escolha um pacote de créditos para adicionar à sua conta:</p>
         
-        {/* Daily Credits Info - Só para modalidade Competição */}
-        {selectedModalidade === 'competicao' && (
-          <div className="daily-credits-info">
-            <span>💰 Créditos gastos hoje: {dailyCreditsSpent}</span>
-            <span className="remaining-credits">
-              Limite diário de gastos: {dailyLimit}
-            </span>
-          </div>
-        )}
-        
-        {/* Credit Options */}
+        {/* Credit Packages */}
         <div className="credits-options">
-          {creditOptions.map((option) => (
-            <div
-              key={option.value}
-              className="credit-card"
-              onClick={() => handleCreditSelect(option.value)}
-            >
-              <div className="credit-icon">{option.icon}</div>
-              <h3>{option.label}</h3>
-            </div>
-          ))}
+          <div className="credit-card">
+            <div className="credit-icon">💰</div>
+            <h3>300 Créditos</h3>
+            <p className="price">R$ 2,99</p>
+          </div>
+          <div className="credit-card">
+            <div className="credit-icon">💰</div>
+            <h3>500 Créditos</h3>
+            <p className="price">R$ 4,99</p>
+          </div>
+          <div className="credit-card">
+            <div className="credit-icon">💰</div>
+            <h3>700 Créditos</h3>
+            <p className="price">R$ 6,99</p>
+          </div>
+          <div className="credit-card">
+            <div className="credit-icon">💎</div>
+            <h3>1000 Créditos</h3>
+            <p className="price">R$ 9,99</p>
+          </div>
+          <div className="credit-card">
+            <div className="credit-icon">💎</div>
+            <h3>2000 Créditos</h3>
+            <p className="price">R$ 19,99</p>
+          </div>
+          <div className="credit-card">
+            <div className="credit-icon">💎</div>
+            <h3>3000 Créditos</h3>
+            <p className="price">R$ 29,99</p>
+          </div>
+          <div className="credit-card">
+            <div className="credit-icon">🏆</div>
+            <h3>5000 Créditos</h3>
+            <p className="price">R$ 49,99</p>
+          </div>
+          <div className="credit-card">
+            <div className="credit-icon">🏆</div>
+            <h3>10000 Créditos</h3>
+            <p className="price">R$ 99,99</p>
+          </div>
         </div>
 
         {/* Action Buttons */}
         <div className="action-buttons">
           <button
-            className="btn btn-primary"
-            onClick={() => setScreen("purchase-credits")}
-          >
-            Inserir Créditos
-          </button>
-          <button
             className="btn btn-secondary"
-            onClick={() => setScreen("start")}
+            onClick={() => setScreen("credits")}
           >
             Voltar
           </button>
@@ -225,31 +209,18 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
           background: #666 !important;
         }
 
-        .daily-credits-info {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 15px;
-          border-radius: 8px;
-          margin: 15px 0;
-          text-align: center;
-          color: white;
-          font-weight: 500;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-
-        .remaining-credits {
-          font-size: 0.9rem;
-          color: #4CAF50;
-          font-weight: 600;
-        }
-
         .action-buttons {
           display: flex;
           gap: 15px;
           justify-content: center;
           margin-top: 20px;
+        }
+
+        .price {
+          color: #ffffff;
+          font-weight: bold;
+          font-size: 1.1rem;
+          margin-top: 8px;
         }
       `}</style>
     </div>

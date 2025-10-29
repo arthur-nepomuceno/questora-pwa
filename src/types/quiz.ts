@@ -39,4 +39,4 @@ export interface UserAnswer {
   isCorrect: boolean;
 }
 
-export type Screen = 'modalidade' | 'start' | 'credits' | 'quiz' | 'results' | 'review' | 'coming-soon' | 'auth' | 'options' | 'calculations' | 'ranking';
+export type Screen = 'modalidade' | 'start' | 'credits' | 'purchase-credits' | 'quiz' | 'results' | 'review' | 'coming-soon' | 'auth' | 'options' | 'calculations' | 'ranking';

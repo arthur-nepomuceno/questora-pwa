@@ -748,5 +748,455 @@
     ],
     "correta": "Passarella",
     "pontuacao": 3
-  }
+  },
+  {
+    "id": 51,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual país sediou a Copa do Mundo de 2014?",
+    "opcoes": ["Brasil", "Alemanha", "África do Sul", "Rússia", "Japão"],
+    "correta": "Brasil",
+    "pontuacao": 1
+  },
+  {
+    "id": 52,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual jogador argentino é conhecido como 'La Pulga'?",
+    "opcoes": ["Messi", "Maradona", "Di María", "Agüero", "Tevez"],
+    "correta": "Messi",
+    "pontuacao": 1
+  },
+  {
+    "id": 53,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual país aconteceu a Copa do Mundo de 2022?",
+    "opcoes": ["Catar", "Rússia", "Alemanha", "Espanha", "Itália"],
+    "correta": "Catar",
+    "pontuacao": 1
+  },
+  {
+    "id": 54,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube espanhol é conhecido como 'Los Blancos'?",
+    "opcoes": ["Real Madrid", "Barcelona", "Atlético de Madrid", "Valencia", "Sevilla"],
+    "correta": "Real Madrid",
+    "pontuacao": 1
+  },
+  {
+    "id": 55,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quantos jogadores um time de futebol tem em campo durante uma partida?",
+    "opcoes": ["11", "10", "12", "9", "8"],
+    "correta": "11",
+    "pontuacao": 1
+  },
+  {
+    "id": 56,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o nome do torneio continental de seleções da América do Sul?",
+    "opcoes": ["Copa América", "Eurocopa", "Copa das Nações", "Concacaf", "Liga das Nações"],
+    "correta": "Copa América",
+    "pontuacao": 1
+  },
+  {
+    "id": 57,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual clube Cristiano Ronaldo iniciou sua carreira profissional?",
+    "opcoes": ["Sporting", "Manchester United", "Real Madrid", "Juventus", "Porto"],
+    "correta": "Sporting",
+    "pontuacao": 1
+  },
+  {
+    "id": 58,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual país venceu a Copa do Mundo de 2006?",
+    "opcoes": ["Itália", "França", "Brasil", "Alemanha", "Espanha"],
+    "correta": "Itália",
+    "pontuacao": 1
+  },
+  {
+    "id": 59,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o principal estádio do Rio de Janeiro?",
+    "opcoes": ["Maracanã", "Mineirão", "Beira-Rio", "Morumbi", "Castelão"],
+    "correta": "Maracanã",
+    "pontuacao": 1
+  },
+  {
+    "id": 60,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o apelido da seleção brasileira de futebol?",
+    "opcoes": ["Seleção Canarinho", "Verde e Amarela", "Auriverde", "Pentacampeã", "Tropa Verde"],
+    "correta": "Seleção Canarinho",
+    "pontuacao": 1
+  },
+  {
+    "id": 61,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem é o maior artilheiro da história da Seleção Brasileira masculina?",
+    "opcoes": ["Neymar", "Pelé", "Ronaldo", "Romário", "Zico"],
+    "correta": "Neymar",
+    "pontuacao": 1
+  },
+  {
+    "id": 62,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual país nasceu Cristiano Ronaldo?",
+    "opcoes": ["Portugal", "Espanha", "Argentina", "Brasil", "Itália"],
+    "correta": "Portugal",
+    "pontuacao": 1
+  },
+  {
+    "id": 63,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual seleção é apelidada de 'Azzurra'?",
+    "opcoes": ["Itália", "França", "Alemanha", "Espanha", "Portugal"],
+    "correta": "Itália",
+    "pontuacao": 1
+  },
+  {
+    "id": 64,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador marcou o gol do título do Brasil na Copa América de 2019?",
+    "opcoes": ["Gabriel Jesus", "Everton Cebolinha", "Firmino", "Coutinho", "Richarlison"],
+    "correta": "Gabriel Jesus",
+    "pontuacao": 2
+  },
+  {
+    "id": 65,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube venceu a primeira edição da Champions League, em 1956?",
+    "opcoes": ["Real Madrid", "Milan", "Benfica", "Barcelona", "Reims"],
+    "correta": "Real Madrid",
+    "pontuacao": 2
+  },
+  {
+    "id": 66,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem era o técnico da França no título da Copa do Mundo de 2018?",
+    "opcoes": ["Didier Deschamps", "Laurent Blanc", "Raymond Domenech", "Aimé Jacquet", "Zidane"],
+    "correta": "Didier Deschamps",
+    "pontuacao": 2
+  },
+  {
+    "id": 67,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube inglês é conhecido como 'The Reds'?",
+    "opcoes": ["Liverpool", "Manchester United", "Arsenal", "Chelsea", "Tottenham"],
+    "correta": "Liverpool",
+    "pontuacao": 2
+  },
+  {
+    "id": 68,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador marcou o famoso gol de falta contra a França na Copa de 1997, pela Seleção Brasileira?",
+    "opcoes": ["Roberto Carlos", "Zico", "Rivaldo", "Cafu", "Ronaldinho"],
+    "correta": "Roberto Carlos",
+    "pontuacao": 2
+  },
+  {
+    "id": 69,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quantos títulos de Champions League o Real Madrid possuía até 2022?",
+    "opcoes": ["14", "13", "12", "15", "11"],
+    "correta": "14",
+    "pontuacao": 2
+  },
+  {
+    "id": 70,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em qual clube inglês jogava Cristiano Ronaldo antes de ir para o Real Madrid?",
+    "opcoes": ["Manchester United", "Arsenal", "Chelsea", "Liverpool", "Leeds United"],
+    "correta": "Manchester United",
+    "pontuacao": 2
+  },
+  {
+    "id": 71,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o artilheiro da Copa do Mundo de 2010?",
+    "opcoes": ["Thomas Müller", "David Villa", "Sneijder", "Forlán", "Klose"],
+    "correta": "Thomas Müller",
+    "pontuacao": 2
+  },
+  {
+    "id": 72,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro venceu a Libertadores de 2019?",
+    "opcoes": ["Flamengo", "Palmeiras", "Grêmio", "Santos", "Corinthians"],
+    "correta": "Flamengo",
+    "pontuacao": 2
+  },
+  {
+    "id": 73,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o capitão da Seleção Espanhola na conquista da Copa do Mundo de 2010?",
+    "opcoes": ["Iker Casillas", "Sergio Ramos", "Xavi", "Iniesta", "Puyol"],
+    "correta": "Iker Casillas",
+    "pontuacao": 2
+  },
+  {
+    "id": 74,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro foi campeão mundial de clubes em 2005?",
+    "opcoes": ["São Paulo", "Internacional", "Corinthians", "Flamengo", "Santos"],
+    "correta": "São Paulo",
+    "pontuacao": 2
+  },
+  {
+    "id": 75,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol decisivo da final da Libertadores de 2021?",
+    "opcoes": ["Deyverson", "Gabigol", "Arrascaeta", "Rony", "Raphael Veiga"],
+    "correta": "Deyverson",
+    "pontuacao": 2
+  },
+  {
+    "id": 76,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual foi o país-sede da Copa do Mundo de 1998?",
+    "opcoes": ["França", "Alemanha", "Espanha", "Itália", "EUA"],
+    "correta": "França",
+    "pontuacao": 2
+  },
+  {
+    "id": 77,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol que deu o título da Champions League de 2012 ao Chelsea?",
+    "opcoes": ["Drogba", "Lampard", "Terry", "Torres", "Mata"],
+    "correta": "Drogba",
+    "pontuacao": 2
+  },
+  {
+    "id": 78,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual seleção venceu a primeira Copa do Mundo da história?",
+    "opcoes": ["Uruguai", "Brasil", "Itália", "Argentina", "Alemanha"],
+    "correta": "Uruguai",
+    "pontuacao": 2
+  },
+  {
+    "id": 79,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador venceu a Bola de Ouro da FIFA em 2007?",
+    "opcoes": ["Kaká", "Cristiano Ronaldo", "Messi", "Ronaldinho", "Henry"],
+    "correta": "Kaká",
+    "pontuacao": 2
+  },
+  {
+    "id": 80,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual técnico comandava o Barcelona no auge do estilo 'tiki-taka'?",
+    "opcoes": ["Pep Guardiola", "Luis Enrique", "Frank Rijkaard", "Koeman", "Valverde"],
+    "correta": "Pep Guardiola",
+    "pontuacao": 2
+  },
+  {
+    "id": 81,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o jogador mais jovem a estrear pelo Santos após Pelé?",
+    "opcoes": ["Rodrygo", "Neymar", "Gabigol", "Ganso", "Robinho"],
+    "correta": "Rodrygo",
+    "pontuacao": 2
+  },
+  {
+    "id": 82,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quantos títulos de Copa América a Argentina tinha até 2021?",
+    "opcoes": ["15", "14", "13", "16", "12"],
+    "correta": "15",
+    "pontuacao": 2
+  },
+  {
+    "id": 83,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube espanhol revelou o atacante Fernando Torres?",
+    "opcoes": ["Atlético de Madrid", "Real Madrid", "Sevilla", "Valencia", "Barcelona"],
+    "correta": "Atlético de Madrid",
+    "pontuacao": 2
+  },
+  {
+    "id": 84,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o primeiro gol da final da Copa do Mundo de 1950?",
+    "opcoes": ["Friaça", "Ghiggia", "Obdulio Varela", "Zizinho", "Ademir"],
+    "correta": "Friaça",
+    "pontuacao": 3
+  },
+  {
+    "id": 85,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico da seleção italiana campeã da Copa de 1982?",
+    "opcoes": ["Enzo Bearzot", "Marcello Lippi", "Arrigo Sacchi", "Cesare Maldini", "Roberto Mancini"],
+    "correta": "Enzo Bearzot",
+    "pontuacao": 3
+  },
+  {
+    "id": 86,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube foi o primeiro brasileiro a disputar uma final de Libertadores?",
+    "opcoes": ["Bahia", "Palmeiras", "Santos", "Vasco", "Flamengo"],
+    "correta": "Bahia",
+    "pontuacao": 3
+  },
+  {
+    "id": 87,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano foi criada a Premier League na Inglaterra?",
+    "opcoes": ["1992", "1990", "1994", "1991", "1993"],
+    "correta": "1992",
+    "pontuacao": 3
+  },
+  {
+    "id": 88,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o capitão da seleção alemã no título da Copa do Mundo de 1990?",
+    "opcoes": ["Lothar Matthäus", "Klinsmann", "Beckenbauer", "Brehme", "Völler"],
+    "correta": "Lothar Matthäus",
+    "pontuacao": 3
+  },
+  {
+    "id": 89,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube argentino foi campeão da Libertadores em 1984?",
+    "opcoes": ["Independiente", "Boca Juniors", "River Plate", "Estudiantes", "Racing"],
+    "correta": "Independiente",
+    "pontuacao": 3
+  },
+  {
+    "id": 90,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol do título da Copa do Mundo de 1998?",
+    "opcoes": ["Petit", "Zidane", "Henry", "Deschamps", "Thuram"],
+    "correta": "Petit",
+    "pontuacao": 3
+  },
+  {
+    "id": 91,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual seleção venceu a primeira edição da Eurocopa, em 1960?",
+    "opcoes": ["União Soviética", "França", "Alemanha", "Itália", "Espanha"],
+    "correta": "União Soviética",
+    "pontuacao": 3
+  },
+  {
+    "id": 92,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico do Brasil na Copa do Mundo de 1974?",
+    "opcoes": ["Zagallo", "Cláudio Coutinho", "Lula", "Carlos Alberto Parreira", "Feola"],
+    "correta": "Zagallo",
+    "pontuacao": 3
+  },
+  {
+    "id": 93,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol de ouro que deu o título olímpico ao Brasil em 2016?",
+    "opcoes": ["Neymar", "Gabigol", "Gabriel Jesus", "Douglas Santos", "Renato Augusto"],
+    "correta": "Neymar",
+    "pontuacao": 3
+  },
+  {
+    "id": 94,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube brasileiro conquistou a Copa Sul-Americana de 2018?",
+    "opcoes": ["Athletico Paranaense", "Chapecoense", "São Paulo", "Corinthians", "Fluminense"],
+    "correta": "Athletico Paranaense",
+    "pontuacao": 3
+  },
+  {
+    "id": 95,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol do título da Libertadores de 1999 pelo Palmeiras?",
+    "opcoes": ["Evair", "Alex", "Zinho", "Paulo Nunes", "Oséas"],
+    "correta": "Evair",
+    "pontuacao": 3
+  },
+  {
+    "id": 96,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual técnico português venceu a Champions League por dois clubes diferentes?",
+    "opcoes": ["José Mourinho", "Fernando Santos", "André Villas-Boas", "Paulo Bento", "Carlos Queiroz"],
+    "correta": "José Mourinho",
+    "pontuacao": 3
+  },
+  {
+    "id": 97,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano Pelé marcou seu milésimo gol?",
+    "opcoes": ["1969", "1970", "1968", "1971", "1967"],
+    "correta": "1969",
+    "pontuacao": 3
+  },
+  {
+    "id": 98,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico da seleção holandesa vice-campeã mundial em 1974?",
+    "opcoes": ["Rinus Michels", "Guus Hiddink", "Louis van Gaal", "Dick Advocaat", "Johan Cruyff"],
+    "correta": "Rinus Michels",
+    "pontuacao": 3
+  },
+  {
+    "id": 99,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube africano venceu a Liga dos Campeões da CAF em 2021?",
+    "opcoes": ["Al Ahly", "Wydad Casablanca", "Espérance Tunis", "Zamalek", "Mamelodi Sundowns"],
+    "correta": "Al Ahly",
+    "pontuacao": 3
+  },
+  {
+    "id": 100,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol de falta que classificou o Corinthians à final da Libertadores de 2012 contra o Santos?",
+    "opcoes": ["Paulinho", "Danilo", "Alex", "Sheik", "Romarinho"],
+    "correta": "Alex",
+    "pontuacao": 3
+  }    
 ]

@@ -1198,5 +1198,1805 @@
     "opcoes": ["Paulinho", "Danilo", "Alex", "Sheik", "Romarinho"],
     "correta": "Alex",
     "pontuacao": 3
-  }    
+  },
+  {
+    "id": 101,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o apelido da seleção da Argentina?",
+    "opcoes": ["La Albiceleste", "La Roja", "Los Gauchos", "Celeste", "La Blanquirroja"],
+    "correta": "La Albiceleste",
+    "pontuacao": 1
+  },
+  {
+    "id": 102,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o nome do torneio que reúne os campeões continentais de clubes?",
+    "opcoes": ["Mundial de Clubes", "Champions League", "Supercopa", "Recopa", "Copa Intercontinental"],
+    "correta": "Mundial de Clubes",
+    "pontuacao": 1
+  },
+  {
+    "id": 103,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual jogador brasileiro é conhecido como 'O Fenômeno'?",
+    "opcoes": ["Ronaldo", "Ronaldinho", "Romário", "Pelé", "Zico"],
+    "correta": "Ronaldo",
+    "pontuacao": 1
+  },
+  {
+    "id": 104,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual país venceu a Copa do Mundo de 1994?",
+    "opcoes": ["Brasil", "Itália", "Alemanha", "Argentina", "França"],
+    "correta": "Brasil",
+    "pontuacao": 1
+  },
+  {
+    "id": 105,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o estádio do Barcelona?",
+    "opcoes": ["Camp Nou", "Bernabéu", "Mestalla", "San Mamés", "Riazor"],
+    "correta": "Camp Nou",
+    "pontuacao": 1
+  },
+  {
+    "id": 106,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quantos cartões vermelhos resultam na expulsão de um jogador?",
+    "opcoes": ["1", "2", "3", "Depende do árbitro", "Nenhum"],
+    "correta": "1",
+    "pontuacao": 1
+  },
+  {
+    "id": 107,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o nome do torneio europeu de seleções?",
+    "opcoes": ["Eurocopa", "Copa América", "Liga das Nações", "Confederações", "Mundial"],
+    "correta": "Eurocopa",
+    "pontuacao": 1
+  },
+  {
+    "id": 108,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual país tem mais títulos da Copa do Mundo?",
+    "opcoes": ["Brasil", "Alemanha", "Itália", "Argentina", "França"],
+    "correta": "Brasil",
+    "pontuacao": 1
+  },
+  {
+    "id": 109,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o time rival histórico do Real Madrid na Espanha?",
+    "opcoes": ["Barcelona", "Valencia", "Atlético de Madrid", "Sevilla", "Betis"],
+    "correta": "Barcelona",
+    "pontuacao": 1
+  },
+  {
+    "id": 110,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual continente nasceu o futebol moderno?",
+    "opcoes": ["Europa", "África", "América do Sul", "Ásia", "Oceania"],
+    "correta": "Europa",
+    "pontuacao": 1
+  },
+  {
+    "id": 111,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é a cor tradicional do uniforme principal da seleção brasileira?",
+    "opcoes": ["Amarelo", "Verde", "Azul", "Branco", "Vermelho"],
+    "correta": "Amarelo",
+    "pontuacao": 1
+  },
+  {
+    "id": 112,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual país fica o clube Bayern de Munique?",
+    "opcoes": ["Alemanha", "Áustria", "Suíça", "França", "Holanda"],
+    "correta": "Alemanha",
+    "pontuacao": 1
+  },
+  {
+    "id": 113,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem é o maior artilheiro da história da Champions League?",
+    "opcoes": ["Cristiano Ronaldo", "Messi", "Benzema", "Raúl", "Lewandowski"],
+    "correta": "Cristiano Ronaldo",
+    "pontuacao": 1
+  },
+  {
+    "id": 114,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o artilheiro da Copa do Mundo de 1998?",
+    "opcoes": ["Davor Suker", "Ronaldo", "Batistuta", "Henry", "Bebeto"],
+    "correta": "Davor Suker",
+    "pontuacao": 2
+  },
+  {
+    "id": 115,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro foi o primeiro campeão da Copa Sul-Americana?",
+    "opcoes": ["Internacional", "Santos", "Chapecoense", "São Paulo", "Athletico Paranaense"],
+    "correta": "Internacional",
+    "pontuacao": 2
+  },
+  {
+    "id": 116,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual seleção eliminou o Brasil nas quartas de final da Copa de 2010?",
+    "opcoes": ["Holanda", "Alemanha", "França", "Espanha", "Bélgica"],
+    "correta": "Holanda",
+    "pontuacao": 2
+  },
+  {
+    "id": 117,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico campeão da Libertadores com o Corinthians em 2012?",
+    "opcoes": ["Tite", "Felipão", "Luxemburgo", "Carille", "Mano Menezes"],
+    "correta": "Tite",
+    "pontuacao": 2
+  },
+  {
+    "id": 118,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual país foi vice-campeão da Copa do Mundo de 2002?",
+    "opcoes": ["Alemanha", "França", "Itália", "Argentina", "Espanha"],
+    "correta": "Alemanha",
+    "pontuacao": 2
+  },
+  {
+    "id": 119,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em qual clube italiano jogou Zinedine Zidane antes de ir para o Real Madrid?",
+    "opcoes": ["Juventus", "Milan", "Inter de Milão", "Roma", "Napoli"],
+    "correta": "Juventus",
+    "pontuacao": 2
+  },
+  {
+    "id": 120,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador foi capitão da seleção brasileira campeã da Copa América de 2007?",
+    "opcoes": ["Gilberto Silva", "Lúcio", "Juan", "Kaká", "Ronaldinho"],
+    "correta": "Gilberto Silva",
+    "pontuacao": 2
+  },
+  {
+    "id": 121,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol do título da Copa América de 2021?",
+    "opcoes": ["Di María", "Messi", "Neymar", "Lautaro Martínez", "De Paul"],
+    "correta": "Di María",
+    "pontuacao": 2
+  },
+  {
+    "id": 122,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual foi o clube campeão da Champions League de 2020?",
+    "opcoes": ["Bayern de Munique", "PSG", "Liverpool", "Real Madrid", "Chelsea"],
+    "correta": "Bayern de Munique",
+    "pontuacao": 2
+  },
+  {
+    "id": 123,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em qual estádio o Brasil conquistou o pentacampeonato mundial?",
+    "opcoes": ["Yokohama", "Maracanã", "Wembley", "Azteca", "Rose Bowl"],
+    "correta": "Yokohama",
+    "pontuacao": 2
+  },
+  {
+    "id": 124,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador marcou o gol mais rápido da história das Copas do Mundo?",
+    "opcoes": ["Hakan Şükür", "Pelé", "Ronaldo", "Bebeto", "Lineker"],
+    "correta": "Hakan Şükür",
+    "pontuacao": 2
+  },
+  {
+    "id": 125,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube foi vice-campeão da Libertadores em 2020?",
+    "opcoes": ["Santos", "Palmeiras", "Grêmio", "River Plate", "Boca Juniors"],
+    "correta": "Santos",
+    "pontuacao": 2
+  },
+  {
+    "id": 126,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual foi o primeiro clube europeu de Neymar?",
+    "opcoes": ["Barcelona", "PSG", "Chelsea", "Real Madrid", "Juventus"],
+    "correta": "Barcelona",
+    "pontuacao": 2
+  },
+  {
+    "id": 127,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o artilheiro da Copa Libertadores de 2022?",
+    "opcoes": ["Pedro", "Gabigol", "Rony", "Hulk", "Borré"],
+    "correta": "Pedro",
+    "pontuacao": 2
+  },
+  {
+    "id": 128,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual seleção venceu a Copa América de 2015?",
+    "opcoes": ["Chile", "Argentina", "Brasil", "Uruguai", "Colômbia"],
+    "correta": "Chile",
+    "pontuacao": 2
+  },
+  {
+    "id": 129,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Grêmio conquistou seu último título da Libertadores até 2022?",
+    "opcoes": ["2017", "2016", "2018", "2019", "2015"],
+    "correta": "2017",
+    "pontuacao": 2
+  },
+  {
+    "id": 130,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi eleito o melhor jogador da Copa do Mundo de 2010?",
+    "opcoes": ["Diego Forlán", "Iniesta", "Xavi", "Müller", "Robben"],
+    "correta": "Diego Forlán",
+    "pontuacao": 2
+  },
+  {
+    "id": 131,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual técnico comandou o Flamengo na conquista da Libertadores de 2019?",
+    "opcoes": ["Jorge Jesus", "Dorival Júnior", "Renato Gaúcho", "Abel Braga", "Tite"],
+    "correta": "Jorge Jesus",
+    "pontuacao": 2
+  },
+  {
+    "id": 132,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual país sediou a Eurocopa de 2004?",
+    "opcoes": ["Portugal", "França", "Alemanha", "Itália", "Espanha"],
+    "correta": "Portugal",
+    "pontuacao": 2
+  },
+  {
+    "id": 133,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico da seleção alemã campeã mundial em 2014?",
+    "opcoes": ["Joachim Löw", "Jürgen Klinsmann", "Rudi Völler", "Beckenbauer", "Hitzfeld"],
+    "correta": "Joachim Löw",
+    "pontuacao": 2
+  },
+  {
+    "id": 134,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico campeão da Copa do Mundo de 1978 pela Argentina?",
+    "opcoes": ["César Luis Menotti", "Carlos Bilardo", "Marcelo Bielsa", "Alejandro Sabella", "Sampaoli"],
+    "correta": "César Luis Menotti",
+    "pontuacao": 3
+  },
+  {
+    "id": 135,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol do título do Milan na Champions League de 2003?",
+    "opcoes": ["Shevchenko", "Inzaghi", "Pirlo", "Kaká", "Maldini"],
+    "correta": "Shevchenko",
+    "pontuacao": 3
+  },
+  {
+    "id": 136,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual seleção foi campeã da Copa do Mundo de 1954?",
+    "opcoes": ["Alemanha Ocidental", "Hungria", "Itália", "Uruguai", "Brasil"],
+    "correta": "Alemanha Ocidental",
+    "pontuacao": 3
+  },
+  {
+    "id": 137,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube venceu a primeira edição da Libertadores da América?",
+    "opcoes": ["Peñarol", "Santos", "River Plate", "Independiente", "Palmeiras"],
+    "correta": "Peñarol",
+    "pontuacao": 3
+  },
+  {
+    "id": 138,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o artilheiro da Copa do Mundo de 1982?",
+    "opcoes": ["Paolo Rossi", "Zico", "Maradona", "Falcão", "Boniek"],
+    "correta": "Paolo Rossi",
+    "pontuacao": 3
+  },
+  {
+    "id": 139,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o River Plate conquistou sua primeira Libertadores?",
+    "opcoes": ["1986", "1985", "1987", "1979", "1989"],
+    "correta": "1986",
+    "pontuacao": 3
+  },
+  {
+    "id": 140,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual técnico foi campeão da Eurocopa de 2008 pela Espanha?",
+    "opcoes": ["Luis Aragonés", "Vicente del Bosque", "Luis Enrique", "Camacho", "Hierro"],
+    "correta": "Luis Aragonés",
+    "pontuacao": 3
+  },
+  {
+    "id": 141,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol decisivo da final da Libertadores de 2019?",
+    "opcoes": ["Gabigol", "Bruno Henrique", "Arrascaeta", "Everton Ribeiro", "Diego"],
+    "correta": "Gabigol",
+    "pontuacao": 3
+  },
+  {
+    "id": 142,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual foi o primeiro clube a conquistar o triplete europeu (liga, copa e Champions) em uma mesma temporada?",
+    "opcoes": ["Manchester United", "Barcelona", "Inter de Milão", "Bayern de Munique", "Ajax"],
+    "correta": "Manchester United",
+    "pontuacao": 3
+  },
+  {
+    "id": 143,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o artilheiro da Copa do Mundo de 1966?",
+    "opcoes": ["Eusébio", "Bobby Charlton", "Pelé", "Garrincha", "Hurst"],
+    "correta": "Eusébio",
+    "pontuacao": 3
+  },
+  {
+    "id": 144,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Santos conquistou seu primeiro título mundial interclubes?",
+    "opcoes": ["1962", "1963", "1961", "1964", "1965"],
+    "correta": "1962",
+    "pontuacao": 3
+  },
+  {
+    "id": 145,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol do título europeu do Chelsea em 2021?",
+    "opcoes": ["Kai Havertz", "Mount", "Werner", "Pulisic", "Kanté"],
+    "correta": "Kai Havertz",
+    "pontuacao": 3
+  },
+  {
+    "id": 146,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual seleção foi a maior campeã da Copa das Confederações?",
+    "opcoes": ["Brasil", "França", "Argentina", "Alemanha", "México"],
+    "correta": "Brasil",
+    "pontuacao": 3
+  },
+  {
+    "id": 147,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico campeão da Copa do Mundo de 1986?",
+    "opcoes": ["Carlos Bilardo", "Menotti", "Beckenbauer", "Parreira", "Telê Santana"],
+    "correta": "Carlos Bilardo",
+    "pontuacao": 3
+  },
+  {
+    "id": 148,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube uruguaio venceu a primeira Copa Intercontinental, em 1960?",
+    "opcoes": ["Peñarol", "Nacional", "Danubio", "Defensor", "Wanderers"],
+    "correta": "Peñarol",
+    "pontuacao": 3
+  },
+  {
+    "id": 149,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol da vitória do Brasil na final da Copa América de 2004?",
+    "opcoes": ["Adriano", "Luis Fabiano", "Kaká", "Roberto Carlos", "Juninho Pernambucano"],
+    "correta": "Adriano",
+    "pontuacao": 3
+  },
+  {
+    "id": 150,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem era o técnico do Brasil na Copa do Mundo de 1970?",
+    "opcoes": ["Mário Zagallo", "João Saldanha", "Feola", "Parreira", "Telê Santana"],
+    "correta": "Mário Zagallo",
+    "pontuacao": 3
+  },
+  {
+    "id": 151,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o time conhecido como 'Mengão'?",
+    "opcoes": ["Flamengo", "Fluminense", "Vasco", "Botafogo", "Corinthians"],
+    "correta": "Flamengo",
+    "pontuacao": 1
+  },
+  {
+    "id": 152,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube tem o apelido de 'Galo'?",
+    "opcoes": ["Atlético Mineiro", "Cruzeiro", "Bahia", "Grêmio", "São Paulo"],
+    "correta": "Atlético Mineiro",
+    "pontuacao": 1
+  },
+  {
+    "id": 153,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual cidade fica o estádio do Maracanã?",
+    "opcoes": ["Rio de Janeiro", "São Paulo", "Belo Horizonte", "Brasília", "Salvador"],
+    "correta": "Rio de Janeiro",
+    "pontuacao": 1
+  },
+  {
+    "id": 154,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o mascote do Corinthians?",
+    "opcoes": ["Mosqueteiro", "Urubu", "Porco", "Galo", "Peixe"],
+    "correta": "Mosqueteiro",
+    "pontuacao": 1
+  },
+  {
+    "id": 155,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual estado brasileiro nasceu o jogador Pelé?",
+    "opcoes": ["Minas Gerais", "São Paulo", "Bahia", "Rio de Janeiro", "Paraná"],
+    "correta": "São Paulo",
+    "pontuacao": 1
+  },
+  {
+    "id": 156,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube é conhecido como 'Peixe'?",
+    "opcoes": ["Santos", "Palmeiras", "São Paulo", "Fluminense", "Botafogo"],
+    "correta": "Santos",
+    "pontuacao": 1
+  },
+  {
+    "id": 157,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual time é apelidado de 'Verdão'?",
+    "opcoes": ["Palmeiras", "Coritiba", "Chapecoense", "Juventude", "Fluminense"],
+    "correta": "Palmeiras",
+    "pontuacao": 1
+  },
+  {
+    "id": 158,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi o capitão do Brasil na conquista da Copa do Mundo de 2002?",
+    "opcoes": ["Cafu", "Ronaldo", "Dida", "Roberto Carlos", "Rivaldo"],
+    "correta": "Cafu",
+    "pontuacao": 1
+  },
+  {
+    "id": 159,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube brasileiro é conhecido como 'Raposa'?",
+    "opcoes": ["Cruzeiro", "Grêmio", "Bahia", "Atlético Mineiro", "Internacional"],
+    "correta": "Cruzeiro",
+    "pontuacao": 1
+  },
+  {
+    "id": 160,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é a cor predominante do uniforme do Palmeiras?",
+    "opcoes": ["Verde", "Branco", "Azul", "Preto", "Vermelho"],
+    "correta": "Verde",
+    "pontuacao": 1
+  },
+  {
+    "id": 161,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual clube Romário se destacou no início dos anos 1990?",
+    "opcoes": ["Vasco", "Flamengo", "Fluminense", "Botafogo", "Palmeiras"],
+    "correta": "Vasco",
+    "pontuacao": 1
+  },
+  {
+    "id": 162,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube revelou o jogador Neymar?",
+    "opcoes": ["Santos", "Flamengo", "Palmeiras", "Corinthians", "Grêmio"],
+    "correta": "Santos",
+    "pontuacao": 1
+  },
+  {
+    "id": 163,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi o técnico do Brasil na conquista da Copa do Mundo de 1994?",
+    "opcoes": ["Carlos Alberto Parreira", "Zagallo", "Felipão", "Tite", "Telê Santana"],
+    "correta": "Carlos Alberto Parreira",
+    "pontuacao": 1
+  },
+  {
+    "id": 164,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual foi o clube campeão brasileiro de 2019?",
+    "opcoes": ["Flamengo", "Palmeiras", "Santos", "Corinthians", "Atlético Mineiro"],
+    "correta": "Flamengo",
+    "pontuacao": 2
+  },
+  {
+    "id": 165,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol do título do Corinthians na Libertadores de 2012?",
+    "opcoes": ["Emerson Sheik", "Paulinho", "Danilo", "Romarinho", "Alex"],
+    "correta": "Emerson Sheik",
+    "pontuacao": 2
+  },
+  {
+    "id": 166,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Palmeiras conquistou seu primeiro título da Libertadores?",
+    "opcoes": ["1999", "2020", "1998", "2001", "1997"],
+    "correta": "1999",
+    "pontuacao": 2
+  },
+  {
+    "id": 167,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador foi artilheiro do Campeonato Brasileiro de 2020?",
+    "opcoes": ["Claudinho", "Gabigol", "Marinho", "Luciano", "Pedro"],
+    "correta": "Luciano",
+    "pontuacao": 2
+  },
+  {
+    "id": 168,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube foi campeão da Copa do Brasil de 2021?",
+    "opcoes": ["Atlético Mineiro", "Flamengo", "Palmeiras", "Grêmio", "Athletico Paranaense"],
+    "correta": "Atlético Mineiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 169,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que clube Rogério Ceni jogou toda a sua carreira profissional?",
+    "opcoes": ["São Paulo", "Santos", "Cruzeiro", "Corinthians", "Palmeiras"],
+    "correta": "São Paulo",
+    "pontuacao": 2
+  },
+  {
+    "id": 170,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico do Grêmio na conquista da Libertadores de 2017?",
+    "opcoes": ["Renato Gaúcho", "Tite", "Felipão", "Cuca", "Mano Menezes"],
+    "correta": "Renato Gaúcho",
+    "pontuacao": 2
+  },
+  {
+    "id": 171,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador marcou o gol do título do Internacional na Libertadores de 2006?",
+    "opcoes": ["Adriano Gabiru", "Fernandão", "Tinga", "Iarley", "Sobis"],
+    "correta": "Adriano Gabiru",
+    "pontuacao": 2
+  },
+  {
+    "id": 172,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual foi o clube campeão brasileiro de 2009?",
+    "opcoes": ["Flamengo", "São Paulo", "Internacional", "Cruzeiro", "Palmeiras"],
+    "correta": "Flamengo",
+    "pontuacao": 2
+  },
+  {
+    "id": 173,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube venceu a Copa do Brasil de 2018?",
+    "opcoes": ["Cruzeiro", "Corinthians", "Palmeiras", "Flamengo", "Athletico Paranaense"],
+    "correta": "Cruzeiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 174,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o artilheiro do Campeonato Brasileiro de 2018?",
+    "opcoes": ["Gabigol", "Ricardo Oliveira", "Fred", "Dudu", "Diego Souza"],
+    "correta": "Gabigol",
+    "pontuacao": 2
+  },
+  {
+    "id": 175,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro venceu a Libertadores de 2013?",
+    "opcoes": ["Atlético Mineiro", "Corinthians", "Flamengo", "Grêmio", "Santos"],
+    "correta": "Atlético Mineiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 176,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico do Flamengo na conquista do Campeonato Brasileiro de 2020?",
+    "opcoes": ["Rogério Ceni", "Jorge Jesus", "Dorival Júnior", "Abel Braga", "Carpegiani"],
+    "correta": "Rogério Ceni",
+    "pontuacao": 2
+  },
+  {
+    "id": 177,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador brasileiro foi eleito o melhor do mundo em 2005?",
+    "opcoes": ["Ronaldinho Gaúcho", "Kaká", "Ronaldo", "Adriano", "Robinho"],
+    "correta": "Ronaldinho Gaúcho",
+    "pontuacao": 2
+  },
+  {
+    "id": 178,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que estádio o Brasil conquistou a Copa América de 2019?",
+    "opcoes": ["Maracanã", "Mineirão", "Mané Garrincha", "Beira-Rio", "Arena Corinthians"],
+    "correta": "Maracanã",
+    "pontuacao": 2
+  },
+  {
+    "id": 179,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico do Palmeiras na conquista da Libertadores de 2020?",
+    "opcoes": ["Abel Ferreira", "Felipão", "Cuca", "Luxemburgo", "Oswaldo de Oliveira"],
+    "correta": "Abel Ferreira",
+    "pontuacao": 2
+  },
+  {
+    "id": 180,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Corinthians conquistou o Mundial de Clubes da FIFA?",
+    "opcoes": ["2012", "2000", "2011", "2010", "2013"],
+    "correta": "2012",
+    "pontuacao": 2
+  },
+  {
+    "id": 181,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o artilheiro da Copa do Brasil de 2017?",
+    "opcoes": ["Lucas Barrios", "Luan", "Jô", "Pedro Rocha", "Barrios"],
+    "correta": "Luan",
+    "pontuacao": 2
+  },
+  {
+    "id": 182,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador marcou o gol do título do São Paulo na Libertadores de 2005?",
+    "opcoes": ["Amoroso", "Mineiro", "Grafite", "Fabão", "Ceni"],
+    "correta": "Mineiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 183,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube foi campeão brasileiro em 2016?",
+    "opcoes": ["Palmeiras", "Santos", "Flamengo", "Corinthians", "Grêmio"],
+    "correta": "Palmeiras",
+    "pontuacao": 2
+  },
+  {
+    "id": 184,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem era o técnico do São Paulo no tricampeonato brasileiro de 2006, 2007 e 2008?",
+    "opcoes": ["Muricy Ramalho", "Telê Santana", "Cuca", "Bauza", "Carpegiani"],
+    "correta": "Muricy Ramalho",
+    "pontuacao": 3
+  },
+  {
+    "id": 185,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube brasileiro foi o primeiro a conquistar a Tríplice Coroa (Estadual, Copa do Brasil e Brasileirão)?",
+    "opcoes": ["Cruzeiro", "Flamengo", "Palmeiras", "Grêmio", "Corinthians"],
+    "correta": "Cruzeiro",
+    "pontuacao": 3
+  },
+  {
+    "id": 186,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o artilheiro do Campeonato Brasileiro de 2015?",
+    "opcoes": ["Ricardo Oliveira", "Fred", "Diego Souza", "Robinho", "Love"],
+    "correta": "Ricardo Oliveira",
+    "pontuacao": 3
+  },
+  {
+    "id": 187,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube eliminou o Palmeiras na semifinal da Libertadores de 2018?",
+    "opcoes": ["Boca Juniors", "River Plate", "Grêmio", "Flamengo", "Cruzeiro"],
+    "correta": "Boca Juniors",
+    "pontuacao": 3
+  },
+  {
+    "id": 188,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Brasil conquistou sua primeira Copa América?",
+    "opcoes": ["1919", "1922", "1939", "1949", "1959"],
+    "correta": "1919",
+    "pontuacao": 3
+  },
+  {
+    "id": 189,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol decisivo na final da Copa do Brasil de 1998 pelo Palmeiras?",
+    "opcoes": ["Oséas", "Alex", "Evair", "Paulo Nunes", "Zinho"],
+    "correta": "Oséas",
+    "pontuacao": 3
+  },
+  {
+    "id": 190,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual técnico comandava o Corinthians na conquista do Brasileirão de 2017?",
+    "opcoes": ["Fábio Carille", "Tite", "Mano Menezes", "Luxemburgo", "Sylvinho"],
+    "correta": "Fábio Carille",
+    "pontuacao": 3
+  },
+  {
+    "id": 191,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Santos conquistou o bicampeonato mundial interclubes?",
+    "opcoes": ["1963", "1962", "1964", "1965", "1961"],
+    "correta": "1963",
+    "pontuacao": 3
+  },
+  {
+    "id": 192,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o artilheiro do Brasileirão de 2003, o primeiro com pontos corridos?",
+    "opcoes": ["Dimba", "Romário", "Alex Alves", "Deivid", "Edílson"],
+    "correta": "Dimba",
+    "pontuacao": 3
+  },
+  {
+    "id": 193,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube brasileiro venceu a Copa Mercosul de 1999?",
+    "opcoes": ["Flamengo", "Palmeiras", "Vasco", "Corinthians", "Grêmio"],
+    "correta": "Vasco",
+    "pontuacao": 3
+  },
+  {
+    "id": 194,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico do Internacional na conquista da Libertadores de 2010?",
+    "opcoes": ["Celso Roth", "Abel Braga", "Muricy Ramalho", "Tite", "Mano Menezes"],
+    "correta": "Celso Roth",
+    "pontuacao": 3
+  },
+  {
+    "id": 195,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol do título brasileiro do Corinthians em 2011 contra o Palmeiras?",
+    "opcoes": ["Liedson", "Paulinho", "Danilo", "Jorge Henrique", "Emerson"],
+    "correta": "Liedson",
+    "pontuacao": 3
+  },
+  {
+    "id": 196,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Grêmio conquistou seu primeiro título da Libertadores?",
+    "opcoes": ["1983", "1981", "1984", "1982", "1980"],
+    "correta": "1983",
+    "pontuacao": 3
+  },
+  {
+    "id": 197,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol decisivo do Cruzeiro na final da Libertadores de 1997?",
+    "opcoes": ["Elivélton", "Marcelo Ramos", "Palhinha", "Dida", "Nonato"],
+    "correta": "Elivélton",
+    "pontuacao": 3
+  },
+  {
+    "id": 198,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador foi o capitão da Seleção Brasileira na Copa do Mundo de 1970?",
+    "opcoes": ["Carlos Alberto Torres", "Gérson", "Pelé", "Tostão", "Rivelino"],
+    "correta": "Carlos Alberto Torres",
+    "pontuacao": 3
+  },
+  {
+    "id": 199,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Bahia conquistou seu primeiro título brasileiro?",
+    "opcoes": ["1959", "1960", "1963", "1971", "1968"],
+    "correta": "1959",
+    "pontuacao": 3
+  },
+  {
+    "id": 200,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico do Brasil na Copa do Mundo de 1982?",
+    "opcoes": ["Telê Santana", "Parreira", "Zagallo", "Feola", "Carlos Alberto Silva"],
+    "correta": "Telê Santana",
+    "pontuacao": 3
+  },
+  {
+    "id": 201,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual jogador marcou o pênalti decisivo na final da Copa do Mundo de 1994?",
+    "opcoes": ["Baggio", "Romário", "Dunga", "Cafu", "Taffarel"],
+    "correta": "Baggio",
+    "pontuacao": 1
+  },
+  {
+    "id": 202,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube é conhecido como 'Timão'?",
+    "opcoes": ["Corinthians", "Santos", "Flamengo", "Palmeiras", "Vasco"],
+    "correta": "Corinthians",
+    "pontuacao": 1
+  },
+  {
+    "id": 203,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem é o maior artilheiro da história da Seleção Brasileira masculina?",
+    "opcoes": ["Neymar", "Pelé", "Romário", "Ronaldo", "Zico"],
+    "correta": "Neymar",
+    "pontuacao": 1
+  },
+  {
+    "id": 204,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual clube o jogador Ronaldinho Gaúcho iniciou sua carreira?",
+    "opcoes": ["Grêmio", "Flamengo", "Atlético Mineiro", "Cruzeiro", "Fluminense"],
+    "correta": "Grêmio",
+    "pontuacao": 1
+  },
+  {
+    "id": 205,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o apelido da seleção brasileira feminina de futebol?",
+    "opcoes": ["Seleção Canarinho", "Guerreiras do Brasil", "Auriverdes", "Meninas do Hexa", "Canarinhas"],
+    "correta": "Canarinhas",
+    "pontuacao": 1
+  },
+  {
+    "id": 206,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o nome do estádio do Corinthians?",
+    "opcoes": ["Neo Química Arena", "Maracanã", "Mineirão", "Beira-Rio", "Morumbi"],
+    "correta": "Neo Química Arena",
+    "pontuacao": 1
+  },
+  {
+    "id": 207,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em que ano o Brasil sediou a Copa do Mundo pela primeira vez?",
+    "opcoes": ["1950", "1962", "1970", "1994", "2014"],
+    "correta": "1950",
+    "pontuacao": 1
+  },
+  {
+    "id": 208,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube é conhecido como 'Gigante da Colina'?",
+    "opcoes": ["Vasco da Gama", "Botafogo", "Fluminense", "Santos", "Corinthians"],
+    "correta": "Vasco da Gama",
+    "pontuacao": 1
+  },
+  {
+    "id": 209,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi o técnico do Brasil na conquista da Copa do Mundo de 2002?",
+    "opcoes": ["Luiz Felipe Scolari", "Zagallo", "Parreira", "Tite", "Luxemburgo"],
+    "correta": "Luiz Felipe Scolari",
+    "pontuacao": 1
+  },
+  {
+    "id": 210,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o estádio do Flamengo e do Fluminense?",
+    "opcoes": ["Maracanã", "Engenhão", "São Januário", "Nilton Santos", "Luso-Brasileiro"],
+    "correta": "Maracanã",
+    "pontuacao": 1
+  },
+  {
+    "id": 211,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o apelido do time do Botafogo?",
+    "opcoes": ["Fogão", "Gigante da Colina", "Porco", "Peixe", "Raposa"],
+    "correta": "Fogão",
+    "pontuacao": 1
+  },
+  {
+    "id": 212,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual estado fica o estádio Mineirão?",
+    "opcoes": ["Minas Gerais", "Rio de Janeiro", "São Paulo", "Bahia", "Pernambuco"],
+    "correta": "Minas Gerais",
+    "pontuacao": 1
+  },
+  {
+    "id": 213,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual jogador marcou três gols na final da Copa do Mundo de 1958?",
+    "opcoes": ["Vavá", "Pelé", "Garrincha", "Didi", "Zagallo"],
+    "correta": "Pelé",
+    "pontuacao": 1
+  },
+  {
+    "id": 214,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol do título do Corinthians no Mundial de Clubes de 2012?",
+    "opcoes": ["Paolo Guerrero", "Emerson Sheik", "Paulinho", "Danilo", "Jorge Henrique"],
+    "correta": "Paolo Guerrero",
+    "pontuacao": 2
+  },
+  {
+    "id": 215,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro revelou o atacante Ronaldo Fenômeno?",
+    "opcoes": ["Cruzeiro", "Corinthians", "Flamengo", "São Cristóvão", "Vasco"],
+    "correta": "Cruzeiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 216,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Brasil perdeu a final da Copa do Mundo para o Uruguai no Maracanã?",
+    "opcoes": ["1950", "1954", "1946", "1958", "1962"],
+    "correta": "1950",
+    "pontuacao": 2
+  },
+  {
+    "id": 217,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador brasileiro foi eleito o melhor do mundo pela FIFA em 2007?",
+    "opcoes": ["Kaká", "Ronaldinho Gaúcho", "Ronaldo", "Adriano", "Cafu"],
+    "correta": "Kaká",
+    "pontuacao": 2
+  },
+  {
+    "id": 218,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem era o técnico do Brasil na Copa do Mundo de 2014?",
+    "opcoes": ["Luiz Felipe Scolari", "Tite", "Dunga", "Parreira", "Mano Menezes"],
+    "correta": "Luiz Felipe Scolari",
+    "pontuacao": 2
+  },
+  {
+    "id": 219,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube venceu a Copa do Brasil de 2019?",
+    "opcoes": ["Athletico Paranaense", "Flamengo", "Grêmio", "Palmeiras", "Cruzeiro"],
+    "correta": "Athletico Paranaense",
+    "pontuacao": 2
+  },
+  {
+    "id": 220,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o artilheiro do Campeonato Brasileiro de 2019?",
+    "opcoes": ["Gabigol", "Bruno Henrique", "Everton", "Pedro", "Fred"],
+    "correta": "Gabigol",
+    "pontuacao": 2
+  },
+  {
+    "id": 221,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual seleção eliminou o Brasil nas quartas de final da Copa do Mundo de 2010?",
+    "opcoes": ["Holanda", "Alemanha", "França", "Argentina", "Espanha"],
+    "correta": "Holanda",
+    "pontuacao": 2
+  },
+  {
+    "id": 222,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Flamengo conquistou a Libertadores pela primeira vez?",
+    "opcoes": ["1981", "1983", "1980", "1985", "1979"],
+    "correta": "1981",
+    "pontuacao": 2
+  },
+  {
+    "id": 223,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol do título da Copa América de 2019 para o Brasil?",
+    "opcoes": ["Gabriel Jesus", "Richarlison", "Everton Cebolinha", "Firmino", "Casemiro"],
+    "correta": "Everton Cebolinha",
+    "pontuacao": 2
+  },
+  {
+    "id": 224,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube foi campeão brasileiro em 2007 com uma campanha histórica?",
+    "opcoes": ["São Paulo", "Flamengo", "Cruzeiro", "Santos", "Corinthians"],
+    "correta": "São Paulo",
+    "pontuacao": 2
+  },
+  {
+    "id": 225,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico do Grêmio no título da Copa do Brasil de 2001?",
+    "opcoes": ["Tite", "Renato Gaúcho", "Felipão", "Mano Menezes", "Cuca"],
+    "correta": "Tite",
+    "pontuacao": 2
+  },
+  {
+    "id": 226,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador brasileiro foi o artilheiro da Copa do Mundo de 2002?",
+    "opcoes": ["Ronaldo", "Rivaldo", "Ronaldinho", "Kaká", "Adriano"],
+    "correta": "Ronaldo",
+    "pontuacao": 2
+  },
+  {
+    "id": 227,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Corinthians conquistou seu primeiro título da Libertadores?",
+    "opcoes": ["2012", "2000", "2010", "2011", "2013"],
+    "correta": "2012",
+    "pontuacao": 2
+  },
+  {
+    "id": 228,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual foi o adversário do Brasil na final da Copa do Mundo de 2002?",
+    "opcoes": ["Alemanha", "França", "Argentina", "Itália", "Holanda"],
+    "correta": "Alemanha",
+    "pontuacao": 2
+  },
+  {
+    "id": 229,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico do Palmeiras no título da Copa do Brasil de 2015?",
+    "opcoes": ["Marcelo Oliveira", "Cuca", "Abel Ferreira", "Felipão", "Luxemburgo"],
+    "correta": "Marcelo Oliveira",
+    "pontuacao": 2
+  },
+  {
+    "id": 230,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador marcou o gol do título da Copa do Brasil de 2006 para o Flamengo?",
+    "opcoes": ["Obina", "Renato Abreu", "Souza", "Petkovic", "Juan"],
+    "correta": "Obina",
+    "pontuacao": 2
+  },
+  {
+    "id": 231,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro revelou o atacante Gabriel Jesus?",
+    "opcoes": ["Palmeiras", "Flamengo", "Corinthians", "Santos", "São Paulo"],
+    "correta": "Palmeiras",
+    "pontuacao": 2
+  },
+  {
+    "id": 232,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o goleiro titular do Brasil na Copa do Mundo de 2018?",
+    "opcoes": ["Alisson", "Ederson", "Weverton", "Cássio", "Diego Alves"],
+    "correta": "Alisson",
+    "pontuacao": 2
+  },
+  {
+    "id": 233,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube foi campeão da Copa do Brasil de 2013?",
+    "opcoes": ["Flamengo", "Atlético Mineiro", "Grêmio", "Cruzeiro", "Internacional"],
+    "correta": "Flamengo",
+    "pontuacao": 2
+  },
+  {
+    "id": 234,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual técnico comandava o Flamengo na conquista da Libertadores de 1981?",
+    "opcoes": ["Paulo César Carpegiani", "Cláudio Coutinho", "Zico", "Jair Pereira", "Telê Santana"],
+    "correta": "Paulo César Carpegiani",
+    "pontuacao": 3
+  },
+  {
+    "id": 235,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol do título brasileiro do São Paulo em 2006?",
+    "opcoes": ["Lenilson", "Dagoberto", "Rogério Ceni", "Danilo", "Mineiro"],
+    "correta": "Lenilson",
+    "pontuacao": 3
+  },
+  {
+    "id": 236,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol do título mundial do Internacional em 2006 contra o Barcelona?",
+    "opcoes": ["Adriano Gabiru", "Fernandão", "Iarley", "Sobis", "Tinga"],
+    "correta": "Adriano Gabiru",
+    "pontuacao": 3
+  },
+  {
+    "id": 237,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Brasil conquistou sua primeira medalha de ouro olímpica no futebol masculino?",
+    "opcoes": ["2016", "2012", "2008", "2020", "2004"],
+    "correta": "2016",
+    "pontuacao": 3
+  },
+  {
+    "id": 238,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual técnico comandava o Palmeiras no título da Libertadores de 1999?",
+    "opcoes": ["Luiz Felipe Scolari", "Luxemburgo", "Oswaldo de Oliveira", "Cuca", "Celso Roth"],
+    "correta": "Luiz Felipe Scolari",
+    "pontuacao": 3
+  },
+  {
+    "id": 239,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual foi o placar da final entre Brasil e Alemanha na Copa do Mundo de 2002?",
+    "opcoes": ["2x0", "3x0", "2x1", "3x1", "1x0"],
+    "correta": "2x0",
+    "pontuacao": 3
+  },
+  {
+    "id": 240,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o capitão do Brasil na Copa do Mundo de 1998?",
+    "opcoes": ["Dunga", "Cafu", "Ronaldo", "Taffarel", "Aldair"],
+    "correta": "Dunga",
+    "pontuacao": 3
+  },
+  {
+    "id": 241,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube foi vice-campeão da Libertadores de 2008, perdida para a LDU?",
+    "opcoes": ["Fluminense", "Internacional", "Santos", "São Paulo", "Palmeiras"],
+    "correta": "Fluminense",
+    "pontuacao": 3
+  },
+  {
+    "id": 242,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o último gol do Brasil na Copa do Mundo de 2014?",
+    "opcoes": ["Oscar", "Neymar", "David Luiz", "Fred", "Marcelo"],
+    "correta": "Oscar",
+    "pontuacao": 3
+  },
+  {
+    "id": 243,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o artilheiro do Campeonato Brasileiro de 2014?",
+    "opcoes": ["Fred", "Diego Tardelli", "Ricardo Goulart", "Robinho", "Neymar"],
+    "correta": "Fred",
+    "pontuacao": 3
+  },
+  {
+    "id": 244,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube brasileiro foi o primeiro a conquistar a Copa Sul-Americana?",
+    "opcoes": ["Internacional", "Chapecoense", "São Paulo", "Athletico Paranaense", "Fluminense"],
+    "correta": "Internacional",
+    "pontuacao": 3
+  },
+  {
+    "id": 245,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que estádio o Brasil conquistou o pentacampeonato mundial em 2002?",
+    "opcoes": ["Estádio de Yokohama", "Maracanã", "Saitama", "Seul", "Nagoya"],
+    "correta": "Estádio de Yokohama",
+    "pontuacao": 3
+  },
+  {
+    "id": 246,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol do título da Copa América de 1989 para o Brasil?",
+    "opcoes": ["Romário", "Bebeto", "Careca", "Jorginho", "Raí"],
+    "correta": "Romário",
+    "pontuacao": 3
+  },
+  {
+    "id": 247,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador brasileiro marcou o gol da final da Copa América de 2007?",
+    "opcoes": ["Daniel Alves", "Robinho", "Elano", "Baptista", "Kaká"],
+    "correta": "Baptista",
+    "pontuacao": 3
+  },
+  {
+    "id": 248,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem era o técnico da Seleção Brasileira na Copa do Mundo de 1986?",
+    "opcoes": ["Telê Santana", "Zagallo", "Parreira", "Emerson Leão", "Carlos Alberto Silva"],
+    "correta": "Telê Santana",
+    "pontuacao": 3
+  },
+  {
+    "id": 249,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube brasileiro foi campeão da Libertadores de 1997?",
+    "opcoes": ["Cruzeiro", "Grêmio", "Palmeiras", "Flamengo", "São Paulo"],
+    "correta": "Cruzeiro",
+    "pontuacao": 3
+  },
+  {
+    "id": 250,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol do título da Copa do Brasil de 1995 para o Corinthians?",
+    "opcoes": ["Marcelinho Carioca", "Viola", "Neto", "Edílson", "Tupãzinho"],
+    "correta": "Marcelinho Carioca",
+    "pontuacao": 3
+  },
+  {
+    "id": 251,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o apelido do Clube de Regatas do Flamengo?",
+    "opcoes": ["Mengão", "Galo", "Verdão", "Tricolor", "Peixe"],
+    "correta": "Mengão",
+    "pontuacao": 1
+  },
+  {
+    "id": 252,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi o camisa 10 da Seleção Brasileira na Copa do Mundo de 2014?",
+    "opcoes": ["Neymar", "Oscar", "Hulk", "Willian", "Paulinho"],
+    "correta": "Neymar",
+    "pontuacao": 1
+  },
+  {
+    "id": 253,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual cidade fica o estádio Beira-Rio?",
+    "opcoes": ["Porto Alegre", "Curitiba", "Belo Horizonte", "Rio de Janeiro", "São Paulo"],
+    "correta": "Porto Alegre",
+    "pontuacao": 1
+  },
+  {
+    "id": 254,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube é conhecido como 'Tricolor Paulista'?",
+    "opcoes": ["São Paulo", "Grêmio", "Fluminense", "Bahia", "Fortaleza"],
+    "correta": "São Paulo",
+    "pontuacao": 1
+  },
+  {
+    "id": 255,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual jogador é apelidado de 'Fenômeno'?",
+    "opcoes": ["Ronaldo", "Ronaldinho", "Romário", "Neymar", "Adriano"],
+    "correta": "Ronaldo",
+    "pontuacao": 1
+  },
+  {
+    "id": 256,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube brasileiro tem o apelido de 'Peixe'?",
+    "opcoes": ["Santos", "Palmeiras", "Corinthians", "Fluminense", "Grêmio"],
+    "correta": "Santos",
+    "pontuacao": 1
+  },
+  {
+    "id": 257,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi o técnico do Brasil na Copa do Mundo de 2018?",
+    "opcoes": ["Tite", "Felipão", "Dunga", "Parreira", "Zagallo"],
+    "correta": "Tite",
+    "pontuacao": 1
+  },
+  {
+    "id": 258,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual é o estádio do Cruzeiro?",
+    "opcoes": ["Mineirão", "Independência", "Castelão", "Beira-Rio", "Maracanã"],
+    "correta": "Mineirão",
+    "pontuacao": 1
+  },
+  {
+    "id": 259,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual jogador foi o artilheiro da Copa do Mundo de 2002?",
+    "opcoes": ["Ronaldo", "Rivaldo", "Ronaldinho", "Adriano", "Kaká"],
+    "correta": "Ronaldo",
+    "pontuacao": 1
+  },
+  {
+    "id": 260,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Em qual clube o jogador Zico fez história?",
+    "opcoes": ["Flamengo", "Vasco", "Fluminense", "Botafogo", "Santos"],
+    "correta": "Flamengo",
+    "pontuacao": 1
+  },
+  {
+    "id": 261,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual seleção venceu a Copa do Mundo de 1994?",
+    "opcoes": ["Brasil", "Itália", "Alemanha", "Argentina", "França"],
+    "correta": "Brasil",
+    "pontuacao": 1
+  },
+  {
+    "id": 262,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Quem é conhecido como 'Rei do Futebol'?",
+    "opcoes": ["Pelé", "Zico", "Ronaldo", "Romário", "Ronaldinho"],
+    "correta": "Pelé",
+    "pontuacao": 1
+  },
+  {
+    "id": 263,
+    "categoria": "Futebol",
+    "dificuldade": "facil",
+    "pergunta": "Qual clube brasileiro é conhecido como 'Verdão'?",
+    "opcoes": ["Palmeiras", "Coritiba", "Chapecoense", "Fluminense", "Guarani"],
+    "correta": "Palmeiras",
+    "pontuacao": 1
+  },
+  {
+    "id": 264,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro venceu a Libertadores de 2021?",
+    "opcoes": ["Palmeiras", "Flamengo", "Athletico Paranaense", "Grêmio", "Santos"],
+    "correta": "Palmeiras",
+    "pontuacao": 2
+  },
+  {
+    "id": 265,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol do título do Brasil na Copa América de 2007?",
+    "opcoes": ["Daniel Alves", "Robinho", "Kaká", "Josué", "Elano"],
+    "correta": "Daniel Alves",
+    "pontuacao": 2
+  },
+  {
+    "id": 266,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador foi o artilheiro do Brasileirão de 2021?",
+    "opcoes": ["Hulk", "Gabigol", "Rony", "Marinho", "Calleri"],
+    "correta": "Hulk",
+    "pontuacao": 2
+  },
+  {
+    "id": 267,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Corinthians conquistou o seu primeiro título mundial da FIFA?",
+    "opcoes": ["2000", "2012", "1999", "2001", "2010"],
+    "correta": "2000",
+    "pontuacao": 2
+  },
+  {
+    "id": 268,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico do Brasil na conquista da Copa América de 2019?",
+    "opcoes": ["Tite", "Felipão", "Dunga", "Parreira", "Luxemburgo"],
+    "correta": "Tite",
+    "pontuacao": 2
+  },
+  {
+    "id": 269,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador marcou o gol do título da Libertadores de 2022 para o Flamengo?",
+    "opcoes": ["Gabigol", "Pedro", "Arrascaeta", "Everton Ribeiro", "David Luiz"],
+    "correta": "Gabigol",
+    "pontuacao": 2
+  },
+  {
+    "id": 270,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o goleiro titular do Brasil na Copa do Mundo de 2002?",
+    "opcoes": ["Marcos", "Dida", "Taffarel", "Rogério Ceni", "Júlio César"],
+    "correta": "Marcos",
+    "pontuacao": 2
+  },
+  {
+    "id": 271,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube venceu o Campeonato Brasileiro de 2022?",
+    "opcoes": ["Palmeiras", "Flamengo", "Corinthians", "Fluminense", "Internacional"],
+    "correta": "Palmeiras",
+    "pontuacao": 2
+  },
+  {
+    "id": 272,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o primeiro gol do Brasil na Copa do Mundo de 2014?",
+    "opcoes": ["Neymar", "Oscar", "Marcelo", "Fred", "David Luiz"],
+    "correta": "Neymar",
+    "pontuacao": 2
+  },
+  {
+    "id": 273,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual técnico comandou o Grêmio na conquista da Libertadores de 1995?",
+    "opcoes": ["Luiz Felipe Scolari", "Renato Gaúcho", "Tite", "Celso Roth", "Cuca"],
+    "correta": "Luiz Felipe Scolari",
+    "pontuacao": 2
+  },
+  {
+    "id": 274,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem marcou o gol do título brasileiro de 2009 pelo Flamengo?",
+    "opcoes": ["Ronaldo Angelim", "Petkovic", "Adriano", "Zé Roberto", "Obina"],
+    "correta": "Ronaldo Angelim",
+    "pontuacao": 2
+  },
+  {
+    "id": 275,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que ano o Brasil conquistou sua última Copa do Mundo?",
+    "opcoes": ["2002", "1998", "2006", "2010", "1994"],
+    "correta": "2002",
+    "pontuacao": 2
+  },
+  {
+    "id": 276,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o artilheiro do Campeonato Brasileiro de 2020?",
+    "opcoes": ["Luciano", "Claudinho", "Gabigol", "Marinho", "Pedro"],
+    "correta": "Luciano",
+    "pontuacao": 2
+  },
+  {
+    "id": 277,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube brasileiro venceu a Copa do Brasil de 2019?",
+    "opcoes": ["Athletico Paranaense", "Grêmio", "Flamengo", "Cruzeiro", "Palmeiras"],
+    "correta": "Athletico Paranaense",
+    "pontuacao": 2
+  },
+  {
+    "id": 278,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual foi o resultado da final entre Brasil e Alemanha na Copa de 2014?",
+    "opcoes": ["7x1", "3x0", "5x2", "6x1", "4x1"],
+    "correta": "7x1",
+    "pontuacao": 2
+  },
+  {
+    "id": 279,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual jogador brasileiro foi o melhor do mundo em 1999?",
+    "opcoes": ["Rivaldo", "Ronaldinho", "Ronaldo", "Romário", "Kaká"],
+    "correta": "Rivaldo",
+    "pontuacao": 2
+  },
+  {
+    "id": 280,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Em que estádio o Brasil conquistou o ouro olímpico em 2021 (Tóquio)?",
+    "opcoes": ["Yokohama", "Saitama", "Tokyo Stadium", "Nagoya Dome", "Osaka Dome"],
+    "correta": "Yokohama",
+    "pontuacao": 2
+  },
+  {
+    "id": 281,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o técnico do Corinthians no título brasileiro de 2015?",
+    "opcoes": ["Tite", "Mano Menezes", "Carille", "Luxemburgo", "Cuca"],
+    "correta": "Tite",
+    "pontuacao": 2
+  },
+  {
+    "id": 282,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o capitão da Seleção Brasileira na Copa América de 2019?",
+    "opcoes": ["Dani Alves", "Thiago Silva", "Casemiro", "Neymar", "Miranda"],
+    "correta": "Dani Alves",
+    "pontuacao": 2
+  },
+  {
+    "id": 283,
+    "categoria": "Futebol",
+    "dificuldade": "medio",
+    "pergunta": "Qual clube foi campeão brasileiro em 2015?",
+    "opcoes": ["Corinthians", "Palmeiras", "Flamengo", "Santos", "Grêmio"],
+    "correta": "Corinthians",
+    "pontuacao": 2
+  },
+  {
+    "id": 284,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico do Santos na conquista da Libertadores de 2011?",
+    "opcoes": ["Muricy Ramalho", "Dorival Júnior", "Luxemburgo", "Cuca", "Abel Braga"],
+    "correta": "Muricy Ramalho",
+    "pontuacao": 3
+  },
+  {
+    "id": 285,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol do título do Grêmio na Libertadores de 1983?",
+    "opcoes": ["Cesar", "Renato Gaúcho", "Mazaropi", "Hugo De León", "Tita"],
+    "correta": "Cesar",
+    "pontuacao": 3
+  },
+  {
+    "id": 286,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual técnico comandava o Cruzeiro na conquista da Libertadores de 1997?",
+    "opcoes": ["Paulo Autuori", "Levir Culpi", "Felipão", "Luxemburgo", "Tite"],
+    "correta": "Paulo Autuori",
+    "pontuacao": 3
+  },
+  {
+    "id": 287,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem marcou o gol decisivo do Palmeiras na final da Libertadores de 2020?",
+    "opcoes": ["Breno Lopes", "Rony", "Luiz Adriano", "Gustavo Gómez", "Willian"],
+    "correta": "Breno Lopes",
+    "pontuacao": 3
+  },
+  {
+    "id": 288,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Fluminense foi campeão brasileiro pela primeira vez no formato unificado pela CBF?",
+    "opcoes": ["1970", "1984", "1980", "1987", "1991"],
+    "correta": "1984",
+    "pontuacao": 3
+  },
+  {
+    "id": 289,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o artilheiro da Copa do Mundo de 1970?",
+    "opcoes": ["Gerd Müller", "Pelé", "Tostão", "Rivelino", "Jairzinho"],
+    "correta": "Gerd Müller",
+    "pontuacao": 3
+  },
+  {
+    "id": 290,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual clube brasileiro foi campeão da Copa Sul-Americana de 2018?",
+    "opcoes": ["Athletico Paranaense", "Fluminense", "Chapecoense", "São Paulo", "Bahia"],
+    "correta": "Athletico Paranaense",
+    "pontuacao": 3
+  },
+  {
+    "id": 291,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem era o técnico da Seleção Brasileira na Copa do Mundo de 1974?",
+    "opcoes": ["Zagallo", "Cláudio Coutinho", "Parreira", "Lula", "Feola"],
+    "correta": "Zagallo",
+    "pontuacao": 3
+  },
+  {
+    "id": 292,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador brasileiro marcou o gol do título mundial do Corinthians em 2000?",
+    "opcoes": ["Edílson", "Ricardinho", "Luizão", "Freddy Rincón", "Elias"],
+    "correta": "Edílson",
+    "pontuacao": 3
+  },
+  {
+    "id": 293,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual foi o resultado da final entre Brasil e Uruguai na Copa América de 1989?",
+    "opcoes": ["1x0", "2x0", "2x1", "3x1", "0x0"],
+    "correta": "1x0",
+    "pontuacao": 3
+  },
+  {
+    "id": 294,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Em que ano o Vasco conquistou a Libertadores?",
+    "opcoes": ["1998", "1999", "1997", "2000", "1996"],
+    "correta": "1998",
+    "pontuacao": 3
+  },
+  {
+    "id": 295,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o artilheiro do Campeonato Brasileiro de 2008?",
+    "opcoes": ["Keirrison", "Kléber Pereira", "Washington", "Alex Mineiro", "Fred"],
+    "correta": "Kléber Pereira",
+    "pontuacao": 3
+  },
+  {
+    "id": 296,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o último gol do Brasil na Copa do Mundo de 1998?",
+    "opcoes": ["Ronaldo", "Bebeto", "César Sampaio", "Rivaldo", "Cafu"],
+    "correta": "Rivaldo",
+    "pontuacao": 3
+  },
+  {
+    "id": 297,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o técnico do Internacional na conquista da Libertadores de 2006?",
+    "opcoes": ["Abel Braga", "Muricy Ramalho", "Celso Roth", "Tite", "Paulo Autuori"],
+    "correta": "Abel Braga",
+    "pontuacao": 3
+  },
+  {
+    "id": 298,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol decisivo do Brasil na final da Copa América de 2004?",
+    "opcoes": ["Adriano", "Kaká", "Alex", "Luis Fabiano", "Juninho Pernambucano"],
+    "correta": "Adriano",
+    "pontuacao": 3
+  },
+  {
+    "id": 299,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Quem foi o capitão do Brasil na Copa do Mundo de 1982?",
+    "opcoes": ["Sócrates", "Zico", "Falcão", "Júnior", "Cerezo"],
+    "correta": "Sócrates",
+    "pontuacao": 3
+  },
+  {
+    "id": 300,
+    "categoria": "Futebol",
+    "dificuldade": "dificil",
+    "pergunta": "Qual jogador marcou o gol do título da Copa do Brasil de 1998 pelo Palmeiras?",
+    "opcoes": ["Oséas", "Zinho", "Alex", "Paulo Nunes", "Evair"],
+    "correta": "Oséas",
+    "pontuacao": 3
+  }
 ]

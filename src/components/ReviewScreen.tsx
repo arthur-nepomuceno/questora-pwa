@@ -23,7 +23,7 @@ export default function ReviewScreen({ quizState, setScreen, timeRemaining }: Re
     <div className="blue-theme">
       {/* Logo Show do Milênio no estilo Show do Milhão */}
       <div className="show-milenio-logo">
-        <h1>🎯 SHOW DO MILÊNIO</h1>
+	    <h1>🎯 <span style={{ fontSize: '1.25em', lineHeight: 1, display: 'inline-block' }}>S</span>HOW DO MILÊNIO</h1>
         <div className="coin-icon">
           📋
         </div>

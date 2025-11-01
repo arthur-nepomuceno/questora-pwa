@@ -114,7 +114,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
     <div className="blue-theme">
       {/* Logo Show do Milênio */}
       <div className="show-milenio-logo">
-        <h1>🎯 SHOW DO MILÊNIO</h1>
+	    <h1>🎯 <span style={{ fontSize: '1.25em', lineHeight: 1, display: 'inline-block' }}>S</span>HOW DO MILÊNIO</h1>
         <div className="coin-icon">
           🏆
         </div>

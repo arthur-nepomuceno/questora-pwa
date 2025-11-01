@@ -92,12 +92,12 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
               OK
             </button>
           ) : (
-            // Se é a tela completa, Voltar vai para credits
+            // Se é a tela completa, Voltar vai para start (escolha de categoria)
             <button
               className="btn btn-secondary"
               onClick={() => {
                 playButtonPress();
-                setScreen("credits");
+                setScreen("start");
               }}
             >
               Voltar

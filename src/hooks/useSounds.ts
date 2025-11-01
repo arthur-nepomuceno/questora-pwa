@@ -1,13 +1,12 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { useSoundContext } from '@/contexts/SoundContext';
 
 export const useSounds = () => {
-  const { isMuted } = useSoundContext();
+  const { isMuted, endGameAudioRef } = useSoundContext();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const buttonAudioRef = useRef<HTMLAudioElement | null>(null);
-  const endGameAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Atualizar volume quando mute muda
   useEffect(() => {
@@ -21,10 +20,6 @@ export const useSounds = () => {
     buttonAudioRef.current = new Audio('/sounds/press-button.mp3');
     buttonAudioRef.current.volume = 0.2;
     buttonAudioRef.current.preload = 'auto';
-    
-    endGameAudioRef.current = new Audio('/sounds/end-game.mp3');
-    endGameAudioRef.current.volume = 0.3;
-    endGameAudioRef.current.preload = 'auto';
   }, []);
 
   // Função para tocar a música do quiz
@@ -65,6 +60,14 @@ export const useSounds = () => {
     }
   };
 
+  // Função para parar o som de fim de jogo
+  const stopEndGame = useCallback(() => {
+    if (endGameAudioRef.current) {
+      endGameAudioRef.current.pause();
+      endGameAudioRef.current.currentTime = 0;
+    }
+  }, [endGameAudioRef]);
+
   // Função para tocar som de botão pressionado (otimizada)
   const playButtonPress = () => {
     if (!isMuted && buttonAudioRef.current) {
@@ -81,6 +84,7 @@ export const useSounds = () => {
     stopQuizMusic,
     playCorrectAnswer,
     playEndGame,
+    stopEndGame,
     playButtonPress,
   };
 };

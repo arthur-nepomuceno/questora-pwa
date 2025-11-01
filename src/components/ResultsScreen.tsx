@@ -20,12 +20,17 @@ export default function ResultsScreen({
 }: ResultsScreenProps) {
 
   // Hook de sons
-  const { playEndGame } = useSounds();
+  const { playEndGame, stopEndGame } = useSounds();
 
   // Tocar som de fim de jogo quando componente monta
   useEffect(() => {
     playEndGame();
-  }, []);
+    
+    // Cleanup: parar o som quando o componente desmonta (usuário sai da tela)
+    return () => {
+      stopEndGame();
+    };
+  }, [playEndGame, stopEndGame]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);

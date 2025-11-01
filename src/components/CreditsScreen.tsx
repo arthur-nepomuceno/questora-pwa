@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
 import { useDailyCredits } from '@/hooks/useDailyCredits';
+import PurchaseCreditsScreen from './PurchaseCreditsScreen';
 
 interface CreditsScreenProps {
   setScreen: (screen: any) => void;
@@ -15,6 +17,7 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
   const { dailyCreditsSpent, spendCredits, canSpendCredits, dailyLimit } = useDailyCredits(selectedModalidade);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
   const creditOptions = [
     { value: 100, icon: "💰", label: "100 Créditos" },
@@ -90,7 +93,10 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
         <div className="action-buttons">
           <button
             className="btn btn-primary"
-            onClick={() => setScreen("purchase-credits")}
+            onClick={() => {
+              playButtonPress();
+              setShowPurchaseModal(true);
+            }}
           >
             Inserir Créditos
           </button>
@@ -152,6 +158,34 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
             🚪 Sair
           </div>
         </div>
+      )}
+
+      {/* Purchase Credits Modal */}
+      {showPurchaseModal && (
+        <>
+          <div 
+            className="modal-overlay"
+            onClick={() => setShowPurchaseModal(false)}
+          />
+          <div className="modal-content">
+            <button 
+              className="close-modal-btn"
+              onClick={() => setShowPurchaseModal(false)}
+              title="Fechar"
+            >
+              ✕
+            </button>
+            <PurchaseCreditsScreen 
+              setScreen={(screen) => {
+                setShowPurchaseModal(false);
+                setScreen(screen);
+              }} 
+              goToOptions={goToOptions}
+              hideUserInfo={true}
+              onClose={() => setShowPurchaseModal(false)}
+            />
+          </div>
+        </>
       )}
 
       <style jsx>{`
@@ -250,6 +284,83 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
           gap: 15px;
           justify-content: center;
           margin-top: 20px;
+        }
+
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 10000;
+          width: 90%;
+          max-width: 600px;
+          max-height: 90vh;
+          overflow-y: auto;
+          animation: fadeIn 0.3s ease-in;
+        }
+
+        .close-modal-btn {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          border: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          font-size: 24px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10001;
+          transition: all 0.3s;
+          line-height: 1;
+        }
+
+        .close-modal-btn:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -48%);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+          }
+        }
+
+        .modal-content :global(.blue-theme) {
+          margin: 0;
+        }
+
+        .modal-content :global(.show-milenio-logo) {
+          font-size: 1.5rem;
+          padding: 15px;
+          margin-bottom: 10px;
+        }
+
+        .modal-content :global(.credits-card) {
+          margin: 0;
         }
       `}</style>
     </div>

@@ -6,9 +6,11 @@ import { useSounds } from '@/hooks/useSounds';
 interface PurchaseCreditsScreenProps {
   setScreen: (screen: any) => void;
   goToOptions: () => void;
+  hideUserInfo?: boolean;
+  onClose?: () => void;
 }
 
-export default function PurchaseCreditsScreen({ setScreen, goToOptions }: PurchaseCreditsScreenProps) {
+export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUserInfo = false, onClose }: PurchaseCreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
 
@@ -78,17 +80,34 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions }: Purcha
 
         {/* Action Buttons */}
         <div className="action-buttons">
-          <button
-            className="btn btn-secondary"
-            onClick={() => setScreen("credits")}
-          >
-            Voltar
-          </button>
+          {hideUserInfo ? (
+            // Se está no modal, OK leva para a tela de purchase-credits
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                playButtonPress();
+                setScreen("purchase-credits");
+              }}
+            >
+              OK
+            </button>
+          ) : (
+            // Se é a tela completa, Voltar vai para credits
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                playButtonPress();
+                setScreen("credits");
+              }}
+            >
+              Voltar
+            </button>
+          )}
         </div>
       </div>
 
       {/* User Info */}
-      {user && !isLoading ? (
+      {!hideUserInfo && user && !isLoading ? (
         <div className="user-info">
           <div className="user-email">
             <span className="user-icon">👤</span>
@@ -109,7 +128,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions }: Purcha
             🚪 Sair
           </button>
         </div>
-      ) : !isLoading ? (
+      ) : !hideUserInfo && !isLoading ? (
         <div className="user-info">
           <div className="user-email">
             <span className="user-icon">👤</span>
@@ -126,7 +145,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions }: Purcha
       ) : null}
       
       {/* Loading placeholder */}
-      {isLoading && (
+      {!hideUserInfo && isLoading && (
         <div className="user-info loading">
           <div className="user-email">
             <span className="user-icon">👤</span>

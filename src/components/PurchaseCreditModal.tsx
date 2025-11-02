@@ -13,17 +13,29 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
   const { playButtonPress } = useSounds();
   const { isValidCPF, isValidCNPJ } = useDocumentValidation();
   const [documentType, setDocumentType] = useState<'CPF' | 'CNPJ'>('CPF');
-  const [cpfCnpj, setCpfCnpj] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [cnpj, setCnpj] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  // Funções auxiliares para obter e atualizar o documento atual
+  const getCurrentDocument = () => documentType === 'CPF' ? cpf : cnpj;
+  const setCurrentDocument = (value: string) => {
+    if (documentType === 'CPF') {
+      setCpf(value);
+    } else {
+      setCnpj(value);
+    }
+  };
 
   const validateForm = (): boolean => {
     const newErrors: { [key: string]: string } = {};
+    const currentDocument = getCurrentDocument();
 
-    if (!cpfCnpj.trim()) {
+    if (!currentDocument.trim()) {
       newErrors.cpfCnpj = `${documentType} é obrigatório`;
     } else {
       // Valida CPF ou CNPJ usando o checksum
-      const isValid = documentType === 'CPF' ? isValidCPF(cpfCnpj) : isValidCNPJ(cpfCnpj);
+      const isValid = documentType === 'CPF' ? isValidCPF(currentDocument) : isValidCNPJ(currentDocument);
       if (!isValid) {
         newErrors.cpfCnpj = `${documentType} inválido`;
       }
@@ -64,12 +76,13 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
     
     // Formata o valor limitado
     const formatted = formatCpfCnpj(limitedNumbers);
-    setCpfCnpj(formatted);
+    setCurrentDocument(formatted);
   };
 
   const handleDocumentTypeChange = (type: 'CPF' | 'CNPJ') => {
     setDocumentType(type);
-    setCpfCnpj('');
+    setCpf('');
+    setCnpj('');
     setErrors({});
   };
 
@@ -106,7 +119,7 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
             <input
               id="cpfCnpj"
               type="text"
-              value={cpfCnpj}
+              value={getCurrentDocument()}
               onChange={handleCpfCnpjChange}
               placeholder={documentType === 'CPF' ? '000.000.000-00' : '00.000.000/0000-00'}
               className={errors.cpfCnpj ? 'error' : ''}

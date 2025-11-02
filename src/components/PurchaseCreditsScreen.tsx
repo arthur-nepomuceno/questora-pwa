@@ -10,6 +10,24 @@ interface PurchaseCreditsScreenProps {
   onClose?: () => void;
 }
 
+interface CreditPackage {
+  credits: number;
+  totalAmount: number; // Valor em centavos (ex: 299 = R$ 2,99)
+  creditsToReceive: number;
+  icon: string;
+}
+
+const creditPackages: CreditPackage[] = [
+  { credits: 300, totalAmount: 299, creditsToReceive: 300, icon: '💰' },
+  { credits: 500, totalAmount: 499, creditsToReceive: 500, icon: '💰' },
+  { credits: 700, totalAmount: 699, creditsToReceive: 700, icon: '💰' },
+  { credits: 1000, totalAmount: 999, creditsToReceive: 1000, icon: '💎' },
+  { credits: 2000, totalAmount: 1999, creditsToReceive: 2000, icon: '💎' },
+  { credits: 3000, totalAmount: 2999, creditsToReceive: 3000, icon: '💎' },
+  { credits: 5000, totalAmount: 4999, creditsToReceive: 5000, icon: '🏆' },
+  { credits: 10000, totalAmount: 9999, creditsToReceive: 10000, icon: '🏆' },
+];
+
 export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUserInfo = false, onClose }: PurchaseCreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
@@ -17,6 +35,16 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
   const handleLogout = async () => {
     await logout();
     setScreen("modalidade");
+  };
+
+  const handlePackageClick = (pkg: CreditPackage) => {
+    playButtonPress();
+    console.log('💳 Pacote selecionado:', {
+      credits: pkg.credits,
+      totalAmount: pkg.totalAmount,
+      creditsToReceive: pkg.creditsToReceive,
+    });
+    // TODO: Implementar lógica de pagamento aqui
   };
 
   return (
@@ -36,46 +64,20 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
         
         {/* Credit Packages */}
         <div className="credits-options">
-          <div className="credit-card">
-            <div className="credit-icon">💰</div>
-            <h3>300 Créditos</h3>
-            <p className="price">R$ 2,99</p>
-          </div>
-          <div className="credit-card">
-            <div className="credit-icon">💰</div>
-            <h3>500 Créditos</h3>
-            <p className="price">R$ 4,99</p>
-          </div>
-          <div className="credit-card">
-            <div className="credit-icon">💰</div>
-            <h3>700 Créditos</h3>
-            <p className="price">R$ 6,99</p>
-          </div>
-          <div className="credit-card">
-            <div className="credit-icon">💎</div>
-            <h3>1000 Créditos</h3>
-            <p className="price">R$ 9,99</p>
-          </div>
-          <div className="credit-card">
-            <div className="credit-icon">💎</div>
-            <h3>2000 Créditos</h3>
-            <p className="price">R$ 19,99</p>
-          </div>
-          <div className="credit-card">
-            <div className="credit-icon">💎</div>
-            <h3>3000 Créditos</h3>
-            <p className="price">R$ 29,99</p>
-          </div>
-          <div className="credit-card">
-            <div className="credit-icon">🏆</div>
-            <h3>5000 Créditos</h3>
-            <p className="price">R$ 49,99</p>
-          </div>
-          <div className="credit-card">
-            <div className="credit-icon">🏆</div>
-            <h3>10000 Créditos</h3>
-            <p className="price">R$ 99,99</p>
-          </div>
+          {creditPackages.map((pkg) => {
+            const priceInReais = (pkg.totalAmount / 100).toFixed(2).replace('.', ',');
+            return (
+              <div
+                key={pkg.credits}
+                className="credit-card"
+                onClick={() => handlePackageClick(pkg)}
+              >
+                <div className="credit-icon">{pkg.icon}</div>
+                <h3>{pkg.credits} Créditos</h3>
+                <p className="price">R$ {priceInReais}</p>
+              </div>
+            );
+          })}
         </div>
 
         {/* Action Buttons */}

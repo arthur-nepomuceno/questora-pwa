@@ -39,10 +39,27 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
 
   const handlePackageClick = (pkg: CreditPackage) => {
     playButtonPress();
+    
+    // Buscar informações do usuário do localStorage
+    const userPaymentInfoStr = localStorage.getItem('userPaymentInfo');
+    let userPaymentInfo = null;
+    
+    if (userPaymentInfoStr) {
+      try {
+        userPaymentInfo = JSON.parse(userPaymentInfoStr);
+      } catch (error) {
+        console.error('Erro ao parsear dados do localStorage:', error);
+      }
+    }
+
     console.log('💳 Pacote selecionado:', {
       credits: pkg.credits,
       totalAmount: pkg.totalAmount,
       creditsToReceive: pkg.creditsToReceive,
+      documentValue: userPaymentInfo?.documentValue || 'Não disponível',
+      documentType: userPaymentInfo?.documentType || 'Não disponível',
+      name: userPaymentInfo?.name || 'Não disponível',
+      email: userPaymentInfo?.email || 'Não disponível',
     });
     // TODO: Implementar lógica de pagamento aqui
   };

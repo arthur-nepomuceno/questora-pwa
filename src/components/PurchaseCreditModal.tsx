@@ -10,10 +10,17 @@ interface PurchaseCreditModalProps {
   onCancel: () => void;
 }
 
+interface UserPaymentInfo {
+  documentValue: string;
+  documentType: 'CPF' | 'CNPJ';
+  name: string;
+  email: string;
+}
+
 export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCreditModalProps) {
   const { playButtonPress } = useSounds();
   const { isValidCPF, isValidCNPJ } = useDocumentValidation();
-  const { updateDocumentInfo } = useAuth();
+  const { updateDocumentInfo, user } = useAuth();
   const [documentType, setDocumentType] = useState<'CPF' | 'CNPJ'>('CPF');
   const [cpf, setCpf] = useState('');
   const [cnpj, setCnpj] = useState('');
@@ -53,8 +60,40 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
     
     if (validateForm()) {
       try {
+        if (!user?.id) {
+          setErrors({ cpfCnpj: 'Usuário não autenticado. Faça login novamente.' });
+          return;
+        }
+
         // Atualizar documentos no Firestore
         await updateDocumentInfo(cpf, cnpj);
+
+        // Buscar name e email do usuário usando Firebase Admin SDK via API Route
+        const response = await fetch(`/api/user-info?userId=${user.id}`);
+        const data = await response.json();
+
+        if (!data.success) {
+          console.error('Erro ao buscar dados do usuário:', data.error);
+          setErrors({ cpfCnpj: 'Erro ao buscar dados do usuário. Tente novamente.' });
+          return;
+        }
+
+        // Preparar dados para salvar no localStorage
+        const currentDocument = getCurrentDocument();
+        const documentValue = currentDocument.replace(/\D/g, ''); // Apenas dígitos
+
+        const paymentInfo: UserPaymentInfo = {
+          documentValue,
+          documentType,
+          name: data.name,
+          email: data.email,
+        };
+
+        // Salvar no localStorage para uso na PurchaseCreditsScreen
+        localStorage.setItem('userPaymentInfo', JSON.stringify(paymentInfo));
+
+        console.log('✅ Informações de pagamento salvas:', paymentInfo);
+
         onConfirm();
       } catch (error) {
         console.error('Erro ao atualizar documentos:', error);
@@ -99,7 +138,7 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
     <div className="modal-overlay" onClick={onCancel}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>Insira seus dados</h2>
+          <h2>Insira um documento válido</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="consent-form">
@@ -193,7 +232,7 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
 
         .modal-header h2 {
           color: #ffeb3b;
-          font-size: 1.8rem;
+          font-size: 1.5rem;
           font-weight: bold;
           margin: 0;
           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);

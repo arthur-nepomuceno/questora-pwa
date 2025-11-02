@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
 
@@ -28,9 +29,20 @@ const creditPackages: CreditPackage[] = [
   { credits: 10000, totalAmount: 9999, creditsToReceive: 10000, icon: '🏆' },
 ];
 
+interface ConfirmModalData {
+  documentValue: string;
+  documentType: string;
+  name: string;
+  email: string;
+  creditsToReceive: number;
+  totalAmount: number;
+}
+
 export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUserInfo = false, onClose }: PurchaseCreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [confirmData, setConfirmData] = useState<ConfirmModalData | null>(null);
 
   const handleLogout = async () => {
     await logout();
@@ -52,16 +64,30 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
       }
     }
 
-    console.log('💳 Pacote selecionado:', {
-      credits: pkg.credits,
-      totalAmount: pkg.totalAmount,
+    // Preparar dados para o modal de confirmação
+    const modalData: ConfirmModalData = {
+      documentValue: userPaymentInfo?.documentValue || user?.phone || 'Não disponível',
+      documentType: userPaymentInfo?.documentType || 'CPF',
+      name: userPaymentInfo?.name || user?.name || 'Não disponível',
+      email: userPaymentInfo?.email || user?.email || 'Não disponível',
       creditsToReceive: pkg.creditsToReceive,
-      documentValue: userPaymentInfo?.documentValue || 'Não disponível',
-      documentType: userPaymentInfo?.documentType || 'Não disponível',
-      name: userPaymentInfo?.name || 'Não disponível',
-      email: userPaymentInfo?.email || 'Não disponível',
-    });
+      totalAmount: pkg.totalAmount
+    };
+
+    setConfirmData(modalData);
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmPurchase = () => {
+    playButtonPress();
+    console.log('✅ Compra confirmada:', confirmData);
     // TODO: Implementar lógica de pagamento aqui
+    setShowConfirmModal(false);
+  };
+
+  const handleCancelPurchase = () => {
+    playButtonPress();
+    setShowConfirmModal(false);
   };
 
   return (
@@ -176,6 +202,47 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
         </div>
       )}
 
+      {/* Modal de Confirmação */}
+      {showConfirmModal && confirmData && (
+        <div className="modal-overlay" onClick={handleCancelPurchase}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Confirmar Compra</h2>
+            </div>
+            <div className="confirm-details">
+              <div className="confirm-row">
+                <span className="confirm-label">Nome:</span>
+                <span className="confirm-value">{confirmData.name}</span>
+              </div>
+              <div className="confirm-row">
+                <span className="confirm-label">Email:</span>
+                <span className="confirm-value">{confirmData.email}</span>
+              </div>
+              <div className="confirm-row">
+                <span className="confirm-label">Documento ({confirmData.documentType}):</span>
+                <span className="confirm-value">{confirmData.documentValue}</span>
+              </div>
+              <div className="confirm-row highlight">
+                <span className="confirm-label">Créditos:</span>
+                <span className="confirm-value">{confirmData.creditsToReceive.toLocaleString()}</span>
+              </div>
+              <div className="confirm-row highlight">
+                <span className="confirm-label">Valor Total:</span>
+                <span className="confirm-value">R$ {(confirmData.totalAmount / 100).toFixed(2).replace('.', ',')}</span>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="btn btn-secondary" onClick={handleCancelPurchase}>
+                Cancelar
+              </button>
+              <button className="btn btn-primary" onClick={handleConfirmPurchase}>
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         .user-info {
           display: flex;
@@ -259,6 +326,172 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
           font-weight: bold;
           font-size: 1.1rem;
           margin-top: 8px;
+        }
+
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+          background: linear-gradient(135deg, #1a237e, #283593);
+          border: 3px solid #ffeb3b;
+          border-radius: 20px;
+          padding: 30px;
+          max-width: 500px;
+          width: 90%;
+          max-height: 90vh;
+          overflow-y: auto;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+          from {
+            opacity: 0;
+            transform: scale(0.8) translateY(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        .modal-header {
+          text-align: center;
+          margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+          color: #ffeb3b;
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin: 0;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .confirm-details {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          padding: 20px;
+          margin-bottom: 20px;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .confirm-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .confirm-row:last-child {
+          border-bottom: none;
+        }
+
+        .confirm-row.highlight {
+          background: rgba(255, 235, 59, 0.1);
+          padding: 15px;
+          border-radius: 8px;
+          margin-top: 5px;
+          border: 2px solid rgba(255, 235, 59, 0.3);
+        }
+
+        .confirm-label {
+          color: #ffeb3b;
+          font-weight: 600;
+          font-size: 0.95rem;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .confirm-value {
+          color: white;
+          font-weight: bold;
+          font-size: 1rem;
+          text-align: right;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .confirm-row.highlight .confirm-value {
+          font-size: 1.2rem;
+          color: #ffeb3b;
+        }
+
+        .modal-actions {
+          display: flex;
+          gap: 15px;
+          margin-top: 15px;
+        }
+
+        .modal-actions .btn {
+          flex: 1;
+          padding: 14px 24px;
+          border: none;
+          border-radius: 10px;
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .modal-content .btn-primary {
+          background: linear-gradient(135deg, #ffeb3b, #ffc107);
+          color: #1a237e;
+          border: none;
+          box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        .modal-content .btn-primary:hover {
+          background: linear-gradient(135deg, #ffc107, #ff9800);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(255, 235, 59, 0.4);
+        }
+
+        .modal-content .btn-primary:active {
+          transform: translateY(0);
+        }
+
+        .modal-content .btn-secondary {
+          background: transparent;
+          color: #ffeb3b;
+          border: 2px solid #ffeb3b;
+        }
+
+        .modal-content .btn-secondary:hover {
+          background: rgba(255, 235, 59, 0.1);
+          border-color: #ffc107;
+        }
+
+        @media (max-width: 600px) {
+          .modal-content {
+            padding: 20px;
+            margin: 20px;
+          }
+
+          .modal-header h2 {
+            font-size: 1.5rem;
+          }
+
+          .modal-actions {
+            flex-direction: column;
+          }
+
+          .modal-actions .btn {
+            width: 100%;
+          }
         }
       `}</style>
     </div>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useSounds } from '@/hooks/useSounds';
+import { useDocumentValidation } from '@/hooks/useDocumentValidation';
 
 interface PurchaseCreditModalProps {
   onConfirm: () => void;
@@ -10,6 +11,8 @@ interface PurchaseCreditModalProps {
 
 export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCreditModalProps) {
   const { playButtonPress } = useSounds();
+  const { isValidCPF, isValidCNPJ } = useDocumentValidation();
+  const [documentType, setDocumentType] = useState<'CPF' | 'CNPJ'>('CPF');
   const [cpfCnpj, setCpfCnpj] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -17,13 +20,12 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
     const newErrors: { [key: string]: string } = {};
 
     if (!cpfCnpj.trim()) {
-      newErrors.cpfCnpj = 'CPF/CNPJ é obrigatório';
+      newErrors.cpfCnpj = `${documentType} é obrigatório`;
     } else {
-      // Remove caracteres não numéricos
-      const cleanCpfCnpj = cpfCnpj.replace(/\D/g, '');
-      // Valida CPF (11 dígitos) ou CNPJ (14 dígitos)
-      if (cleanCpfCnpj.length !== 11 && cleanCpfCnpj.length !== 14) {
-        newErrors.cpfCnpj = 'CPF/CNPJ inválido';
+      // Valida CPF ou CNPJ usando o checksum
+      const isValid = documentType === 'CPF' ? isValidCPF(cpfCnpj) : isValidCNPJ(cpfCnpj);
+      if (!isValid) {
+        newErrors.cpfCnpj = `${documentType} inválido`;
       }
     }
 
@@ -42,7 +44,7 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
 
   const formatCpfCnpj = (value: string) => {
     const numbers = value.replace(/\D/g, '');
-    if (numbers.length <= 11) {
+    if (documentType === 'CPF') {
       // CPF: 000.000.000-00
       return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/, '$1.$2.$3-$4').trim();
     } else {
@@ -52,8 +54,23 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
   };
 
   const handleCpfCnpjChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatCpfCnpj(e.target.value);
+    let input = e.target.value;
+    // Remove caracteres não numéricos para contar apenas dígitos
+    const numbers = input.replace(/\D/g, '');
+    
+    // Limita o número de dígitos baseado no tipo de documento
+    const maxDigits = documentType === 'CPF' ? 11 : 14;
+    const limitedNumbers = numbers.slice(0, maxDigits);
+    
+    // Formata o valor limitado
+    const formatted = formatCpfCnpj(limitedNumbers);
     setCpfCnpj(formatted);
+  };
+
+  const handleDocumentTypeChange = (type: 'CPF' | 'CNPJ') => {
+    setDocumentType(type);
+    setCpfCnpj('');
+    setErrors({});
   };
 
   return (
@@ -65,13 +82,33 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
 
         <form onSubmit={handleSubmit} className="consent-form">
           <div className="form-group">
-            <label htmlFor="cpfCnpj">CPF/CNPJ *</label>
+            <label>Tipo de Documento *</label>
+            <div className="document-type-selector">
+              <button
+                type="button"
+                className={`type-option ${documentType === 'CPF' ? 'active' : ''}`}
+                onClick={() => handleDocumentTypeChange('CPF')}
+              >
+                CPF
+              </button>
+              <button
+                type="button"
+                className={`type-option ${documentType === 'CNPJ' ? 'active' : ''}`}
+                onClick={() => handleDocumentTypeChange('CNPJ')}
+              >
+                CNPJ
+              </button>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="cpfCnpj">{documentType} *</label>
             <input
               id="cpfCnpj"
               type="text"
               value={cpfCnpj}
               onChange={handleCpfCnpjChange}
-              placeholder="000.000.000-00 ou 00.000.000/0000-00"
+              placeholder={documentType === 'CPF' ? '000.000.000-00' : '00.000.000/0000-00'}
               className={errors.cpfCnpj ? 'error' : ''}
             />
             {errors.cpfCnpj && <span className="error-message">{errors.cpfCnpj}</span>}
@@ -158,6 +195,36 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
           font-size: 0.95rem;
         }
 
+        .document-type-selector {
+          display: flex;
+          gap: 10px;
+        }
+
+        .type-option {
+          flex: 1;
+          padding: 12px 20px;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .type-option:hover {
+          border-color: #ffeb3b;
+          background: rgba(255, 235, 59, 0.1);
+        }
+
+        .type-option.active {
+          background: linear-gradient(135deg, #ffeb3b, #ffc107);
+          color: #1a237e;
+          border-color: #ffeb3b;
+          box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+        }
+
         .form-group input[type="text"] {
           padding: 12px 16px;
           border: 2px solid rgba(255, 255, 255, 0.3);
@@ -242,6 +309,14 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
 
           .modal-header h2 {
             font-size: 1.5rem;
+          }
+
+          .document-type-selector {
+            flex-direction: column;
+          }
+
+          .type-option {
+            width: 100%;
           }
 
           .modal-actions {

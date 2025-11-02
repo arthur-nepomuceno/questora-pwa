@@ -47,6 +47,8 @@ export const useAuth = () => {
           creditPackage500: 0,
           creditPackage700: 0,
           creditPackage1000: 0,
+          cpfNumber: '',
+          cnpjNumber: '',
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -83,6 +85,8 @@ export const useAuth = () => {
               creditPackage500: userData.creditPackage500 || userData.creditGames500 || 0,
               creditPackage700: userData.creditPackage700 || userData.creditGames700 || 0,
               creditPackage1000: userData.creditPackage1000 || userData.creditGames1000 || 0,
+              cpfNumber: userData.cpfNumber || '',
+              cnpjNumber: userData.cnpjNumber || '',
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
@@ -221,6 +225,8 @@ export const useAuth = () => {
         creditPackage500: 0,
         creditPackage700: 0,
         creditPackage1000: 0,
+        cpfNumber: '',
+        cnpjNumber: '',
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };

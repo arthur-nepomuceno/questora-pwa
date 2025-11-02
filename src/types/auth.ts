@@ -13,6 +13,8 @@ export interface User {
   creditPackage500: number;
   creditPackage700: number;
   creditPackage1000: number;
+  cpfNumber: string;
+  cnpjNumber: string;
   createdAt: Date;
   updatedAt: Date;
 }

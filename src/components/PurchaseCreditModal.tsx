@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useSounds } from '@/hooks/useSounds';
 import { useDocumentValidation } from '@/hooks/useDocumentValidation';
+import { useAuth } from '@/hooks/useAuth';
 
 interface PurchaseCreditModalProps {
   onConfirm: () => void;
@@ -12,6 +13,7 @@ interface PurchaseCreditModalProps {
 export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCreditModalProps) {
   const { playButtonPress } = useSounds();
   const { isValidCPF, isValidCNPJ } = useDocumentValidation();
+  const { updateDocumentInfo } = useAuth();
   const [documentType, setDocumentType] = useState<'CPF' | 'CNPJ'>('CPF');
   const [cpf, setCpf] = useState('');
   const [cnpj, setCnpj] = useState('');
@@ -45,12 +47,19 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     playButtonPress();
     
     if (validateForm()) {
-      onConfirm();
+      try {
+        // Atualizar documentos no Firestore
+        await updateDocumentInfo(cpf, cnpj);
+        onConfirm();
+      } catch (error) {
+        console.error('Erro ao atualizar documentos:', error);
+        setErrors({ cpfCnpj: 'Erro ao salvar documentos. Tente novamente.' });
+      }
     }
   };
 

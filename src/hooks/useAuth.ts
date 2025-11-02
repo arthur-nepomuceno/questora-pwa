@@ -452,6 +452,50 @@ export const useAuth = () => {
     }
   };
 
+  const updateDocumentInfo = async (cpfNumber: string, cnpjNumber: string) => {
+    try {
+      if (!authState.user || !authState.isAuthenticated) {
+        console.error('❌ Usuário não autenticado');
+        return;
+      }
+
+      // Remove caracteres não numéricos para armazenar apenas dígitos
+      const cleanCpfNumber = cpfNumber.replace(/\D/g, '');
+      const cleanCnpjNumber = cnpjNumber.replace(/\D/g, '');
+
+      // Monta objeto de atualização apenas com os campos preenchidos
+      const updateData: any = {
+        updatedAt: serverTimestamp(),
+      };
+
+      // Atualiza apenas se o CPF foi preenchido
+      if (cleanCpfNumber) {
+        updateData.cpfNumber = cleanCpfNumber;
+      }
+
+      // Atualiza apenas se o CNPJ foi preenchido
+      if (cleanCnpjNumber) {
+        updateData.cnpjNumber = cleanCnpjNumber;
+      }
+
+      await updateDoc(doc(db, 'users', authState.user.id), updateData);
+
+      setAuthState(prev => ({
+        ...prev,
+        user: prev.user ? {
+          ...prev.user,
+          ...(cleanCpfNumber && { cpfNumber: cleanCpfNumber }),
+          ...(cleanCnpjNumber && { cnpjNumber: cleanCnpjNumber }),
+        } : null,
+      }));
+
+      console.log('✅ Dados de documento atualizados com sucesso');
+    } catch (error) {
+      console.error('❌ Erro ao atualizar dados de documento:', error);
+      throw error;
+    }
+  };
+
   return {
     ...authState,
     login,
@@ -464,5 +508,6 @@ export const useAuth = () => {
     updateGameStats,
     updateTotalGames,
     updateCreditGames,
+    updateDocumentInfo,
   };
 };

@@ -43,6 +43,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
   const { playButtonPress } = useSounds();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [confirmData, setConfirmData] = useState<ConfirmModalData | null>(null);
+  const [isCreatingPayment, setIsCreatingPayment] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -78,14 +79,65 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
     setShowConfirmModal(true);
   };
 
-  const handleConfirmPurchase = () => {
+  const handleConfirmPurchase = async () => {
+    if (!confirmData || !user?.id) {
+      alert('Erro: Dados incompletos ou usuário não autenticado');
+      return;
+    }
+
     playButtonPress();
-    console.log('✅ Compra confirmada:', confirmData);
-    // TODO: Implementar lógica de pagamento aqui
-    setShowConfirmModal(false);
+    setIsCreatingPayment(true);
+
+    try {
+      console.log('💳 [PurchaseCreditsScreen] Criando pagamento no Firestore...');
+      
+      const response = await fetch('/api/payments/create-pix', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          totalAmount: confirmData.totalAmount,
+          creditsToReceive: confirmData.creditsToReceive,
+          documentValue: confirmData.documentValue,
+          documentType: confirmData.documentType,
+          name: confirmData.name,
+          email: confirmData.email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Erro ao criar pagamento');
+      }
+
+      if (data.success) {
+        console.log('✅ [PurchaseCreditsScreen] Pagamento criado com sucesso:', {
+          orderId: data.orderId,
+          referenceId: data.referenceId,
+        });
+        
+        alert(`Pagamento criado com sucesso!\nOrder ID: ${data.orderId}`);
+        setShowConfirmModal(false);
+        setConfirmData(null);
+      } else {
+        throw new Error(data.error || 'Erro desconhecido');
+      }
+
+    } catch (error: any) {
+      console.error('❌ [PurchaseCreditsScreen] Erro ao criar pagamento:', error);
+      alert(`Erro ao criar pagamento: ${error.message}`);
+    } finally {
+      setIsCreatingPayment(false);
+    }
   };
 
   const handleCancelPurchase = () => {
+    if (isCreatingPayment) {
+      return; // Não permite fechar durante o processamento
+    }
     playButtonPress();
     setShowConfirmModal(false);
   };
@@ -204,7 +256,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
 
       {/* Modal de Confirmação */}
       {showConfirmModal && confirmData && (
-        <div className="modal-overlay" onClick={handleCancelPurchase}>
+        <div className="modal-overlay" onClick={isCreatingPayment ? undefined : handleCancelPurchase}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>Confirmar Compra</h2>
@@ -232,11 +284,19 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
               </div>
             </div>
             <div className="modal-actions">
-              <button className="btn btn-secondary" onClick={handleCancelPurchase}>
+              <button 
+                className="btn btn-secondary" 
+                onClick={handleCancelPurchase}
+                disabled={isCreatingPayment}
+              >
                 Cancelar
               </button>
-              <button className="btn btn-primary" onClick={handleConfirmPurchase}>
-                Confirmar
+              <button 
+                className="btn btn-primary" 
+                onClick={handleConfirmPurchase}
+                disabled={isCreatingPayment}
+              >
+                {isCreatingPayment ? 'Criando Pagamento...' : 'Confirmar'}
               </button>
             </div>
           </div>
@@ -473,6 +533,23 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
         .modal-content .btn-secondary:hover {
           background: rgba(255, 235, 59, 0.1);
           border-color: #ffc107;
+        }
+
+        .modal-actions .btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          transform: none !important;
+        }
+
+        .modal-content .btn-primary:disabled {
+          background: linear-gradient(135deg, #9e9e9e, #757575);
+          color: #ffffff;
+          box-shadow: none;
+        }
+
+        .modal-content .btn-secondary:disabled {
+          opacity: 0.5;
+          border-color: rgba(255, 235, 59, 0.5);
         }
 
         @media (max-width: 600px) {

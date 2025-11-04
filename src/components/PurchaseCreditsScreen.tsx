@@ -110,7 +110,39 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Erro ao criar pagamento');
+        // Exibir informações de debug do token
+        if (data.debug) {
+          console.log('🔑 [PurchaseCreditsScreen] DEBUG - Informações do Token:');
+          console.log('   - Token existe?', data.debug.tokenExists);
+          console.log('   - Comprimento do token:', data.debug.tokenLength);
+          console.log('   - Preview do token:', data.debug.tokenPreview);
+          console.log('   - Token completo:', data.debug.tokenFull);
+        }
+        
+        // Exibir detalhes do erro do PagSeguro se disponível
+        let errorMessage = data.error || 'Erro ao criar pagamento';
+        
+        if (data.pagbankError) {
+          console.error('❌ [PurchaseCreditsScreen] Erro detalhado do PagSeguro:', data.pagbankError);
+          
+          // Extrair mensagem de erro mais específica
+          if (data.pagbankError.message) {
+            errorMessage += `: ${data.pagbankError.message}`;
+          } else if (data.pagbankError.error_messages) {
+            // PagSeguro pode retornar array de erros
+            const errors = Array.isArray(data.pagbankError.error_messages) 
+              ? data.pagbankError.error_messages.join(', ')
+              : data.pagbankError.error_messages;
+            errorMessage += `: ${errors}`;
+          } else if (typeof data.pagbankError === 'string') {
+            errorMessage += `: ${data.pagbankError}`;
+          }
+          
+          // Log completo para debug
+          console.error('❌ [PurchaseCreditsScreen] Resposta completa do PagSeguro:', JSON.stringify(data.pagbankError, null, 2));
+        }
+        
+        throw new Error(errorMessage);
       }
 
       if (data.success) {
@@ -119,7 +151,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
           referenceId: data.referenceId,
         });
         
-        alert(`Pagamento criado com sucesso!\nOrder ID: ${data.orderId}`);
+        alert(`Pagamento criado com sucesso!\nRegistro: ${data.orderId}`);
         setShowConfirmModal(false);
         setConfirmData(null);
       } else {
@@ -128,6 +160,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
 
     } catch (error: any) {
       console.error('❌ [PurchaseCreditsScreen] Erro ao criar pagamento:', error);
+      console.error('❌ [PurchaseCreditsScreen] Stack trace:', error.stack);
       alert(`Erro ao criar pagamento: ${error.message}`);
     } finally {
       setIsCreatingPayment(false);

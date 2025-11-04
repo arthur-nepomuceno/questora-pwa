@@ -81,6 +81,11 @@ export async function POST(request: NextRequest) {
 
     console.log('🆔 [API Create PIX] IDs gerados:', { referenceId, orderId });
 
+    // Calcular data de expiração (1 hora depois)
+    const expirationTime = new Date();
+    expirationTime.setHours(expirationTime.getHours() + 1);
+    const expirationDateISO = expirationTime.toISOString().slice(0, 19) + '-03:00';
+
     // Criar documento no Firestore na collection 'payments'
     const paymentData = {
       orderId,
@@ -98,6 +103,7 @@ export async function POST(request: NextRequest) {
       pixString: '', // Será preenchido quando o PagBank responder
       createdAt: new Date(),
       updatedAt: new Date(),
+      wouldExpireAt: expirationDateISO,
     };
 
     // Usar orderId como ID do documento no Firestore
@@ -105,10 +111,131 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ [API Create PIX] Documento criado no Firestore com sucesso:', orderId);
 
+    // Montar payload para o PagBank
+    const pagbankPayload = {
+      reference_id: referenceId,
+      customer: {
+        name: body.name,
+        email: body.email,
+        tax_id: body.documentValue.replace(/\D/g, ''), // Remover formatação (apenas dígitos)
+      },
+      qr_codes: [{
+        amount: {
+          value: body.totalAmount, // Valor já está em centavos
+        },
+        expiration_date: expirationDateISO,
+      }],
+      notification_urls: [
+        `${process.env.NEXT_PUBLIC_APP_URL || 'https://show-do-milenio.vercel.app'}/api/payments/webhook-confirm`,
+      ],
+    };
+
+    console.log('📤 [API Create PIX] Enviando requisição para PagSeguro...');
+    console.log('📋 [API Create PIX] Payload:', JSON.stringify(pagbankPayload, null, 2));
+
+    // Fazer chamada ao PagSeguro
+    console.log('🔍 [API Create PIX] Verificando variável de ambiente...');
+    const pagbankToken = process.env.PAGBANK_ACCESS_TOKEN;
+    console.log('🔍 [API Create PIX] Token existe?', pagbankToken ? 'SIM' : 'NÃO');
+    console.log('🔍 [API Create PIX] Token é undefined?', pagbankToken === undefined);
+    console.log('🔍 [API Create PIX] Token é null?', pagbankToken === null);
+    console.log('🔍 [API Create PIX] Token é string vazia?', pagbankToken === '');
+    
+    if (!pagbankToken) {
+      console.error('❌ [API Create PIX] PAGBANK_ACCESS_TOKEN não configurado');
+      console.error('❌ [API Create PIX] Valor do token:', pagbankToken);
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Configuração do PagBank não encontrada' 
+        },
+        { status: 500 }
+      );
+    }
+
+    console.log('🔑 [API Create PIX] Token PagSeguro:', pagbankToken);
+    console.log('🔑 [API Create PIX] Token length:', pagbankToken.length);
+    console.log('🔑 [API Create PIX] Primeiros 10 caracteres:', pagbankToken.substring(0, 10) + '...');
+
+    const pagbankResponse = await fetch('https://sandbox.api.pagseguro.com/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${pagbankToken}`,
+      },
+      body: JSON.stringify(pagbankPayload),
+    });
+
+    // Tentar parsear resposta JSON
+    let pagbankData;
+    try {
+      const text = await pagbankResponse.text();
+      console.log('📥 [API Create PIX] Resposta bruta do PagSeguro:', text);
+      pagbankData = text ? JSON.parse(text) : {};
+    } catch (parseError) {
+      console.error('❌ [API Create PIX] Erro ao parsear resposta JSON:', parseError);
+      pagbankData = { error: 'Resposta inválida do PagSeguro' };
+    }
+
+    console.log('📊 [API Create PIX] Status HTTP:', pagbankResponse.status);
+    console.log('📊 [API Create PIX] Resposta parseada:', JSON.stringify(pagbankData, null, 2));
+
+    if (!pagbankResponse.ok) {
+      console.error('❌ [API Create PIX] Erro na resposta do PagSeguro:');
+      console.error('   - Status:', pagbankResponse.status);
+      console.error('   - Status Text:', pagbankResponse.statusText);
+      console.error('   - Body:', JSON.stringify(pagbankData, null, 2));
+      
+      // Atualizar status do pagamento para FAILED
+      await adminDb.collection('payments').doc(orderId).update({
+        paymentStatus: 'FAILED',
+        updatedAt: new Date(),
+        errorDetails: pagbankData,
+      });
+
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Erro ao criar ordem no PagSeguro',
+          pagbankError: pagbankData,
+          httpStatus: pagbankResponse.status,
+          debug: {
+            tokenExists: !!pagbankToken,
+            tokenLength: pagbankToken?.length || 0,
+            tokenPreview: pagbankToken ? `${pagbankToken.substring(0, 10)}...` : 'N/A',
+            tokenFull: pagbankToken, // APENAS PARA DEBUG - REMOVER EM PRODUÇÃO
+          },
+        },
+        { status: pagbankResponse.status }
+      );
+    }
+
+    console.log('✅ [API Create PIX] Resposta do PagSeguro recebida:', JSON.stringify(pagbankData, null, 2));
+
+    // Extrair dados do QR Code PIX da resposta
+    const qrCode = pagbankData.qr_codes?.[0];
+    const pagbankOrderId = pagbankData.id || pagbankData.order_id || '';
+    const pixQrCodeUrl = qrCode?.qr_code_image || qrCode?.image_url || '';
+    const pixString = qrCode?.text || qrCode?.qr_code || '';
+
+    // Atualizar documento no Firestore com dados do PagBank
+    await adminDb.collection('payments').doc(orderId).update({
+      pagbankOrderId,
+      pixQrCodeUrl,
+      pixString,
+      updatedAt: new Date(),
+    });
+
+    console.log('✅ [API Create PIX] Documento atualizado com dados do PagBank');
+
     return NextResponse.json({
       success: true,
       orderId,
       referenceId,
+      pagbankOrderId,
+      pixQrCodeUrl,
+      pixString,
+      expirationDate: expirationDateISO,
       message: 'Cobrança PIX criada com sucesso',
     });
 

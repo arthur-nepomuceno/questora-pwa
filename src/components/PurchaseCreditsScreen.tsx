@@ -38,12 +38,19 @@ interface ConfirmModalData {
   totalAmount: number;
 }
 
+interface PixModalData {
+  qrCodeText: string;
+  qrCodeImageUrl: string;
+}
+
 export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUserInfo = false, onClose }: PurchaseCreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress } = useSounds();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [confirmData, setConfirmData] = useState<ConfirmModalData | null>(null);
   const [isCreatingPayment, setIsCreatingPayment] = useState(false);
+  const [showPixModal, setShowPixModal] = useState(false);
+  const [pixModalData, setPixModalData] = useState<PixModalData | null>(null);
 
   const handleLogout = async () => {
     await logout();
@@ -154,11 +161,29 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
           console.log('📥 [PurchaseCreditsScreen] QR Code Text:', data.pagbankResponse.qr_codes?.[0]?.text);
           console.log('📥 [PurchaseCreditsScreen] QR Code Image URL:', data.pagbankResponse.qr_codes[0].links.find((link: any) => link.rel === 'QRCODE.PNG').href);
           console.log('📥 [PurchaseCreditsScreen] Resposta completa do PagSeguro:', JSON.stringify(data.pagbankResponse, null, 2));
-        }
 
-        alert(`Pagamento criado com sucesso!\nRegistro: ${data.orderId}`);
-        setShowConfirmModal(false);
-        setConfirmData(null);
+          // Extrair dados do PIX para exibir no modal
+          const qrCodeText = data.pagbankResponse.qr_codes?.[0]?.text || '';
+          const qrCodeImageUrl = data.pagbankResponse.qr_codes[0].links.find((link: any) => link.rel === 'QRCODE.PNG')?.href || '';
+
+          if (qrCodeText && qrCodeImageUrl) {
+            setPixModalData({
+              qrCodeText,
+              qrCodeImageUrl,
+            });
+            setShowConfirmModal(false);
+            setConfirmData(null);
+            setShowPixModal(true);
+          } else {
+            alert(`Pagamento criado com sucesso!\nRegistro: ${data.orderId}`);
+            setShowConfirmModal(false);
+            setConfirmData(null);
+          }
+        } else {
+          alert(`Pagamento criado com sucesso!\nRegistro: ${data.orderId}`);
+          setShowConfirmModal(false);
+          setConfirmData(null);
+        }
       } else {
         throw new Error(data.error || 'Erro desconhecido');
       }
@@ -178,6 +203,25 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
     }
     playButtonPress();
     setShowConfirmModal(false);
+  };
+
+  const handleClosePixModal = () => {
+    playButtonPress();
+    setShowPixModal(false);
+    setPixModalData(null);
+  };
+
+  const handleCopyPixCode = async () => {
+    if (!pixModalData?.qrCodeText) return;
+    
+    try {
+      await navigator.clipboard.writeText(pixModalData.qrCodeText);
+      playButtonPress();
+      alert('Código PIX copiado para a área de transferência!');
+    } catch (error) {
+      console.error('Erro ao copiar código PIX:', error);
+      alert('Erro ao copiar código PIX');
+    }
   };
 
   return (
@@ -335,6 +379,47 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
                 disabled={isCreatingPayment}
               >
                 {isCreatingPayment ? 'Criando Pagamento...' : 'Confirmar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal do PIX */}
+      {showPixModal && pixModalData && (
+        <div className="modal-overlay" onClick={handleClosePixModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Pagamento PIX</h2>
+            </div>
+            <div className="pix-details">
+              <div className="pix-qr-code">
+                <img src={pixModalData.qrCodeImageUrl} alt="QR Code PIX" />
+              </div>
+              <div className="pix-code-section">
+                <label className="pix-code-label">Código PIX (Copia e Cola):</label>
+                <div className="pix-code-input-wrapper">
+                  <input
+                    type="text"
+                    readOnly
+                    value={pixModalData.qrCodeText}
+                    className="pix-code-input"
+                  />
+                  <button
+                    className="btn btn-copy"
+                    onClick={handleCopyPixCode}
+                  >
+                    Copiar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button 
+                className="btn btn-primary" 
+                onClick={handleClosePixModal}
+              >
+                Fechar
               </button>
             </div>
           </div>
@@ -590,6 +675,90 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
           border-color: rgba(255, 235, 59, 0.5);
         }
 
+        .pix-details {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          padding: 20px;
+          margin-bottom: 20px;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pix-qr-code {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 25px;
+          padding: 15px;
+          background: white;
+          border-radius: 12px;
+        }
+
+        .pix-qr-code img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+
+        .pix-code-section {
+          margin-top: 20px;
+        }
+
+        .pix-code-label {
+          display: block;
+          color: #ffeb3b;
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-bottom: 10px;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .pix-code-input-wrapper {
+          display: flex;
+          gap: 10px;
+          align-items: stretch;
+        }
+
+        .pix-code-input {
+          flex: 1;
+          padding: 12px;
+          border: 2px solid #ffeb3b;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.95);
+          color: #1a237e;
+          font-size: 0.9rem;
+          font-family: monospace;
+          word-break: break-all;
+        }
+
+        .pix-code-input:focus {
+          outline: none;
+          border-color: #ffc107;
+          box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.2);
+        }
+
+        .btn-copy {
+          background: linear-gradient(135deg, #ffeb3b, #ffc107);
+          color: #1a237e;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 8px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+          background: linear-gradient(135deg, #ffc107, #ff9800);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+        }
+
+        .btn-copy:active {
+          transform: translateY(0);
+        }
+
         @media (max-width: 600px) {
           .modal-content {
             padding: 20px;
@@ -605,6 +774,14 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
           }
 
           .modal-actions .btn {
+            width: 100%;
+          }
+
+          .pix-code-input-wrapper {
+            flex-direction: column;
+          }
+
+          .btn-copy {
             width: 100%;
           }
         }

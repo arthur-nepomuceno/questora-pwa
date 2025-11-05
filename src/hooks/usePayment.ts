@@ -13,9 +13,14 @@ import { Payment } from '@/types/payment';
 
 export interface CreatePaymentData {
   orderId: string; // ID primário do pedido (interno, único)
-  referenceId: string; // ID de rastreio, consistente com o PagBank (reference_id)
-  userId: string; // Chave estrangeira - ligação com a tabela de usuários
+  referenceId: string; // ID de rastreio, consistente com o PagBank (reference_id)                                                                              
+  userId: string; // Chave estrangeira - ligação com a tabela de usuários    
   totalAmount: number; // Valor total da transação (obrigatório)
+  creditsToReceive: number; // Quantidade de créditos a receber
+  documentValue: string; // Valor do documento (CPF/CNPJ)
+  documentType: string; // Tipo do documento (CPF ou CNPJ)
+  name: string; // Nome do comprador
+  email: string; // Email do comprador
   pagbankOrderId: string; // ID retornado pelo PagBank
   pixQrCodeUrl: string; // URL da imagem do QR Code
   pixString: string; // Código "Copia e Cola"
@@ -41,12 +46,17 @@ export const usePayment = () => {
 
       const now = new Date();
       
-      const paymentDoc: Omit<Payment, 'createdAt' | 'updatedAt'> & { createdAt: any; updatedAt: any } = {
+            const paymentDoc: Omit<Payment, 'createdAt' | 'updatedAt'> & { createdAt: any; updatedAt: any } = {                                                       
         orderId: paymentData.orderId,
         referenceId: paymentData.referenceId,
         userId: paymentData.userId,
         totalAmount: paymentData.totalAmount,
-        paymentStatus: 'PENDING', // Status inicial sempre será PENDING
+        creditsToReceive: paymentData.creditsToReceive,
+        documentValue: paymentData.documentValue,
+        documentType: paymentData.documentType,
+        name: paymentData.name,
+        email: paymentData.email,
+        paymentStatus: 'PENDING', // Status inicial sempre será PENDING        
         pagbankOrderId: paymentData.pagbankOrderId,
         pixQrCodeUrl: paymentData.pixQrCodeUrl,
         pixString: paymentData.pixString,
@@ -97,6 +107,11 @@ export const usePayment = () => {
         referenceId: data.referenceId,
         userId: data.userId,
         totalAmount: data.totalAmount,
+        creditsToReceive: data.creditsToReceive,
+        documentValue: data.documentValue,
+        documentType: data.documentType,
+        name: data.name,
+        email: data.email,
         paymentStatus: data.paymentStatus,
         pagbankOrderId: data.pagbankOrderId,
         pixQrCodeUrl: data.pixQrCodeUrl,

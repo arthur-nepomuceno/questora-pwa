@@ -122,35 +122,40 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
         // Exibir detalhes do erro do PagSeguro se disponível
         let errorMessage = data.error || 'Erro ao criar pagamento';
         
-        if (data.pagbankError) {
+                if (data.pagbankError) {
           console.error('❌ [PurchaseCreditsScreen] Erro detalhado do PagSeguro:', data.pagbankError);
-          
+          console.error('📥 [PurchaseCreditsScreen] Resposta completa do PagSeguro (ERRO):', JSON.stringify(data.pagbankError, null, 2));
+
           // Extrair mensagem de erro mais específica
           if (data.pagbankError.message) {
             errorMessage += `: ${data.pagbankError.message}`;
           } else if (data.pagbankError.error_messages) {
             // PagSeguro pode retornar array de erros
-            const errors = Array.isArray(data.pagbankError.error_messages) 
+            const errors = Array.isArray(data.pagbankError.error_messages)
               ? data.pagbankError.error_messages.join(', ')
               : data.pagbankError.error_messages;
             errorMessage += `: ${errors}`;
           } else if (typeof data.pagbankError === 'string') {
             errorMessage += `: ${data.pagbankError}`;
           }
-          
-          // Log completo para debug
-          console.error('❌ [PurchaseCreditsScreen] Resposta completa do PagSeguro:', JSON.stringify(data.pagbankError, null, 2));
         }
         
         throw new Error(errorMessage);
       }
 
-      if (data.success) {
+            if (data.success) {
         console.log('✅ [PurchaseCreditsScreen] Pagamento criado com sucesso:', {
           orderId: data.orderId,
           referenceId: data.referenceId,
         });
-        
+
+        if (data.pagbankResponse) {
+          console.log('📥 [PurchaseCreditsScreen] ID:', data.pagbankResponse.id);
+          console.log('📥 [PurchaseCreditsScreen] QR Code Text:', data.pagbankResponse.qr_codes?.[0]?.text);
+          console.log('📥 [PurchaseCreditsScreen] QR Code Image URL:', data.pagbankResponse.qr_codes[0].links.find((link: any) => link.rel === 'QRCODE.PNG').href);
+          console.log('📥 [PurchaseCreditsScreen] Resposta completa do PagSeguro:', JSON.stringify(data.pagbankResponse, null, 2));
+        }
+
         alert(`Pagamento criado com sucesso!\nRegistro: ${data.orderId}`);
         setShowConfirmModal(false);
         setConfirmData(null);

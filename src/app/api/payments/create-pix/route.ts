@@ -237,6 +237,7 @@ export async function POST(request: NextRequest) {
       pixString,
       expirationDate: expirationDateISO,
       message: 'Cobrança PIX criada com sucesso',
+      pagbankResponse: pagbankData, // Resposta completa do PagSeguro para exibição no navegador
     });
 
   } catch (error: any) {

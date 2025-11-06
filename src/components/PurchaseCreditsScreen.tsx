@@ -39,8 +39,9 @@ interface ConfirmModalData {
 }
 
 interface PixModalData {
-  qrCodeText: string;
   qrCodeImageUrl: string;
+  qrCodePayload: string;
+  expirationDate?: string;
 }
 
 export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUserInfo = false, onClose }: PurchaseCreditsScreenProps) {
@@ -117,68 +118,40 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
       const data = await response.json();
 
       if (!response.ok) {
-        // Exibir informações de debug do token
-        if (data.debug) {
-          console.log('🔑 [PurchaseCreditsScreen] DEBUG - Informações do Token:');
-          console.log('   - Token existe?', data.debug.tokenExists);
-          console.log('   - Comprimento do token:', data.debug.tokenLength);
-          console.log('   - Preview do token:', data.debug.tokenPreview);
-          console.log('   - Token completo:', data.debug.tokenFull);
-        }
-        
-        // Exibir detalhes do erro do PagSeguro se disponível
         let errorMessage = data.error || 'Erro ao criar pagamento';
-        
-                if (data.pagbankError) {
-          console.error('❌ [PurchaseCreditsScreen] Erro detalhado do PagSeguro:', data.pagbankError);
-          console.error('📥 [PurchaseCreditsScreen] Resposta completa do PagSeguro (ERRO):', JSON.stringify(data.pagbankError, null, 2));
 
-          // Extrair mensagem de erro mais específica
-          if (data.pagbankError.message) {
-            errorMessage += `: ${data.pagbankError.message}`;
-          } else if (data.pagbankError.error_messages) {
-            // PagSeguro pode retornar array de erros
-            const errors = Array.isArray(data.pagbankError.error_messages)
-              ? data.pagbankError.error_messages.join(', ')
-              : data.pagbankError.error_messages;
-            errorMessage += `: ${errors}`;
-          } else if (typeof data.pagbankError === 'string') {
-            errorMessage += `: ${data.pagbankError}`;
+        if (data.mpError) {
+          console.error('❌ [PurchaseCreditsScreen] Erro detalhado do Mercado Pago:', data.mpError);
+          if (data.mpError.message) {
+            errorMessage += `: ${data.mpError.message}`;
+          } else if (data.mpError.errors && Array.isArray(data.mpError.errors)) {
+            errorMessage += `: ${data.mpError.errors.map((e: any) => e.message || JSON.stringify(e)).join(', ')}`;
           }
+        } else if (data.httpStatus) {
+          errorMessage += ` (Status HTTP: ${data.httpStatus})`;
         }
-        
+
         throw new Error(errorMessage);
       }
 
-            if (data.success) {
+      if (data.success) {
         console.log('✅ [PurchaseCreditsScreen] Pagamento criado com sucesso:', {
           orderId: data.orderId,
           referenceId: data.referenceId,
+          mpPaymentId: data.mpPaymentId,
         });
 
-        if (data.pagbankResponse) {
-          console.log('📥 [PurchaseCreditsScreen] ID:', data.pagbankResponse.id);
-          console.log('📥 [PurchaseCreditsScreen] QR Code Text:', data.pagbankResponse.qr_codes?.[0]?.text);
-          console.log('📥 [PurchaseCreditsScreen] QR Code Image URL:', data.pagbankResponse.qr_codes[0].links.find((link: any) => link.rel === 'QRCODE.PNG').href);
-          console.log('📥 [PurchaseCreditsScreen] Resposta completa do PagSeguro:', JSON.stringify(data.pagbankResponse, null, 2));
+        const newPixData: PixModalData = {
+          qrCodeImageUrl: data.pixQrCodeUrl,
+          qrCodePayload: data.pixString,
+          expirationDate: data.expirationDate,
+        };
 
-          // Extrair dados do PIX para exibir no modal
-          const qrCodeText = data.pagbankResponse.qr_codes?.[0]?.text || '';
-          const qrCodeImageUrl = data.pagbankResponse.qr_codes[0].links.find((link: any) => link.rel === 'QRCODE.PNG')?.href || '';
-
-          if (qrCodeText && qrCodeImageUrl) {
-            setPixModalData({
-              qrCodeText,
-              qrCodeImageUrl,
-            });
-            setShowConfirmModal(false);
-            setConfirmData(null);
-            setShowPixModal(true);
-          } else {
-            alert(`Pagamento criado com sucesso!\nRegistro: ${data.orderId}`);
-            setShowConfirmModal(false);
-            setConfirmData(null);
-          }
+        if (newPixData.qrCodeImageUrl && newPixData.qrCodePayload) {
+          setPixModalData(newPixData);
+          setShowConfirmModal(false);
+          setConfirmData(null);
+          setShowPixModal(true);
         } else {
           alert(`Pagamento criado com sucesso!\nRegistro: ${data.orderId}`);
           setShowConfirmModal(false);
@@ -212,10 +185,10 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
   };
 
   const handleCopyPixCode = async () => {
-    if (!pixModalData?.qrCodeText) return;
+    if (!pixModalData?.qrCodePayload) return;
     
     try {
-      await navigator.clipboard.writeText(pixModalData.qrCodeText);
+      await navigator.clipboard.writeText(pixModalData.qrCodePayload);
       playButtonPress();
       alert('Código PIX copiado para a área de transferência!');
     } catch (error) {
@@ -402,7 +375,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
                   <input
                     type="text"
                     readOnly
-                    value={pixModalData.qrCodeText}
+                    value={pixModalData.qrCodePayload}
                     className="pix-code-input"
                   />
                   <button

@@ -18,7 +18,6 @@ export async function POST(request: NextRequest) {
     
     const body: CreatePixRequest = await request.json();
     
-    // Validação de dados obrigatórios
     const requiredFields = {
       userId: body.userId,
       totalAmount: body.totalAmount,
@@ -29,7 +28,6 @@ export async function POST(request: NextRequest) {
       email: body.email,
     };
 
-    // Verificar se todos os campos foram fornecidos
     const missingFields: string[] = [];
     for (const [field, value] of Object.entries(requiredFields)) {
       if (!value || (typeof value === 'string' && value.trim() === '')) {
@@ -49,7 +47,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validação de tipos
     if (typeof body.totalAmount !== 'number' || body.totalAmount <= 0) {
       return NextResponse.json(
         { success: false, error: 'totalAmount deve ser um número positivo' },
@@ -64,7 +61,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validação de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(body.email)) {
       return NextResponse.json(
@@ -75,169 +71,194 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ [API Create PIX] Validações passadas');
 
-    // Geração de IDs únicos
-    const referenceId = randomUUID(); // UUID para PagBank
-    const orderId = randomUUID(); // UUID distinto para Firestore
+    const referenceId = randomUUID();
+    const orderId = randomUUID();
 
     console.log('🆔 [API Create PIX] IDs gerados:', { referenceId, orderId });
 
-    // Calcular data de expiração (1 hora depois)
-    const expirationTime = new Date();
-    expirationTime.setHours(expirationTime.getHours() + 1);
-    const expirationDateISO = expirationTime.toISOString().slice(0, 19) + '-03:00';
+    // Lógica para obter token do Mercado Pago
+    const isProduction = process.env.NODE_ENV === 'production';
+    const mpAccessToken = isProduction 
+        ? process.env.MP_ACCESS_TOKEN_PROD 
+        : process.env.MP_ACCESS_TOKEN_SANDBOX;
+    const mpBaseUrl = process.env.MP_API_BASE_URL || 'https://api.mercadopago.com';
+    const apiEndpoint = `${mpBaseUrl}/v1/payments`;
+    const notificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://seusite.com'}/api/payments/webhook-mp`;
+
+    if (!mpAccessToken) {
+      console.error('❌ [API Create PIX] ACCESS_TOKEN do Mercado Pago não configurado para o ambiente atual');
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Configuração do Mercado Pago não encontrada' 
+        },
+        { status: 500 }
+      );
+    }
+    
+    // Preparar dados do cliente para o MP (nome completo)
+    const nameParts = body.name.split(' ').filter(part => part.length > 0);
+    const firstName = nameParts.length > 0 ? nameParts[0] : 'Cliente';
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : 'App';
+    
+    // Valor da transação em Reais (Dividido por 100)
+    const transactionAmount = body.totalAmount / 100;
 
     // Criar documento no Firestore na collection 'payments'
     const paymentData = {
       orderId,
       referenceId,
       userId: body.userId,
-      totalAmount: body.totalAmount,
+      totalAmount: transactionAmount, // Armazenar em Reais para consistência MP
       creditsToReceive: body.creditsToReceive,
       documentValue: body.documentValue,
       documentType: body.documentType,
       name: body.name,
       email: body.email,
       paymentStatus: 'PENDING',
-      pagbankOrderId: '', // Será preenchido quando o PagBank responder
-      pixQrCodeUrl: '', // Será preenchido quando o PagBank responder
-      pixString: '', // Será preenchido quando o PagBank responder
+      mpPaymentId: '', // NOVO CAMPO: Será preenchido quando o Mercado Pago responder
+      pixQrCodeUrl: '',
+      pixString: '',
       createdAt: new Date(),
       updatedAt: new Date(),
-      wouldExpireAt: expirationDateISO,
+      wouldExpireAt: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(), // Expiração MP é tipicamente 1 hora
     };
 
-    // Usar orderId como ID do documento no Firestore
     await adminDb.collection('payments').doc(orderId).set(paymentData);
 
     console.log('✅ [API Create PIX] Documento criado no Firestore com sucesso:', orderId);
 
-    // Montar payload para o PagBank
-    const pagbankPayload = {
-      reference_id: referenceId,
-      customer: {
-        name: body.name,
+    // Montar payload para o Mercado Pago (POST /v1/payments)
+    const mpPayload = {
+      transaction_amount: transactionAmount,
+      description: `Compra de ${body.creditsToReceive} créditos`,
+      payment_method_id: 'pix',
+      external_reference: referenceId, // Usaremos o orderId do Firestore como referência externa
+      notification_url: notificationUrl,
+      payer: {
         email: body.email,
-        tax_id: body.documentValue.replace(/\D/g, ''), // Remover formatação (apenas dígitos)
-      },
-      qr_codes: [{
-        amount: {
-          value: body.totalAmount, // Valor já está em centavos
+        first_name: firstName,
+        last_name: lastName,
+        identification: {
+          type: body.documentType.toUpperCase(),
+          number: body.documentValue.replace(/\D/g, ''),
         },
-        expiration_date: expirationDateISO,
-      }],
-      notification_urls: [
-        `${process.env.NEXT_PUBLIC_APP_URL || 'https://show-do-milenio.vercel.app'}/api/payments/webhook-confirm`,
-      ],
+      },
     };
 
-    console.log('📤 [API Create PIX] Enviando requisição para PagSeguro...');
-    console.log('📋 [API Create PIX] Payload:', JSON.stringify(pagbankPayload, null, 2));
+    console.log('📤 [API Create PIX] Enviando requisição para Mercado Pago...');
+    console.log('📋 [API Create PIX] Payload:', JSON.stringify(mpPayload, null, 2));
 
-    // Fazer chamada ao PagSeguro
-    console.log('🔍 [API Create PIX] Verificando variável de ambiente...');
-    const pagbankToken = process.env.PAGBANK_ACCESS_TOKEN;
-    console.log('🔍 [API Create PIX] Token existe?', pagbankToken ? 'SIM' : 'NÃO');
-    console.log('🔍 [API Create PIX] Token é undefined?', pagbankToken === undefined);
-    console.log('🔍 [API Create PIX] Token é null?', pagbankToken === null);
-    console.log('🔍 [API Create PIX] Token é string vazia?', pagbankToken === '');
-    
-    if (!pagbankToken) {
-      console.error('❌ [API Create PIX] PAGBANK_ACCESS_TOKEN não configurado');
-      console.error('❌ [API Create PIX] Valor do token:', pagbankToken);
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Configuração do PagBank não encontrada' 
-        },
-        { status: 500 }
-      );
-    }
-
-    console.log('🔑 [API Create PIX] Token PagSeguro:', pagbankToken);
-    console.log('🔑 [API Create PIX] Token length:', pagbankToken.length);
-    console.log('🔑 [API Create PIX] Primeiros 10 caracteres:', pagbankToken.substring(0, 10) + '...');
-
-    const pagbankResponse = await fetch('https://sandbox.api.pagseguro.com/orders', {
+    const mpResponse = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${pagbankToken}`,
+        'Authorization': `Bearer ${mpAccessToken}`, // Usando o Access Token
+        'X-Idempotency-Key': referenceId,
       },
-      body: JSON.stringify(pagbankPayload),
+      body: JSON.stringify(mpPayload),
     });
 
-    // Tentar parsear resposta JSON
-    let pagbankData;
+    let mpData;
     try {
-      const text = await pagbankResponse.text();
-      console.log('📥 [API Create PIX] Resposta bruta do PagSeguro:', text);
-      pagbankData = text ? JSON.parse(text) : {};
+      const text = await mpResponse.text();
+      console.log('📥 [API Create PIX] Resposta bruta do MP:', text);
+      mpData = text ? JSON.parse(text) : {};
     } catch (parseError) {
       console.error('❌ [API Create PIX] Erro ao parsear resposta JSON:', parseError);
-      pagbankData = { error: 'Resposta inválida do PagSeguro' };
+      mpData = { error: 'Resposta inválida do Mercado Pago' };
     }
 
-    console.log('📊 [API Create PIX] Status HTTP:', pagbankResponse.status);
-    console.log('📊 [API Create PIX] Resposta parseada:', JSON.stringify(pagbankData, null, 2));
+    console.log('📊 [API Create PIX] Status HTTP:', mpResponse.status);
+    console.log('📊 [API Create PIX] Resposta parseada:', JSON.stringify(mpData, null, 2));
 
-    if (!pagbankResponse.ok) {
-      console.error('❌ [API Create PIX] Erro na resposta do PagSeguro:');
-      console.error('   - Status:', pagbankResponse.status);
-      console.error('   - Status Text:', pagbankResponse.statusText);
-      console.error('   - Body:', JSON.stringify(pagbankData, null, 2));
+    if (!mpResponse.ok) {
+      console.error('❌ [API Create PIX] Erro na resposta do Mercado Pago:');
+      console.error('   - Status:', mpResponse.status);
+      console.error('   - Body:', JSON.stringify(mpData, null, 2));
       
-      // Atualizar status do pagamento para FAILED
       await adminDb.collection('payments').doc(orderId).update({
         paymentStatus: 'FAILED',
         updatedAt: new Date(),
-        errorDetails: pagbankData,
+        errorDetails: mpData,
       });
 
       return NextResponse.json(
         { 
           success: false, 
-          error: 'Erro ao criar ordem no PagSeguro',
-          pagbankError: pagbankData,
-          httpStatus: pagbankResponse.status,
-          debug: {
-            tokenExists: !!pagbankToken,
-            tokenLength: pagbankToken?.length || 0,
-            tokenPreview: pagbankToken ? `${pagbankToken.substring(0, 10)}...` : 'N/A',
-            tokenFull: pagbankToken, // APENAS PARA DEBUG - REMOVER EM PRODUÇÃO
-          },
+          error: 'Erro ao criar pagamento no Mercado Pago',
+          mpError: mpData,
+          httpStatus: mpResponse.status,
         },
-        { status: pagbankResponse.status }
+        { status: mpResponse.status }
       );
     }
 
-    console.log('✅ [API Create PIX] Resposta do PagSeguro recebida:', JSON.stringify(pagbankData, null, 2));
+    console.log('✅ [API Create PIX] Resposta do Mercado Pago recebida:', JSON.stringify(mpData, null, 2));
 
-    // Extrair dados do QR Code PIX da resposta
-    const qrCode = pagbankData.qr_codes?.[0];
-    const pagbankOrderId = pagbankData.id || pagbankData.order_id || '';
-    const pixQrCodeUrl = qrCode?.qr_code_image || qrCode?.image_url || '';
-    const pixString = qrCode?.text || qrCode?.qr_code || '';
+    // Extrair dados do QR Code PIX da resposta do Mercado Pago
+    const mpPaymentId = mpData.id || '';
+    const transactionData = mpData.point_of_interaction?.transaction_data;
+    
+    if (!mpPaymentId || !transactionData) {
+        console.error('❌ [API Create PIX] ID do pagamento ou dados da transação não encontrados na resposta do MP');
+        throw new Error('Dados críticos do PIX não encontrados na resposta do Mercado Pago');
+    }
 
-    // Atualizar documento no Firestore com dados do PagBank
+    // EXTRAÇÃO: CÓDIGO COPIA E COLA (Texto) e QR Code em Base64 (Imagem)
+    const pixString = transactionData.qr_code || '';
+    const qrCodeBase64 = transactionData.qr_code_base64 || ''; // MP retorna a imagem em Base64
+
+    console.log('📋 [API Create PIX] Dados extraídos:', {
+      mpPaymentId,
+      pixString: pixString ? `${pixString.substring(0, 50)}...` : 'VAZIO',
+      qrCodeBase64Exists: !!qrCodeBase64,
+    });
+
+    // O Mercado Pago retorna a imagem em Base64. Precisamos formatar como URL de imagem
+    const pixQrCodeUrl = qrCodeBase64 ? `data:image/png;base64,${qrCodeBase64}` : '';
+
+    if (!pixString || !pixQrCodeUrl) {
+      console.error('❌ [API Create PIX] Dados PIX incompletos!');
+
+      await adminDb.collection('payments').doc(orderId).update({
+        paymentStatus: 'FAILED',
+        updatedAt: new Date(),
+        errorDetails: {
+          message: 'Dados do QR Code PIX incompletos na resposta do Mercado Pago',
+          fullResponse: mpData,
+        },
+      });
+
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Dados do QR Code PIX não foram retornados pelo Mercado Pago',
+        },
+        { status: 500 }
+      );
+    }
+
+    // Atualizar documento no Firestore com dados do Mercado Pago
     await adminDb.collection('payments').doc(orderId).update({
-      pagbankOrderId,
+      mpPaymentId, // Salvando o ID do pagamento do MP
       pixQrCodeUrl,
       pixString,
       updatedAt: new Date(),
     });
 
-    console.log('✅ [API Create PIX] Documento atualizado com dados do PagBank');
+    console.log('✅ [API Create PIX] Documento atualizado com dados do Mercado Pago');
 
     return NextResponse.json({
       success: true,
       orderId,
-      referenceId,
-      pagbankOrderId,
+      referenceId: referenceId,
+      mpPaymentId: mpPaymentId, // Retornar o ID do pagamento do MP como referência
       pixQrCodeUrl,
       pixString,
-      expirationDate: expirationDateISO,
+      expirationDate: mpData.date_of_expiration, // O MP fornece o campo de expiração na resposta
       message: 'Cobrança PIX criada com sucesso',
-      pagbankResponse: pagbankData, // Resposta completa do PagSeguro para exibição no navegador
+      mpOrder: mpData,
     });
 
   } catch (error: any) {
@@ -254,4 +275,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

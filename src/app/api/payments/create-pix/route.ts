@@ -36,13 +36,13 @@ if (mpAccessToken) {
             access_token: mpAccessToken,
         });
     } else if (typeof preferences.create === 'function' && typeof config !== 'undefined') {
-        // Workaround para Next.js: injeta o token diretamente na configuração global (erro de digitação corrigido)
+        // Workaround para injetar o token se 'configure' falhar (erro de digitação corrigido)
         mercadopago.config = { 
             ...mercadopago.config,
             access_token: mpAccessToken
         }
     } else {
-        console.error("ERRO CRÍTICO: SDK do Mercado Pago totalmente corrompido ou mal importado.");
+        console.error("ERRO CRÍTICO: SDK do Mercado Pago corrompido.");
     }
 }
 

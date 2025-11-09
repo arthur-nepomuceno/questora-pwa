@@ -36,9 +36,8 @@ if (mpAccessToken) {
             access_token: mpAccessToken,
         });
     } else if (typeof preferences.create === 'function' && typeof config !== 'undefined') {
-        // Se 'configure' falhar, injeta o token diretamente na configuração (workaround for Next.js)
-        // CORRIGIDO: O nome da variável 'mercadopago' estava digitado errado.
-        mercadopago.config = {
+        // Workaround para Next.js: injeta o token diretamente na configuração global (erro de digitação corrigido)
+        mercadopago.config = { 
             ...mercadopago.config,
             access_token: mpAccessToken
         }
@@ -249,8 +248,14 @@ export async function POST(request: NextRequest) {
     }
 
     if (!paymentCreationResponse.ok) {
+        // Logar a resposta detalhada do MP para diagnóstico
+        console.error('❌ [MP Error] Falha na criação do PIX:', paymentDataResponse);
+        
         return NextResponse.json(
-            { success: false, error: 'Erro ao gerar PIX após criação da Preferência' },
+            { success: false, 
+              error: 'Erro ao gerar PIX após criação da Preferência',
+              mpError: paymentDataResponse,
+            },
             { status: paymentCreationResponse.status }
         );
     }
@@ -296,6 +301,8 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
+    // Log detalhado para o erro 500
+    console.error('❌ [Internal Error] Erro ao criar cobrança PIX:', error.message);
     
     return NextResponse.json(
       { 

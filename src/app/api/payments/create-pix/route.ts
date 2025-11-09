@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { randomUUID } from 'crypto';
-// CORREÇÃO: Usar require() para SDK CommonJS
-const mercadopago = require('mercadopago'); 
+// CORREÇÃO FINAL: Usar require() e type assertion ': any'
+const mercadopago: any = require('mercadopago'); 
 
 interface CreatePixRequest {
   userId: string;
@@ -31,11 +31,9 @@ if (mpAccessToken) {
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('🔍 [API Create PIX] Recebendo requisição...');
     
     const body: CreatePixRequest = await request.json();
     
-    // ... (Validações omitidas por brevidade) ...
     const requiredFields = {
       userId: body.userId,
       totalAmount: body.totalAmount,
@@ -54,7 +52,6 @@ export async function POST(request: NextRequest) {
     }
 
     if (missingFields.length > 0) {
-      console.error('❌ [API Create PIX] Campos obrigatórios faltando:', missingFields);
       return NextResponse.json(
         { 
           success: false, 
@@ -88,7 +85,6 @@ export async function POST(request: NextRequest) {
     }
 
     if (!mpAccessToken) {
-      console.error('❌ [API Create PIX] ACCESS_TOKEN do Mercado Pago não configurado para o ambiente atual');
       return NextResponse.json(
         { 
           success: false, 
@@ -104,17 +100,12 @@ export async function POST(request: NextRequest) {
       : process.env.MP_USER_ID_SANDBOX;
 
     if (!mpUserId) {
-        console.error('❌ [API Create PIX] ID de usuário (MP_USER_ID) não configurado.');
         return NextResponse.json({ success: false, error: 'ID de usuário MP não encontrado' }, { status: 500 });
     }
     // ----------------------------------------
 
-    console.log('✅ [API Create PIX] Validações passadas');
-
     const referenceId = randomUUID();
     const orderId = randomUUID();
-
-    console.log('🆔 [API Create PIX] IDs gerados:', { referenceId, orderId });
     
     const notificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://seusite.com'}/api/payments/webhook-mp`;
     const transactionAmount = body.totalAmount / 100;
@@ -140,8 +131,6 @@ export async function POST(request: NextRequest) {
     };
 
     await adminDb.collection('payments').doc(orderId).set(paymentData);
-
-    console.log('✅ [API Create PIX] Documento criado no Firestore com sucesso:', orderId);
 
     // --- MONTAGEM DO PAYLOAD DE PREFERÊNCIA PARA OCULTAR CNPJ ---
     const mpPayloadPreference = {
@@ -189,16 +178,12 @@ export async function POST(request: NextRequest) {
         expiration_date_to: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
     };
     // --------------------------------------------------------------------------
-
-    console.log('📤 [API Create PIX] Enviando requisição para Mercado Pago (Preferences)...');
     
     // 1. CRIA A PREFERÊNCIA
     const mpResponse = await mercadopago.preferences.create(mpPayloadPreference);
     const mpData = mpResponse.body;
     
     if (mpResponse.status !== 201) {
-      console.error('❌ [API Create PIX] Erro na resposta do Mercado Pago (Preferences):');
-      
       await adminDb.collection('payments').doc(orderId).update({
         paymentStatus: 'FAILED',
         updatedAt: new Date(),
@@ -229,7 +214,7 @@ export async function POST(request: NextRequest) {
             'Authorization': `Bearer ${mpAccessToken}`,
         },
         body: JSON.stringify({
-            preference_id: preferenceId, // ID da Preferência criada
+            preference_id: preferenceId,
             payment_method_id: 'pix',
             transaction_amount: transactionAmount,
             installments: 1,
@@ -241,12 +226,10 @@ export async function POST(request: NextRequest) {
         const text = await paymentCreationResponse.text();
         paymentDataResponse = text ? JSON.parse(text) : {};
     } catch (parseError) {
-        console.error('❌ [API Create PIX] Erro ao parsear resposta JSON do pagamento:', parseError);
         paymentDataResponse = { error: 'Resposta inválida do Mercado Pago na criação do PIX' };
     }
 
     if (!paymentCreationResponse.ok) {
-        console.error('❌ [API Create PIX] Erro na criação do PIX após Preferência:', paymentDataResponse);
         return NextResponse.json(
             { success: false, error: 'Erro ao gerar PIX após criação da Preferência' },
             { status: paymentCreationResponse.status }
@@ -294,7 +277,6 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('❌ [API Create PIX] Erro ao criar cobrança PIX:', error);
     
     return NextResponse.json(
       { 

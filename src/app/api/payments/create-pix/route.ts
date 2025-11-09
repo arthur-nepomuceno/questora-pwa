@@ -3,7 +3,14 @@ import { adminDb } from '@/lib/firebase-admin';
 import { randomUUID } from 'crypto';
 // CORREÇÃO FINAL PARA ERRO DE BUILD/RUNTIME: Trata a forma como o Mercado Pago (CommonJS) é exportado.
 const mercadopagoRaw = require('mercadopago');
-const mercadopago: any = mercadopagoRaw.default ? mercadopagoRaw.default : mercadopagoRaw;
+
+// Força o acesso ao objeto correto (CommonJS/ESM compatibility)
+const mercadopago: any = mercadopagoRaw.default || mercadopagoRaw;
+
+// Acesso direto às propriedades usadas para contornar o erro 'configure is not a function'
+const preferences = mercadopago.preferences;
+const config = mercadopago.config;
+
 
 interface CreatePixRequest {
   userId: string;
@@ -23,14 +30,19 @@ const mpAccessToken = isProduction
 // -----------------------------
 
 if (mpAccessToken) {
-    // Inicialização do SDK no escopo global
     if (typeof mercadopago.configure === 'function') {
+        // Tenta a configuração padrão (ideal)
         mercadopago.configure({
             access_token: mpAccessToken,
         });
+    } else if (typeof preferences.create === 'function' && typeof config !== 'undefined') {
+        // Se 'configure' falhar, injeta o token diretamente na configuração (workaround for Next.js)
+        mercadadopago.config = {
+            ...mercadopago.config,
+            access_token: mpAccessToken
+        }
     } else {
-        // Log para debug, caso o configure não seja encontrado (o erro que você está vendo)
-        console.error("ERRO CRÍTICO: O método 'configure' não foi encontrado no objeto do Mercado Pago.");
+        console.error("ERRO CRÍTICO: SDK do Mercado Pago totalmente corrompido ou mal importado.");
     }
 }
 
@@ -185,8 +197,8 @@ export async function POST(request: NextRequest) {
     };
     // --------------------------------------------------------------------------
     
-    // 1. CRIA A PREFERÊNCIA
-    const mpResponse = await mercadopago.preferences.create(mpPayloadPreference);
+    // 1. CRIA A PREFERÊNCIA - USANDO VARIÁVEL preferences
+    const mpResponse = await preferences.create(mpPayloadPreference);
     const mpData = mpResponse.body;
     
     if (mpResponse.status !== 201) {
@@ -212,8 +224,8 @@ export async function POST(request: NextRequest) {
         throw new Error('ID da Preferência não encontrado na resposta do Mercado Pago');
     }
 
-    // 2. CRIA O PAGAMENTO PIX USANDO A PREFERÊNCIA
-    const paymentCreationResponse = await fetch(`${mercadopago.config.base_url}/v1/payments`, {
+    // 2. CRIA O PAGAMENTO PIX USANDO A PREFERÊNCIA - USANDO VARIÁVEL config
+    const paymentCreationResponse = await fetch(`${config.base_url}/v1/payments`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

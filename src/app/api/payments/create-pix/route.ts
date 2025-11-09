@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { randomUUID } from 'crypto';
-import * as mercadopago from 'mercadopago'; // CORREÇÃO: Usar import * as
+// CORREÇÃO: Usar require() para SDK CommonJS
+const mercadopago = require('mercadopago'); 
 
 interface CreatePixRequest {
   userId: string;
@@ -21,7 +22,7 @@ const mpAccessToken = isProduction
 // -----------------------------
 
 if (mpAccessToken) {
-    // Inicialização do SDK no escopo global para evitar erros de build
+    // Inicialização do SDK no escopo global
     mercadopago.configure({
         access_token: mpAccessToken,
     });
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
     
     const body: CreatePixRequest = await request.json();
     
-    // ... (Validações omitidas por brevidade, mas mantidas no código original) ...
+    // ... (Validações omitidas por brevidade) ...
     const requiredFields = {
       userId: body.userId,
       totalAmount: body.totalAmount,

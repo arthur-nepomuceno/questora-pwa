@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { randomUUID } from 'crypto';
-// CORREÇÃO FINAL: Usar require() e type assertion ': any'
-const mercadopago: any = require('mercadopago'); 
+// CORREÇÃO FINAL PARA ERRO DE BUILD/RUNTIME: Trata a forma como o Mercado Pago (CommonJS) é exportado.
+const mercadopagoRaw = require('mercadopago');
+const mercadopago: any = mercadopagoRaw.default ? mercadopagoRaw.default : mercadopagoRaw;
 
 interface CreatePixRequest {
   userId: string;
@@ -23,9 +24,14 @@ const mpAccessToken = isProduction
 
 if (mpAccessToken) {
     // Inicialização do SDK no escopo global
-    mercadopago.configure({
-        access_token: mpAccessToken,
-    });
+    if (typeof mercadopago.configure === 'function') {
+        mercadopago.configure({
+            access_token: mpAccessToken,
+        });
+    } else {
+        // Log para debug, caso o configure não seja encontrado (o erro que você está vendo)
+        console.error("ERRO CRÍTICO: O método 'configure' não foi encontrado no objeto do Mercado Pago.");
+    }
 }
 
 

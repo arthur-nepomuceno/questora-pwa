@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { randomUUID } from 'crypto';
-// CORREÇÃO FINAL PARA ERRO DE BUILD/RUNTIME: Trata a forma como o Mercado Pago (CommonJS) é exportado.
+// CORREÇÃO: Trata a forma como o Mercado Pago (CommonJS) é exportado no Next.js App Router.
 const mercadopagoRaw = require('mercadopago');
 
 // Força o acesso ao objeto correto (CommonJS/ESM compatibility)
@@ -37,7 +37,8 @@ if (mpAccessToken) {
         });
     } else if (typeof preferences.create === 'function' && typeof config !== 'undefined') {
         // Se 'configure' falhar, injeta o token diretamente na configuração (workaround for Next.js)
-        mercadadopago.config = {
+        // CORRIGIDO: O nome da variável 'mercadopago' estava digitado errado.
+        mercadopago.config = {
             ...mercadopago.config,
             access_token: mpAccessToken
         }

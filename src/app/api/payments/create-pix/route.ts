@@ -22,34 +22,56 @@ interface CreatePixRequest {
   email: string;
 }
 
-// --- Variáveis de Ambiente ---
-const isProduction = process.env.NODE_ENV === 'production';
-const mpAccessToken = isProduction 
-    ? process.env.MP_ACCESS_TOKEN_PROD 
-    : process.env.MP_ACCESS_TOKEN_SANDBOX;
-// -----------------------------
+// REMOVIDO: O bloco de inicialização global. Ele será movido para dentro da função POST.
+// const isProduction = process.env.NODE_ENV === 'production';
+// const mpAccessToken = isProduction 
+//     ? process.env.MP_ACCESS_TOKEN_PROD 
+//     : process.env.MP_ACCESS_TOKEN_SANDBOX;
 
-if (mpAccessToken) {
+export async function POST(request: NextRequest) {
+  try {
+    
+    // --- Variáveis de Ambiente ---
+    const isProduction = process.env.NODE_ENV === 'production';
+    const mpAccessToken = isProduction 
+        ? process.env.MP_ACCESS_TOKEN_PROD 
+        : process.env.MP_ACCESS_TOKEN_SANDBOX;
+
+    // --- VARIÁVEIS DO SPLIT/MARKETPLACE ---
+    const mpUserId = isProduction 
+      ? process.env.MP_USER_ID_PROD 
+      : process.env.MP_USER_ID_SANDBOX;
+    // -----------------------------
+
+    // ⚡️ CORREÇÃO CRÍTICA: INICIALIZAÇÃO E CONFIGURAÇÃO MOVIDAS PARA DENTRO DO HANDLER ⚡️
+    if (!mpAccessToken) {
+        return NextResponse.json(
+            { 
+              success: false, 
+              error: 'Configuração do Mercado Pago não encontrada' 
+            },
+            { status: 500 }
+          );
+    }
+    
     if (typeof mercadopago.configure === 'function') {
-        // Tenta a configuração padrão (ideal)
         mercadopago.configure({
             access_token: mpAccessToken,
         });
     } else if (typeof preferences.create === 'function' && typeof config !== 'undefined') {
-        // Workaround para injetar o token se 'configure' falhar (erro de digitação corrigido)
         mercadopago.config = { 
             ...mercadopago.config,
             access_token: mpAccessToken
         }
     } else {
         console.error("ERRO CRÍTICO: SDK do Mercado Pago corrompido.");
+        return NextResponse.json(
+            { success: false, error: 'Erro de inicialização do SDK Mercado Pago.' },
+            { status: 500 }
+        );
     }
-}
+    // -----------------------------------------------------------------------------------
 
-
-export async function POST(request: NextRequest) {
-  try {
-    
     const body: CreatePixRequest = await request.json();
     
     const requiredFields = {
@@ -101,21 +123,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    if (!mpAccessToken) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Configuração do Mercado Pago não encontrada' 
-        },
-        { status: 500 }
-      );
-    }
-
-    // --- VARIÁVEIS DO SPLIT/MARKETPLACE ---
-    const mpUserId = isProduction 
-      ? process.env.MP_USER_ID_PROD 
-      : process.env.MP_USER_ID_SANDBOX;
 
     if (!mpUserId) {
         return NextResponse.json({ success: false, error: 'ID de usuário MP não encontrado' }, { status: 500 });

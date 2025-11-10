@@ -37,10 +37,18 @@ export async function POST(request: NextRequest) {
     
     const body: CreatePixRequest = await request.json();
     
-    // Validações de campos obrigatórios (mantidas para segurança)
-    if (!body.userId || !body.totalAmount || !body.email || body.totalAmount <= 0) {
+    // 🛑 CORREÇÃO DA VALIDAÇÃO: Garantindo que todos os dados do Payer (Pagador) estão presentes
+    if (
+        !body.userId || 
+        !body.totalAmount || 
+        body.totalAmount <= 0 ||
+        !body.email || 
+        !body.name ||
+        !body.documentType || 
+        !body.documentValue 
+    ) {
       return NextResponse.json(
-        { success: false, error: 'Dados obrigatórios (userId, totalAmount, email) faltando ou inválidos' },
+        { success: false, error: 'Dados do Pagador (nome, email, documento, tipo) ou valores obrigatórios faltando' },
         { status: 400 }
       );
     }
@@ -56,7 +64,7 @@ export async function POST(request: NextRequest) {
       referenceId,
       userId: body.userId,
       totalAmount: transactionAmount,
-      creditsToReceive: body.creditsToReceive, // Adicionando creditsToReceive
+      creditsToReceive: body.creditsToReceive,
       documentValue: body.documentValue,
       documentType: body.documentType,
       name: body.name,
@@ -124,6 +132,7 @@ export async function POST(request: NextRequest) {
 
     const preferenceData = await preferenceResponse.json();
     
+    // Verificação de falha na criação da Preferência
     if (!preferenceResponse.ok || !preferenceData.id) {
         console.error('❌ [MP Error] Falha ao criar Preferência:', preferenceData);
         await adminDb.collection('payments').doc(orderId).update({

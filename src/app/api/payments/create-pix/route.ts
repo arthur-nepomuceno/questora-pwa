@@ -1,16 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { randomUUID } from 'crypto';
-// CORREÇÃO: Trata a forma como o Mercado Pago (CommonJS) é exportado no Next.js App Router.
-const mercadopagoRaw = require('mercadopago');
-
-// Força o acesso ao objeto correto (CommonJS/ESM compatibility)
-const mercadopago: any = mercadopagoRaw.default || mercadopagoRaw;
-
-// Acesso direto às propriedades usadas para contornar o erro 'configure is not a function'
-const preferences = mercadopago.preferences;
-const config = mercadopago.config;
-
 
 interface CreatePixRequest {
   userId: string;
@@ -22,126 +12,51 @@ interface CreatePixRequest {
   email: string;
 }
 
-// REMOVIDO: O bloco de inicialização global. Ele será movido para dentro da função POST.
-// const isProduction = process.env.NODE_ENV === 'production';
-// const mpAccessToken = isProduction 
-//     ? process.env.MP_ACCESS_TOKEN_PROD 
-//     : process.env.MP_ACCESS_TOKEN_SANDBOX;
+const MP_BASE_URL = "https://api.mercadopago.com";
+
+// --- Variáveis de Ambiente (Carregadas fora do handler) ---
+const isProduction = process.env.NODE_ENV === 'production';
+const mpAccessToken = isProduction 
+    ? process.env.MP_ACCESS_TOKEN_PROD 
+    : process.env.MP_ACCESS_TOKEN_SANDBOX;
+const mpUserId = isProduction 
+    ? process.env.MP_USER_ID_PROD 
+    : process.env.MP_USER_ID_SANDBOX;
+// -----------------------------------------------------------
 
 export async function POST(request: NextRequest) {
   try {
     
-    // --- Variáveis de Ambiente ---
-    const isProduction = process.env.NODE_ENV === 'production';
-    const mpAccessToken = isProduction 
-        ? process.env.MP_ACCESS_TOKEN_PROD 
-        : process.env.MP_ACCESS_TOKEN_SANDBOX;
-
-    // --- VARIÁVEIS DO SPLIT/MARKETPLACE ---
-    const mpUserId = isProduction 
-      ? process.env.MP_USER_ID_PROD 
-      : process.env.MP_USER_ID_SANDBOX;
-    // -----------------------------
-
-    // ⚡️ CORREÇÃO CRÍTICA: INICIALIZAÇÃO E CONFIGURAÇÃO MOVIDAS PARA DENTRO DO HANDLER ⚡️
-    if (!mpAccessToken) {
+    // --- 1. Validação e Configuração de Credenciais ---
+    if (!mpAccessToken || !mpUserId) {
         return NextResponse.json(
-            { 
-              success: false, 
-              error: 'Configuração do Mercado Pago não encontrada' 
-            },
-            { status: 500 }
-          );
-    }
-    
-    if (typeof mercadopago.configure === 'function') {
-        mercadopago.configure({
-            access_token: mpAccessToken,
-        });
-    } else if (typeof preferences.create === 'function' && typeof config !== 'undefined') {
-        mercadopago.config = { 
-            ...mercadopago.config,
-            access_token: mpAccessToken
-        }
-    } else {
-        console.error("ERRO CRÍTICO: SDK do Mercado Pago corrompido.");
-        return NextResponse.json(
-            { success: false, error: 'Erro de inicialização do SDK Mercado Pago.' },
+            { success: false, error: 'Variáveis de ambiente do Mercado Pago (token/user ID) não configuradas' },
             { status: 500 }
         );
     }
-    // -----------------------------------------------------------------------------------
-
+    
     const body: CreatePixRequest = await request.json();
     
-    const requiredFields = {
-      userId: body.userId,
-      totalAmount: body.totalAmount,
-      creditsToReceive: body.creditsToReceive,
-      documentValue: body.documentValue,
-      documentType: body.documentType,
-      name: body.name,
-      email: body.email,
-    };
-
-    const missingFields: string[] = [];
-    for (const [field, value] of Object.entries(requiredFields)) {
-      if (!value || (typeof value === 'string' && value.trim() === '')) {
-        missingFields.push(field);
-      }
-    }
-
-    if (missingFields.length > 0) {
+    // Validações de campos obrigatórios (mantidas para segurança)
+    if (!body.userId || !body.totalAmount || !body.email || body.totalAmount <= 0) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Campos obrigatórios faltando', 
-          missingFields 
-        },
+        { success: false, error: 'Dados obrigatórios (userId, totalAmount, email) faltando ou inválidos' },
         { status: 400 }
       );
     }
-
-    if (typeof body.totalAmount !== 'number' || body.totalAmount <= 0) {
-      return NextResponse.json(
-        { success: false, error: 'totalAmount deve ser um número positivo' },
-        { status: 400 }
-      );
-    }
-
-    if (typeof body.creditsToReceive !== 'number' || body.creditsToReceive <= 0) {
-      return NextResponse.json(
-        { success: false, error: 'creditsToReceive deve ser um número positivo' },
-        { status: 400 }
-      );
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(body.email)) {
-      return NextResponse.json(
-        { success: false, error: 'Email inválido' },
-        { status: 400 }
-      );
-    }
-
-    if (!mpUserId) {
-        return NextResponse.json({ success: false, error: 'ID de usuário MP não encontrado' }, { status: 500 });
-    }
-    // ----------------------------------------
 
     const referenceId = randomUUID();
     const orderId = randomUUID();
-    
     const notificationUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://seusite.com'}/api/payments/webhook-mp`;
     const transactionAmount = body.totalAmount / 100;
 
-    // Criar documento no Firestore na collection 'payments'
+    // --- 2. Criar Registro no Firestore ---
     const paymentData = {
       orderId,
       referenceId,
       userId: body.userId,
       totalAmount: transactionAmount,
-      creditsToReceive: body.creditsToReceive,
+      creditsToReceive: body.creditsToReceive, // Adicionando creditsToReceive
       documentValue: body.documentValue,
       documentType: body.documentType,
       name: body.name,
@@ -154,10 +69,10 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date(),
       wouldExpireAt: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(), 
     };
-
     await adminDb.collection('payments').doc(orderId).set(paymentData);
 
-    // --- MONTAGEM DO PAYLOAD DE PREFERÊNCIA PARA OCULTAR CNPJ ---
+    // --- 3. Criar PREFERÊNCIA (API REST com fetch) ---
+    
     const mpPayloadPreference = {
         items: [
             {
@@ -174,10 +89,10 @@ export async function POST(request: NextRequest) {
                 number: body.documentValue.replace(/\D/g, ''),
             },
         },
-        // --- SPLIT DE PAGAMENTO (Oculta o CNPJ) ---
+        // 🔑 SPLIT DE PAGAMENTO (Requisito da Documentação)
         disbursements: [
             {
-                collector_id: parseInt(mpUserId), // SEU ID DE USUÁRIO MP
+                collector_id: parseInt(mpUserId), // SEU ID DE USUÁRIO MP (collector_id)
                 amount: transactionAmount, 
                 external_reference: referenceId,
             }
@@ -191,83 +106,68 @@ export async function POST(request: NextRequest) {
             ],
             installments: 1,
         },
-        back_urls: {
-            success: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success?order=${orderId}`,
-            pending: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/pending?order=${orderId}`,
-            failure: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/failure?order=${orderId}`,
-        },
         notification_url: notificationUrl,
         external_reference: referenceId,
         expires: true,
         expiration_date_from: new Date().toISOString(),
         expiration_date_to: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
     };
-    // --------------------------------------------------------------------------
     
-    // 1. CRIA A PREFERÊNCIA - USANDO VARIÁVEL preferences
-    const mpResponse = await preferences.create(mpPayloadPreference);
-    const mpData = mpResponse.body;
-    
-    if (mpResponse.status !== 201) {
-      await adminDb.collection('payments').doc(orderId).update({
-        paymentStatus: 'FAILED',
-        updatedAt: new Date(),
-        errorDetails: mpData,
-      });
-
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Erro ao criar preferência de pagamento no Mercado Pago',
-          mpError: mpData,
-          httpStatus: mpResponse.status,
-        },
-        { status: mpResponse.status }
-      );
-    }
-
-    const preferenceId = mpData.id || '';
-    if (!preferenceId) {
-        throw new Error('ID da Preferência não encontrado na resposta do Mercado Pago');
-    }
-
-    // 2. CRIA O PAGAMENTO PIX USANDO A PREFERÊNCIA - USANDO VARIÁVEL config
-    const paymentCreationResponse = await fetch(`${config.base_url}/v1/payments`, {
+    const preferenceResponse = await fetch(`${MP_BASE_URL}/checkout/preferences`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${mpAccessToken}`,
         },
-        body: JSON.stringify({
-            preference_id: preferenceId,
-            payment_method_id: 'pix',
-            transaction_amount: transactionAmount,
-            installments: 1,
-        }),
+        body: JSON.stringify(mpPayloadPreference),
     });
 
-    let paymentDataResponse;
-    try {
-        const text = await paymentCreationResponse.text();
-        paymentDataResponse = text ? JSON.parse(text) : {};
-    } catch (parseError) {
-        paymentDataResponse = { error: 'Resposta inválida do Mercado Pago na criação do PIX' };
+    const preferenceData = await preferenceResponse.json();
+    
+    if (!preferenceResponse.ok || !preferenceData.id) {
+        console.error('❌ [MP Error] Falha ao criar Preferência:', preferenceData);
+        await adminDb.collection('payments').doc(orderId).update({
+            paymentStatus: 'FAILED',
+            errorDetails: preferenceData,
+        });
+        return NextResponse.json(
+            { success: false, error: 'Erro ao criar preferência de pagamento no Mercado Pago', mpError: preferenceData },
+            { status: preferenceResponse.status }
+        );
     }
 
-    if (!paymentCreationResponse.ok) {
-        // Logar a resposta detalhada do MP para diagnóstico
-        console.error('❌ [MP Error] Falha na criação do PIX:', paymentDataResponse);
-        
+    const preferenceId = preferenceData.id;
+
+    // --- 4. Criar PAGAMENTO PIX (API REST com fetch) ---
+    
+    const paymentPayload = {
+        preference_id: preferenceId,
+        payment_method_id: 'pix',
+        transaction_amount: transactionAmount,
+        installments: 1,
+    };
+    
+    const paymentResponse = await fetch(`${MP_BASE_URL}/v1/payments`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${mpAccessToken}`,
+        },
+        body: JSON.stringify(paymentPayload),
+    });
+    
+    const paymentDataResponse = await paymentResponse.json();
+
+    if (!paymentResponse.ok) {
+        console.error('❌ [MP Error] Falha ao gerar PIX:', paymentDataResponse);
         return NextResponse.json(
-            { success: false, 
-              error: 'Erro ao gerar PIX após criação da Preferência',
-              mpError: paymentDataResponse,
-            },
-            { status: paymentCreationResponse.status }
+            { success: false, error: 'Erro ao gerar PIX após criação da Preferência', mpError: paymentDataResponse },
+            { status: paymentResponse.status }
         );
     }
     
-    // --- EXTRAÇÃO FINAL (ID DO PAGAMENTO E DADOS DO PIX) ---
+    // --- 5. Extração e Resposta ---
+    
     const mpPaymentId = paymentDataResponse.id || '';
     const transactionData = paymentDataResponse.point_of_interaction?.transaction_data;
     
@@ -279,14 +179,7 @@ export async function POST(request: NextRequest) {
     const qrCodeBase64 = transactionData.qr_code_base64 || ''; 
     const pixQrCodeUrl = qrCodeBase64 ? `data:image/png;base64,${qrCodeBase64}` : '';
 
-    if (!pixString || !pixQrCodeUrl) {
-      return NextResponse.json(
-        { success: false, error: 'Dados do QR Code PIX não foram retornados' },
-        { status: 500 }
-      );
-    }
-
-    // Atualizar documento no Firestore com dados do Mercado Pago
+    // Atualizar documento no Firestore
     await adminDb.collection('payments').doc(orderId).update({
       mpPaymentId, 
       pixQrCodeUrl,
@@ -308,14 +201,10 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    // Log detalhado para o erro 500
     console.error('❌ [Internal Error] Erro ao criar cobrança PIX:', error.message);
     
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Erro interno do servidor ao criar cobrança PIX',
-      },
+      { success: false, error: 'Erro interno do servidor ao criar cobrança PIX' },
       { status: 500 }
     );
   }

@@ -37,18 +37,10 @@ export async function POST(request: NextRequest) {
     
     const body: CreatePixRequest = await request.json();
     
-    // 🛑 CORREÇÃO DA VALIDAÇÃO: Garantindo que todos os dados do Payer (Pagador) estão presentes
-    if (
-        !body.userId || 
-        !body.totalAmount || 
-        body.totalAmount <= 0 ||
-        !body.email || 
-        !body.name ||
-        !body.documentType || 
-        !body.documentValue 
-    ) {
+    // VALIDAÇÃO MÍNIMA (Não inclui todos os campos do Pagador para forçar o erro do MP)
+    if (!body.userId || !body.totalAmount || body.totalAmount <= 0) {
       return NextResponse.json(
-        { success: false, error: 'Dados do Pagador (nome, email, documento, tipo) ou valores obrigatórios faltando' },
+        { success: false, error: 'Dados obrigatórios (userId, totalAmount) faltando ou inválidos' },
         { status: 400 }
       );
     }
@@ -97,7 +89,7 @@ export async function POST(request: NextRequest) {
                 number: body.documentValue.replace(/\D/g, ''),
             },
         },
-        // 🔑 SPLIT DE PAGAMENTO (Requisito da Documentação)
+        // 🔑 SPLIT DE PAGAMENTO (O que permite omitir o CNPJ do comprador)
         disbursements: [
             {
                 collector_id: parseInt(mpUserId), // SEU ID DE USUÁRIO MP (collector_id)
@@ -154,6 +146,8 @@ export async function POST(request: NextRequest) {
         payment_method_id: 'pix',
         transaction_amount: transactionAmount,
         installments: 1,
+        // 💰 REQUISITO DE SPLIT PARA CHECKOUT TRANSPARENTE:
+        application_fee: 0, 
     };
     
     const paymentResponse = await fetch(`${MP_BASE_URL}/v1/payments`, {

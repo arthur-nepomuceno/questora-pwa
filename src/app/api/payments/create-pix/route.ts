@@ -88,6 +88,7 @@ export async function POST(request: NextRequest) {
                 number: body.documentValue.replace(/\D/g, ''),
             },
         },
+        operation_type: "binary_operation",
         // 🔑 SPLIT DE PAGAMENTO (O que permite omitir o CNPJ do comprador)
         disbursements: [
             {

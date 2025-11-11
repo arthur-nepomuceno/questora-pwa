@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
 
     // --- 4. Criar PAGAMENTO PIX (API REST com fetch) ---  
     const xIdempotencyKey = randomUUID();
-    const applicationFee = isProduction ? 0.001 : 1;
+    const applicationFee = isProduction ? 0.01 : 1;
     const nameParts = body.name.split(' ');
     const firstName = nameParts[0];
     const lastName = nameParts.slice(1).join(' ');

@@ -71,8 +71,7 @@ export async function POST(request: NextRequest) {
     };
     await adminDb.collection('payments').doc(orderId).set(paymentData);
 
-    // --- 3. Criar PREFERÊNCIA (API REST com fetch) ---
-    
+    // --- 3. Criar PREFERÊNCIA (API REST com fetch) ---    
     const mpPayloadPreference = {
         items: [
             {
@@ -112,6 +111,9 @@ export async function POST(request: NextRequest) {
         expiration_date_from: new Date().toISOString(),
         expiration_date_to: new Date(new Date().getTime() + 60 * 60 * 1000).toISOString(),
     };
+
+    console.log('✅ [MP] MPPayloadPreference: ', mpPayloadPreference);
+    console.log('✅ [MP] JSON.stringify(MPPayloadPreference): ', JSON.stringify(mpPayloadPreference));
     
     const preferenceResponse = await fetch(`${MP_BASE_URL}/checkout/preferences`, {
         method: 'POST',
@@ -123,6 +125,7 @@ export async function POST(request: NextRequest) {
     });
 
     const preferenceData = await preferenceResponse.json();
+    console.log('✅ [MP] PreferenceData: ', preferenceData);
     
     // Verificação de falha na criação da Preferência
     if (!preferenceResponse.ok || !preferenceData.id) {
@@ -136,25 +139,41 @@ export async function POST(request: NextRequest) {
             { status: preferenceResponse.status }
         );
     }
-
     const preferenceId = preferenceData.id;
+    console.log('✅ [MP] PreferenceID: ', preferenceId);
 
-    // --- 4. Criar PAGAMENTO PIX (API REST com fetch) ---
-    
+    // --- 4. Criar PAGAMENTO PIX (API REST com fetch) ---  
+    const xIdempotencyKey = randomUUID();
+    const applicationFee = isProduction ? 0 : 1;
+    const nameParts = body.name.split(' ');
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ');
     const paymentPayload = {
-        preference_id: preferenceId,
         payment_method_id: 'pix',
         transaction_amount: transactionAmount,
         installments: 1,
         // 💰 REQUISITO DE SPLIT PARA CHECKOUT TRANSPARENTE:
-        application_fee: 0, 
+        application_fee: applicationFee,
+        payer: {
+            first_name: firstName,
+            last_name: lastName,
+            email: body.email,
+            identification: {
+                type: body.documentType.toUpperCase(),
+                number: body.documentValue.replace(/\D/g, ''),
+            },
+        }
     };
+
+    console.log('✅ [MP] PaymentPayload: ', paymentPayload);
+    console.log('✅ [MP] mpAccessToken: ', mpAccessToken);
     
-    const paymentResponse = await fetch(`${MP_BASE_URL}/v1/payments`, {
+    const paymentResponse = await fetch(`${MP_BASE_URL}/v1/payments?preference_id=${preferenceId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${mpAccessToken}`,
+            'x-idempotency-key': xIdempotencyKey,
         },
         body: JSON.stringify(paymentPayload),
     });

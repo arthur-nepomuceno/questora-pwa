@@ -90,13 +90,13 @@ export async function POST(request: NextRequest) {
         },
         operation_type: "split_payment",
         // 🔑 SPLIT DE PAGAMENTO (O que permite omitir o CNPJ do comprador)
-        disbursements: [
-            {
-                collector_id: parseInt(mpUserId), // SEU ID DE USUÁRIO MP (collector_id)
-                amount: transactionAmount, 
-                external_reference: referenceId,
-            }
-        ],
+        // disbursements: [
+        //     {
+        //         collector_id: parseInt(mpUserId), // SEU ID DE USUÁRIO MP (collector_id)
+        //         amount: transactionAmount, 
+        //         external_reference: referenceId,
+        //     }
+        // ],
         payment_methods: {
             excluded_payment_types: [
                 { id: "credit_card" },

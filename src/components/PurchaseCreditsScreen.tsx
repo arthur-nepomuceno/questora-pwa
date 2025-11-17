@@ -12,6 +12,7 @@ interface PurchaseCreditsScreenProps {
 }
 
 interface CreditPackage {
+  id: string;
   credits: number;
   totalAmount: number; // Valor em centavos (ex: 299 = R$ 2,99)
   creditsToReceive: number;
@@ -19,14 +20,14 @@ interface CreditPackage {
 }
 
 const creditPackages: CreditPackage[] = [
-  { credits: 300, totalAmount: 299, creditsToReceive: 300, icon: '💰' },
-  { credits: 500, totalAmount: 499, creditsToReceive: 500, icon: '💰' },
-  { credits: 700, totalAmount: 699, creditsToReceive: 700, icon: '💰' },
-  { credits: 1000, totalAmount: 999, creditsToReceive: 1000, icon: '💎' },
-  { credits: 2000, totalAmount: 1999, creditsToReceive: 2000, icon: '💎' },
-  { credits: 3000, totalAmount: 2999, creditsToReceive: 3000, icon: '💎' },
-  { credits: 5000, totalAmount: 4999, creditsToReceive: 5000, icon: '🏆' },
-  { credits: 10000, totalAmount: 9999, creditsToReceive: 10000, icon: '🏆' },
+  { id: 'adquirir_pacote_de_300_creditos', credits: 300, totalAmount: 299, creditsToReceive: 300, icon: '💰' },
+  { id: 'adquirir_pacote_de_500_creditos', credits: 500, totalAmount: 499, creditsToReceive: 500, icon: '💰' },
+  { id: 'adquirir_pacote_de_700_creditos', credits: 700, totalAmount: 699, creditsToReceive: 700, icon: '💰' },
+  { id: 'adquirir_pacote_de_1000_creditos', credits: 1000, totalAmount: 999, creditsToReceive: 1000, icon: '💎' },
+  { id: 'adquirir_pacote_de_2000_creditos', credits: 2000, totalAmount: 1999, creditsToReceive: 2000, icon: '💎' },
+  { id: 'adquirir_pacote_de_3000_creditos', credits: 3000, totalAmount: 2999, creditsToReceive: 3000, icon: '💎' },
+  { id: 'adquirir_pacote_de_5000_creditos', credits: 5000, totalAmount: 4999, creditsToReceive: 5000, icon: '🏆' },
+  { id: 'adquirir_pacote_de_10000_creditos', credits: 10000, totalAmount: 9999, creditsToReceive: 10000, icon: '🏆' },
 ];
 
 interface ConfirmModalData {

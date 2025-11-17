@@ -54,6 +54,7 @@ async function sendTelegramMessage({
 export async function POST(request: NextRequest) {
   const configuredSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  console.log("Bot Token Loaded:", botToken ? `YES: ${botToken}` : "NO");
   const pushinpayApiKey = process.env.PUSHINPAY_API_KEY;
 
   if (!configuredSecret) {
@@ -69,10 +70,10 @@ export async function POST(request: NextRequest) {
     request.nextUrl.searchParams.get("secret") ??
     "";
 
-  // if (configuredSecret && receivedSecret !== configuredSecret) {
-  //   console.warn("[TelegramWebhook] Invalid webhook secret received");
-  //   return NextResponse.json({ ok: true }, { status: 200 });
-  // }
+  if (configuredSecret && receivedSecret !== configuredSecret) {
+    console.warn("[TelegramWebhook] Invalid webhook secret received");
+    return NextResponse.json({ ok: true }, { status: 200 });
+  }
 
   let update: TelegramMessage | null = null;
 

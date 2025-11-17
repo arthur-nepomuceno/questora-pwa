@@ -70,6 +70,9 @@ export async function POST(request: NextRequest) {
     request.nextUrl.searchParams.get("secret") ??
     "";
 
+  console.log("[TelegramWebhook] Received Secret:", receivedSecret);
+  console.log("[TelegramWebhook] Configured Secret:", configuredSecret);
+
   if (configuredSecret && receivedSecret !== configuredSecret) {
     console.warn("[TelegramWebhook] Invalid webhook secret received");
     return NextResponse.json({ ok: true }, { status: 200 });

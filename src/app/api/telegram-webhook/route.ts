@@ -89,6 +89,10 @@ export async function POST(request: NextRequest) {
   const trimmedMessage = messageText.trim();
 
   if (botToken && chatId && trimmedMessage.startsWith("/start")) {
+    console.log("[TelegramWebhook] Comando /start recebido. Tentando responder.");
+    console.log("[TelegramWebhook] Bot Token:", botToken ? `YES: ${botToken}` : "NO");
+    console.log("[TelegramWebhook] Chat ID:", chatId);
+    console.log("[TelegramWebhook] Trimmed Message:", trimmedMessage);
     const welcomeMessage =
       "Olá! Seja bem-vindo ao bot do Show do Milênio. Em breve traremos novidades por aqui.";
     await sendTelegramMessage({ botToken, chatId, text: welcomeMessage });

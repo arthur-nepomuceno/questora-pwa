@@ -65,8 +65,10 @@ export async function POST(request: NextRequest) {
     console.error("[TelegramWebhook] Missing TELEGRAM_BOT_TOKEN");
   }
 
+  console.log("[TelegramWebhook] Headers:", request.headers);
+
   const receivedSecret =
-    request.headers.get("x-telegram-secret") ??
+    request.headers.get("x-telegram-bot-api-secret-token") ??
     request.nextUrl.searchParams.get("secret") ??
     "";
 

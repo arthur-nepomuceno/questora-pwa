@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
   // LÓGICA DO /START (COM MENU INTERATIVO)
   if (botToken && chatId && trimmedMessage.startsWith("/start")) {
     const welcomeMessage =
-      "Olá! Seja bem-vindo ao bot do Show do Milênio. **Selecione um pacote para iniciar sua compra:**";
+      "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
 
       const inlineKeyboard = {
         inline_keyboard: [  

@@ -12,16 +12,27 @@ interface TelegramMessage {
       title?: string;
     };
   };
+  // Incluído para futuras interações de botão
+  callback_query?: {
+    id: string;
+    data: string;
+    message?: {
+      chat: { id: number };
+    };
+    from: { id: number };
+  };
 }
 
 async function sendTelegramMessage({
   botToken,
   chatId,
   text,
+  reply_markup, // <-- NOVO PARÂMETRO
 }: {
   botToken: string;
   chatId: number;
   text: string;
+  reply_markup?: object; // <-- NOVO TIPO
 }) {
   try {
     const telegramResponse = await fetch(
@@ -34,6 +45,7 @@ async function sendTelegramMessage({
         body: JSON.stringify({
           chat_id: chatId,
           text,
+          reply_markup, // <-- INCLUÍDO NO BODY
         }),
       }
     );
@@ -54,7 +66,6 @@ async function sendTelegramMessage({
 export async function POST(request: NextRequest) {
   const configuredSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  console.log("Bot Token Loaded:", botToken ? `YES: ${botToken}` : "NO");
   const pushinpayApiKey = process.env.PUSHINPAY_API_KEY;
 
   if (!configuredSecret) {
@@ -65,15 +76,11 @@ export async function POST(request: NextRequest) {
     console.error("[TelegramWebhook] Missing TELEGRAM_BOT_TOKEN");
   }
 
-  console.log("[TelegramWebhook] Headers:", request.headers);
-
+  // CORREÇÃO DE ERRO: Leitura do cabeçalho oficial do Telegram
   const receivedSecret =
     request.headers.get("x-telegram-bot-api-secret-token") ??
     request.nextUrl.searchParams.get("secret") ??
     "";
-
-  console.log("[TelegramWebhook] Received Secret:", receivedSecret);
-  console.log("[TelegramWebhook] Configured Secret:", configuredSecret);
 
   if (configuredSecret && receivedSecret !== configuredSecret) {
     console.warn("[TelegramWebhook] Invalid webhook secret received");
@@ -88,21 +95,55 @@ export async function POST(request: NextRequest) {
     console.error("[TelegramWebhook] Failed to parse request body", error);
     return NextResponse.json({ ok: true }, { status: 200 });
   }
-
+  
+  // A lógica atual só pega comandos de texto (como /start)
   const messageText = update?.message?.text ?? "";
   const chatId = update?.message?.chat?.id;
   const trimmedMessage = messageText.trim();
 
+  // LÓGICA DO /START (COM MENU INTERATIVO)
   if (botToken && chatId && trimmedMessage.startsWith("/start")) {
-    console.log("[TelegramWebhook] Comando /start recebido. Tentando responder.");
-    console.log("[TelegramWebhook] Bot Token:", botToken ? `YES: ${botToken}` : "NO");
-    console.log("[TelegramWebhook] Chat ID:", chatId);
-    console.log("[TelegramWebhook] Trimmed Message:", trimmedMessage);
     const welcomeMessage =
-      "Olá! Seja bem-vindo ao bot do Show do Milênio. Em breve traremos novidades por aqui.";
-    await sendTelegramMessage({ botToken, chatId, text: welcomeMessage });
+      "Olá! Seja bem-vindo ao bot do Show do Milênio. **Selecione um pacote para iniciar sua compra:**";
+
+      const inlineKeyboard = {
+        inline_keyboard: [  
+          [  
+            { text: "300 créditos : R$2,99", callback_data: "pacote_de_300_creditos" },
+          ],
+          [
+            { text: "500 créditos : R$4,99", callback_data: "pacote_de_500_creditos" },
+          ],
+          [
+            { text: "700 créditos : R$6,99", callback_data: "pacote_de_700_creditos" },
+          ],
+          [
+            { text: "1000 créditos : R$9,99", callback_data: "pacote_de_1000_creditos" },
+          ],
+          [
+            { text: "2000 créditos : R$19,99", callback_data: "pacote_de_2000_creditos" },
+          ],
+          [
+            { text: "3000 créditos : R$29,99", callback_data: "pacote_de_3000_creditos" },
+          ],
+          [
+            { text: "5000 créditos : R$49,99", callback_data: "pacote_de_5000_creditos" },
+          ],
+          [
+            { text: "10000 créditos : R$99,99", callback_data: "pacote_de_10000_creditos" },
+          ],
+        ],
+      };  
+
+    await sendTelegramMessage({
+      botToken,
+      chatId,
+      text: welcomeMessage,
+      reply_markup: inlineKeyboard,
+    });
   }
 
+  // O bloco /comprar deve ser adaptado no próximo passo
   if (botToken && chatId && trimmedMessage.startsWith("/comprar")) {
     if (!pushinpayApiKey) {
       console.error("[TelegramWebhook] Missing PUSHINPAY_API_KEY");
@@ -182,5 +223,3 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }
-
-

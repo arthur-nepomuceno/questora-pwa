@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 
-interface TelegramMessage {
+interface TelegramData {
   message?: {
     text?: string;
     chat?: {
@@ -23,7 +23,7 @@ interface TelegramMessage {
   };
 }
 
-async function sendTelegramMessage({
+async function sendTelegramData({
   botToken,
   chatId,
   text,
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
     console.error("[TelegramWebhook] Missing TELEGRAM_BOT_TOKEN");
   }
 
-  // CORREÇÃO DE ERRO: Leitura do cabeçalho oficial do Telegram
+  // VERIFICAÇÃO DE CREDENCIAIS: Leitura do cabeçalho oficial do Telegram
   const receivedSecret =
     request.headers.get("x-telegram-bot-api-secret-token") ??
     request.nextUrl.searchParams.get("secret") ??
@@ -87,55 +87,64 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true }, { status: 200 });
   }
 
-  let update: TelegramMessage | null = null;
+  //RECEBENDO E DECODIFICANDO OS DADOS DA REQUISIÇÃO DO TELEGRAM
+  let telegramData: TelegramData | null = null;
 
   try {
-    update = (await request.json()) as TelegramMessage;
+    telegramData = (await request.json()) as TelegramData;
   } catch (error) {
     console.error("[TelegramWebhook] Failed to parse request body", error);
     return NextResponse.json({ ok: true }, { status: 200 });
   }
   
-  // A lógica atual só pega comandos de texto (como /start)
-  const messageText = update?.message?.text ?? "";
-  const chatId = update?.message?.chat?.id;
-  const trimmedMessage = messageText.trim();
+  console.log("✅ Telegram Data:", telegramData);
+  
+  //CAPTURANDO OS DADOS IMPORTANTES DA REQUISIÇÃO
+  const messageText = telegramData?.message?.text ?? "";
+  const trimmedMessage = messageText.trim();  
+  const chatId = telegramData?.message?.chat?.id;
+  const callbackQuery = telegramData?.callback_query;  
+  if (callbackQuery) {
+      const packageId = callbackQuery.data; 
+      console.log("✅ Escolha:", packageId);
+      return NextResponse.json({ ok: true }); 
+  }
 
   // LÓGICA DO /START (COM MENU INTERATIVO)
   if (botToken && chatId && trimmedMessage.startsWith("/start")) {
     const welcomeMessage =
       "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
 
-      const inlineKeyboard = {
-        inline_keyboard: [  
-          [  
-            { text: "300 créditos : R$2,99", callback_data: "pacote_de_300_creditos" },
-          ],
-          [
-            { text: "500 créditos : R$4,99", callback_data: "pacote_de_500_creditos" },
-          ],
-          [
-            { text: "700 créditos : R$6,99", callback_data: "pacote_de_700_creditos" },
-          ],
-          [
-            { text: "1000 créditos : R$9,99", callback_data: "pacote_de_1000_creditos" },
-          ],
-          [
-            { text: "2000 créditos : R$19,99", callback_data: "pacote_de_2000_creditos" },
-          ],
-          [
-            { text: "3000 créditos : R$29,99", callback_data: "pacote_de_3000_creditos" },
-          ],
-          [
-            { text: "5000 créditos : R$49,99", callback_data: "pacote_de_5000_creditos" },
-          ],
-          [
-            { text: "10000 créditos : R$99,99", callback_data: "pacote_de_10000_creditos" },
-          ],
+    const inlineKeyboard = {
+      inline_keyboard: [  
+        [  
+          { text: "300 créditos : R$2,99", callback_data: "pacote_de_300_creditos" },
         ],
-      };  
+        [
+          { text: "500 créditos : R$4,99", callback_data: "pacote_de_500_creditos" },
+        ],
+        [
+          { text: "700 créditos : R$6,99", callback_data: "pacote_de_700_creditos" },
+        ],
+        [
+          { text: "1000 créditos : R$9,99", callback_data: "pacote_de_1000_creditos" },
+        ],
+        [
+          { text: "2000 créditos : R$19,99", callback_data: "pacote_de_2000_creditos" },
+        ],
+        [
+          { text: "3000 créditos : R$29,99", callback_data: "pacote_de_3000_creditos" },
+        ],
+        [
+          { text: "5000 créditos : R$49,99", callback_data: "pacote_de_5000_creditos" },
+        ],
+        [
+          { text: "10000 créditos : R$99,99", callback_data: "pacote_de_10000_creditos" },
+        ],
+      ],
+    };  
 
-    await sendTelegramMessage({
+    await sendTelegramData({
       botToken,
       chatId,
       text: welcomeMessage,
@@ -147,7 +156,7 @@ export async function POST(request: NextRequest) {
   if (botToken && chatId && trimmedMessage.startsWith("/comprar")) {
     if (!pushinpayApiKey) {
       console.error("[TelegramWebhook] Missing PUSHINPAY_API_KEY");
-      await sendTelegramMessage({
+      await sendTelegramData({
         botToken,
         chatId,
         text: "Não foi possível gerar o link de pagamento no momento. Tente novamente mais tarde.",
@@ -198,13 +207,13 @@ export async function POST(request: NextRequest) {
             "[TelegramWebhook] PushinPay request failed",
             pushinResponse.status
           );
-          await sendTelegramMessage({
+          await sendTelegramData({
             botToken,
             chatId,
             text: "Não foi possível gerar o link de pagamento agora. Tente novamente em instantes.",
           });
         } else {
-          await sendTelegramMessage({
+          await sendTelegramData({
             botToken,
             chatId,
             text: `Seu link de pagamento está pronto: ${paymentUrl}`,
@@ -212,7 +221,7 @@ export async function POST(request: NextRequest) {
         }
       } catch (error) {
         console.error("[TelegramWebhook] Error creating payment link", error);
-        await sendTelegramMessage({
+        await sendTelegramData({
           botToken,
           chatId,
           text: "Tivemos um problema ao criar o link de pagamento. Tente novamente mais tarde.",

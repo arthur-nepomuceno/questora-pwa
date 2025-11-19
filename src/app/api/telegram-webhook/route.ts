@@ -23,6 +23,31 @@ interface TelegramData {
   };
 }
 
+interface CreditPackage {
+  id: string;
+  credits: number;
+  totalAmount: number; // Já em centavos (ex: 299, 499)
+  creditsToReceive: number;
+  icon: string;
+}
+
+const creditPackages: CreditPackage[] = [
+  { id: 'pacote_de_300_creditos', credits: 300, totalAmount: 299, creditsToReceive: 300, icon: '💰' },
+  { id: 'pacote_de_500_creditos', credits: 500, totalAmount: 499, creditsToReceive: 500, icon: '💰' },
+  { id: 'pacote_de_700_creditos', credits: 700, totalAmount: 699, creditsToReceive: 700, icon: '💰' },
+  { id: 'pacote_de_1000_creditos', credits: 1000, totalAmount: 999, creditsToReceive: 1000, icon: '💎' },
+  { id: 'pacote_de_2000_creditos', credits: 2000, totalAmount: 1999, creditsToReceive: 2000, icon: '💎' },
+  { id: 'pacote_de_3000_creditos', credits: 3000, totalAmount: 2999, creditsToReceive: 3000, icon: '💎' },
+  { id: 'pacote_de_5000_creditos', credits: 5000, totalAmount: 4999, creditsToReceive: 5000, icon: '🏆' },
+  { id: 'pacote_de_10000_creditos', credits: 10000, totalAmount: 9999, creditsToReceive: 10000, icon: '🏆' },
+];
+
+const packageMap: Record<string, CreditPackage> = creditPackages.reduce((acc, pkg) => {
+  acc[pkg.id] = pkg;
+  return acc;
+}, {} as Record<string, CreditPackage>);
+
+//ENVIAR MENSAGENS PARA O TELEGRAM
 async function sendTelegramData({
   botToken,
   chatId,
@@ -46,6 +71,7 @@ async function sendTelegramData({
           chat_id: chatId,
           text,
           reply_markup, // <-- INCLUÍDO NO BODY
+          parse_mode: 'Markdown',
         }),
       }
     );
@@ -63,11 +89,77 @@ async function sendTelegramData({
   }
 }
 
+//ENVIAR IMAGEM DO QRCODE PARA O TELEGRAM
+// async function sendTelegramPhoto({
+//   botToken,
+//   chatId,
+//   photoUrl,
+//   caption,
+// }: {
+//   botToken: string;
+//   chatId: number;
+//   photoUrl: string;
+//   caption?: string; // Legenda para a foto (onde ficará o Pix Copia e Cola)
+// }) {
+//   try {
+//     await fetch(
+//       `https://api.telegram.org/bot${botToken}/sendPhoto`,
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           chat_id: chatId,
+//           photo: photoUrl, // URL da imagem do QR Code
+//           caption: caption, // O texto (com o Pix Copia e Cola)
+//           parse_mode: 'Markdown',
+//         }),
+//       }
+//     );
+//   } catch (error) {
+//     console.error("[TelegramWebhook] Error sending photo", error);
+//   }
+// }
+
+//RESPONDER À ESCOLHA DO PACOTE DE CRÉDITOS
+async function answerCallbackQuery({
+  botToken,
+  callbackQueryId,
+  text,
+}: {
+  botToken: string;
+  callbackQueryId: string;
+  text?: string;
+}) {
+  try {
+    await fetch(
+      `https://api.telegram.org/bot${botToken}/answerCallbackQuery`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          callback_query_id: callbackQueryId,
+          text: text,
+          show_alert: false,
+        }),
+      }
+    );
+  } catch (error) {
+    console.error("[TelegramWebhook] Error answering callback query", error);
+  }
+}
+
 export async function POST(request: NextRequest) {
   const configuredSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const pushinpayApiKey = process.env.PUSHINPAY_API_KEY;
+  const receivedSecret =
+  request.headers.get("x-telegram-bot-api-secret-token") ??
+  request.nextUrl.searchParams.get("secret") ??
+  "";
 
+  // VERIFICAÇÃO DE CREDENCIAIS
   if (!configuredSecret) {
     console.error("[TelegramWebhook] Missing TELEGRAM_WEBHOOK_SECRET");
   }
@@ -75,12 +167,6 @@ export async function POST(request: NextRequest) {
   if (!botToken) {
     console.error("[TelegramWebhook] Missing TELEGRAM_BOT_TOKEN");
   }
-
-  // VERIFICAÇÃO DE CREDENCIAIS: Leitura do cabeçalho oficial do Telegram
-  const receivedSecret =
-    request.headers.get("x-telegram-bot-api-secret-token") ??
-    request.nextUrl.searchParams.get("secret") ??
-    "";
 
   if (configuredSecret && receivedSecret !== configuredSecret) {
     console.warn("[TelegramWebhook] Invalid webhook secret received");
@@ -98,15 +184,84 @@ export async function POST(request: NextRequest) {
   }
   
   console.log("✅ Telegram Data:", telegramData);
-  
+
   //CAPTURANDO OS DADOS IMPORTANTES DA REQUISIÇÃO
   const messageText = telegramData?.message?.text ?? "";
   const trimmedMessage = messageText.trim();  
   const chatId = telegramData?.message?.chat?.id;
+
+  //CAPTURANDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  
-  if (callbackQuery) {
+  if (botToken && callbackQuery) {
       const packageId = callbackQuery.data; 
+      const chatId = callbackQuery.message?.chat.id ?? callbackQuery.from.id;
+      const selectedPackage = packageMap[packageId];
       console.log("✅ Escolha:", packageId);
+
+      // 1. Responde ao Telegram para fechar o loading
+      await answerCallbackQuery({
+        botToken,
+        callbackQueryId: callbackQuery.id,
+        text: "Gerando link de pagamento...",
+      });
+
+      if (selectedPackage && pushinpayApiKey) {
+        // 2. Prepara o payload para PushinPay
+        const payloadRequest = {
+          value: selectedPackage.totalAmount, // Valor em centavos
+          webhook_url: process.env.PUSHINPAY_WEBHOOK_URL || "", 
+          split_rules: [],
+        };
+
+        try {
+          // 3. CHAMA A API PUSHINPAY
+          const pushinResponse = await fetch(
+            "https://api.pushinpay.com.br/api/pix/cashIn",
+            {
+              method: "POST",
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${pushinpayApiKey}`,
+              },
+              body: JSON.stringify(payloadRequest),
+            }
+          );
+
+          const responseData = await pushinResponse.json();
+          console.log("✅ Response Data:", responseData);
+          
+          const pixCode = responseData?.qr_code;
+
+          // 4. ENVIA O LINK PIX/QR CODE DE VOLTA
+          if (pixCode) {
+            const price = (selectedPackage.totalAmount / 100).toFixed(2).replace('.', ',');
+
+            const caption = 
+            `💰 **Pagamento Pix - ${selectedPackage.credits} Créditos**\n` +
+            `Valor: *R$${price}*\n\n` +
+            `Use o código Pix (Copia e Cola):\n\n` +
+            `\`${pixCode}\``;
+
+            await sendTelegramData({
+              botToken,
+              chatId,
+              text: caption,
+            });
+          } else {
+            console.error("[PushinPay Error] Pix data missing. Response:", JSON.stringify(responseData));
+            throw new Error("Dados Pix (QR Code ou código) indisponíveis na resposta.");
+          }
+        } catch (error) {
+          console.error("[TelegramWebhook] Erro ao criar link PushinPay:", error);
+          await sendTelegramData({
+            botToken,
+            chatId,
+            text: "❌ Não foi possível gerar o link de pagamento. Tente novamente mais tarde.",
+          });
+        }
+      }
+
       return NextResponse.json({ ok: true }); 
   }
 
@@ -153,82 +308,82 @@ export async function POST(request: NextRequest) {
   }
 
   // O bloco /comprar deve ser adaptado no próximo passo
-  if (botToken && chatId && trimmedMessage.startsWith("/comprar")) {
-    if (!pushinpayApiKey) {
-      console.error("[TelegramWebhook] Missing PUSHINPAY_API_KEY");
-      await sendTelegramData({
-        botToken,
-        chatId,
-        text: "Não foi possível gerar o link de pagamento no momento. Tente novamente mais tarde.",
-      });
-    } else {
-      const [, amountArg] = trimmedMessage.split(/\s+/);
-      const parsedAmount = Number(amountArg);
-      const amountInCents =
-        Number.isFinite(parsedAmount) && parsedAmount > 0
-          ? Math.round(parsedAmount * 100)
-          : 0;
+  // if (botToken && chatId && trimmedMessage.startsWith("/comprar")) {
+  //   if (!pushinpayApiKey) {
+  //     console.error("[TelegramWebhook] Missing PUSHINPAY_API_KEY");
+  //     await sendTelegramData({
+  //       botToken,
+  //       chatId,
+  //       text: "Não foi possível gerar o link de pagamento no momento. Tente novamente mais tarde.",
+  //     });
+  //   } else {
+  //     const [, amountArg] = trimmedMessage.split(/\s+/);
+  //     const parsedAmount = Number(amountArg);
+  //     const amountInCents =
+  //       Number.isFinite(parsedAmount) && parsedAmount > 0
+  //         ? Math.round(parsedAmount * 100)
+  //         : 0;
 
-      const payload = {
-        amount: amountInCents || 1000,
-        currency: "BRL",
-        description: "Compra de créditos Show do Milênio via Telegram",
-      };
+  //     const payload = {
+  //       amount: amountInCents || 1000,
+  //       currency: "BRL",
+  //       description: "Compra de créditos Show do Milênio via Telegram",
+  //     };
 
-      try {
-        const pushinResponse = await fetch(
-          "https://api.pushinpay.com/v1/payment-links",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${pushinpayApiKey}`,
-            },
-            body: JSON.stringify(payload),
-          }
-        );
+  //     try {
+  //       const pushinResponse = await fetch(
+  //         "https://api.pushinpay.com/v1/payment-links",
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Authorization: `Bearer ${pushinpayApiKey}`,
+  //           },
+  //           body: JSON.stringify(payload),
+  //         }
+  //       );
 
-        let paymentUrl: string | undefined;
-        try {
-          const responseData = await pushinResponse.json();
-          paymentUrl =
-            responseData?.url ??
-            responseData?.data?.url ??
-            responseData?.payment_link;
-        } catch (parseError) {
-          console.error(
-            "[TelegramWebhook] Failed to parse PushinPay response",
-            parseError
-          );
-        }
+  //       let paymentUrl: string | undefined;
+  //       try {
+  //         const responseData = await pushinResponse.json();
+  //         paymentUrl =
+  //           responseData?.url ??
+  //           responseData?.data?.url ??
+  //           responseData?.payment_link;
+  //       } catch (parseError) {
+  //         console.error(
+  //           "[TelegramWebhook] Failed to parse PushinPay response",
+  //           parseError
+  //         );
+  //       }
 
-        if (!pushinResponse.ok || !paymentUrl) {
-          console.error(
-            "[TelegramWebhook] PushinPay request failed",
-            pushinResponse.status
-          );
-          await sendTelegramData({
-            botToken,
-            chatId,
-            text: "Não foi possível gerar o link de pagamento agora. Tente novamente em instantes.",
-          });
-        } else {
-          await sendTelegramData({
-            botToken,
-            chatId,
-            text: `Seu link de pagamento está pronto: ${paymentUrl}`,
-          });
-        }
-      } catch (error) {
-        console.error("[TelegramWebhook] Error creating payment link", error);
-        await sendTelegramData({
-          botToken,
-          chatId,
-          text: "Tivemos um problema ao criar o link de pagamento. Tente novamente mais tarde.",
-        });
-      }
-    }
-  }
+  //       if (!pushinResponse.ok || !paymentUrl) {
+  //         console.error(
+  //           "[TelegramWebhook] PushinPay request failed",
+  //           pushinResponse.status
+  //         );
+  //         await sendTelegramData({
+  //           botToken,
+  //           chatId,
+  //           text: "Não foi possível gerar o link de pagamento agora. Tente novamente em instantes.",
+  //         });
+  //       } else {
+  //         await sendTelegramData({
+  //           botToken,
+  //           chatId,
+  //           text: `Seu link de pagamento está pronto: ${paymentUrl}`,
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error("[TelegramWebhook] Error creating payment link", error);
+  //       await sendTelegramData({
+  //         botToken,
+  //         chatId,
+  //         text: "Tivemos um problema ao criar o link de pagamento. Tente novamente mais tarde.",
+  //       });
+  //     }
+  //   }
+  // }
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }

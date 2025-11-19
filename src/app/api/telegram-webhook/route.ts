@@ -1,6 +1,7 @@
 "use server";
 
 import { NextRequest, NextResponse } from "next/server";
+import { adminDb } from '@/lib/firebase-admin';
 
 interface TelegramData {
   message?: {
@@ -213,6 +214,7 @@ export async function POST(request: NextRequest) {
           split_rules: [],
         };
 
+
         try {
           // 3. CHAMA A API PUSHINPAY
           const pushinResponse = await fetch(
@@ -230,6 +232,19 @@ export async function POST(request: NextRequest) {
 
           const responseData = await pushinResponse.json();
           console.log("✅ Response Data:", responseData);
+          
+          // Salvar dados no Firestore
+          const paymentData = {
+            telegramChatId: callbackQuery.message?.chat.id,
+            pspTransactionId: responseData.id,
+            status: responseData.status,
+            totalAmount: responseData.value,
+            creditsToReceive: selectedPackage.creditsToReceive,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          };
+          
+          await adminDb.collection('payments').doc(responseData.id || `payment_${Date.now()}`).set(paymentData);
           
           const pixCode = responseData?.qr_code;
 

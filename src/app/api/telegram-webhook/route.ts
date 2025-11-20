@@ -12,6 +12,12 @@ interface TelegramData {
       username?: string;
       title?: string;
     };
+    from?: {
+      id: number;
+      first_name?: string;
+      last_name?: string;
+      username?: string;
+    };
   };
   // Incluído para futuras interações de botão
   callback_query?: {
@@ -237,7 +243,7 @@ export async function POST(request: NextRequest) {
           const paymentData = {
             telegramChatId: callbackQuery.message?.chat.id,
             pspTransactionId: responseData.id,
-            status: responseData.status,
+            status: 'pending',
             totalAmount: responseData.value,
             creditsToReceive: selectedPackage.creditsToReceive,
             createdAt: new Date(),
@@ -282,8 +288,12 @@ export async function POST(request: NextRequest) {
 
   // LÓGICA DO /START (COM MENU INTERATIVO)
   if (botToken && chatId && trimmedMessage.startsWith("/start")) {
+    const firstName = telegramData?.message?.from?.first_name ?? "";
+    const lastName = telegramData?.message?.from?.last_name ?? "";
+    const fullName = [firstName, lastName].filter(Boolean).join(" ").trim() || "bem-vindo";
+
     const welcomeMessage =
-      "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
+      `Olá, ${fullName}! Selecione um pacote para iniciar sua compra:`;
 
     const inlineKeyboard = {
       inline_keyboard: [  

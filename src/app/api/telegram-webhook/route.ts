@@ -56,7 +56,7 @@ const packageMap: Record<string, CreditPackage> = creditPackages.reduce((acc, pk
 
 // Teclado Fixo (Reply Keyboard) para o botão INICIAR
 const startMenuKeyboard = {
-  keyboard: [[{ text: "/start" }]], // O botão em si
+  keyboard: [[{ text: "Iniciar compra de créditos" }]], // O botão em si
   resize_keyboard: true, // Ajusta o tamanho
   one_time_keyboard: false, // CRUCIAL: Mantém o teclado sempre visível
 };
@@ -243,6 +243,15 @@ export async function POST(request: NextRequest) {
               chatId,
               text: caption,
             });
+
+            // Mantem o botão de Iniciar após o Pix
+            await sendTelegramData({
+              botToken,
+              chatId,
+              text: " ", // Mensagem vazia para anexar o teclado
+              reply_markup: startMenuKeyboard, 
+          });
+
           } else {
             console.error("[PushinPay Error] Pix data missing. Response:", JSON.stringify(responseData));
             throw new Error("Dados Pix (QR Code ou código) indisponíveis na resposta.");
@@ -261,7 +270,7 @@ export async function POST(request: NextRequest) {
   }
 
   // LÓGICA DO /START (COM MENU INTERATIVO)
-  if (botToken && chatId && trimmedMessage.startsWith("/start")) {
+  if (botToken && chatId && (trimmedMessage.startsWith("/start") || trimmedMessage.startsWith("Iniciar"))) {
     const firstName = telegramData?.message?.from?.first_name ?? "";
     const lastName = telegramData?.message?.from?.last_name ?? "";
     const fullName = [firstName, lastName].filter(Boolean).join(" ").trim() || "bem-vindo";
@@ -308,7 +317,7 @@ export async function POST(request: NextRequest) {
     await sendTelegramData({ 
       botToken, 
       chatId, 
-      text: ".", 
+      text: " ", 
       reply_markup: startMenuKeyboard });
   }
 

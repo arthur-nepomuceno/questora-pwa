@@ -243,7 +243,7 @@ export async function POST(request: NextRequest) {
           const paymentData = {
             telegramChatId: callbackQuery.message?.chat.id,
             pspTransactionId: responseData.id,
-            status: 'pending',
+            status: 'pending', 
             totalAmount: responseData.value,
             creditsToReceive: selectedPackage.creditsToReceive,
             createdAt: new Date(),

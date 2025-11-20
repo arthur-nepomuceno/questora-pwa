@@ -12,12 +12,6 @@ interface TelegramData {
       username?: string;
       title?: string;
     };
-    from?: {
-      id: number;
-      first_name?: string;
-      last_name?: string;
-      username?: string;
-    };
   };
   // Incluído para futuras interações de botão
   callback_query?: {
@@ -53,13 +47,6 @@ const packageMap: Record<string, CreditPackage> = creditPackages.reduce((acc, pk
   acc[pkg.id] = pkg;
   return acc;
 }, {} as Record<string, CreditPackage>);
-
-// Teclado Fixo (Reply Keyboard) para o botão INICIAR
-const startMenuKeyboard = {
-  keyboard: [[{ text: "Iniciar compra de créditos" }]], // O botão em si
-  resize_keyboard: true, // Ajusta o tamanho
-  one_time_keyboard: false, // CRUCIAL: Mantém o teclado sempre visível
-};
 
 //ENVIAR MENSAGENS PARA O TELEGRAM
 async function sendTelegramData({
@@ -217,7 +204,7 @@ export async function POST(request: NextRequest) {
           const paymentData = {
             telegramChatId: callbackQuery.message?.chat.id,
             pspTransactionId: responseData.id,
-            status: 'pending', 
+            status: 'pending',
             totalAmount: responseData.value,
             creditsToReceive: selectedPackage.creditsToReceive,
             createdAt: new Date(),
@@ -243,15 +230,6 @@ export async function POST(request: NextRequest) {
               chatId,
               text: caption,
             });
-
-            // Mantem o botão de Iniciar após o Pix
-            await sendTelegramData({
-              botToken,
-              chatId,
-              text: " ", // Mensagem vazia para anexar o teclado
-              reply_markup: startMenuKeyboard, 
-          });
-
           } else {
             console.error("[PushinPay Error] Pix data missing. Response:", JSON.stringify(responseData));
             throw new Error("Dados Pix (QR Code ou código) indisponíveis na resposta.");
@@ -270,13 +248,9 @@ export async function POST(request: NextRequest) {
   }
 
   // LÓGICA DO /START (COM MENU INTERATIVO)
-  if (botToken && chatId && (trimmedMessage.startsWith("/start") || trimmedMessage.startsWith("Iniciar"))) {
-    const firstName = telegramData?.message?.from?.first_name ?? "";
-    const lastName = telegramData?.message?.from?.last_name ?? "";
-    const fullName = [firstName, lastName].filter(Boolean).join(" ").trim() || "bem-vindo";
-
+  if (botToken && chatId && trimmedMessage.startsWith("/start")) {
     const welcomeMessage =
-      `Olá, ${fullName}! Selecione um pacote para iniciar sua compra:`;
+      "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
 
     const inlineKeyboard = {
       inline_keyboard: [  
@@ -312,22 +286,6 @@ export async function POST(request: NextRequest) {
       chatId,
       text: welcomeMessage,
       reply_markup: inlineKeyboard,
-    });
-
-    await sendTelegramData({ 
-      botToken, 
-      chatId, 
-      text: " ", 
-      reply_markup: startMenuKeyboard });
-  }
-
-  // ESTE BLOCO É O "CATCH-ALL" QUE REATIVA O TECLADO FIXO E BLOQUEIA A DIGITAÇÃO
-  if (botToken && chatId && trimmedMessage.length > 0 && !trimmedMessage.startsWith("/") && !callbackQuery) {
-    await sendTelegramData({
-        botToken,
-        chatId,
-        text: " ", 
-        reply_markup: startMenuKeyboard, 
     });
   }
 

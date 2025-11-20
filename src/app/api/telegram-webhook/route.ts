@@ -321,5 +321,15 @@ export async function POST(request: NextRequest) {
       reply_markup: startMenuKeyboard });
   }
 
+  // ESTE BLOCO É O "CATCH-ALL" QUE REATIVA O TECLADO FIXO E BLOQUEIA A DIGITAÇÃO
+  if (botToken && chatId && trimmedMessage.length > 0 && !trimmedMessage.startsWith("/") && !callbackQuery) {
+    await sendTelegramData({
+        botToken,
+        chatId,
+        text: " ", 
+        reply_markup: startMenuKeyboard, 
+    });
+  }
+
   return NextResponse.json({ ok: true }, { status: 200 });
 }

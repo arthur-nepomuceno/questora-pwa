@@ -15,6 +15,7 @@ export interface User {
   creditPackage1000: number;
   cpfNumber: string;
   cnpjNumber: string;
+  purchaseToken?: string;
   createdAt: Date;
   updatedAt: Date;
 }

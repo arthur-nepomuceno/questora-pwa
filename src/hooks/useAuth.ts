@@ -463,9 +463,13 @@ export const useAuth = () => {
       const cleanCpfNumber = cpfNumber.replace(/\D/g, '');
       const cleanCnpjNumber = cnpjNumber.replace(/\D/g, '');
 
+      // Gera purchaseToken (UUID)
+      const purchaseToken = crypto.randomUUID();
+
       // Monta objeto de atualização apenas com os campos preenchidos
       const updateData: any = {
         updatedAt: serverTimestamp(),
+        purchaseToken: purchaseToken,
       };
 
       // Atualiza apenas se o CPF foi preenchido
@@ -486,6 +490,7 @@ export const useAuth = () => {
           ...prev.user,
           ...(cleanCpfNumber && { cpfNumber: cleanCpfNumber }),
           ...(cleanCnpjNumber && { cnpjNumber: cleanCnpjNumber }),
+          purchaseToken: purchaseToken,
         } : null,
       }));
 

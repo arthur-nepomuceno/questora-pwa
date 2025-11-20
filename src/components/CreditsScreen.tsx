@@ -168,7 +168,8 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
           onConfirm={() => {
             playButtonPress();
             setShowPurchaseModal(false);
-            window.open('https://t.me/showdomileniooficial_bot?start=', '_blank');
+            const purchaseToken = user?.purchaseToken || '';
+            window.open(`https://t.me/showdomileniooficial_bot?start=${purchaseToken}`, '_blank');
           }}
           onCancel={() => setShowPurchaseModal(false)}
         />

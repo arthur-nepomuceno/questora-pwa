@@ -54,6 +54,13 @@ const packageMap: Record<string, CreditPackage> = creditPackages.reduce((acc, pk
   return acc;
 }, {} as Record<string, CreditPackage>);
 
+// Teclado Fixo (Reply Keyboard) para o botão INICIAR
+const startMenuKeyboard = {
+  keyboard: [[{ text: "/start" }]], // O botão em si
+  resize_keyboard: true, // Ajusta o tamanho
+  one_time_keyboard: false, // CRUCIAL: Mantém o teclado sempre visível
+};
+
 //ENVIAR MENSAGENS PARA O TELEGRAM
 async function sendTelegramData({
   botToken,
@@ -95,39 +102,6 @@ async function sendTelegramData({
     console.error("[TelegramWebhook] Error sending message", error);
   }
 }
-
-//ENVIAR IMAGEM DO QRCODE PARA O TELEGRAM
-// async function sendTelegramPhoto({
-//   botToken,
-//   chatId,
-//   photoUrl,
-//   caption,
-// }: {
-//   botToken: string;
-//   chatId: number;
-//   photoUrl: string;
-//   caption?: string; // Legenda para a foto (onde ficará o Pix Copia e Cola)
-// }) {
-//   try {
-//     await fetch(
-//       `https://api.telegram.org/bot${botToken}/sendPhoto`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           chat_id: chatId,
-//           photo: photoUrl, // URL da imagem do QR Code
-//           caption: caption, // O texto (com o Pix Copia e Cola)
-//           parse_mode: 'Markdown',
-//         }),
-//       }
-//     );
-//   } catch (error) {
-//     console.error("[TelegramWebhook] Error sending photo", error);
-//   }
-// }
 
 //RESPONDER À ESCOLHA DO PACOTE DE CRÉDITOS
 async function answerCallbackQuery({
@@ -330,85 +304,13 @@ export async function POST(request: NextRequest) {
       text: welcomeMessage,
       reply_markup: inlineKeyboard,
     });
+
+    await sendTelegramData({ 
+      botToken, 
+      chatId, 
+      text: ".", 
+      reply_markup: startMenuKeyboard });
   }
-
-  // O bloco /comprar deve ser adaptado no próximo passo
-  // if (botToken && chatId && trimmedMessage.startsWith("/comprar")) {
-  //   if (!pushinpayApiKey) {
-  //     console.error("[TelegramWebhook] Missing PUSHINPAY_API_KEY");
-  //     await sendTelegramData({
-  //       botToken,
-  //       chatId,
-  //       text: "Não foi possível gerar o link de pagamento no momento. Tente novamente mais tarde.",
-  //     });
-  //   } else {
-  //     const [, amountArg] = trimmedMessage.split(/\s+/);
-  //     const parsedAmount = Number(amountArg);
-  //     const amountInCents =
-  //       Number.isFinite(parsedAmount) && parsedAmount > 0
-  //         ? Math.round(parsedAmount * 100)
-  //         : 0;
-
-  //     const payload = {
-  //       amount: amountInCents || 1000,
-  //       currency: "BRL",
-  //       description: "Compra de créditos Show do Milênio via Telegram",
-  //     };
-
-  //     try {
-  //       const pushinResponse = await fetch(
-  //         "https://api.pushinpay.com/v1/payment-links",
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: `Bearer ${pushinpayApiKey}`,
-  //           },
-  //           body: JSON.stringify(payload),
-  //         }
-  //       );
-
-  //       let paymentUrl: string | undefined;
-  //       try {
-  //         const responseData = await pushinResponse.json();
-  //         paymentUrl =
-  //           responseData?.url ??
-  //           responseData?.data?.url ??
-  //           responseData?.payment_link;
-  //       } catch (parseError) {
-  //         console.error(
-  //           "[TelegramWebhook] Failed to parse PushinPay response",
-  //           parseError
-  //         );
-  //       }
-
-  //       if (!pushinResponse.ok || !paymentUrl) {
-  //         console.error(
-  //           "[TelegramWebhook] PushinPay request failed",
-  //           pushinResponse.status
-  //         );
-  //         await sendTelegramData({
-  //           botToken,
-  //           chatId,
-  //           text: "Não foi possível gerar o link de pagamento agora. Tente novamente em instantes.",
-  //         });
-  //       } else {
-  //         await sendTelegramData({
-  //           botToken,
-  //           chatId,
-  //           text: `Seu link de pagamento está pronto: ${paymentUrl}`,
-  //         });
-  //       }
-  //     } catch (error) {
-  //       console.error("[TelegramWebhook] Error creating payment link", error);
-  //       await sendTelegramData({
-  //         botToken,
-  //         chatId,
-  //         text: "Tivemos um problema ao criar o link de pagamento. Tente novamente mais tarde.",
-  //       });
-  //     }
-  //   }
-  // }
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }

@@ -154,14 +154,19 @@ export async function POST(request: NextRequest) {
   
   console.log("✅ Telegram Data:", telegramData);
 
-  //CAPTURANDO OS DADOS IMPORTANTES DA REQUISIÇÃO
+  //RECEBENDO OS DADOS IMPORTANTES DA REQUISIÇÃO
   const messageText = telegramData?.message?.text ?? "<command> <token>";
   const [command, token] = messageText.split(' ');  
   const chatId = telegramData?.message?.chat?.id;
   console.log("✅ Command:", command);
   console.log("✅ Token:", token);
-  
-  //CAPTURANDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
+
+  //BUSCAR O USER PELO TOKEN;
+  const user = await adminDb.collection('users').where('purchaseToken', '==', token).get();
+  //console.log("✅ User:", user.docs[0].data());
+  console.log("✅ User:", user);
+
+  //RECEBENDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  
   if (botToken && callbackQuery) {
       const packageId = callbackQuery.data; 
@@ -176,8 +181,8 @@ export async function POST(request: NextRequest) {
         text: "Gerando link de pagamento...",
       });
 
+      // 2. Prepara o payload para PushinPay
       if (selectedPackage && pushinpayApiKey) {
-        // 2. Prepara o payload para PushinPay
         const payloadRequest = {
           value: selectedPackage.totalAmount, // Valor em centavos
           webhook_url: process.env.PUSHINPAY_WEBHOOK_URL || "", 
@@ -207,6 +212,7 @@ export async function POST(request: NextRequest) {
           const paymentData = {
             telegramChatId: callbackQuery.message?.chat.id,
             pspTransactionId: responseData.id,
+            purchaseToken: token,
             status: 'pending',
             totalAmount: responseData.value,
             creditsToReceive: selectedPackage.creditsToReceive,

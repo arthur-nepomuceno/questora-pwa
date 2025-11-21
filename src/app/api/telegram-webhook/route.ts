@@ -158,6 +158,7 @@ export async function POST(request: NextRequest) {
   const messageText = telegramData?.message?.text ?? "";
   const trimmedMessage = messageText.trim();  
   const chatId = telegramData?.message?.chat?.id;
+  console.log("✅ Trimming message:", trimmedMessage);
 
   //CAPTURANDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  

@@ -155,11 +155,12 @@ export async function POST(request: NextRequest) {
   console.log("✅ Telegram Data:", telegramData);
 
   //CAPTURANDO OS DADOS IMPORTANTES DA REQUISIÇÃO
-  const messageText = telegramData?.message?.text ?? "";
-  const trimmedMessage = messageText.trim();  
+  const messageText = telegramData?.message?.text ?? "<command> <token>";
+  const [command, token] = messageText.split(' ');  
   const chatId = telegramData?.message?.chat?.id;
-  console.log("✅ Trimming message:", trimmedMessage);
-
+  console.log("✅ Command:", command);
+  console.log("✅ Token:", token);
+  
   //CAPTURANDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  
   if (botToken && callbackQuery) {
@@ -250,7 +251,7 @@ export async function POST(request: NextRequest) {
   }
 
   // LÓGICA DO /START (COM MENU INTERATIVO)
-  if (botToken && chatId && trimmedMessage.startsWith("/start")) {
+  if (botToken && chatId && command === "/start") {
     const welcomeMessage =
       "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
 

@@ -140,8 +140,9 @@ export async function POST(request: NextRequest) {
     console.warn("[TelegramWebhook] Invalid webhook secret received");
     return NextResponse.json({ ok: true }, { status: 200 });
   }
+  //
 
-  //RECEBENDO E DECODIFICANDO OS DADOS DA REQUISIÇÃO DO TELEGRAM
+  //RECEBENDO OS DADOS DA REQUISIÇÃO DO TELEGRAM
   let telegramData: TelegramData | null = null;
 
   try {

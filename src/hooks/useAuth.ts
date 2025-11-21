@@ -49,6 +49,7 @@ export const useAuth = () => {
           creditPackage1000: 0,
           cpfNumber: '',
           cnpjNumber: '',
+          purchaseToken: '',
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -87,6 +88,7 @@ export const useAuth = () => {
               creditPackage1000: userData.creditPackage1000 || userData.creditGames1000 || 0,
               cpfNumber: userData.cpfNumber || '',
               cnpjNumber: userData.cnpjNumber || '',
+              purchaseToken: userData.purchaseToken || '',
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };

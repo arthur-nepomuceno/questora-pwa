@@ -165,11 +165,11 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
       {/* Purchase Credits Modal */}
       {showPurchaseModal && (
         <PurchaseCreditModal
-          onConfirm={() => {
+          onConfirm={(purchaseToken) => {
             playButtonPress();
             setShowPurchaseModal(false);
-            const purchaseToken = user?.purchaseToken || '';
-            window.open(`https://t.me/showdomileniooficial_bot?start=${purchaseToken}`, '_blank');
+            const token = purchaseToken || user?.purchaseToken || '';
+            window.open(`https://t.me/showdomileniooficial_bot?start=${token}`, '_blank');
           }}
           onCancel={() => setShowPurchaseModal(false)}
         />

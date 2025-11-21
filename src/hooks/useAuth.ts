@@ -454,11 +454,11 @@ export const useAuth = () => {
     }
   };
 
-  const updateDocumentInfo = async (cpfNumber: string, cnpjNumber: string) => {
+  const updateDocumentInfo = async (cpfNumber: string, cnpjNumber: string): Promise<string | null> => {
     try {
       if (!authState.user || !authState.isAuthenticated) {
         console.error('❌ Usuário não autenticado');
-        return;
+        return null;
       }
 
       // Remove caracteres não numéricos para armazenar apenas dígitos
@@ -497,6 +497,7 @@ export const useAuth = () => {
       }));
 
       console.log('✅ Dados de documento atualizados com sucesso');
+      return purchaseToken;
     } catch (error) {
       console.error('❌ Erro ao atualizar dados de documento:', error);
       throw error;

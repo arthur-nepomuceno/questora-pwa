@@ -6,7 +6,7 @@ import { useDocumentValidation } from '@/hooks/useDocumentValidation';
 import { useAuth } from '@/hooks/useAuth';
 
 interface PurchaseCreditModalProps {
-  onConfirm: () => void;
+  onConfirm: (purchaseToken?: string) => void;
   onCancel: () => void;
 }
 
@@ -65,8 +65,8 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
           return;
         }
 
-        // Atualizar documentos no Firestore
-        await updateDocumentInfo(cpf, cnpj);
+        // Atualizar documentos no Firestore e obter o purchaseToken
+        const purchaseToken = await updateDocumentInfo(cpf, cnpj);
 
         // Buscar name e email do usuário usando Firebase Admin SDK via API Route
         const response = await fetch(`/api/user-info?userId=${user.id}`);
@@ -94,7 +94,7 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
 
         console.log('✅ Informações de pagamento salvas:', paymentInfo);
 
-        onConfirm();
+        onConfirm(purchaseToken || undefined);
       } catch (error) {
         console.error('Erro ao atualizar documentos:', error);
         setErrors({ cpfCnpj: 'Erro ao salvar documentos. Tente novamente.' });

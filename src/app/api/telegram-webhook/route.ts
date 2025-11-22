@@ -162,17 +162,17 @@ export async function POST(request: NextRequest) {
   console.log("✅ Token:", token);
 
   //BUSCAR O USER PELO TOKEN;
-  const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
-  const userDoc = userSnapshot.docs[0];
-  const userId = userDoc?.id;
-  const userName = userDoc?.data().name;
-  const userEmail = userDoc?.data().email;
-  const userTotalCredits = userDoc?.data().totalCredits;
+  // const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
+  // const userDoc = userSnapshot.docs[0];
+  // const userId = userDoc?.id;
+  // const userName = userDoc?.data().name;
+  // const userEmail = userDoc?.data().email;
+  // const userTotalCredits = userDoc?.data().totalCredits;
 
-  console.log("✅ User ID:", userId);
-  console.log("✅ User Name:", userName);
-  console.log("✅ User Email:", userEmail);
-  console.log("✅ User Total Credits:", userTotalCredits);
+  // console.log("✅ User ID:", userId);
+  // console.log("✅ User Name:", userName);
+  // console.log("✅ User Email:", userEmail);
+  // console.log("✅ User Total Credits:", userTotalCredits);
 
   //RECEBENDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  
@@ -218,13 +218,13 @@ export async function POST(request: NextRequest) {
           
           // Salvar dados no Firestore
           const paymentData = {
-            userId: userId,
-            userName: userName,
-            userEmail: userEmail,
-            userTotalCredits: userTotalCredits,
+            // userId: userId,
+            // userName: userName,
+            // userEmail: userEmail,
+            // userTotalCredits: userTotalCredits,
             telegramChatId: callbackQuery.message?.chat.id,
             pspTransactionId: responseData.id,
-            purchaseToken: token,
+            // purchaseToken: token,
             status: 'pending',
             totalAmount: responseData.value,
             creditsToReceive: selectedPackage.creditsToReceive,

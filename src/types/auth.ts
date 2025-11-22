@@ -16,6 +16,7 @@ export interface User {
   cpfNumber: string;
   cnpjNumber: string;
   purchaseToken?: string;
+  chatId?: number;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -267,13 +267,20 @@ export async function POST(request: NextRequest) {
     const userEmail = userDoc?.data().email;
     const userTotalCredits = userDoc?.data().totalCredits;
 
+    // Atualizar chatId no documento do usuário
+    if (userId) {
+      await adminDb.collection('users').doc(userId).update({
+        chatId: chatId
+      });
+    }
+
     console.log("✅ User ID:", userId);
     console.log("✅ User Name:", userName);
     console.log("✅ User Email:", userEmail);
     console.log("✅ User Total Credits:", userTotalCredits);
 
     const welcomeMessage =
-      "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
+      `Olá ${userName}! Selecione um pacote para iniciar sua compra:`;
 
     const inlineKeyboard = {
       inline_keyboard: [  

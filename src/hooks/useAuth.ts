@@ -89,6 +89,7 @@ export const useAuth = () => {
               cpfNumber: userData.cpfNumber || '',
               cnpjNumber: userData.cnpjNumber || '',
               purchaseToken: userData.purchaseToken || '',
+              chatId: userData.chatId,
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };

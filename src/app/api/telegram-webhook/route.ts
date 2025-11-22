@@ -162,8 +162,12 @@ export async function POST(request: NextRequest) {
   console.log("✅ Token:", token);
 
   //BUSCAR O USER PELO TOKEN;
-  const user = await adminDb.collection('users').where('purchaseToken', '==', token).get();
-  console.log("✅ User:", user);
+  const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
+  const userDoc = userSnapshot.docs[0];
+  const userId = userDoc?.id;
+  const userData = userDoc?.data();
+  console.log("✅ User ID:", userId);
+  console.log("✅ User Data:", userData);
 
   //RECEBENDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  
@@ -209,6 +213,7 @@ export async function POST(request: NextRequest) {
           
           // Salvar dados no Firestore
           const paymentData = {
+            userId: userId,
             telegramChatId: callbackQuery.message?.chat.id,
             pspTransactionId: responseData.id,
             purchaseToken: token,

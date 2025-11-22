@@ -163,7 +163,6 @@ export async function POST(request: NextRequest) {
 
   //BUSCAR O USER PELO TOKEN;
   const user = await adminDb.collection('users').where('purchaseToken', '==', token).get();
-  //console.log("✅ User:", user.docs[0].data());
   console.log("✅ User:", user);
 
   //RECEBENDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP

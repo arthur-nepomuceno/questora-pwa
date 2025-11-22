@@ -119,13 +119,15 @@ async function answerCallbackQuery({
 }
 
 export async function POST(request: NextRequest) {
+  
+  let telegramData: TelegramData | null = null;
+  
   const configuredSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const pushinpayApiKey = process.env.PUSHINPAY_API_KEY;
-  const receivedSecret =
-  request.headers.get("x-telegram-bot-api-secret-token") ??
-  request.nextUrl.searchParams.get("secret") ??
-  "";
+  const pushinpayApiKey = process.env.PUSHINPAY_API_KEY;    
+  const receivedSecret = request.headers.get("x-telegram-bot-api-secret-token") 
+  ?? request.nextUrl.searchParams.get("secret") 
+  ?? "";
 
   // VERIFICAÇÃO DE CREDENCIAIS
   if (!configuredSecret) {
@@ -140,39 +142,27 @@ export async function POST(request: NextRequest) {
     console.warn("[TelegramWebhook] Invalid webhook secret received");
     return NextResponse.json({ ok: true }, { status: 200 });
   }
-  //
+  ////////////////////////////////////////////////////////////////////
 
   //RECEBENDO OS DADOS DA REQUISIÇÃO DO TELEGRAM
-  let telegramData: TelegramData | null = null;
-
   try {
     telegramData = (await request.json()) as TelegramData;
+    console.log("✅ Telegram Data:", telegramData);
   } catch (error) {
     console.error("[TelegramWebhook] Failed to parse request body", error);
     return NextResponse.json({ ok: true }, { status: 200 });
   }
   
-  console.log("✅ Telegram Data:", telegramData);
-
-  //RECEBENDO OS DADOS IMPORTANTES DA REQUISIÇÃO
+  const chatId = telegramData?.message?.chat?.id;
   const messageText = telegramData?.message?.text ?? "<command> <token>";
   const [command, token] = messageText.split(' ');  
-  const chatId = telegramData?.message?.chat?.id;
   console.log("✅ Command:", command);
   console.log("✅ Token:", token);
-
+  ////////////////////////////////////////////////////////////////////
+  
+  
   //BUSCAR O USER PELO TOKEN;
-  // const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
-  // const userDoc = userSnapshot.docs[0];
-  // const userId = userDoc?.id;
-  // const userName = userDoc?.data().name;
-  // const userEmail = userDoc?.data().email;
-  // const userTotalCredits = userDoc?.data().totalCredits;
 
-  // console.log("✅ User ID:", userId);
-  // console.log("✅ User Name:", userName);
-  // console.log("✅ User Email:", userEmail);
-  // console.log("✅ User Total Credits:", userTotalCredits);
 
   //RECEBENDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  
@@ -270,6 +260,18 @@ export async function POST(request: NextRequest) {
 
   // LÓGICA DO /START (COM MENU INTERATIVO)
   if (botToken && chatId && command === "/start") {
+    const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
+    const userDoc = userSnapshot.docs[0];
+    const userId = userDoc?.id;
+    const userName = userDoc?.data().name;
+    const userEmail = userDoc?.data().email;
+    const userTotalCredits = userDoc?.data().totalCredits;
+
+    console.log("✅ User ID:", userId);
+    console.log("✅ User Name:", userName);
+    console.log("✅ User Email:", userEmail);
+    console.log("✅ User Total Credits:", userTotalCredits);
+
     const welcomeMessage =
       "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
 

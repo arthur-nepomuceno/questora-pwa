@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
   }
   ////////////////////////////////////////////////////////////////////
 
-  //RECEBENDO OS DADOS DA REQUISIÇÃO DO TELEGRAM
+  //RECEBENDO OS DADOS DE RESPOSTA AO ABRIR A URL DO TELEGRAM
   try {
     telegramData = (await request.json()) as TelegramData;
     console.log("✅ Telegram Data:", telegramData);
@@ -212,8 +212,8 @@ export async function POST(request: NextRequest) {
             // userName: userName,
             // userEmail: userEmail,
             // userTotalCredits: userTotalCredits,
-            telegramChatId: callbackQuery.message?.chat.id,
-            pspTransactionId: responseData.id,
+            chatId: callbackQuery.message?.chat.id,
+            pspId: responseData.id,
             // purchaseToken: token,
             status: 'pending',
             totalAmount: responseData.value,

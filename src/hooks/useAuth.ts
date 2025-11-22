@@ -104,6 +104,7 @@ export const useAuth = () => {
             console.log('🔶 [useAuth] Documento não existe. Criando novo...');
             // Criar documento do usuário se não existir
             await setDoc(doc(db, 'users', firebaseUser.uid), {
+              id: firebaseUser.uid,
               ...basicUser,
               createdAt: serverTimestamp(),
               updatedAt: serverTimestamp(),
@@ -214,6 +215,7 @@ export const useAuth = () => {
       
       // Criar documento do usuário no Firestore
       const userData = {
+        id: userCredential.user.uid,
         name: fullName,
         email: credentials.email,
         phone: credentials.phone,
@@ -229,6 +231,7 @@ export const useAuth = () => {
         creditPackage1000: 0,
         cpfNumber: '',
         cnpjNumber: '',
+        purchaseToken: '',
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };

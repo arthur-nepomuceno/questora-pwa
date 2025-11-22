@@ -158,9 +158,21 @@ export async function POST(request: NextRequest) {
   const messageText = telegramData?.message?.text ?? "<command> <token>";
   const [command, token] = messageText.split(' ');  
   const chatId = telegramData?.message?.chat?.id;
-  console.log("✅ Token:", token);
   console.log("✅ Command:", command);
-  console.log("✅ Chat ID:", chatId);
+  console.log("✅ Token:", token);
+
+  //BUSCAR O USER PELO TOKEN;
+  const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
+  const userDoc = userSnapshot.docs[0];
+  const userId = userDoc?.id;
+  const userName = userDoc?.data().name;
+  const userEmail = userDoc?.data().email;
+  const userTotalCredits = userDoc?.data().totalCredits;
+
+  console.log("✅ User ID:", userId);
+  console.log("✅ User Name:", userName);
+  console.log("✅ User Email:", userEmail);
+  console.log("✅ User Total Credits:", userTotalCredits);
 
   //RECEBENDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
   const callbackQuery = telegramData?.callback_query;  
@@ -258,20 +270,6 @@ export async function POST(request: NextRequest) {
 
   // LÓGICA DO /START (COM MENU INTERATIVO)
   if (botToken && chatId && command === "/start") {
-    
-    //BUSCAR O USER PELO TOKEN;
-    const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
-    const userDoc = userSnapshot.docs[0];
-    const userId = userDoc?.id;
-    const userName = userDoc?.data().name;
-    const userEmail = userDoc?.data().email;
-    const userTotalCredits = userDoc?.data().totalCredits;
-  
-    console.log("✅ User ID:", userId);
-    console.log("✅ User Name:", userName);
-    console.log("✅ User Email:", userEmail);
-    console.log("✅ User Total Credits:", userTotalCredits);
-
     const welcomeMessage =
       "Olá! Seja bem-vindo! Selecione um pacote para iniciar sua compra:";
 

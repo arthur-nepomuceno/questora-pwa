@@ -168,12 +168,52 @@ export async function POST(request: NextRequest) {
 
   // RECEBE COMANDO /START E RESPONDE COM MENU DE PACOTES
   if (command === "/start" && botToken && chatId) {
-    const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
-    const userDoc = userSnapshot.docs[0];
-    const userId = userDoc?.id;
-    const userName = userDoc?.data().name;
-    const userEmail = userDoc?.data().email;
-    const userCreditsBeforePurchase = userDoc?.data().totalCredits;
+    // Retry logic para resolver race condition: token pode não estar salvo ainda
+    let userDoc = null;
+    let userId: string | undefined;
+    let userName: string | undefined;
+    let userEmail: string | undefined;
+    let userCreditsBeforePurchase: number | undefined;
+    
+    const maxRetries = 3;
+    const retryDelay = 1000; // 1 segundo
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      if (token && token.trim() !== '') {
+        const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
+        userDoc = userSnapshot.docs[0];
+        
+        if (userDoc) {
+          userId = userDoc.id;
+          const userData = userDoc.data();
+          userName = userData.name;
+          userEmail = userData.email;
+          userCreditsBeforePurchase = userData.totalCredits;
+          console.log(`✅ Token encontrado na tentativa ${attempt}`);
+          break;
+        } else {
+          console.log(`⚠️ Token não encontrado na tentativa ${attempt}/${maxRetries}`);
+          if (attempt < maxRetries) {
+            console.log(`⏳ Aguardando ${retryDelay}ms antes de tentar novamente...`);
+            await new Promise(resolve => setTimeout(resolve, retryDelay));
+          }
+        }
+      } else {
+        console.warn('⚠️ Token vazio ou undefined');
+        break;
+      }
+    }
+    
+    // Se ainda não encontrou o usuário após todas as tentativas
+    if (!userDoc || !userId) {
+      console.error('❌ Usuário não encontrado após todas as tentativas. Token:', token);
+      await sendTelegramData({
+        botToken,
+        chatId,
+        text: '❌ Não foi possível identificar seu usuário. Por favor, tente novamente em alguns instantes.',
+      });
+      return NextResponse.json({ ok: true }, { status: 200 });
+    }
 
     // Atualizar chatId no documento do usuário
     if (userId) {

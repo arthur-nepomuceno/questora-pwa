@@ -500,10 +500,39 @@ export const useAuth = () => {
       }));
 
       console.log('✅ Dados de documento atualizados com sucesso');
+      
+      // Verificar se o token foi realmente salvo no Firestore (resolve race condition)
+      const tokenVerified = await verifyPurchaseTokenSaved(authState.user.id, purchaseToken);
+      if (!tokenVerified) {
+        console.warn('⚠️ Token não encontrado após salvar. Tentando novamente...');
+        // Retry: ler o documento novamente após um pequeno delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+        const retryVerified = await verifyPurchaseTokenSaved(authState.user.id, purchaseToken);
+        if (!retryVerified) {
+          console.error('❌ Token ainda não encontrado após retry');
+          throw new Error('Falha ao verificar token salvo no Firestore');
+        }
+      }
+      
       return purchaseToken;
     } catch (error) {
       console.error('❌ Erro ao atualizar dados de documento:', error);
       throw error;
+    }
+  };
+
+  // Função auxiliar para verificar se o purchaseToken foi salvo no Firestore
+  const verifyPurchaseTokenSaved = async (userId: string, expectedToken: string): Promise<boolean> => {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', userId));
+      if (!userDoc.exists()) {
+        return false;
+      }
+      const savedToken = userDoc.data()?.purchaseToken;
+      return savedToken === expectedToken;
+    } catch (error) {
+      console.error('❌ Erro ao verificar token salvo:', error);
+      return false;
     }
   };
 

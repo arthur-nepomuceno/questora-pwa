@@ -297,9 +297,11 @@ export async function POST(request: NextRequest) {
           const userName = userDoc?.data().name;
           const userEmail = userDoc?.data().email;
           const userCreditsBeforePurchase = userDoc?.data().totalCredits;
+          const paymentRef = adminDb.collection('payments').doc();
 
           // Salvar dados no Firestore
           const paymentData = {
+            orderId: paymentRef.id,
             userId: userId,
             userName: userName,
             userEmail: userEmail,

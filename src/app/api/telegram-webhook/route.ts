@@ -132,10 +132,12 @@ export async function POST(request: NextRequest) {
   // VERIFICAÇÃO DE CREDENCIAIS
   if (!configuredSecret) {
     console.error("[TelegramWebhook] Missing TELEGRAM_WEBHOOK_SECRET");
+    return NextResponse.json({ ok: true }, { status: 200 });
   }
 
   if (!botToken) {
     console.error("[TelegramWebhook] Missing TELEGRAM_BOT_TOKEN");
+    return NextResponse.json({ ok: true }, { status: 200 });
   }
 
   if (configuredSecret && receivedSecret !== configuredSecret) {
@@ -162,110 +164,16 @@ export async function POST(request: NextRequest) {
   
   
   //BUSCAR O USER PELO TOKEN;
+  //////////////////////////
 
-
-  //RECEBENDO A ESCOLHA DO PACOTE DE CRÉDITOS E PASSANDO AO PSP
-  const callbackQuery = telegramData?.callback_query;  
-  if (botToken && callbackQuery) {
-      const packageId = callbackQuery.data; 
-      const chatId = callbackQuery.message?.chat.id ?? callbackQuery.from.id;
-      const selectedPackage = packageMap[packageId];
-      console.log("✅ Escolha:", packageId);
-
-      // 1. Responde ao Telegram para fechar o loading
-      await answerCallbackQuery({
-        botToken,
-        callbackQueryId: callbackQuery.id,
-        text: "Gerando link de pagamento...",
-      });
-
-      // 2. Prepara o payload para PushinPay
-      if (selectedPackage && pushinpayApiKey) {
-        const payloadRequest = {
-          value: selectedPackage.totalAmount, // Valor em centavos
-          webhook_url: process.env.PUSHINPAY_WEBHOOK_URL || "", 
-          split_rules: [],
-        };
-
-
-        try {
-          // 3. CHAMA A API PUSHINPAY
-          const pushinResponse = await fetch(
-            "https://api.pushinpay.com.br/api/pix/cashIn",
-            {
-              method: "POST",
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${pushinpayApiKey}`,
-              },
-              body: JSON.stringify(payloadRequest),
-            }
-          );
-
-          const responseData = await pushinResponse.json();
-          console.log("✅ Response Data:", responseData);
-          
-          // Salvar dados no Firestore
-          const paymentData = {
-            // userId: userId,
-            // userName: userName,
-            // userEmail: userEmail,
-            // userTotalCredits: userTotalCredits,
-            chatId: callbackQuery.message?.chat.id,
-            pspId: responseData.id,
-            // purchaseToken: token,
-            status: 'pending',
-            totalAmount: responseData.value,
-            creditsToReceive: selectedPackage.creditsToReceive,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          };
-          
-          await adminDb.collection('payments').doc(responseData.id || `payment_${Date.now()}`).set(paymentData);
-          
-          const pixCode = responseData?.qr_code;
-
-          // 4. ENVIA O LINK PIX/QR CODE DE VOLTA
-          if (pixCode) {
-            const price = (selectedPackage.totalAmount / 100).toFixed(2).replace('.', ',');
-
-            const caption = 
-            `💰 **Pagamento Pix - ${selectedPackage.credits} Créditos**\n` +
-            `Valor: *R$${price}*\n\n` +
-            `Use o código Pix (Copia e Cola):\n\n` +
-            `\`${pixCode}\``;
-
-            await sendTelegramData({
-              botToken,
-              chatId,
-              text: caption,
-            });
-          } else {
-            console.error("[PushinPay Error] Pix data missing. Response:", JSON.stringify(responseData));
-            throw new Error("Dados Pix (QR Code ou código) indisponíveis na resposta.");
-          }
-        } catch (error) {
-          console.error("[TelegramWebhook] Erro ao criar link PushinPay:", error);
-          await sendTelegramData({
-            botToken,
-            chatId,
-            text: "❌ Não foi possível gerar o link de pagamento. Tente novamente mais tarde.",
-          });
-        }
-      }
-
-      return NextResponse.json({ ok: true }); 
-  }
-
-  // LÓGICA DO /START (COM MENU INTERATIVO)
-  if (botToken && chatId && command === "/start") {
+  // RECEBE COMANDO /START E RESPONDE COM MENU DE PACOTES
+  if (command === "/start" && botToken && chatId) {
     const userSnapshot = await adminDb.collection('users').where('purchaseToken', '==', token).get();
     const userDoc = userSnapshot.docs[0];
     const userId = userDoc?.id;
     const userName = userDoc?.data().name;
     const userEmail = userDoc?.data().email;
-    const userTotalCredits = userDoc?.data().totalCredits;
+    const userCreditsBeforePurchase = userDoc?.data().totalCredits;
 
     // Atualizar chatId no documento do usuário
     if (userId) {
@@ -277,7 +185,7 @@ export async function POST(request: NextRequest) {
     console.log("✅ User ID:", userId);
     console.log("✅ User Name:", userName);
     console.log("✅ User Email:", userEmail);
-    console.log("✅ User Total Credits:", userTotalCredits);
+    console.log("✅ User Total Credits:", userCreditsBeforePurchase);
 
     const welcomeMessage =
       `Olá ${userName}! Selecione um pacote para iniciar sua compra:`;
@@ -318,6 +226,109 @@ export async function POST(request: NextRequest) {
       reply_markup: inlineKeyboard,
     });
   }
+  ////////////////////////////////////////////////////////////////////
+
+  //RECEBE A ESCOLHA DE PACOTE DE CRÉDITOS E PASSA AO PSP
+  const callbackQuery = telegramData?.callback_query;  
+  if (botToken && callbackQuery) {
+      const packageId = callbackQuery.data; 
+      const chatId = callbackQuery.message?.chat.id ?? callbackQuery.from.id;
+      const selectedPackage = packageMap[packageId];
+      console.log("✅ Escolha:", packageId);
+
+      // 1. Responde ao Telegram para fechar o loading
+      await answerCallbackQuery({
+        botToken,
+        callbackQueryId: callbackQuery.id,
+        text: "Gerando link de pagamento...",
+      });
+
+      // 2. Prepara o payload para PushinPay
+      if (selectedPackage && pushinpayApiKey) {
+        const payloadRequest = {
+          value: selectedPackage.totalAmount, // Valor em centavos
+          webhook_url: process.env.PUSHINPAY_WEBHOOK_URL || "", 
+          split_rules: [],
+        };
+
+        // 3. Envia para o PUSHINPAY
+        try {
+          const pushinResponse = await fetch(
+            "https://api.pushinpay.com.br/api/pix/cashIn",
+            {
+              method: "POST",
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${pushinpayApiKey}`,
+              },
+              body: JSON.stringify(payloadRequest),
+            }
+          );
+
+          const responseData = await pushinResponse.json();
+          const pixCode = responseData?.qr_code;
+          console.log("✅ Response Data:", responseData);
+          
+          // 4. Envia o link do PIX para o cliente
+          if (pixCode) {
+            const price = (selectedPackage.totalAmount / 100).toFixed(2).replace('.', ',');
+
+            const caption = 
+            `💰 **Pagamento Pix - ${selectedPackage.credits} Créditos**\n` +
+            `Valor: *R$${price}*\n\n` +
+            `Use o código Pix (Copia e Cola):\n\n` +
+            `\`${pixCode}\``;
+
+            await sendTelegramData({
+              botToken,
+              chatId,
+              text: caption,
+            });
+          } else {
+            console.error("[PushinPay Error] Pix data missing. Response:", JSON.stringify(responseData));
+            throw new Error("Dados Pix (QR Code ou código) indisponíveis na resposta.");
+          }
+
+          // 5. Busca userId do cliente para salvar no Firestore
+          const userSnapshot = await adminDb.collection('users').where('chatId', '==', chatId).get();
+          const userDoc = userSnapshot.docs[0];
+          const userId = userDoc?.id;
+          const userName = userDoc?.data().name;
+          const userEmail = userDoc?.data().email;
+          const userCreditsBeforePurchase = userDoc?.data().totalCredits;
+
+          // Salvar dados no Firestore
+          const paymentData = {
+            userId: userId,
+            userName: userName,
+            userEmail: userEmail,
+            userCreditsBeforePurchase: userCreditsBeforePurchase,
+            chatId: callbackQuery.message?.chat.id,
+            pspId: responseData.id,
+            status: 'pending',
+            totalAmount: responseData.value,
+            creditsToReceive: selectedPackage.creditsToReceive,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          };
+          
+          await adminDb.collection('payments').doc(responseData.id || `payment_${Date.now()}`).set(paymentData);
+          
+
+        } catch (error) {
+          console.error("[TelegramWebhook] Erro ao criar link PushinPay:", error);
+          await sendTelegramData({
+            botToken,
+            chatId,
+            text: "❌ Não foi possível gerar o link de pagamento. Tente novamente mais tarde.",
+          });
+        }
+      }
+
+      return NextResponse.json({ ok: true }); 
+  }
+  ////////////////////////////////////////////////////////////////////
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }

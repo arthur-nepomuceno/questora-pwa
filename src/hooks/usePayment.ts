@@ -13,22 +13,20 @@ import { Payment } from '@/types/payment';
 
 export interface CreatePaymentData {
   orderId: string; // ID primário do pedido (interno, único)
-  referenceId: string; // ID de rastreio, consistente com o PagBank (reference_id)                                                                              
-  userId: string; // Chave estrangeira - ligação com a tabela de usuários    
+  userId: string; // Chave estrangeira - ligação com a tabela de usuários
+  userName: string; // Nome do comprador
+  userEmail: string; // Email do comprador
+  userCreditsBeforePurchase: number; // Créditos do usuário antes da compra
+  chatId?: number; // ID do chat do Telegram
+  pspId: string; // ID retornado pelo PSP (PushinPay)
+  pixCode: string; // Código do QR Code do PIX
+  status: string; // Status atual
   totalAmount: number; // Valor total da transação (obrigatório)
   creditsToReceive: number; // Quantidade de créditos a receber
-  documentValue: string; // Valor do documento (CPF/CNPJ)
-  documentType: string; // Tipo do documento (CPF ou CNPJ)
-  name: string; // Nome do comprador
-  email: string; // Email do comprador
-  pagbankOrderId: string; // ID retornado pelo PagBank
-  pixQrCodeUrl: string; // URL da imagem do QR Code
-  pixString: string; // Código "Copia e Cola"
 }
 
 export interface UpdatePaymentStatusData {
-  paymentStatus: string; // Status atual (atualizado SOMENTE pelo Webhook)
-  pagbankOrderId?: string; // ID retornado pelo PagBank (opcional para atualização)
+  status: string; // Status atual (atualizado SOMENTE pelo Webhook)
 }
 
 export const usePayment = () => {
@@ -48,18 +46,16 @@ export const usePayment = () => {
       
             const paymentDoc: Omit<Payment, 'createdAt' | 'updatedAt'> & { createdAt: any; updatedAt: any } = {                                                       
         orderId: paymentData.orderId,
-        referenceId: paymentData.referenceId,
         userId: paymentData.userId,
+        userName: paymentData.userName,
+        userEmail: paymentData.userEmail,
+        userCreditsBeforePurchase: paymentData.userCreditsBeforePurchase,
+        chatId: paymentData.chatId,
+        pspId: paymentData.pspId,
+        pixCode: paymentData.pixCode,
+        status: paymentData.status || 'pending',
         totalAmount: paymentData.totalAmount,
         creditsToReceive: paymentData.creditsToReceive,
-        documentValue: paymentData.documentValue,
-        documentType: paymentData.documentType,
-        name: paymentData.name,
-        email: paymentData.email,
-        paymentStatus: 'PENDING', // Status inicial sempre será PENDING        
-        pagbankOrderId: paymentData.pagbankOrderId,
-        pixQrCodeUrl: paymentData.pixQrCodeUrl,
-        pixString: paymentData.pixString,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
@@ -104,18 +100,16 @@ export const usePayment = () => {
       const data = paymentDoc.data();
       const payment: Payment = {
         orderId: data.orderId,
-        referenceId: data.referenceId,
         userId: data.userId,
+        userName: data.userName,
+        userEmail: data.userEmail,
+        userCreditsBeforePurchase: data.userCreditsBeforePurchase,
+        chatId: data.chatId,
+        pspId: data.pspId,
+        pixCode: data.pixCode,
+        status: data.status,
         totalAmount: data.totalAmount,
         creditsToReceive: data.creditsToReceive,
-        documentValue: data.documentValue,
-        documentType: data.documentType,
-        name: data.name,
-        email: data.email,
-        paymentStatus: data.paymentStatus,
-        pagbankOrderId: data.pagbankOrderId,
-        pixQrCodeUrl: data.pixQrCodeUrl,
-        pixString: data.pixString,
         createdAt: data.createdAt?.toDate() || new Date(),
         updatedAt: data.updatedAt?.toDate() || new Date(),
       };
@@ -135,7 +129,7 @@ export const usePayment = () => {
    * Atualiza o status do pagamento (para ser usado pelo Webhook)
    * IMPORTANTE: Esta função deve ser preferencialmente chamada por um webhook/backend
    * @param orderId ID do pedido
-   * @param updateData Dados para atualização (paymentStatus é obrigatório)
+   * @param updateData Dados para atualização (status é obrigatório)
    * @returns Promise com sucesso ou erro
    */
   const updatePaymentStatus = async (
@@ -144,17 +138,12 @@ export const usePayment = () => {
   ): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true);
-      console.log('🔄 [usePayment] Atualizando status do pagamento:', orderId, 'Novo status:', updateData.paymentStatus);
+      console.log('🔄 [usePayment] Atualizando status do pagamento:', orderId, 'Novo status:', updateData.status);
 
       const updateFields: any = {
-        paymentStatus: updateData.paymentStatus,
+        status: updateData.status,
         updatedAt: serverTimestamp(),
       };
-
-      // Adicionar pagbankOrderId se fornecido
-      if (updateData.pagbankOrderId) {
-        updateFields.pagbankOrderId = updateData.pagbankOrderId;
-      }
 
       await updateDoc(doc(db, 'payments', orderId), updateFields);
 

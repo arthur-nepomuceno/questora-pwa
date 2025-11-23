@@ -302,12 +302,13 @@ export async function POST(request: NextRequest) {
           // Salvar dados no Firestore
           const paymentData = {
             orderId: paymentRef.id,
-            userId: userId,
-            userName: userName,
-            userEmail: userEmail,
-            userCreditsBeforePurchase: userCreditsBeforePurchase,
+            userId,
+            userName,
+            userEmail,
+            userCreditsBeforePurchase,
             chatId: callbackQuery.message?.chat.id,
             pspId: responseData.id,
+            pixCode,
             status: 'pending',
             totalAmount: responseData.value,
             creditsToReceive: selectedPackage.creditsToReceive,
@@ -315,8 +316,7 @@ export async function POST(request: NextRequest) {
             updatedAt: new Date(),
           };
           
-          await adminDb.collection('payments').doc(responseData.id || `payment_${Date.now()}`).set(paymentData);
-          
+          await paymentRef.set(paymentData);          
 
         } catch (error) {
           console.error("[TelegramWebhook] Erro ao criar link PushinPay:", error);

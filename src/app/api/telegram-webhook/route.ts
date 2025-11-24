@@ -33,6 +33,7 @@ interface CreditPackage {
 }
 
 const creditPackages: CreditPackage[] = [
+  { id: 'pacote_de_50_creditos', credits: 50, totalAmount: 50, creditsToReceive: 50, icon: '💰' },
   { id: 'pacote_de_300_creditos', credits: 300, totalAmount: 299, creditsToReceive: 300, icon: '💰' },
   { id: 'pacote_de_500_creditos', credits: 500, totalAmount: 499, creditsToReceive: 500, icon: '💰' },
   { id: 'pacote_de_700_creditos', credits: 700, totalAmount: 699, creditsToReceive: 700, icon: '💰' },
@@ -232,6 +233,9 @@ export async function POST(request: NextRequest) {
 
     const inlineKeyboard = {
       inline_keyboard: [  
+        [  
+          { text: "50 créditos : R$0,50", callback_data: "pacote_de_50_creditos" },
+        ],
         [  
           { text: "300 créditos : R$2,99", callback_data: "pacote_de_300_creditos" },
         ],

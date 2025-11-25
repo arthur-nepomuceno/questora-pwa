@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   console.log("[PSP Webhook] Body:", body);
 
   // usar o id para achar o payment certo
-  const pspId = body.id as string;
+  const pspId = (body.id as string).toLowerCase();
   const paymentSnapshot = await adminDb.collection('payments').where('pspId', '==', pspId).get();
   
   if (paymentSnapshot.empty) {

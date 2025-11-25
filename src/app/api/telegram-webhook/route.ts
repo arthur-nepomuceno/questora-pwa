@@ -351,7 +351,7 @@ export async function POST(request: NextRequest) {
             userEmail,
             userCreditsBeforePurchase,
             chatId: callbackQuery.message?.chat.id,
-            pspId: responseData.id,
+            pspId: responseData.id?.toLowerCase(),
             pixCode,
             status: 'pending',
             totalAmount: responseData.value,

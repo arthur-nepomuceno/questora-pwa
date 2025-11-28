@@ -109,7 +109,6 @@ export async function POST(request: NextRequest) {
     }
     
     if (error.message === "Payment is already paid") {
-      console.log("[PSP Webhook] Pagamento duplicado.");
       return NextResponse.json({ message: "Payment was already done." }, { status: 200 });
     }
     

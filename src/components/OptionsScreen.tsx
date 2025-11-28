@@ -101,15 +101,23 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
             Ver Ranking
           </button>
           {selectedModalidade !== 'livre' && (
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                playButtonPress();
-                setShowPurchaseModal(true);
-              }}
-            >
-              Inserir Créditos
-            </button>
+            <>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  playButtonPress();
+                  setShowPurchaseModal(true);
+                }}
+              >
+                Inserir Créditos
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {}}
+              >
+                Saque
+              </button>
+            </>
           )}
         </div>
       </div>

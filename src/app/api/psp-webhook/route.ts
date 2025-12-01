@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
       await sendTelegramData({
         botToken,
         chatId,
-        text: `✅ Pagamento confirmado! Você recebeu ${paymentData.creditsToReceive} créditos.`,
+        text: `✅ Pagamento confirmado! Você acaba de receber ${paymentData.creditsToReceive} créditos em sua conta.`,
       });
     }
   } catch (error: any) {

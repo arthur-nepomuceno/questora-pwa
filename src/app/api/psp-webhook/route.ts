@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminDb } from '@/lib/firebase-admin';
+import { sendTelegramData } from '@/lib/telegram-utils';
 
 export async function POST(request: NextRequest) {
   // Log dos cabeçalhos
@@ -101,6 +102,16 @@ export async function POST(request: NextRequest) {
         updatedAt: new Date(),
       });
     });
+
+    // Mensagem de Sucesso
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    if (chatId && paymentData.creditsToReceive && botToken) {
+      await sendTelegramData({
+        botToken,
+        chatId,
+        text: `✅ Pagamento confirmado! Você recebeu ${paymentData.creditsToReceive} créditos.`,
+      });
+    }
   } catch (error: any) {
     console.error("[PSP Webhook] Erro na transação:", error.message);
     
@@ -113,10 +124,26 @@ export async function POST(request: NextRequest) {
     }
     
     if (error.message === "Value mismatch") {
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      if (chatId && botToken) {
+        await sendTelegramData({
+          botToken,
+          chatId,
+          text: "❌ **Falha na Transação**\n\nInfelizmente não foi possível completar a transação. Se você já realizou o pagamento, mas não recebeu os créditos, entre em contato com o suporte.",
+        });
+      }
       return NextResponse.json({ message: "Value mismatch" }, { status: 400 });
     }
     
     if (error.message === "CPF/CNPJ mismatch") {
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      if (chatId && botToken) {
+        await sendTelegramData({
+          botToken,
+          chatId,
+          text: "❌ **Falha na Transação**\n\nInfelizmente não foi possível completar a transação. Se você já realizou o pagamento, mas não recebeu os créditos, entre em contato com o suporte.",
+        });
+      }
       return NextResponse.json({ message: "CPF/CNPJ mismatch" }, { status: 400 });
     }
     

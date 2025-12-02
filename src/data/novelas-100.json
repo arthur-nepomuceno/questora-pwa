@@ -3,29 +3,17 @@
     "id": 1,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual novela apresentou o personagem Roque Santeiro?",
-    "opcoes": [
-      "Roque Santeiro",
-      "Tieta",
-      "O Bem-Amado",
-      "Selva de Pedra",
-      "Vale Tudo"
-    ],
-    "correta": "Roque Santeiro",
+    "pergunta": "Qual novela tornou famosa a personagem Carminha?",
+    "opcoes": ["Avenida Brasil", "Fina Estampa", "Belíssima", "A Favorita", "Tieta"],
+    "correta": "Avenida Brasil",
     "pontuacao": 1
   },
   {
     "id": 2,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual novela tinha a personagem Viúva Porcina?",
-    "opcoes": [
-      "Roque Santeiro",
-      "Tieta",
-      "O Salvador da Pátria",
-      "Explode Coração",
-      "Fera Ferida"
-    ],
+    "pergunta": "Qual novela apresentou o personagem Sinhozinho Malta?",
+    "opcoes": ["Roque Santeiro", "Tieta", "Explode Coração", "O Clone", "A Indomada"],
     "correta": "Roque Santeiro",
     "pontuacao": 1
   },
@@ -33,284 +21,170 @@
     "id": 3,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual novela consagrou a personagem Tieta?",
-    "opcoes": [
-      "Tieta",
-      "Gabriela",
-      "Vale Tudo",
-      "Senhora do Destino",
-      "Porto dos Milagres"
-    ],
-    "correta": "Tieta",
+    "pergunta": "A vilã Nazaré Tedesco pertence a qual novela?",
+    "opcoes": ["Senhora do Destino", "Vale Tudo", "A Favorita", "Fina Estampa", "Explode Coração"],
+    "correta": "Senhora do Destino",
     "pontuacao": 1
   },
   {
     "id": 4,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual atriz interpretou Dona Armênia em Rainha da Sucata?",
-    "opcoes": [
-      "Aracy Balabanian",
-      "Fernanda Montenegro",
-      "Susana Vieira",
-      "Irene Ravache",
-      "Claudia Raia"
-    ],
-    "correta": "Aracy Balabanian",
+    "pergunta": "Qual novela popularizou o personagem Tonho da Lua?",
+    "opcoes": ["Mulheres de Areia", "Tieta", "Cabocla", "Roque Santeiro", "Fera Ferida"],
+    "correta": "Mulheres de Areia",
     "pontuacao": 1
   },
   {
     "id": 5,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Em qual novela a personagem Nazaré Tedesco se destacou?",
-    "opcoes": [
-      "Senhora do Destino",
-      "Vale Tudo",
-      "Mulheres de Areia",
-      "Fina Estampa",
-      "A Favorita"
-    ],
-    "correta": "Senhora do Destino",
+    "pergunta": "Em qual novela Jade e Lucas vivem um amor proibido?",
+    "opcoes": ["O Clone", "América", "Caminho das Índias", "Salve Jorge", "Explode Coração"],
+    "correta": "O Clone",
     "pontuacao": 1
   },
   {
     "id": 6,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual novela exibiu a música 'Vale Tudo' como tema de abertura?",
-    "opcoes": [
-      "Vale Tudo",
-      "Roque Santeiro",
-      "Celebridade",
-      "Explode Coração",
-      "Avenida Brasil"
-    ],
-    "correta": "Vale Tudo",
+    "pergunta": "Quem interpretou Félix em Amor à Vida?",
+    "opcoes": ["Mateus Solano", "Cauã Reymond", "Murilo Benício", "Reynaldo Gianecchini", "Tony Ramos"],
+    "correta": "Mateus Solano",
     "pontuacao": 1
   },
   {
     "id": 7,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Quem era a vilã Carminha em Avenida Brasil?",
-    "opcoes": [
-      "Adriana Esteves",
-      "Deborah Secco",
-      "Glória Pires",
-      "Claudia Raia",
-      "Giovanna Antonelli"
-    ],
-    "correta": "Adriana Esteves",
+    "pergunta": "Qual novela tinha a inesquecível vilã Odete Roitman?",
+    "opcoes": ["Vale Tudo", "Tieta", "A Indomada", "O Clone", "Por Amor"],
+    "correta": "Vale Tudo",
     "pontuacao": 1
   },
   {
     "id": 8,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual novela popularizou a personagem Odete Roitman?",
-    "opcoes": [
-      "Vale Tudo",
-      "Tieta",
-      "O Clone",
-      "Explode Coração",
-      "Belíssima"
-    ],
-    "correta": "Vale Tudo",
+    "pergunta": "A música 'País Tropical' foi abertura de qual novela?",
+    "opcoes": ["Belíssima", "Caminho das Índias", "Paraíso Tropical", "Torre de Babel", "Explode Coração"],
+    "correta": "Belíssima",
     "pontuacao": 1
   },
   {
     "id": 9,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual novela tinha como tema a clonagem humana?",
-    "opcoes": [
-      "O Clone",
-      "Caminho das Índias",
-      "América",
-      "Avenida Brasil",
-      "Explode Coração"
-    ],
-    "correta": "O Clone",
+    "pergunta": "Qual novela é conhecida pela frase 'Eu sou rica!'?",
+    "opcoes": ["Rainha da Sucata", "Senhora do Destino", "Belíssima", "Vale Tudo", "A Favorita"],
+    "correta": "Rainha da Sucata",
     "pontuacao": 1
   },
   {
     "id": 10,
     "categoria": "Novelas",
     "dificuldade": "facil",
-    "pergunta": "Qual novela consagrou a música 'Amor e Poder' de Rosana?",
-    "opcoes": [
-      "Mandala",
-      "Selva de Pedra",
-      "Baila Comigo",
-      "Explode Coração",
-      "Vamp"
-    ],
-    "correta": "Mandala",
+    "pergunta": "Qual novela tinha o núcleo do Divino Futebol Clube?",
+    "opcoes": ["Avenida Brasil", "Fina Estampa", "Império", "Celebridade", "A Regra do Jogo"],
+    "correta": "Avenida Brasil",
     "pontuacao": 1
   },
   {
     "id": 11,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual novela exibiu a famosa cena do último capítulo com o bordão 'Me serve, Odete'?",
-    "opcoes": [
-      "Vale Tudo",
-      "Celebridade",
-      "Senhora do Destino",
-      "Explode Coração",
-      "Belíssima"
-    ],
-    "correta": "Vale Tudo",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha a personagem Tieta?",
+    "opcoes": ["Tieta", "Gabriela", "Porto dos Milagres", "O Rei do Gado", "Renascer"],
+    "correta": "Tieta",
+    "pontuacao": 1
   },
   {
     "id": 12,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual ator interpretou Félix em Amor à Vida?",
-    "opcoes": [
-      "Mateus Solano",
-      "Reynaldo Gianecchini",
-      "Murilo Benício",
-      "Cauã Reymond",
-      "Tony Ramos"
-    ],
-    "correta": "Mateus Solano",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "Qual novela consagrou o personagem Roque Santeiro?",
+    "opcoes": ["Roque Santeiro", "O Salvado da Pátria", "Tieta", "Selva de Pedra", "Pai Herói"],
+    "correta": "Roque Santeiro",
+    "pontuacao": 1
   },
   {
     "id": 13,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual novela de Glória Perez abordou a cultura cigana?",
-    "opcoes": [
-      "Explode Coração",
-      "O Clone",
-      "América",
-      "Caminho das Índias",
-      "Salve Jorge"
-    ],
-    "correta": "Explode Coração",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "Quem interpretou Carminha em Avenida Brasil?",
+    "opcoes": ["Adriana Esteves", "Giovanna Antonelli", "Claudia Raia", "Deborah Secco", "Letícia Colin"],
+    "correta": "Adriana Esteves",
+    "pontuacao": 1
   },
   {
     "id": 14,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Em qual novela Susana Vieira viveu Maria do Carmo?",
-    "opcoes": [
-      "Senhora do Destino",
-      "Mulheres de Areia",
-      "Vale Tudo",
-      "Por Amor",
-      "A Regra do Jogo"
-    ],
-    "correta": "Senhora do Destino",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "Qual novela abordou o tema da clonagem humana?",
+    "opcoes": ["O Clone", "Caminho das Índias", "América", "A Favorita", "Belíssima"],
+    "correta": "O Clone",
+    "pontuacao": 1
   },
   {
     "id": 15,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual novela de 1992 foi ambientada no fictício 'Tocaia Grande'?",
-    "opcoes": [
-      "Deus nos Acuda",
-      "Pedra sobre Pedra",
-      "Renascer",
-      "O Rei do Gado",
-      "Fera Ferida"
-    ],
-    "correta": "Pedra sobre Pedra",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "Qual novela apresentou a personagem Bebel, vivida por Camila Pitanga?",
+    "opcoes": ["Paraíso Tropical", "Belíssima", "Fina Estampa", "Celebridade", "A Regra do Jogo"],
+    "correta": "Paraíso Tropical",
+    "pontuacao": 1
   },
   {
     "id": 16,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual novela popularizou o personagem Tonho da Lua?",
-    "opcoes": [
-      "Mulheres de Areia",
-      "A Indomada",
-      "Fera Ferida",
-      "Tieta",
-      "Torre de Babel"
-    ],
-    "correta": "Mulheres de Areia",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "A personagem Flora é vilã de qual novela?",
+    "opcoes": ["A Favorita", "Senhora do Destino", "Belíssima", "Vale Tudo", "Explode Coração"],
+    "correta": "A Favorita",
+    "pontuacao": 1
   },
   {
     "id": 17,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual novela tinha como protagonista o fazendeiro Bruno Mezenga?",
-    "opcoes": [
-      "O Rei do Gado",
-      "Terra Nostra",
-      "América",
-      "Renascer",
-      "Pantanal"
-    ],
-    "correta": "O Rei do Gado",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha o bordão 'Cada mergulho é um flash'?",
+    "opcoes": ["Celebridade", "Avenida Brasil", "Fina Estampa", "Belíssima", "Laços de Família"],
+    "correta": "Celebridade",
+    "pontuacao": 1
   },
   {
     "id": 18,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Quem interpretou a vilã Flora em A Favorita?",
-    "opcoes": [
-      "Patrícia Pillar",
-      "Claudia Raia",
-      "Glória Menezes",
-      "Giovanna Antonelli",
-      "Susana Vieira"
-    ],
-    "correta": "Patrícia Pillar",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "A personagem Jade dançava ao som de qual trilha famosa?",
+    "opcoes": ["O Clone", "A Indomada", "Caminho das Índias", "Explode Coração", "Cabocla"],
+    "correta": "O Clone",
+    "pontuacao": 1
   },
   {
     "id": 19,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual novela de 1998 tinha um triângulo amoroso entre Eduarda, Helena e Atílio?",
-    "opcoes": [
-      "Por Amor",
-      "Laços de Família",
-      "Mulheres Apaixonadas",
-      "A Próxima Vítima",
-      "Celebridade"
-    ],
-    "correta": "Por Amor",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "Qual novela foi marcada pela vilania de Altiva Roitman?",
+    "opcoes": ["A Indomada", "Tieta", "Belíssima", "Vale Tudo", "A Favorita"],
+    "correta": "A Indomada",
+    "pontuacao": 1
   },
   {
     "id": 20,
     "categoria": "Novelas",
-    "dificuldade": "medio",
-    "pergunta": "Qual novela apresentou o núcleo fictício de 'Ilhéus'?",
-    "opcoes": [
-      "Gabriela",
-      "Tieta",
-      "Porto dos Milagres",
-      "Corpo a Corpo",
-      "A Indomada"
-    ],
-    "correta": "Gabriela",
-    "pontuacao": 2
+    "dificuldade": "facil",
+    "pergunta": "A frase 'Me serve, Odete' pertence a qual novela?",
+    "opcoes": ["Vale Tudo", "Roque Santeiro", "Explode Coração", "Por Amor", "Senhora do Destino"],
+    "correta": "Vale Tudo",
+    "pontuacao": 1
   },
   {
     "id": 21,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela exibiu a cena da escada envolvendo a vilã Nazaré?",
-    "opcoes": [
-      "Senhora do Destino",
-      "Vale Tudo",
-      "Explode Coração",
-      "A Favorita",
-      "O Clone"
-    ],
+    "pergunta": "Qual novela apresentou a personagem Maria do Carmo lutando para reencontrar sua filha desaparecida?",
+    "opcoes": ["Senhora do Destino", "Por Amor", "Laços de Família", "A Favorita", "Belíssima"],
     "correta": "Senhora do Destino",
     "pontuacao": 2
   },
@@ -318,435 +192,2511 @@
     "id": 22,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela tinha Jade e Lucas como protagonistas?",
-    "opcoes": [
-      "O Clone",
-      "América",
-      "Caminho das Índias",
-      "Salve Jorge",
-      "Explode Coração"
-    ],
-    "correta": "O Clone",
+    "pergunta": "Em qual novela o personagem João Pedro tem um romance proibido com a madrasta?",
+    "opcoes": ["Renascer", "Cabocla", "Tieta", "Pantanal", "O Rei do Gado"],
+    "correta": "Renascer",
     "pontuacao": 2
   },
   {
     "id": 23,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela de Benedito Ruy Barbosa apresentou o personagem Zé Leôncio?",
-    "opcoes": [
-      "Pantanal",
-      "O Rei do Gado",
-      "Terra Nostra",
-      "Cabocla",
-      "Renascer"
-    ],
-    "correta": "Pantanal",
+    "pergunta": "Qual novela teve como protagonista a estilista Maria Clara Diniz?",
+    "opcoes": ["Celebridade", "Belíssima", "A Favorita", "Laços de Família", "Explode Coração"],
+    "correta": "Celebridade",
     "pontuacao": 2
   },
   {
     "id": 24,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Em qual novela Tony Ramos viveu o indiano Opash?",
-    "opcoes": [
-      "Caminho das Índias",
-      "O Clone",
-      "América",
-      "Explode Coração",
-      "Esperança"
-    ],
-    "correta": "Caminho das Índias",
+    "pergunta": "Quem interpretou o personagem Vadinho na novela Tieta?",
+    "opcoes": ["José Mayer", "Ary Fontoura", "Reginaldo Faria", "Marcos Palmeira", "Cláudio Corrêa e Castro"],
+    "correta": "José Mayer",
     "pontuacao": 2
   },
   {
     "id": 25,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela teve como tema central a cafeicultura no início do século XX?",
-    "opcoes": [
-      "Terra Nostra",
-      "Esperança",
-      "O Rei do Gado",
-      "Cabocla",
-      "Sinhá Moça"
-    ],
-    "correta": "Esperança",
+    "pergunta": "Em qual novela a personagem Serena era a reencarnação de uma princesa indígena?",
+    "opcoes": ["Alma Gêmea", "A Viagem", "Explode Coração", "Cordel Encantado", "Sinhá Moça"],
+    "correta": "Alma Gêmea",
     "pontuacao": 2
   },
   {
     "id": 26,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela de 2003 apresentou o romance de Helena e Miguel?",
-    "opcoes": [
-      "Mulheres Apaixonadas",
-      "Laços de Família",
-      "Páginas da Vida",
-      "Celebridade",
-      "Por Amor"
-    ],
-    "correta": "Mulheres Apaixonadas",
+    "pergunta": "Qual novela de Gilberto Braga abordou a disputa entre Maria Clara e Laura?",
+    "opcoes": ["Celebridade", "Paraíso Tropical", "Vale Tudo", "Belíssima", "Rainha da Sucata"],
+    "correta": "Celebridade",
     "pontuacao": 2
   },
   {
     "id": 27,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Quem foi o autor de Vale Tudo?",
-    "opcoes": [
-      "Gilberto Braga",
-      "Manoel Carlos",
-      "Glória Perez",
-      "Aguinaldo Silva",
-      "Benedito Ruy Barbosa"
-    ],
-    "correta": "Gilberto Braga",
+    "pergunta": "Qual novela teve a famosa cena em que a vilã Flora declara sua inocência?",
+    "opcoes": ["A Favorita", "Belíssima", "Senhora do Destino", "Vale Tudo", "A Regra do Jogo"],
+    "correta": "A Favorita",
     "pontuacao": 2
   },
   {
     "id": 28,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela da Globo em 2004 teve como abertura a música 'Celebration' do Kool & The Gang?",
-    "opcoes": [
-      "Da Cor do Pecado",
-      "Senhora do Destino",
-      "Celebridade",
-      "Belíssima",
-      "Alma Gêmea"
-    ],
-    "correta": "Da Cor do Pecado",
+    "pergunta": "Quem interpretou o personagem Pacífico em A Indomada?",
+    "opcoes": ["Carlos Vereza", "Juca de Oliveira", "Paulo Goulart", "Lima Duarte", "Osmar Prado"],
+    "correta": "Lima Duarte",
     "pontuacao": 2
   },
   {
     "id": 29,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela apresentou o bordão 'Cada mergulho é um flash'?",
-    "opcoes": [
-      "Celebridade",
-      "Senhora do Destino",
-      "O Clone",
-      "Explode Coração",
-      "Belíssima"
-    ],
-    "correta": "Celebridade",
+    "pergunta": "Em qual novela o personagem Augusto César acreditava ser um extraterrestre?",
+    "opcoes": ["O Amor Está no Ar", "A Viagem", "Explode Coração", "O Beijo do Vampiro", "Caminho das Índias"],
+    "correta": "O Amor Está no Ar",
     "pontuacao": 2
   },
   {
     "id": 30,
     "categoria": "Novelas",
     "dificuldade": "medio",
-    "pergunta": "Qual novela foi protagonizada por Regina Duarte como Helena, mãe de Camila?",
-    "opcoes": [
-      "Laços de Família",
-      "Por Amor",
-      "Mulheres Apaixonadas",
-      "Viver a Vida",
-      "História de Amor"
-    ],
-    "correta": "Laços de Família",
+    "pergunta": "Em qual novela surgiu o bordão 'Eu sou rica!'?",
+    "opcoes": ["Rainha da Sucata", "Celebridade", "Avenida Brasil", "Belíssima", "Torre de Babel"],
+    "correta": "Rainha da Sucata",
     "pontuacao": 2
   },
   {
     "id": 31,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de 1976 apresentou a personagem Carina, vivida por Elizabeth Savalla?",
-    "opcoes": [
-      "Estúpido Cupido",
-      "Gabriela",
-      "Dancin' Days",
-      "Pai Herói",
-      "Selva de Pedra"
-    ],
-    "correta": "Estúpido Cupido",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve como pano de fundo a cafeicultura do início do século XX?",
+    "opcoes": ["Esperança", "Terra Nostra", "O Rei do Gado", "Sinhá Moça", "Cabocla"],
+    "correta": "Esperança",
+    "pontuacao": 2
   },
   {
     "id": 32,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela da Manchete, de 1989, teve destaque por abordar o garimpo?",
-    "opcoes": [
-      "Pantanal",
-      "Tocaia Grande",
-      "A História de Ana Raio e Zé Trovão",
-      "Kananga do Japão",
-      "Pedra sobre Pedra"
-    ],
-    "correta": "Kananga do Japão",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Quem viveu a personagem Lindalva, que mais tarde virou Maria do Carmo?",
+    "opcoes": ["Carolina Dieckmann", "Débora Falabella", "Susana Vieira", "Adriana Esteves", "Letícia Sabatella"],
+    "correta": "Carolina Dieckmann",
+    "pontuacao": 2
   },
   {
     "id": 33,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela teve uma versão original em 1973 e um remake em 2013?",
-    "opcoes": [
-      "Saramandaia",
-      "Gabriela",
-      "Mulheres de Areia",
-      "Sinhá Moça",
-      "Cabocla"
-    ],
-    "correta": "Saramandaia",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela a personagem Diana se envolve com o toureiro Júlio?",
+    "opcoes": ["América", "Explode Coração", "O Clone", "Caminho das Índias", "Salve Jorge"],
+    "correta": "América",
+    "pontuacao": 2
   },
   {
     "id": 34,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de 1975 foi marcada pela censura e pelo corte de seu último capítulo?",
-    "opcoes": [
-      "Roque Santeiro",
-      "O Rebu",
-      "Selva de Pedra",
-      "O Grito",
-      "Escalada"
-    ],
-    "correta": "Roque Santeiro",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela abordou o romance de Helena e Miguel, vivido por Tony Ramos?",
+    "opcoes": ["Mulheres Apaixonadas", "Laços de Família", "Por Amor", "Páginas da Vida", "História de Amor"],
+    "correta": "Mulheres Apaixonadas",
+    "pontuacao": 2
   },
   {
     "id": 35,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de Ivani Ribeiro teve a atriz Cláudia Raia como vilã Andreia?",
-    "opcoes": [
-      "Rainha da Sucata",
-      "A Próxima Vítima",
-      "A Indomada",
-      "Fera Ferida",
-      "Hipertensão"
-    ],
-    "correta": "Hipertensão",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve o icônico personagem véio do rio?",
+    "opcoes": ["Pantanal", "Renascer", "Velho Chico", "Cabocla", "O Rei do Gado"],
+    "correta": "Pantanal",
+    "pontuacao": 2
   },
   {
     "id": 36,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela marcou a estreia de Tony Ramos na TV Globo em 1977?",
-    "opcoes": [
-      "Espelho Mágico",
-      "Pai Herói",
-      "O Astro",
-      "Dancin' Days",
-      "Selva de Pedra"
-    ],
-    "correta": "Espelho Mágico",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Quem interpretou a vilã Laura Prudente da Costa em Celebridade?",
+    "opcoes": ["Cláudia Abreu", "Giovanna Antonelli", "Deborah Secco", "Adriana Esteves", "Camila Pitanga"],
+    "correta": "Cláudia Abreu",
+    "pontuacao": 2
   },
   {
     "id": 37,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela tinha o personagem Tião Galinha?",
-    "opcoes": [
-      "Renascer",
-      "O Rei do Gado",
-      "Cabocla",
-      "Pantanal",
-      "Tieta"
-    ],
-    "correta": "Renascer",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela o personagem Tufão foi destaque?",
+    "opcoes": ["Avenida Brasil", "Fina Estampa", "Império", "A Regra do Jogo", "Belíssima"],
+    "correta": "Avenida Brasil",
+    "pontuacao": 2
   },
   {
     "id": 38,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela da TV Tupi foi a primeira transmitida em cores no Brasil?",
-    "opcoes": [
-      "O Bem-Amado",
-      "A Moreninha",
-      "Irmãos Coragem",
-      "Bandeira 2",
-      "Minha Doce Namorada"
-    ],
-    "correta": "O Bem-Amado",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve como trilha famosa a música 'Love by Grace'?",
+    "opcoes": ["Laços de Família", "Páginas da Vida", "Por Amor", "Mulheres Apaixonadas", "A Favorita"],
+    "correta": "Laços de Família",
+    "pontuacao": 2
   },
   {
     "id": 39,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de Janete Clair teve o personagem Cristiano Vilhena?",
-    "opcoes": [
-      "Selva de Pedra",
-      "O Astro",
-      "O Semideus",
-      "Pai Herói",
-      "Irmãos Coragem"
-    ],
-    "correta": "Selva de Pedra",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela surgiu a personagem Bibi Perigosa?",
+    "opcoes": ["A Força do Querer", "Império", "Salve Jorge", "A Regra do Jogo", "América"],
+    "correta": "A Força do Querer",
+    "pontuacao": 2
   },
   {
     "id": 40,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de 1988 apresentou a música 'Chico Mineiro' na abertura?",
-    "opcoes": [
-      "Vida Nova",
-      "Cabocla",
-      "Pantanal",
-      "Pacto de Sangue",
-      "Fera Ferida"
-    ],
-    "correta": "Pacto de Sangue",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela apresentou a rivalidade entre as famílias Mezenga e Berdinazzi?",
+    "opcoes": ["O Rei do Gado", "Esperança", "Renascer", "Pantanal", "Terra Nostra"],
+    "correta": "O Rei do Gado",
+    "pontuacao": 2
   },
   {
     "id": 41,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela exibida em 1973 tinha como tema a exploração do petróleo no Recôncavo Baiano?",
-    "opcoes": [
-      "O Bem-Amado",
-      "Bandeira 2",
-      "O Rebu",
-      "Escalada",
-      "Assim na Terra como no Céu"
-    ],
-    "correta": "Bandeira 2",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Quem interpretou Jade em O Clone?",
+    "opcoes": ["Giovanna Antonelli", "Adriana Esteves", "Letícia Sabatella", "Priscila Fantin", "Camila Pitanga"],
+    "correta": "Giovanna Antonelli",
+    "pontuacao": 2
   },
   {
     "id": 42,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de 1982 foi marcada pelo núcleo de ciganos?",
-    "opcoes": [
-      "Coração Alado",
-      "Coração de Estudante",
-      "Explode Coração",
-      "Louco Amor",
-      "Parabéns pra Você"
-    ],
-    "correta": "Louco Amor",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o autor de Vale Tudo?",
+    "opcoes": ["Gilberto Braga", "Glória Perez", "Aguinaldo Silva", "Benedito Ruy Barbosa", "Manoel Carlos"],
+    "correta": "Gilberto Braga",
+    "pontuacao": 2
   },
   {
     "id": 43,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela teve como trilha a música 'Explode Coração' de Gonzaguinha, mas não era homônima?",
-    "opcoes": [
-      "Partido Alto",
-      "Sinal de Alerta",
-      "O Homem Proibido",
-      "Eu Prometo",
-      "O Outro"
-    ],
-    "correta": "Partido Alto",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela a personagem Camila raspa o cabelo durante o tratamento de leucemia?",
+    "opcoes": ["Laços de Família", "Por Amor", "Páginas da Vida", "Mulheres Apaixonadas", "Esperança"],
+    "correta": "Laços de Família",
+    "pontuacao": 2
   },
   {
     "id": 44,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de 1990 teve Lima Duarte como Zé do Burro?",
-    "opcoes": [
-      "Meu Bem, Meu Mal",
-      "Pedra sobre Pedra",
-      "Araponga",
-      "Deus nos Acuda",
-      "O Salvador da Pátria"
-    ],
-    "correta": "O Salvador da Pátria",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela apresentou a trama da Justiça mística do Além?",
+    "opcoes": ["A Viagem", "O Beijo do Vampiro", "Alma Gêmea", "Espelho da Vida", "Explode Coração"],
+    "correta": "A Viagem",
+    "pontuacao": 2
   },
   {
     "id": 45,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela teve como protagonista a personagem Ana Raio?",
-    "opcoes": [
-      "A História de Ana Raio e Zé Trovão",
-      "Kananga do Japão",
-      "Pantanal",
-      "Tocaia Grande",
-      "Xica da Silva"
-    ],
-    "correta": "A História de Ana Raio e Zé Trovão",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Quem viveu a personagem Bebel em Paraíso Tropical?",
+    "opcoes": ["Camila Pitanga", "Cláudia Raia", "Juliana Paes", "Letícia Sabatella", "Deborah Secco"],
+    "correta": "Camila Pitanga",
+    "pontuacao": 2
   },
   {
     "id": 46,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de 1972 apresentou a personagem Vitória, vivida por Regina Duarte?",
-    "opcoes": [
-      "Selva de Pedra",
-      "Minha Doce Namorada",
-      "Escalada",
-      "Irmãos Coragem",
-      "Bandeira 2"
-    ],
-    "correta": "Selva de Pedra",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Quem cantava a abertura de Avenida Brasil?",
+    "opcoes": ["Carlinhos Brown", "Gilberto Gil", "Lulu Santos", "Ivete Sangalo", "Chico Buarque"],
+    "correta": "Carlinhos Brown",
+    "pontuacao": 2
   },
   {
     "id": 47,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela da TV Manchete retratou o garimpo em Serra Pelada?",
-    "opcoes": [
-      "Pantanal",
-      "Kananga do Japão",
-      "Amazônia",
-      "Tocaia Grande",
-      "Pacto de Sangue"
-    ],
-    "correta": "Amazônia",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela contou a história de Ritinha e o boto encantado?",
+    "opcoes": ["A Força do Querer", "Velho Chico", "América", "Caminho das Índias", "Cordel Encantado"],
+    "correta": "A Força do Querer",
+    "pontuacao": 2
   },
   {
     "id": 48,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela de Dias Gomes foi exibida em 1976, logo após o sucesso de O Bem-Amado?",
-    "opcoes": [
-      "Saramandaia",
-      "Roque Santeiro",
-      "Escalada",
-      "Pai Herói",
-      "O Rebu"
-    ],
-    "correta": "Saramandaia",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Qual novela exibiu a icônica cena do batom vermelho no espelho?",
+    "opcoes": ["Mulheres Apaixonadas", "Páginas da Vida", "Belíssima", "Por Amor", "A Regra do Jogo"],
+    "correta": "Mulheres Apaixonadas",
+    "pontuacao": 2
   },
   {
     "id": 49,
     "categoria": "Novelas",
-    "dificuldade": "dificil",
-    "pergunta": "Qual novela da Globo foi protagonizada por Bruna Lombardi em 1981?",
-    "opcoes": [
-      "Louco Amor",
-      "Mágica",
-      "Os Gigantes",
-      "A Deusa Vencida",
-      "Baila Comigo"
-    ],
-    "correta": "Os Gigantes",
-    "pontuacao": 3
+    "dificuldade": "medio",
+    "pergunta": "Quem interpretou Ramiro em O Rei do Gado?",
+    "opcoes": ["Carlos Vereza", "Tarcísio Meira", "Paulo Goulart", "Stênio Garcia", "Lima Duarte"],
+    "correta": "Carlos Vereza",
+    "pontuacao": 2
   },
   {
     "id": 50,
     "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela tinha um núcleo cigano como destaque?",
+    "opcoes": ["Explode Coração", "América", "Caminho das Índias", "Porto dos Milagres", "Gabriela"],
+    "correta": "Explode Coração",
+    "pontuacao": 2
+  },
+  {
+    "id": 51,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela foi interrompida após a morte da atriz Daniela Perez?",
+    "opcoes": ["De Corpo e Alma", "Explode Coração", "Fera Ferida", "Top Model", "Barriga de Aluguel"],
+    "correta": "De Corpo e Alma",
+    "pontuacao": 2
+  },
+  {
+    "id": 52,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela apresentou a personagem Serena e seu amor por Rafael?",
+    "opcoes": ["Alma Gêmea", "A Viagem", "Terras do Sem Fim", "Espelho da Vida", "Cabocla"],
+    "correta": "Alma Gêmea",
+    "pontuacao": 2
+  },
+  {
+    "id": 53,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Quem interpretou a vilã Maria de Fátima em Vale Tudo?",
+    "opcoes": ["Glória Pires", "Beatriz Segall", "Susana Vieira", "Lília Cabral", "Carolina Ferraz"],
+    "correta": "Glória Pires",
+    "pontuacao": 2
+  },
+  {
+    "id": 54,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela tinha o núcleo fictício de Greenville?",
+    "opcoes": ["A Indomada", "Tieta", "Porto dos Milagres", "Gabriela", "A Padroeira"],
+    "correta": "A Indomada",
+    "pontuacao": 2
+  },
+  {
+    "id": 55,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela Carolina Dieckmann viveu a personagem Camila, famosa pela cena emocionante?",
+    "opcoes": ["Laços de Família", "Por Amor", "Mulheres Apaixonadas", "Páginas da Vida", "Explode Coração"],
+    "correta": "Laços de Família",
+    "pontuacao": 2
+  },
+  {
+    "id": 56,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela apresentou o personagem Opash, patriarca indiano?",
+    "opcoes": ["Caminho das Índias", "América", "O Clone", "Cordel Encantado", "Velho Chico"],
+    "correta": "Caminho das Índias",
+    "pontuacao": 2
+  },
+  {
+    "id": 57,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela trouxe a história de amor entre Zé Leôncio e Madeleine?",
+    "opcoes": ["Pantanal", "Renascer", "O Rei do Gado", "Velho Chico", "Terra Nostra"],
+    "correta": "Pantanal",
+    "pontuacao": 2
+  },
+  {
+    "id": 58,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela a personagem Bia Falcão, vivida por Fernanda Montenegro, é destaque?",
+    "opcoes": ["Belíssima", "Celebridade", "A Favorita", "Vale Tudo", "Rainha da Sucata"],
+    "correta": "Belíssima",
+    "pontuacao": 2
+  },
+  {
+    "id": 59,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve o romance proibido entre Clara e Marina, vivido por Giovanna Antonelli?",
+    "opcoes": ["Em Família", "Amor à Vida", "Salve Jorge", "A Regra do Jogo", "Babilônia"],
+    "correta": "Em Família",
+    "pontuacao": 2
+  },
+  {
+    "id": 60,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em qual novela a personagem Ritinha tem um filho supostamente de um boto?",
+    "opcoes": ["A Força do Querer", "Velho Chico", "América", "Caminho das Índias", "Salve Jorge"],
+    "correta": "A Força do Querer",
+    "pontuacao": 2
+  },
+  {
+    "id": 61,
+    "categoria": "Novelas",
     "dificuldade": "dificil",
-    "pergunta": "Qual novela de 1979 tinha como trama central o desaparecimento de um cadáver?",
-    "opcoes": [
-      "O Rebu",
-      "Água Viva",
-      "Dancin' Days",
-      "Corpo a Corpo",
-      "Eu Prometo"
-    ],
+    "pergunta": "Qual novela de Dias Gomes teve sua exibição proibida pela censura nos anos 70 antes de finalmente ir ao ar em 1985?",
+    "opcoes": ["Roque Santeiro", "Saramandaia", "O Bem-Amado", "Verão Vermelho", "Bandeira 2"],
+    "correta": "Roque Santeiro",
+    "pontuacao": 3
+  },
+  {
+    "id": 62,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Que novela apresentou a misteriosa personagem 'A Rola' cuja identidade era segredo até o capítulo final?",
+    "opcoes": ["Tieta", "Saramandaia", "A Indomada", "Pedra sobre Pedra", "Porto dos Milagres"],
+    "correta": "Pedra sobre Pedra",
+    "pontuacao": 3
+  },
+  {
+    "id": 63,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela de 1978 havia um núcleo inspirado na cultura cigana, antes de Explode Coração popularizar o tema?",
+    "opcoes": ["Dancin' Days", "O Pulo do Gato", "Cavalo de Aço", "Pai Herói", "O Astro"],
+    "correta": "Cavalo de Aço",
+    "pontuacao": 3
+  },
+  {
+    "id": 64,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela o personagem João Gibão possuía asas nas costas, simbolizando realismo fantástico?",
+    "opcoes": ["Saramandaia", "Pedra sobre Pedra", "Tieta", "A Indomada", "Roque Santeiro"],
+    "correta": "Saramandaia",
+    "pontuacao": 3
+  },
+  {
+    "id": 65,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela apresentou a enigmática personagem 'Sinhá Moça' em sua primeira adaptação televisiva?",
+    "opcoes": ["Sinhá Moça (1986)", "A Escrava Isaura", "Cabocla (1959)", "O Sheik de Agadir", "Os Imigrantes"],
+    "correta": "Sinhá Moça (1986)",
+    "pontuacao": 3
+  },
+  {
+    "id": 66,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Aguinaldo Silva trouxe um lobisomem como figura central na trama?",
+    "opcoes": ["Pedra sobre Pedra", "A Indomada", "Fera Ferida", "Tieta", "Porto dos Milagres"],
+    "correta": "Pedra sobre Pedra",
+    "pontuacao": 3
+  },
+  {
+    "id": 67,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela o ator Antônio Fagundes interpretou dois personagens simultaneamente, pai e filho?",
+    "opcoes": ["O Rei do Gado", "Renascer", "Terra Nostra", "Selva de Pedra", "Coração Alado"],
+    "correta": "Renascer",
+    "pontuacao": 3
+  },
+  {
+    "id": 68,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela apresentou a cidade fictícia de Tubiacanga, marcada pela disputa política entre dois prefeitos?",
+    "opcoes": ["Fera Ferida", "Porto dos Milagres", "Pedra sobre Pedra", "A Indomada", "Roque Santeiro"],
+    "correta": "Fera Ferida",
+    "pontuacao": 3
+  },
+  {
+    "id": 69,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela surgiram os personagens Sete, Fausto e Viriato, que tinham humor nonsense e surrealista?",
+    "opcoes": ["Que Rei Sou Eu?", "Saramandaia", "Uga-Uga", "Bang Bang", "O Fim do Mundo"],
+    "correta": "Que Rei Sou Eu?",
+    "pontuacao": 3
+  },
+  {
+    "id": 70,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Que novela trouxe a personagem donatária Úrsula, vivida por Marília Pêra, em uma trama política do século XVI?",
+    "opcoes": ["A Muralha", "A Padroeira", "Nova Esperança", "Os Maias", "Escrava Isaura"],
+    "correta": "A Muralha",
+    "pontuacao": 3
+  },
+  {
+    "id": 71,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela da Globo foi parcialmente escrita por substitutos após o falecimento de Lauro César Muniz?",
+    "opcoes": ["Escalada", "O Salvador da Pátria", "O Casarão", "Transas e Caretas", "Pecado Rasgado"],
+    "correta": "O Casarão",
+    "pontuacao": 3
+  },
+  {
+    "id": 72,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Carlos Lombardi foi inspirada no universo dos filmes de ação dos anos 80?",
+    "opcoes": ["Uga-Uga", "Kubanacan", "Pé na Jaca", "Guerra dos Sexos (2012)", "Bang Bang"],
+    "correta": "Kubanacan",
+    "pontuacao": 3
+  },
+  {
+    "id": 73,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela Tony Ramos interpretou um grego chamado Nikos?",
+    "opcoes": ["Belíssima", "Caminho das Índias", "O Clone", "A Próxima Vítima", "A Indomada"],
+    "correta": "Belíssima",
+    "pontuacao": 3
+  },
+  {
+    "id": 74,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela de 1979 a abertura mostrava bailes de discoteca e a ascensão da cultura jovem urbana?",
+    "opcoes": ["Dancin' Days", "O Astro", "O Grito", "Locomotivas", "Gina"],
+    "correta": "Dancin' Days",
+    "pontuacao": 3
+  },
+  {
+    "id": 75,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela do início dos anos 90 teve como tema central a alquimia, simbolizando a busca por ouro branco?",
+    "opcoes": ["Pedra sobre Pedra", "Fera Ferida", "O Rei do Gado", "Tieta", "Renascer"],
+    "correta": "Fera Ferida",
+    "pontuacao": 3
+  },
+  {
+    "id": 76,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1976 utilizou estrutura narrativa de múltiplas fases, representando três gerações de uma família?",
+    "opcoes": ["O Casarão", "Escalada", "Irmãos Coragem", "O Sheik de Agadir", "Selva de Pedra"],
+    "correta": "O Casarão",
+    "pontuacao": 3
+  },
+  {
+    "id": 77,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela os personagens tinham nomes inspirados em sabores de sorvete, como Chiclete e Hortênsia?",
+    "opcoes": ["Chocolate com Pimenta", "Caras & Bocas", "Alto Astral", "Êta Mundo Bom!", "Pé na Jaca"],
+    "correta": "Chocolate com Pimenta",
+    "pontuacao": 3
+  },
+  {
+    "id": 78,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela do horário das 18h contou com cenas gravadas no Marrocos em sua abertura?",
+    "opcoes": ["O Clone", "O Profeta", "Esplendor", "Pérola Negra", "Viver a Vida"],
+    "correta": "O Clone",
+    "pontuacao": 3
+  },
+  {
+    "id": 79,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Que novela apresentou o personagem Teleco, que podia se transformar em diferentes animais?",
+    "opcoes": ["Sítio do Picapau Amarelo", "O Beijo do Vampiro", "A Próxima Vítima", "Um Anjo Caiu do Céu", "Bang Bang"],
+    "correta": "Sítio do Picapau Amarelo",
+    "pontuacao": 3
+  },
+  {
+    "id": 80,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela exibiu a personagem Laura Prudente da Costa fugindo de um homicídio em cena icônica com trilha de ópera?",
+    "opcoes": ["Celebridade", "Belíssima", "A Favorita", "Vale Tudo", "A Regra do Jogo"],
+    "correta": "Celebridade",
+    "pontuacao": 3
+  },
+  {
+    "id": 81,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela Fernanda Montenegro interpretou uma vilã que fingia a própria morte para manipular herdeiros?",
+    "opcoes": ["Belíssima", "Saramandaia", "A Regra do Jogo", "Rainha da Sucata", "O Dono do Mundo"],
+    "correta": "Belíssima",
+    "pontuacao": 3
+  },
+  {
+    "id": 82,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela Griselda vence na loteria e muda completamente de vida?",
+    "opcoes": ["Fina Estampa", "Avenida Brasil", "A Regra do Jogo", "Império", "Velho Chico"],
+    "correta": "Fina Estampa",
+    "pontuacao": 3
+  },
+  {
+    "id": 83,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela exibiu a Chapada Diamantina como cenário da aldeia fictícia do personagem Pedro Gouveia?",
+    "opcoes": ["Velho Chico", "O Rei do Gado", "Renascer", "Tieta", "Pantanal"],
+    "correta": "Velho Chico",
+    "pontuacao": 3
+  },
+  {
+    "id": 84,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela uma personagem falava com pinturas e acreditava receber mensagens espirituais por meio delas?",
+    "opcoes": ["Espelho da Vida", "A Viagem", "Além do Tempo", "Alma Gêmea", "O Profeta"],
+    "correta": "Espelho da Vida",
+    "pontuacao": 3
+  },
+  {
+    "id": 85,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela apresentou um triângulo amoroso entre João Pedro, Mariana e Egídio?",
+    "opcoes": ["Renascer", "Cabocla", "O Rei do Gado", "Terra Nostra", "Pantanal"],
+    "correta": "Renascer",
+    "pontuacao": 3
+  },
+  {
+    "id": 86,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Que novela estreou originalmente no SBT e depois ganhou remake pela Globo em 2004?",
+    "opcoes": ["Esmeralda", "Pícara Sonhadora", "Carrossel", "Pequena Travessa", "Cristal"],
+    "correta": "Esmeralda",
+    "pontuacao": 3
+  },
+  {
+    "id": 87,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela a personagem Tenória vivia em uma vila litorânea e tinha dons místicos relacionados à água?",
+    "opcoes": ["Porto dos Milagres", "A Indomada", "Tieta", "Gabriela", "Velho Chico"],
+    "correta": "Porto dos Milagres",
+    "pontuacao": 3
+  },
+  {
+    "id": 88,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Dias Gomes abordou a polêmica disputa municipal de Sucupira?",
+    "opcoes": ["O Bem-Amado", "Roque Santeiro", "Saramandaia", "Verão Vermelho", "Bandeira 2"],
+    "correta": "O Bem-Amado",
+    "pontuacao": 3
+  },
+  {
+    "id": 89,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela foi pioneira ao exibir efeitos especiais nunca usados na TV brasileira até 2006, com atmosfera gótica?",
+    "opcoes": ["O Profeta", "O Beijo do Vampiro", "Caminho das Índias", "Além do Tempo", "Bang Bang"],
+    "correta": "O Beijo do Vampiro",
+    "pontuacao": 3
+  },
+  {
+    "id": 90,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela Selton Mello interpretou o personagem Rachid, que retornava ao Brasil após décadas no exterior?",
+    "opcoes": ["Cordel Encantado", "Velho Chico", "O Auto da Compadecida", "Chocolate com Pimenta", "Esperança"],
+    "correta": "Chocolate com Pimenta",
+    "pontuacao": 3
+  },
+  {
+    "id": 91,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Que novela trouxe a personagem Yvete, conhecida por sua personalidade marcante e por bordões consagrados?",
+    "opcoes": ["O Clone", "América", "Fina Estampa", "Avenida Brasil", "Kubanacan"],
+    "correta": "O Clone",
+    "pontuacao": 3
+  },
+  {
+    "id": 92,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela exibiu um núcleo de cenários inspirado no barroco mineiro, com forte presença de obras sacras?",
+    "opcoes": ["Esperança", "Velho Chico", "Amor Eterno Amor", "Além do Tempo", "Sinhá Moça"],
+    "correta": "Além do Tempo",
+    "pontuacao": 3
+  },
+  {
+    "id": 93,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela o protagonista Sandro lutava para provar que não era o responsável por uma explosão criminosa?",
+    "opcoes": ["A Regra do Jogo", "A Próxima Vítima", "Belíssima", "Explode Coração", "A Favorita"],
+    "correta": "A Regra do Jogo",
+    "pontuacao": 3
+  },
+  {
+    "id": 94,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de época apresentou a saga da família Magalhães durante a Revolução Farroupilha?",
+    "opcoes": ["A Casa das Sete Mulheres", "Desalma", "Os Maias", "A Muralha", "Éramos Seis"],
+    "correta": "A Casa das Sete Mulheres",
+    "pontuacao": 3
+  },
+  {
+    "id": 95,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela exibiu a história de duas famílias rivais separadas por uma maldição passada por gerações?",
+    "opcoes": ["Pedra sobre Pedra", "Saramandaia", "Velho Chico", "Renascer", "Porto dos Milagres"],
+    "correta": "Pedra sobre Pedra",
+    "pontuacao": 3
+  },
+  {
+    "id": 96,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela a reencarnação era explorada por meio de dois personagens que reviviam um romance interrompido no passado?",
+    "opcoes": ["Além do Tempo", "A Viagem", "Alma Gêmea", "Espelho da Vida", "O Profeta"],
+    "correta": "Além do Tempo",
+    "pontuacao": 3
+  },
+  {
+    "id": 97,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Que novela utilizou uma narrativa não linear, com idas e vindas no tempo, para revelar um segredo do protagonista?",
+    "opcoes": ["Amor de Mãe", "Avenida Brasil", "A Regra do Jogo", "Império", "Velho Chico"],
+    "correta": "Avenida Brasil",
+    "pontuacao": 3
+  },
+  {
+    "id": 98,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela apresentou um vilão que manipulava ações de empresas para controlar o mercado financeiro?",
+    "opcoes": ["O Dono do Mundo", "Celebridade", "Belíssima", "Paraíso Tropical", "Império"],
+    "correta": "Paraíso Tropical",
+    "pontuacao": 3
+  },
+  {
+    "id": 99,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em qual novela Lília Cabral interpretou uma mulher obcecada por controle e rituais de limpeza?",
+    "opcoes": ["Fina Estampa", "A Favorita", "Belíssima", "Páginas da Vida", "Império"],
+    "correta": "Páginas da Vida",
+    "pontuacao": 3
+  },
+  {
+    "id": 100,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela apresentou a misteriosa Irmandade dos Cismáticos, grupo secreto que influenciava decisões políticas?",
+    "opcoes": ["Que Rei Sou Eu?", "A Regra do Jogo", "Os Maias", "Caminho das Índias", "O Bem-Amado"],
+    "correta": "Que Rei Sou Eu?",
+    "pontuacao": 3
+  },
+  {
+    "id": 101,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha a protagonista que se transformava em Vampira à noite?",
+    "opcoes": ["O Beijo do Vampiro", "Vamp", "Deus nos Acuda", "Lua Cheia de Amor", "Explode Coração"],
+    "correta": "Vamp",
+    "pontuacao": 1
+  },
+  {
+    "id": 102,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual foi a novela que popularizou o casal de adolescentes Beto e Tancinha?",
+    "opcoes": ["Sassaricando", "Ti Ti Ti", "Totalmente Demais", "Cheias de Charme", "A Próxima Vítima"],
+    "correta": "Sassaricando",
+    "pontuacao": 1
+  },
+  {
+    "id": 103,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela abordou a vida de um peão boiadeiro que se torna um grande empresário?",
+    "opcoes": ["O Rei do Gado", "Pantanal", "Renascer", "Cabocla", "Terra Nostra"],
+    "correta": "O Rei do Gado",
+    "pontuacao": 1
+  },
+  {
+    "id": 104,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual a novela da personagem Paloma, que sonhava em ser estilista e vivia um drama com a mãe biológica?",
+    "opcoes": ["Amor à Vida", "Fina Estampa", "Avenida Brasil", "Passione", "Império"],
+    "correta": "Amor à Vida",
+    "pontuacao": 1
+  },
+  {
+    "id": 105,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "A personagem Sandrinha era famosa por seu envolvimento com uma seita satânica em qual novela?",
+    "opcoes": ["Explode Coração", "De Corpo e Alma", "A Viagem", "O Astro", "Fera Ferida"],
+    "correta": "Explode Coração",
+    "pontuacao": 1
+  },
+  {
+    "id": 106,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela foi a primeira a ser exibida em cores no Brasil?",
+    "opcoes": ["O Bem-Amado", "Selva de Pedra", "Irmãos Coragem", "Cavalo de Aço", "Dancin' Days"],
+    "correta": "O Bem-Amado",
+    "pontuacao": 1
+  },
+  {
+    "id": 107,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela teve a personagem Darlene interpretada por Giovanna Antonelli, que sonhava em ser famosa?",
+    "opcoes": ["Celebridade", "A Regra do Jogo", "Avenida Brasil", "Da Cor do Pecado", "Cheias de Charme"],
+    "correta": "Celebridade",
+    "pontuacao": 1
+  },
+  {
+    "id": 108,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "O personagem Giovanni Improtta, com seu famoso bordão 'Fecho!', pertence a qual novela?",
+    "opcoes": ["Senhora do Destino", "A Favorita", "Vale Tudo", "Fina Estampa", "Império"],
+    "correta": "Senhora do Destino",
+    "pontuacao": 1
+  },
+  {
+    "id": 109,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em qual novela a protagonista era uma empregada doméstica que se descobre herdeira?",
+    "opcoes": ["Cheias de Charme", "Da Cor do Pecado", "A Favorita", "Malhação", "Anjo Mau"],
+    "correta": "Cheias de Charme",
+    "pontuacao": 1
+  },
+  {
+    "id": 110,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela popularizou o uso da expressão 'Are baba!'?",
+    "opcoes": ["Caminho das Índias", "O Clone", "Salve Jorge", "América", "Explode Coração"],
+    "correta": "Caminho das Índias",
+    "pontuacao": 1
+  },
+  {
+    "id": 111,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi a protagonista de 'A Escrava Isaura' na versão de 1976?",
+    "opcoes": ["Lucélia Santos", "Lídia Brondi", "Betty Faria", "Maitê Proença", "Patrícia Pillar"],
+    "correta": "Lucélia Santos",
+    "pontuacao": 1
+  },
+  {
+    "id": 112,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha como pano de fundo a cidade de Resplendor, com características de realismo mágico?",
+    "opcoes": ["Pedra sobre Pedra", "Saramandaia", "A Indomada", "Tieta", "Roque Santeiro"],
+    "correta": "Pedra sobre Pedra",
+    "pontuacao": 1
+  },
+  {
+    "id": 113,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela de 2013 teve a personagem Amora, uma 'it girl' blogueira de moda?",
+    "opcoes": ["Sangue Bom", "Geração Brasil", "A Força do Querer", "Cheias de Charme", "Sete Vidas"],
+    "correta": "Sangue Bom",
+    "pontuacao": 1
+  },
+  {
+    "id": 114,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha o núcleo do bairro de Triagem e o lixão no início da trama?",
+    "opcoes": ["Avenida Brasil", "A Regra do Jogo", "Império", "Fina Estampa", "Amor à Vida"],
+    "correta": "Avenida Brasil",
+    "pontuacao": 1
+  },
+  {
+    "id": 115,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em qual novela a personagem Clara (Giovanna Antonelli) se envolve com o chef Cadu (Reynaldo Gianecchini)?",
+    "opcoes": ["Em Família", "Salve Jorge", "Amor à Vida", "Passione", "A Regra do Jogo"],
+    "correta": "Em Família",
+    "pontuacao": 1
+  },
+  {
+    "id": 116,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela foi a primeira a ter uma personagem com AIDS, a Cecília, interpretada por Nádia Lippi?",
+    "opcoes": ["Roda de Fogo", "Corpo a Corpo", "Vale Tudo", "Explode Coração", "De Corpo e Alma"],
+    "correta": "Roda de Fogo",
+    "pontuacao": 1
+  },
+  {
+    "id": 117,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha como protagonista uma boia-fria, vivida por Patrícia Pillar?",
+    "opcoes": ["O Rei do Gado", "Renascer", "Terra Nostra", "Esperança", "Cabocla"],
+    "correta": "O Rei do Gado",
+    "pontuacao": 1
+  },
+  {
+    "id": 118,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi o ator que interpretou o protagonista Tufão em Avenida Brasil?",
+    "opcoes": ["Murilo Benício", "Cauã Reymond", "Marcos Palmeira", "Alexandre Nero", "Tony Ramos"],
+    "correta": "Murilo Benício",
+    "pontuacao": 1
+  },
+  {
+    "id": 119,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela de 2012 abordou o universo das empregadas domésticas que viram cantoras de sucesso?",
+    "opcoes": ["Cheias de Charme", "Geração Brasil", "Totalmente Demais", "Sangue Bom", "Aquele Beijo"],
+    "correta": "Cheias de Charme",
+    "pontuacao": 1
+  },
+  {
+    "id": 120,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em qual novela a personagem Maria da Paz era uma boleira batalhadora?",
+    "opcoes": ["A Dona do Pedaço", "Cheias de Charme", "A Força do Querer", "Fina Estampa", "Amor de Mãe"],
+    "correta": "A Dona do Pedaço",
+    "pontuacao": 1
+  },
+  {
+    "id": 121,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Da Cor do Pecado', qual era a profissão da protagonista Preta, interpretada por Taís Araújo?",
+    "opcoes": ["Vendedora de ervas e comidas naturais", "Estilista", "Cantora", "Enfermeira", "Cozinheira"],
+    "correta": "Vendedora de ervas e comidas naturais",
+    "pontuacao": 2
+  },
+  {
+    "id": 122,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Quem interpretou a vilã Branca Letícia de Barros Mota na novela 'Por Amor'?",
+    "opcoes": ["Susana Vieira", "Regina Duarte", "Vera Fischer", "Tereza Rachel", "Joana Fomm"],
+    "correta": "Susana Vieira",
+    "pontuacao": 2
+  },
+  {
+    "id": 123,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela foi ao ar em 1990 e abordou a disputa empresarial entre a sucateira Maria do Carmo e a socialite Laurinha Figueroa?",
+    "opcoes": ["Rainha da Sucata", "Fera Radical", "Top Model", "O Dono do Mundo", "Meu Bem, Meu Mal"],
+    "correta": "Rainha da Sucata",
+    "pontuacao": 2
+  },
+  {
+    "id": 124,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'A Favorita', qual era a profissão do protagonista Donatela, acusada de assassinato?",
+    "opcoes": ["Cantora sertaneja", "Jornalista", "Estilista", "Empresária da Construção", "Arquiteta"],
+    "correta": "Cantora sertaneja",
+    "pontuacao": 2
+  },
+  {
+    "id": 125,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2004 teve o drama de uma mãe que troca o próprio filho por um recém-nascido saudável?",
+    "opcoes": ["Senhora do Destino", "Por Amor", "Laços de Família", "Páginas da Vida", "Belíssima"],
+    "correta": "Senhora do Destino",
+    "pontuacao": 2
+  },
+  {
+    "id": 126,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela apresentou o personagem 'Juba', um lutador de artes marciais, vivido por Lauro Corona?",
+    "opcoes": ["Corpo a Corpo", "Transas e Caretas", "Baila Comigo", "A Gata Comeu", "Vereda Tropical"],
+    "correta": "Corpo a Corpo",
+    "pontuacao": 2
+  },
+  {
+    "id": 127,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Quem interpretou a personagem Viúva Porcina em 'Roque Santeiro'?",
+    "opcoes": ["Regina Duarte", "Betty Faria", "Vera Fischer", "Joana Fomm", "Lídia Brondi"],
+    "correta": "Betty Faria",
+    "pontuacao": 2
+  },
+  {
+    "id": 128,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1993 abordou a temática da mediunidade e reencarnação com o personagem Alexandre?",
+    "opcoes": ["A Viagem", "Alma Gêmea", "Explode Coração", "A Próxima Vítima", "Anjo Mau"],
+    "correta": "A Viagem",
+    "pontuacao": 2
+  },
+  {
+    "id": 129,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Passione', quem foi o ator que interpretou o vilão Fred, conhecido por sua ambição e crueldade?",
+    "opcoes": ["Reynaldo Gianecchini", "Bruno Gagliasso", "Marcelo Antony", "Cauã Reymond", "Rodrigo Lombardi"],
+    "correta": "Marcelo Antony",
+    "pontuacao": 2
+  },
+  {
+    "id": 130,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Duda, que se passava por irmã gêmea de Taís para desvendar um crime?",
+    "opcoes": ["Paraíso Tropical", "Da Cor do Pecado", "A Favorita", "Celebridade", "Babilônia"],
+    "correta": "Paraíso Tropical",
+    "pontuacao": 2
+  },
+  {
+    "id": 131,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'O Dono do Mundo', quem interpretou o cirurgião plástico Felipe Barreto, protagonista da trama?",
+    "opcoes": ["Antônio Fagundes", "Lima Duarte", "Paulo Gorgulho", "Tarcísio Meira", "José Mayer"],
+    "correta": "Antônio Fagundes",
+    "pontuacao": 2
+  },
+  {
+    "id": 132,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1988 abordou o tráfico de drogas e a corrupção política com a personagem Odete Roitman?",
+    "opcoes": ["Vale Tudo", "Roda de Fogo", "O Salvador da Pátria", "Dancin' Days", "Fera Radical"],
+    "correta": "Vale Tudo",
+    "pontuacao": 2
+  },
+  {
+    "id": 133,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Capitu (Giovanna Antonelli), que era garota de programa para sustentar seu filho?",
+    "opcoes": ["Laços de Família", "Por Amor", "Mulheres Apaixonadas", "Páginas da Vida", "Esperança"],
+    "correta": "Laços de Família",
+    "pontuacao": 2
+  },
+  {
+    "id": 134,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'A Gata Comeu', qual era a embarcação em que a turma de jovens fazia um passeio que terminou em naufrágio?",
+    "opcoes": ["O veleiro", "O iate", "A escuna", "O navio", "O bote"],
+    "correta": "A escuna",
+    "pontuacao": 2
+  },
+  {
+    "id": 135,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de Janete Clair foi a segunda versão do sucesso que abordava a ambição de Regina Duarte?",
+    "opcoes": ["Selva de Pedra (1986)", "Baila Comigo", "Os Gigantes", "Pecado Capital", "Guerra dos Sexos (1983)"],
+    "correta": "Selva de Pedra (1986)",
+    "pontuacao": 2
+  },
+  {
+    "id": 136,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Coração de Estudante', qual era a profissão do protagonista Edu, vivido por Fábio Assunção?",
+    "opcoes": ["Professor de Biologia", "Advogado", "Pecuarista", "Médico", "Jornalista"],
+    "correta": "Professor de Biologia",
+    "pontuacao": 2
+  },
+  {
+    "id": 137,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve um final polêmico onde o assassino da 'Baleia' não era revelado?",
+    "opcoes": ["O Rebu", "O Astro", "A Próxima Vítima", "Dancin' Days", "Babilônia"],
     "correta": "O Rebu",
+    "pontuacao": 2
+  },
+  {
+    "id": 138,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Dona Redonda, que explode ao comer demais?",
+    "opcoes": ["Saramandaia", "Roque Santeiro", "Pedra sobre Pedra", "A Indomada", "Tieta"],
+    "correta": "Saramandaia",
+    "pontuacao": 2
+  },
+  {
+    "id": 139,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2012 teve como pano de fundo a moda e o universo das editoras de revista?",
+    "opcoes": ["Guerra dos Sexos (2012)", "Cheias de Charme", "Sangue Bom", "Geração Brasil", "Ti Ti Ti (2010)"],
+    "correta": "Guerra dos Sexos (2012)",
+    "pontuacao": 2
+  },
+  {
+    "id": 140,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela foi dividida em duas épocas, com um salto de 20 anos na trama?",
+    "opcoes": ["Velho Chico", "Avenida Brasil", "Em Família", "Passione", "Império"],
+    "correta": "Velho Chico",
+    "pontuacao": 2
+  },
+  {
+    "id": 141,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Explode Coração', qual era a origem do personagem Dara, que vivia um amor proibido?",
+    "opcoes": ["Cigana", "Indiana", "Árabe", "Italiana", "Nordestina"],
+    "correta": "Cigana",
+    "pontuacao": 2
+  },
+  {
+    "id": 142,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela abordou a rivalidade entre as irmãs Pilar e Antônia, herdeiras de uma fábrica de lingerie?",
+    "opcoes": ["Guerra dos Sexos (1983)", "Top Model", "Dancin' Days", "Pecado Capital", "Meu Bem, Meu Mal"],
+    "correta": "Guerra dos Sexos (1983)",
+    "pontuacao": 2
+  },
+  {
+    "id": 143,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2003 se passava no Rio de Janeiro e tinha como tema central o universo dos skatistas?",
+    "opcoes": ["Celebridade", "Malhação", "Mulheres Apaixonadas", "Chocolate com Pimenta", "Kubanacan"],
+    "correta": "Celebridade",
+    "pontuacao": 2
+  },
+  {
+    "id": 144,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Da Cor do Pecado', qual era o nome do personagem do ator Lima Duarte, patriarca e dono de um império?",
+    "opcoes": ["Afonso Lambertini", "Tony Ramos", "Lázaro Ramos", "Tarcísio Meira", "José Wilker"],
+    "correta": "Afonso Lambertini",
+    "pontuacao": 2
+  },
+  {
+    "id": 145,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela do início dos anos 2000 se passava na cidade de Porto dos Milagres, com temática ligada ao mar?",
+    "opcoes": ["Porto dos Milagres", "Saramandaia", "O Salvador da Pátria", "Tieta", "Porto Alegre"],
+    "correta": "Porto dos Milagres",
+    "pontuacao": 2
+  },
+  {
+    "id": 146,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de Benedito Ruy Barbosa abordou a saga de imigrantes italianos no Brasil?",
+    "opcoes": ["Terra Nostra", "Esperança", "O Rei do Gado", "Renascer", "Cabocla"],
+    "correta": "Terra Nostra",
+    "pontuacao": 2
+  },
+  {
+    "id": 147,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'América', qual era a condição do personagem Tião, que sonhava em atravessar a fronteira para os EUA?",
+    "opcoes": ["Peão de boiadeiro", "Fazendeiro", "Imigrante ilegal", "Empresário", "Cantor"],
+    "correta": "Peão de boiadeiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 148,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Luma, que era cleptomaníaca e se envolvia com o protagonista?",
+    "opcoes": ["O Dono do Mundo", "Passione", "Tieta", "Rainha da Sucata", "A Indomada"],
+    "correta": "O Dono do Mundo",
+    "pontuacao": 2
+  },
+  {
+    "id": 149,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'O Profeta', qual era a habilidade sobrenatural do protagonista Marcos, vivido por Thiago Fragoso?",
+    "opcoes": ["Vidência", "Telepatia", "Telecinese", "Cura", "Reencarnação"],
+    "correta": "Vidência",
+    "pontuacao": 2
+  },
+  {
+    "id": 150,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1978 popularizou a moda das 'dancin' days' e a vida noturna carioca?",
+    "opcoes": ["Dancin' Days", "O Astro", "Locomotivas", "Explode Coração", "Coração Alado"],
+    "correta": "Dancin' Days",
+    "pontuacao": 2
+  },
+  {
+    "id": 151,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'A Regra do Jogo', qual era a organização criminosa liderada pelo vilão Gibson (José de Abreu)?",
+    "opcoes": ["A facção", "O bando", "O clã", "A máfia", "A Irmandade"],
+    "correta": "A facção",
+    "pontuacao": 2
+  },
+  {
+    "id": 152,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Sandra, que se fingia de morta para se casar por interesse?",
+    "opcoes": ["Êta Mundo Bom!", "Chocolate com Pimenta", "Alma Gêmea", "O Profeta", "Cordel Encantado"],
+    "correta": "Êta Mundo Bom!",
+    "pontuacao": 2
+  },
+  {
+    "id": 153,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Baila Comigo', quais eram os nomes dos gêmeos idênticos separados na infância?",
+    "opcoes": ["João e Pedro", "Quinzinho e Quinzão", "Mauro e Ricardo", "Lúcio e Léo", "Caio e Cadu"],
+    "correta": "João e Pedro",
+    "pontuacao": 2
+  },
+  {
+    "id": 154,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o autor de 'A Viagem', novela de temática espírita?",
+    "opcoes": ["Ivani Ribeiro", "Glória Perez", "Manoel Carlos", "Aguinaldo Silva", "Gilberto Braga"],
+    "correta": "Ivani Ribeiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 155,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Páginas da Vida', qual era o nome da médica que adotava a neta com síndrome de Down?",
+    "opcoes": ["Helena", "Teresa", "Lívia", "Isabel", "Marta"],
+    "correta": "Helena",
+    "pontuacao": 2
+  },
+  {
+    "id": 156,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1989 se passava em uma vila litorânea e tinha a personagem Tieta de volta à sua terra natal?",
+    "opcoes": ["Tieta", "Gabriela", "Porto dos Milagres", "Verão Vermelho", "Fera Radical"],
+    "correta": "Tieta",
+    "pontuacao": 2
+  },
+  {
+    "id": 157,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela abordou a história de uma família que se muda para o Brasil após fugir da crise da Argentina?",
+    "opcoes": ["Salsa e Merengue", "Explode Coração", "Suave Veneno", "Corpo Dourado", "Anjo de Mim"],
+    "correta": "Salsa e Merengue",
+    "pontuacao": 2
+  },
+  {
+    "id": 158,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Vamp', quem era a vampira que retornava à terra para atormentar a vida de Lipe?",
+    "opcoes": ["Natasha", "Carmem", "Júlia", "Eugênia", "Helena"],
+    "correta": "Natasha",
+    "pontuacao": 2
+  },
+  {
+    "id": 159,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Clara (Mariana Ximenes) que jurou vingança após ser enterrada viva?",
+    "opcoes": ["O Outro Lado do Paraíso", "Império", "A Regra do Jogo", "Babilônia", "Sete Vidas"],
+    "correta": "O Outro Lado do Paraíso",
+    "pontuacao": 2
+  },
+  {
+    "id": 160,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Quem foi o ator que interpretou o personagem Berlamino Reginatto na novela 'Explode Coração'?",
+    "opcoes": ["Rogério Cardoso", "Ary Fontoura", "Mauro Mendonça", "Stênio Garcia", "Paulo Goulart"],
+    "correta": "Rogério Cardoso",
+    "pontuacao": 2
+  },
+  {
+    "id": 161,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1974 de Dias Gomes teve como tema central a seca no nordeste e o misticismo?",
+    "opcoes": ["O Casarão", "Saramandaia", "O Rebu", "Verão Vermelho", "Roque Santeiro"],
+    "correta": "Verão Vermelho",
+    "pontuacao": 3
+  },
+  {
+    "id": 162,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Corpo a Corpo', qual era o nome do pacto social que dividia os personagens, questionando a ascensão social?",
+    "opcoes": ["O 'Pacto do Progresso'", "O 'Pacto da Ascensão'", "O 'Pacto de Classe'", "O 'Pacto de Honra'", "O 'Pacto Secreto'"],
+    "correta": "O 'Pacto de Classe'",
+    "pontuacao": 3
+  },
+  {
+    "id": 163,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Aguinaldo Silva se passava em uma cidade com características vitorianas e tinha um trem como elemento de cenário?",
+    "opcoes": ["A Indomada", "Pedra sobre Pedra", "Fera Ferida", "Porto dos Milagres", "Tieta"],
+    "correta": "A Indomada",
+    "pontuacao": 3
+  },
+  {
+    "id": 164,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Salvador da Pátria', quem era o 'Bode Expiatório' usado para encobrir o crime político na cidade de Ouro Verde?",
+    "opcoes": ["Sassá Mutema", "Juca Pirama", "Tieta", "Roque Santeiro", "Zé Leôncio"],
+    "correta": "Sassá Mutema",
+    "pontuacao": 3
+  },
+  {
+    "id": 165,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1975 de Janete Clair teve como protagonista uma moça ambiciosa que buscava ascensão social a todo custo?",
+    "opcoes": ["Pecado Capital", "Selva de Pedra", "Baila Comigo", "Dancin' Days", "O Astro"],
+    "correta": "Pecado Capital",
+    "pontuacao": 3
+  },
+  {
+    "id": 166,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1977 apresentou a personagem Helena (Dina Sfat) que se disfarçava de homem para trabalhar?",
+    "opcoes": ["Os Gigantes", "Espelho Mágico", "Corpo a Corpo", "Sinal de Alerta", "Nina"],
+    "correta": "Os Gigantes",
+    "pontuacao": 3
+  },
+  {
+    "id": 167,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Astro', qual era o nome da cidade fictícia onde o protagonista, Herculano Quintanilha, era um místico golpista?",
+    "opcoes": ["Guanabara", "Sucupira", "Resplendor", "Tubiacanga", "Catavento"],
+    "correta": "Guanabara",
+    "pontuacao": 3
+  },
+  {
+    "id": 168,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1982 apresentou o primeiro beijo gay exibido na televisão brasileira, entre Tuca e Clara?",
+    "opcoes": ["Caso Verdade: Santo Antônio", "Baila Comigo", "Transas e Caretas", "Final Feliz", "Amor com Amor Se Paga"],
+    "correta": "Caso Verdade: Santo Antônio",
+    "pontuacao": 3
+  },
+  {
+    "id": 169,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela teve a personagem Dona Xepa, uma feirante batalhadora, em sua versão original de 1977?",
+    "opcoes": ["Dona Xepa", "Estúpido Cupido", "O Profeta", "Duas Vidas", "O Casarão"],
+    "correta": "Dona Xepa",
+    "pontuacao": 3
+  },
+  {
+    "id": 170,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Clone', qual era o nome do cientista que realizou a clonagem humana, criando Léo?",
+    "opcoes": ["Albieri", "Said", "Lucas", "Leônidas", "Xande"],
+    "correta": "Albieri",
+    "pontuacao": 3
+  },
+  {
+    "id": 171,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1983, que abordava a ditadura militar, teve seu texto original modificado pela censura?",
+    "opcoes": ["Guerra dos Sexos (1983)", "Louco Amor", "Final Feliz", "Champagne", "Pecado Capital"],
+    "correta": "Louco Amor",
+    "pontuacao": 3
+  },
+  {
+    "id": 172,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela teve a personagem Maria Altiva, famosa por sua frase 'Me chame de Altiva!'?",
+    "opcoes": ["A Indomada", "Tieta", "Pedra sobre Pedra", "Fera Ferida", "Porto dos Milagres"],
+    "correta": "A Indomada",
+    "pontuacao": 3
+  },
+  {
+    "id": 173,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'A Próxima Vítima', quem era o serial killer que matava os membros da família Ferreto?",
+    "opcoes": ["Assassino Mascarado", "Jairo", "Bruno", "Alberto", "Marcelo"],
+    "correta": "Assassino Mascarado",
+    "pontuacao": 3
+  },
+  {
+    "id": 174,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1975 de Dias Gomes teve como protagonista a professora de História de Arte, Sônia (Regina Duarte)?",
+    "opcoes": ["Sinal de Alerta", "O Casarão", "Saramandaia", "Coração Alado", "Bravo!"],
+    "correta": "Bravo!",
+    "pontuacao": 3
+  },
+  {
+    "id": 175,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela se passava no Nordeste e tinha a personagem Florinda (Arlete Salles), que engolia sapos por dinheiro?",
+    "opcoes": ["Tieta", "Saramandaia", "Pedra sobre Pedra", "A Indomada", "Fera Ferida"],
+    "correta": "Saramandaia",
+    "pontuacao": 3
+  },
+  {
+    "id": 176,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Pecado Capital', quem interpretou o taxista Carlão, que encontra uma mala de dinheiro?",
+    "opcoes": ["Francisco Cuoco", "Lima Duarte", "Paulo Gracindo", "Juca de Oliveira", "Jardel Filho"],
+    "correta": "Francisco Cuoco",
+    "pontuacao": 3
+  },
+  {
+    "id": 177,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1990 teve a protagonista Madalena (Christiane Torloni), uma mulher moderna e empresária de sucesso?",
+    "opcoes": ["Corpo Dourado", "Top Model", "Desejo Proibido", "Deus nos Acuda", "Barriga de Aluguel"],
+    "correta": "Gente Fina",
+    "pontuacao": 3
+  },
+  {
+    "id": 178,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Babilônia', qual era o nome da vilã que se tornou famosa por seu bordão 'Tá com nojinho, é?'?",
+    "opcoes": ["Beatriz", "Inês", "Alice", "Olga", "Regina"],
+    "correta": "Beatriz",
+    "pontuacao": 3
+  },
+  {
+    "id": 179,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela teve a personagem Cida (Isabelle Drummond), uma das três empregadas que viram estrelas do pop?",
+    "opcoes": ["Cheias de Charme", "A Força do Querer", "Sangue Bom", "Geração Brasil", "Totalmente Demais"],
+    "correta": "Cheias de Charme",
+    "pontuacao": 3
+  },
+  {
+    "id": 180,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Sassaricando', qual era o nome da matriarca da família que deixava um testamento cheio de surpresas?",
+    "opcoes": ["Dona Aldonza", "Dona Armênia", "Dona Beija", "Dona Redonda", "Dona Yolanda"],
+    "correta": "Dona Aldonza",
+    "pontuacao": 3
+  },
+  {
+    "id": 181,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1980 abordou o tema da ditadura militar e a luta por liberdade de expressão na imprensa?",
+    "opcoes": ["Coração Alado", "Baila Comigo", "O Casarão", "Dancin' Days", "Sinal de Alerta"],
+    "correta": "Coração Alado",
+    "pontuacao": 3
+  },
+  {
+    "id": 182,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Mulheres de Areia' (1993), quem interpretou as gêmeas Ruth e Raquel?",
+    "opcoes": ["Glória Pires", "Isabela Garcia", "Andrea Beltrão", "Patrícia Pillar", "Maitê Proença"],
+    "correta": "Glória Pires",
+    "pontuacao": 3
+  },
+  {
+    "id": 183,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Walther Negrão teve como tema central a busca por um tesouro escondido em uma ilha?",
+    "opcoes": ["Corpo Dourado", "Tropicaliente", "Meu Bem Querer", "Começar de Novo", "Água Viva"],
+    "correta": "Corpo Dourado",
+    "pontuacao": 3
+  },
+  {
+    "id": 184,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Profeta', qual era a religião do personagem Samuel, que tentava se redimir de erros passados?",
+    "opcoes": ["Judaica", "Católica", "Espírita", "Evangélica", "Candomblé"],
+    "correta": "Espírita",
+    "pontuacao": 3
+  },
+  {
+    "id": 185,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 2010 tinha a personagem Diana (Carolina Dieckmann) que vivia um romance com o protagonista Fred?",
+    "opcoes": ["Passione", "Ti Ti Ti (2010)", "Aquele Beijo", "Insensato Coração", "Escrito nas Estrelas"],
+    "correta": "Passione",
+    "pontuacao": 3
+  },
+  {
+    "id": 186,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Ti Ti Ti' (2010), qual era o nome do personagem interpretado por Murilo Benício, um 'rei' da moda?",
+    "opcoes": ["Victor Valentim", "Jacques Leclair", "Ariclenes", "Chico", "Edgar"],
+    "correta": "Ariclenes",
+    "pontuacao": 3
+  },
+  {
+    "id": 187,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela teve o personagem Lampião, um cangaceiro que volta à vida para se vingar?",
+    "opcoes": ["Cordel Encantado", "Velho Chico", "Renascer", "Roque Santeiro", "Saramandaia"],
+    "correta": "Cordel Encantado",
+    "pontuacao": 3
+  },
+  {
+    "id": 188,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Rei do Gado', qual era o nome da cidade fictícia onde se passava a maior parte da trama na segunda fase?",
+    "opcoes": ["Ribeirão Preto", "Guanabara", "Palmeiras", "Araguaia", "Sucupira"],
+    "correta": "Ribeirão Preto",
+    "pontuacao": 3
+  },
+  {
+    "id": 189,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1978 abordou a rivalidade entre as irmãs Júlia e Yolanda, donas de uma butique?",
+    "opcoes": ["Dancin' Days", "O Astro", "Pecado Capital", "Baila Comigo", "Água Viva"],
+    "correta": "Dancin' Days",
+    "pontuacao": 3
+  },
+  {
+    "id": 190,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'A Indomada', quem interpretou o professor de matemática Pitágoras, um personagem com forte sotaque britânico?",
+    "opcoes": ["Ary Fontoura", "Paulo Betti", "Matheus Nachtergaele", "José Mayer", "Lima Duarte"],
+    "correta": "Ary Fontoura",
+    "pontuacao": 3
+  },
+  {
+    "id": 191,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 2011 apresentou a personagem Tereza Cristina (Christiane Torloni), uma socialite extravagante e vilã?",
+    "opcoes": ["Fina Estampa", "Avenida Brasil", "A Regra do Jogo", "Império", "Passione"],
+    "correta": "Fina Estampa",
+    "pontuacao": 3
+  },
+  {
+    "id": 192,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1999 se passava em uma vila de pescadores no litoral da Bahia e abordava lendas marítimas?",
+    "opcoes": ["Porto dos Milagres", "Uga-Uga", "Suave Veneno", "Força de Um Desejo", "Vila Madalena"],
+    "correta": "Porto dos Milagres",
+    "pontuacao": 3
+  },
+  {
+    "id": 193,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'A Favorita', qual era a música tema de abertura que trazia a rivalidade das protagonistas Donatela e Flora?",
+    "opcoes": ["Amado", "Minha Doce Estrela", "Tema da Donatela", "País Tropical", "Cheia de Manias"],
+    "correta": "Amado",
+    "pontuacao": 3
+  },
+  {
+    "id": 194,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1985 teve a personagem Maria de Fátima (Glória Pires) que sonhava em se mudar para os EUA?",
+    "opcoes": ["Vale Tudo", "Dancin' Days", "O Salvador da Pátria", "Roda de Fogo", "Explode Coração"],
+    "correta": "Vale Tudo",
+    "pontuacao": 3
+  },
+  {
+    "id": 195,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'A Força do Querer', quem interpretou a personagem Ivana, que passava pela transição de gênero?",
+    "opcoes": ["Carol Duarte", "Juliana Paes", "Paolla Oliveira", "Isis Valverde", "Maria Fernanda Cândido"],
+    "correta": "Carol Duarte",
+    "pontuacao": 3
+  },
+  {
+    "id": 196,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 2015 abordou a história de um homem que se infiltra em uma facção criminosa para desmantelá-la?",
+    "opcoes": ["A Regra do Jogo", "Babilônia", "Império", "Velho Chico", "Avenida Brasil"],
+    "correta": "A Regra do Jogo",
+    "pontuacao": 3
+  },
+  {
+    "id": 197,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Chocolate com Pimenta', qual era o nome da cidade fictícia onde se passava a trama?",
+    "opcoes": ["Ventura", "Sucupira", "Greenville", "Tubiacanga", "Resplendor"],
+    "correta": "Ventura",
+    "pontuacao": 3
+  },
+  {
+    "id": 198,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1996 teve a personagem Altiva Roitman, interpretada por Eva Wilma, em uma trama com realismo fantástico?",
+    "opcoes": ["A Indomada", "Saramandaia", "Pedra sobre Pedra", "Tieta", "Explode Coração"],
+    "correta": "A Indomada",
+    "pontuacao": 3
+  },
+  {
+    "id": 199,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Sinal de Alerta', qual era a profissão do protagonista Márcio (Jardel Filho) que descobria uma conspiração?",
+    "opcoes": ["Jornalista", "Detetive", "Médico", "Advogado", "Policial"],
+    "correta": "Jornalista",
+    "pontuacao": 3
+  },
+  {
+    "id": 200,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1974 foi a primeira a ser totalmente gravada no exterior, na cidade de Lisboa?",
+    "opcoes": ["Fogo Sobre Terra", "O Casarão", "Bravo!", "Verão Vermelho", "Saramandaia"],
+    "correta": "Fogo Sobre Terra",
+    "pontuacao": 3
+  },
+  {
+    "id": 201,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela tinha a abertura com a canção 'É o Amor', de Zezé Di Camargo & Luciano?",
+    "opcoes": ["O Rei do Gado", "Pantanal", "Renascer", "Terra Nostra", "Cabocla"],
+    "correta": "O Rei do Gado",
+    "pontuacao": 1
+  },
+  {
+    "id": 202,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela se passava no Nordeste e tinha uma protagonista que voltava rica após ser expulsa da cidade?",
+    "opcoes": ["Tieta", "Saramandaia", "Pedra sobre Pedra", "A Indomada", "Porto dos Milagres"],
+    "correta": "Tieta",
+    "pontuacao": 1
+  },
+  {
+    "id": 203,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "O personagem Giovanni Berardinelli, que usava o bordão 'Dio mio!', era de qual novela?",
+    "opcoes": ["Passione", "Terra Nostra", "Esperança", "O Rei do Gado", "América"],
+    "correta": "Passione",
+    "pontuacao": 1
+  },
+  {
+    "id": 204,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela apresentou a vilã Flora, que disputava o amor de Marcelo com Donatela?",
+    "opcoes": ["A Favorita", "Avenida Brasil", "Paraíso Tropical", "Da Cor do Pecado", "Celebridade"],
+    "correta": "A Favorita",
+    "pontuacao": 1
+  },
+  {
+    "id": 205,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela se passa na fictícia Greenville, onde a protagonista, uma professora, é a única que consegue enxergar um trem fantasma?",
+    "opcoes": ["A Indomada", "Pedra sobre Pedra", "Fera Ferida", "Saramandaia", "Roque Santeiro"],
+    "correta": "A Indomada",
+    "pontuacao": 1
+  },
+  {
+    "id": 206,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em qual novela a protagonista era uma órfã que vendia doces e se apaixona por um homem rico?",
+    "opcoes": ["A Dona do Pedaço", "Chocolate com Pimenta", "Alma Gêmea", "O Profeta", "A Indomada"],
+    "correta": "Chocolate com Pimenta",
+    "pontuacao": 1
+  },
+  {
+    "id": 207,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela abordou a rivalidade de duas primas, Bebel e Paula, disputando um herdeiro?",
+    "opcoes": ["Paraíso Tropical", "A Favorita", "Da Cor do Pecado", "Celebridade", "Babilônia"],
+    "correta": "Paraíso Tropical",
+    "pontuacao": 1
+  },
+  {
+    "id": 208,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Quem foi o protagonista de 'O Clone', que se dividia entre as culturas brasileira e marroquina?",
+    "opcoes": ["Lucas", "Léo", "Said", "Albieri", "Júlio"],
+    "correta": "Lucas",
+    "pontuacao": 1
+  },
+  {
+    "id": 209,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em 'Avenida Brasil', qual era o nome da cidade fictícia onde se passava o núcleo de Subúrbio?",
+    "opcoes": ["Divino", "Triagem", "Jacarezinho", "Olaria", "Penha"],
+    "correta": "Divino",
+    "pontuacao": 1
+  },
+  {
+    "id": 210,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela teve a personagem Nazaré Tedesco, famosa por empurrar suas vítimas de escadas?",
+    "opcoes": ["Senhora do Destino", "Vale Tudo", "A Favorita", "Fina Estampa", "A Próxima Vítima"],
+    "correta": "Senhora do Destino",
+    "pontuacao": 1
+  },
+  {
+    "id": 211,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em 'Ti Ti Ti', qual era a profissão dos rivais Ariclenes e Jacques Leclair?",
+    "opcoes": ["Estilistas/Costureiros", "Jornalistas", "Advogados", "Empresários", "Cantores"],
+    "correta": "Estilistas/Costureiros",
+    "pontuacao": 1
+  },
+  {
+    "id": 212,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela de 2017 abordou a temática da transexualidade com o personagem Ivan (Ivana)?",
+    "opcoes": ["A Força do Querer", "O Outro Lado do Paraíso", "Império", "A Regra do Jogo", "Babilônia"],
+    "correta": "A Força do Querer",
+    "pontuacao": 1
+  },
+  {
+    "id": 213,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em 'De Corpo e Alma', quem era o ator que interpretou Diogo, o par romântico de Paloma, antes de falecer?",
+    "opcoes": ["Guilherme de Pádua", "Fábio Assunção", "Marcello Antony", "Márcio Garcia", "Maurício Mattar"],
+    "correta": "Guilherme de Pádua",
+    "pontuacao": 1
+  },
+  {
+    "id": 214,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela se passava no Rio de Janeiro e tinha como tema central o universo dos surfistas e a moda praia?",
+    "opcoes": ["Tropicaliente", "Corpo Dourado", "Uga-Uga", "Dancin' Days", "Verão 90"],
+    "correta": "Tropicaliente",
+    "pontuacao": 1
+  },
+  {
+    "id": 215,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em 'Malhação', qual era o nome do colégio mais famoso das primeiras temporadas?",
+    "opcoes": ["Múltipla Escolha", "Pedro II", "Santo Agostinho", "Colégio Estadual", "Carioca"],
+    "correta": "Múltipla Escolha",
+    "pontuacao": 1
+  },
+  {
+    "id": 216,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela de 2005, com temática espírita, teve a personagem Serena, que era a reencarnação da falecida Luna?",
+    "opcoes": ["Alma Gêmea", "O Profeta", "A Viagem", "Escrito nas Estrelas", "Além do Tempo"],
+    "correta": "Alma Gêmea",
+    "pontuacao": 1
+  },
+  {
+    "id": 217,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em 'Laços de Família', qual era a doença que a personagem Camila enfrentava?",
+    "opcoes": ["Leucemia", "Câncer de Mama", "Lúpus", "AIDS", "Esclerose Múltipla"],
+    "correta": "Leucemia",
+    "pontuacao": 1
+  },
+  {
+    "id": 218,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela teve a personagem Maria do Carmo, que buscava sua filha roubada durante anos?",
+    "opcoes": ["Senhora do Destino", "Por Amor", "Laços de Família", "Páginas da Vida", "A Força do Querer"],
+    "correta": "Senhora do Destino",
+    "pontuacao": 1
+  },
+  {
+    "id": 219,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Qual novela de 2011 tinha a personagem Griselda, uma 'marido de aluguel' que fica milionária?",
+    "opcoes": ["Fina Estampa", "Império", "A Regra do Jogo", "Avenida Brasil", "Passione"],
+    "correta": "Fina Estampa",
+    "pontuacao": 1
+  },
+  {
+    "id": 220,
+    "categoria": "Novelas",
+    "dificuldade": "facil",
+    "pergunta": "Em 'Verdades Secretas', qual era a profissão da protagonista Angel?",
+    "opcoes": ["Modelo", "Atriz", "Dançarina", "Jornalista", "Estudante de Direito"],
+    "correta": "Modelo",
+    "pontuacao": 1
+  },
+  {
+    "id": 221,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Kubanacan', qual era o nome do protagonista amnésico interpretado por Marcos Pasquim?",
+    "opcoes": ["Esteban", "Enrico", "Carlos", "Diego", "Salvador"],
+    "correta": "Esteban",
+    "pontuacao": 2
+  },
+  {
+    "id": 222,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Heloísa (Giulia Gam), que era obcecada e possessiva pelo marido Sérgio (Marcello Antony)?",
+    "opcoes": ["Mulheres Apaixonadas", "Laços de Família", "Por Amor", "Páginas da Vida", "Em Família"],
+    "correta": "Mulheres Apaixonadas",
+    "pontuacao": 2
+  },
+  {
+    "id": 223,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'A Viagem', quem interpretou o vilão Alexandre, que morria no início da trama e voltava como espírito obsessor?",
+    "opcoes": ["Guilherme Fontes", "Maurício Mattar", "Fábio Assunção", "Felipe Camargo", "Antônio Fagundes"],
+    "correta": "Guilherme Fontes",
+    "pontuacao": 2
+  },
+  {
+    "id": 224,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de Silvio de Abreu de 1995 foi a primeira a ter a identidade do assassino revelada somente no último capítulo?",
+    "opcoes": ["A Próxima Vítima", "O Rebu", "O Astro", "Fera Ferida", "Rainha da Sucata"],
+    "correta": "A Próxima Vítima",
+    "pontuacao": 2
+  },
+  {
+    "id": 225,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela se passava em uma tecelagem e tinha a protagonista que usava o nome de Maria do Carmo para se esconder?",
+    "opcoes": ["Dona do Pedaço", "Cheias de Charme", "Sassaricando", "A Indomada", "Rainha da Sucata"],
+    "correta": "Sassaricando",
+    "pontuacao": 2
+  },
+  {
+    "id": 226,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Belíssima', qual era a avó grega e vilã da história, interpretada por Fernanda Montenegro?",
+    "opcoes": ["Bia Falcão", "Odete Roitman", "Laura Prudente", "Flora", "Maria de Fátima"],
+    "correta": "Bia Falcão",
+    "pontuacao": 2
+  },
+  {
+    "id": 227,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1998 tinha a protagonista Patrícia (Patrícia Pillar) que sonhava em ser piloto de avião?",
+    "opcoes": ["Meu Bem Querer", "Era Uma Vez...", "Força de um Desejo", "Corpo Dourado", "Anjo de Mim"],
+    "correta": "Meu Bem Querer",
+    "pontuacao": 2
+  },
+  {
+    "id": 228,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'A Força do Querer', qual era o apelido da personagem de Isis Valverde, que se envolvia com o tráfico?",
+    "opcoes": ["Bibi Perigosa", "Carminha", "Nazaré", "Jezebel", "Ritinha Sereia"],
+    "correta": "Bibi Perigosa",
+    "pontuacao": 2
+  },
+  {
+    "id": 229,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2014 teve a personagem Maria Marta (Lília Cabral), que fingia o próprio casamento?",
+    "opcoes": ["Império", "Fina Estampa", "A Regra do Jogo", "Babilônia", "Verdades Secretas"],
+    "correta": "Império",
+    "pontuacao": 2
+  },
+  {
+    "id": 230,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Uga-Uga', qual era a origem do protagonista que foi criado por índios e falava uma língua inventada?",
+    "opcoes": ["Sueca", "Italiana", "Polonesa", "Austríaca", "Inglesa"],
+    "correta": "Sueca",
+    "pontuacao": 2
+  },
+  {
+    "id": 231,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2015 abordou a temática da desigualdade social e o retorno de uma família à cidade natal após a falência?",
+    "opcoes": ["Sete Vidas", "Além do Tempo", "I Love Paraisópolis", "A Regra do Jogo", "Babilônia"],
+    "correta": "I Love Paraisópolis",
+    "pontuacao": 2
+  },
+  {
+    "id": 232,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Tieta', qual era o nome do personagem interpretado por Cássio Gabus Mendes que era um seminarista?",
+    "opcoes": ["Osnar", "Ascânio", "Arturzinho", "Timóteo", "Ricco"],
+    "correta": "Ascânio",
+    "pontuacao": 2
+  },
+  {
+    "id": 233,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1993, com realismo fantástico, tinha o personagem Professor Astromar Junqueira (Marcos Winter) que se transformava em lobisomem?",
+    "opcoes": ["Pedra sobre Pedra", "Saramandaia", "Fera Ferida", "A Indomada", "Tieta"],
+    "correta": "Pedra sobre Pedra",
+    "pontuacao": 2
+  },
+  {
+    "id": 234,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Dóris (Regiane Alves), que maltratava os avós, e se tornou símbolo de violência contra idosos?",
+    "opcoes": ["Mulheres Apaixonadas", "Laços de Família", "Por Amor", "Páginas da Vida", "Em Família"],
+    "correta": "Mulheres Apaixonadas",
+    "pontuacao": 2
+  },
+  {
+    "id": 235,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'O Astro', qual era a religião do protagonista Herculano Quintanilha, que era um místico e cartomante?",
+    "opcoes": ["Umbanda", "Católica", "Espírita", "Cigana", "Astrologia/Misticismo"],
+    "correta": "Astrologia/Misticismo",
+    "pontuacao": 2
+  },
+  {
+    "id": 236,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1989 se passava em Búzios e tinha a protagonista Duda (Maitê Proença), uma vendedora de artesanato?",
+    "opcoes": ["O Salvador da Pátria", "Tieta", "Que Rei Sou Eu?", "Fera Radical", "Top Model"],
+    "correta": "O Salvador da Pátria",
+    "pontuacao": 2
+  },
+  {
+    "id": 237,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Avenida Brasil', qual era o nome da mãe biológica de Jorginho que o abandonou no lixão?",
+    "opcoes": ["Lucinda", "Carminha", "Rita", "Nina", "Monique"],
+    "correta": "Lucinda",
+    "pontuacao": 2
+  },
+  {
+    "id": 238,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2010 teve a rivalidade de duas mães, Clara e Mariana, disputando a maternidade?",
+    "opcoes": ["Escrito nas Estrelas", "Passione", "Ti Ti Ti (2010)", "Insensato Coração", "Aquele Beijo"],
+    "correta": "Escrito nas Estrelas",
+    "pontuacao": 2
+  },
+  {
+    "id": 239,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Top Model', qual era a profissão do pai de Duda, interpretado por Luís Carlos Arutin?",
+    "opcoes": ["Surfista", "Taxista", "Marinheiro", "Músico", "Jornalista"],
+    "correta": "Marinheiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 240,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1990 teve o protagonista Guma, que se afogava e tinha seu corpo procurado?",
+    "opcoes": ["Pantanal", "Riacho Doce", "O Rei do Gado", "Renascer", "Gente Fina"],
+    "correta": "Riacho Doce",
+    "pontuacao": 2
+  },
+  {
+    "id": 241,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Sassaricando', quem interpretou a personagem Tancinha, com seu sotaque carregado?",
+    "opcoes": ["Cláudia Raia", "Maitê Proença", "Lídia Brondi", "Isabela Garcia", "Marisa Orth"],
+    "correta": "Cláudia Raia",
+    "pontuacao": 2
+  },
+  {
+    "id": 242,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1986 de Walter George Durst e Walther Negrão teve a protagonista Camila (Lucélia Santos)?",
+    "opcoes": ["Ciranda de Pedra", "Roda de Fogo", "Selva de Pedra", "Transas e Caretas", "Corpo a Corpo"],
+    "correta": "Ciranda de Pedra",
+    "pontuacao": 2
+  },
+  {
+    "id": 243,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Suave Veneno', qual era a profissão do protagonista Uálber (Nuno Leal Maia)?",
+    "opcoes": ["Dono de joalheria", "Empresário de mármores", "Taxista", "Engenheiro", "Pescador"],
+    "correta": "Empresário de mármores",
+    "pontuacao": 2
+  },
+  {
+    "id": 244,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 1983 teve a personagem Bia (Fernanda Torres) que se envolvia com o protagonista Nando (Nuno Leal Maia)?",
+    "opcoes": ["Vereda Tropical", "Guerra dos Sexos", "Champagne", "Pecado Capital", "Transas e Caretas"],
+    "correta": "Vereda Tropical",
+    "pontuacao": 2
+  },
+  {
+    "id": 245,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Aquele Beijo', qual era o nome da cidade fictícia onde a protagonista morava?",
+    "opcoes": ["Jardim do Éden", "Resplendor", "Ouro Verde", "Tubiacanga", "Catavento"],
+    "correta": "Jardim do Éden",
+    "pontuacao": 2
+  },
+  {
+    "id": 246,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2018 abordou a temática do espiritismo e o vale do café em um salto no tempo?",
+    "opcoes": ["Espelho da Vida", "O Outro Lado do Paraíso", "Sete Vidas", "Além do Tempo", "Deus Salve o Rei"],
+    "correta": "Espelho da Vida",
+    "pontuacao": 2
+  },
+  {
+    "id": 247,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Chocolate com Pimenta', qual era o nome do personagem do ator Tarcísio Filho, o 'Cozinheiro de Mão Cheia'?",
+    "opcoes": ["Timóteo", "Soldado Peixoto", "Jezebel", "Conde Klaus", "Reginaldo"],
+    "correta": "Timóteo",
+    "pontuacao": 2
+  },
+  {
+    "id": 248,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Jade, que vivia um amor proibido em Marrocos?",
+    "opcoes": ["O Clone", "Caminho das Índias", "Salve Jorge", "América", "Explode Coração"],
+    "correta": "O Clone",
+    "pontuacao": 2
+  },
+  {
+    "id": 249,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Páginas da Vida', qual era o nome da filha de Nanda (Fernanda Vasconcellos) com síndrome de Down?",
+    "opcoes": ["Clara", "Alice", "Helena", "Isabel", "Marta"],
+    "correta": "Clara",
+    "pontuacao": 2
+  },
+  {
+    "id": 250,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2002 teve o personagem Zeca, que via o Velho do Rio e se comunicava com animais?",
+    "opcoes": ["Esperança", "O Clone", "Sabor da Paixão", "Desejos de Mulher", "Coração de Estudante"],
+    "correta": "Esperança",
+    "pontuacao": 2
+  },
+  {
+    "id": 251,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2013 teve a personagem Giane (Isabelle Drummond) que se vestia como homem para jogar futebol?",
+    "opcoes": ["Sangue Bom", "Geração Brasil", "A Força do Querer", "Cheias de Charme", "Sete Vidas"],
+    "correta": "Sangue Bom",
+    "pontuacao": 2
+  },
+  {
+    "id": 252,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'A Indomada', quem interpretou o prefeito de Greenville, Pedro Afonso?",
+    "opcoes": ["Paulo Betti", "Ary Fontoura", "José Wilker", "Lima Duarte", "José Mayer"],
+    "correta": "José Mayer",
+    "pontuacao": 2
+  },
+  {
+    "id": 253,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2016 teve a personagem Maria do Céu (Camila Queiroz) que se envolveu com um gângster italiano?",
+    "opcoes": ["Êta Mundo Bom!", "Haja Coração", "A Lei do Amor", "Totalmente Demais", "A Dona do Pedaço"],
+    "correta": "Haja Coração",
+    "pontuacao": 2
+  },
+  {
+    "id": 254,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Que Rei Sou Eu?', qual era o nome do reino fictício onde se passava a trama de comédia política?",
+    "opcoes": ["Alegria", "Sucupira", "Avilan", "Greenville", "Resplendor"],
+    "correta": "Avilan",
+    "pontuacao": 2
+  },
+  {
+    "id": 255,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2009 abordou a temática da comunidade indiana e a diferença de costumes?",
+    "opcoes": ["Caminho das Índias", "O Clone", "Salve Jorge", "América", "Viver a Vida"],
+    "correta": "Caminho das Índias",
+    "pontuacao": 2
+  },
+  {
+    "id": 256,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Baila Comigo', quem interpretou o pai dos gêmeos, Joaquim Miranda?",
+    "opcoes": ["Fernando Torres", "Raul Cortez", "Antônio Fagundes", "Reginaldo Faria", "Cláudio Cavalcanti"],
+    "correta": "Fernando Torres",
+    "pontuacao": 2
+  },
+  {
+    "id": 257,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela teve a personagem Zezé (Arlete Salles) que acreditava ter casado com o 'Rei do Baião', Luiz Gonzaga?",
+    "opcoes": ["Saramandaia", "Pedra sobre Pedra", "Roque Santeiro", "Tieta", "A Indomada"],
+    "correta": "Roque Santeiro",
+    "pontuacao": 2
+  },
+  {
+    "id": 258,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'Rainha da Sucata', quem interpretou a socialite Laurinha Figueroa, rival de Maria do Carmo?",
+    "opcoes": ["Regina Duarte", "Renata Sorrah", "Susana Vieira", "Glória Pires", "Lília Cabral"],
+    "correta": "Renata Sorrah",
+    "pontuacao": 2
+  },
+  {
+    "id": 259,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Qual novela de 2016 teve a personagem Tancinha (Mariana Ximenes), uma feirante com sotaque de São Paulo?",
+    "opcoes": ["Haja Coração", "Êta Mundo Bom!", "A Lei do Amor", "Totalmente Demais", "A Dona do Pedaço"],
+    "correta": "Haja Coração",
+    "pontuacao": 2
+  },
+  {
+    "id": 260,
+    "categoria": "Novelas",
+    "dificuldade": "medio",
+    "pergunta": "Em 'A Lei do Amor', qual era a empresa da família que gerava a disputa entre os protagonistas?",
+    "opcoes": ["Tecelagem", "Indústria de Naval", "Tecidos", "Cerâmica", "Cervejaria"],
+    "correta": "Tecidos",
+    "pontuacao": 2
+  },
+  {
+    "id": 261,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de Janete Clair de 1970 teve como tema central o universo dos motoqueiros e a busca pela liberdade?",
+    "opcoes": ["Irmãos Coragem", "Cavalo de Aço", "Verão Vermelho", "O Casarão", "Selva de Pedra"],
+    "correta": "Cavalo de Aço",
+    "pontuacao": 3
+  },
+  {
+    "id": 262,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Roque Santeiro', qual era o nome do ator que interpretava o 'Milagreiro', que ressurgia após 17 anos?",
+    "opcoes": ["José Wilker", "Lima Duarte", "Paulo Gracindo", "Ary Fontoura", "Luiz Armando Queiroz"],
+    "correta": "José Wilker",
+    "pontuacao": 3
+  },
+  {
+    "id": 263,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1980 abordou o tema da clonagem humana, antes de 'O Clone', e foi censurada pela ditadura?",
+    "opcoes": ["Sinal de Alerta", "Coração Alado", "Transas e Caretas", "Louco Amor", "Baila Comigo"],
+    "correta": "Coração Alado",
+    "pontuacao": 3
+  },
+  {
+    "id": 264,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'A Próxima Vítima', quem era o personagem que era o único a saber a identidade do 'Assassino Mascarado'?",
+    "opcoes": ["Adalberto", "Juca", "Sandrinho", "Marcelo", "Kléber"],
+    "correta": "Adalberto",
+    "pontuacao": 3
+  },
+  {
+    "id": 265,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1990 teve a personagem Ivanildo (Christiane Torloni) que se disfarçava de homem para herdar uma fortuna?",
+    "opcoes": ["Rainha da Sucata", "Gente Fina", "Meu Bem, Meu Mal", "O Dono do Mundo", "Deus nos Acuda"],
+    "correta": "Gente Fina",
+    "pontuacao": 3
+  },
+  {
+    "id": 266,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1982 teve a personagem Sandra, que passava a trama procurando pelo pai biológico?",
+    "opcoes": ["Final Feliz", "Baila Comigo", "Amor com Amor Se Paga", "Sol de Verão", "Elas por Elas (1982)"],
+    "correta": "Final Feliz",
+    "pontuacao": 3
+  },
+  {
+    "id": 267,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Explode Coração', qual era o nome do personagem interpretado por Ricardo Macchi, que era o par romântico de Dara?",
+    "opcoes": ["Ígor", "Alek", "Júlio", "Freitas", "Ivan"],
+    "correta": "Ígor",
+    "pontuacao": 3
+  },
+  {
+    "id": 268,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1971, de Janete Clair, tinha como tema central a disputa de terras e o coronelismo?",
+    "opcoes": ["Irmãos Coragem", "Selva de Pedra", "Cavalo de Aço", "O Casarão", "Minha Doce Namorada"],
+    "correta": "Selva de Pedra",
+    "pontuacao": 3
+  },
+  {
+    "id": 269,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Deus nos Acuda', qual era o nome do objeto mágico que caía do céu no início da trama?",
+    "opcoes": ["O meteorito", "O pedaço de lua", "O bilhete premiado", "A Nave", "A arca"],
+    "correta": "A arca",
+    "pontuacao": 3
+  },
+  {
+    "id": 270,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1976 teve a protagonista Ângela (Pepita Rodrigues) que, após um trauma, perde a memória?",
+    "opcoes": ["Duas Vidas", "O Casarão", "Estúpido Cupido", "Bravo!", "Pecado Capital"],
+    "correta": "Duas Vidas",
+    "pontuacao": 3
+  },
+  {
+    "id": 271,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Dancin' Days', quem interpretou a personagem de Yolanda Pratini, uma dondoca rival de Júlia?",
+    "opcoes": ["Sônia Braga", "Lídia Brondi", "Pepita Rodrigues", "Luzia Guimarães", "Regina Vianna"],
+    "correta": "Pepita Rodrigues",
+    "pontuacao": 3
+  },
+  {
+    "id": 272,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1981, de Gilberto Braga, teve a personagem Lúcia (Glória Pires) que se envolvia com um homem mais velho?",
+    "opcoes": ["Baila Comigo", "Água Viva", "Transas e Caretas", "Brilhante", "Louco Amor"],
+    "correta": "Brilhante",
+    "pontuacao": 3
+  },
+  {
+    "id": 273,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Casarão', qual era o nome do casarão onde a trama de duas épocas se desenvolvia?",
+    "opcoes": ["Solar de Sant'Anna", "Casa Grande", "Casarão dos Moura", "Fazenda Velha", "A Mansão"],
+    "correta": "Solar de Sant'Anna",
+    "pontuacao": 3
+  },
+  {
+    "id": 274,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1990 teve o protagonista Mário (Tarcísio Meira), um empresário da construção civil, que seduzia a noiva do próprio filho?",
+    "opcoes": ["O Dono do Mundo", "Rainha da Sucata", "Meu Bem, Meu Mal", "Barriga de Aluguel", "Gente Fina"],
+    "correta": "O Dono do Mundo",
+    "pontuacao": 3
+  },
+  {
+    "id": 275,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Tieta', qual era o nome do vilarejo baiano onde a maior parte da trama se passava?",
+    "opcoes": ["Santana do Agreste", "Greenville", "Tubiacanga", "Porto dos Milagres", "Mangue Seco"],
+    "correta": "Santana do Agreste",
+    "pontuacao": 3
+  },
+  {
+    "id": 276,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 2010 teve a personagem Clara (Mariana Ximenes) que se envolvia com o 'Rei do Lixo', Breno?",
+    "opcoes": ["Passione", "Ti Ti Ti (2010)", "Aquele Beijo", "Insensato Coração", "Escrito nas Estrelas"],
+    "correta": "Passione",
+    "pontuacao": 3
+  },
+  {
+    "id": 277,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'A Viagem', quem interpretou o personagem Téo, o irmão de Diná, que tentava se reaproximar da família?",
+    "opcoes": ["Fábio Assunção", "Maurício Mattar", "Guilherme Fontes", "Andréa Beltrão", "Luciana Vendramini"],
+    "correta": "Fábio Assunção",
+    "pontuacao": 3
+  },
+  {
+    "id": 278,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1998 teve o protagonista Barão de Araruna, que vivia um romance proibido no século XIX?",
+    "opcoes": ["Força de um Desejo", "Era Uma Vez...", "Meu Bem Querer", "Corpo Dourado", "Anjo de Mim"],
+    "correta": "Força de um Desejo",
+    "pontuacao": 3
+  },
+  {
+    "id": 279,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Avenida Brasil', qual era o nome da ex-mulher de Tufão que se tornava sua segunda esposa, a arqui-inimiga de Nina?",
+    "opcoes": ["Carminha", "Rita", "Jorginho", "Lucinda", "Monique"],
+    "correta": "Carminha",
+    "pontuacao": 3
+  },
+  {
+    "id": 280,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1977, com toques de realismo fantástico, tinha personagens que se transformavam em árvores?",
+    "opcoes": ["Saramandaia", "Roque Santeiro", "O Astro", "Pedra sobre Pedra", "A Indomada"],
+    "correta": "Saramandaia",
+    "pontuacao": 3
+  },
+  {
+    "id": 281,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Vamp', qual era o instrumento musical tocado por Lipe, o protagonista que enfrentava a vampira Natasha?",
+    "opcoes": ["Guitarra", "Baixo", "Bateria", "Violino", "Saxofone"],
+    "correta": "Guitarra",
+    "pontuacao": 3
+  },
+  {
+    "id": 282,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1973, de Walter George Durst, teve como tema central a disputa por uma herança em uma família matriarcal?",
+    "opcoes": ["O Casarão", "Cavalo de Aço", "O Bem-Amado", "Os Gigantes", "Pecado Capital"],
+    "correta": "O Casarão",
+    "pontuacao": 3
+  },
+  {
+    "id": 283,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Rei do Gado', quem interpretou o senador Caxias, que se suicidou após desilusão política?",
+    "opcoes": ["Raul Cortez", "Antônio Fagundes", "Lima Duarte", "Tarcísio Meira", "José Wilker"],
+    "correta": "Raul Cortez",
+    "pontuacao": 3
+  },
+  {
+    "id": 284,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1999, que abordou o tema da adoção por um casal homossexual, foi alvo de críticas e modificações?",
+    "opcoes": ["Suave Veneno", "Força de Um Desejo", "Vila Madalena", "Andando nas Nuvens", "Terra Nostra"],
+    "correta": "Suave Veneno",
+    "pontuacao": 3
+  },
+  {
+    "id": 285,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Da Cor do Pecado', qual era o nome do personagem do ator Lázaro Ramos, o 'irmão' de Paco?",
+    "opcoes": ["Apolo", "Ulisses", "Raí", "Tony", "Felipe"],
+    "correta": "Raí",
+    "pontuacao": 3
+  },
+  {
+    "id": 286,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1976 teve a personagem Ritinha (Lucélia Santos), que tentava se livrar de uma maldição?",
+    "opcoes": ["Escrava Isaura", "O Casarão", "Estúpido Cupido", "Duas Vidas", "Pecado Capital"],
+    "correta": "Escrava Isaura",
+    "pontuacao": 3
+  },
+  {
+    "id": 287,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Guerra dos Sexos' (1983), quem interpretou a personagem Vânia, que se tornou par de Nando?",
+    "opcoes": ["Cristina Pereira", "Maria Zilda", "Eva Wilma", "Maitê Proença", "Glória Menezes"],
+    "correta": "Cristina Pereira",
+    "pontuacao": 3
+  },
+  {
+    "id": 288,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1994, de Antônio Calmon, teve a personagem Alice (Christiane Torloni), que era bruxa e se transformava em gata?",
+    "opcoes": ["Cara e Coroa", "Pátria Minha", "A Viagem", "Quatro por Quatro", "Vira Lata"],
+    "correta": "Cara e Coroa",
+    "pontuacao": 3
+  },
+  {
+    "id": 289,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Celebridade', qual era o nome da banda de rock liderada por Darlene (Giovanna Antonelli)?",
+    "opcoes": ["Cachorras do Asfalto", "As Cheias de Charme", "Tchaca Tchaca na Butchaca", "As Piriguetes", "As Popstar"],
+    "correta": "Cachorras do Asfalto",
+    "pontuacao": 3
+  },
+  {
+    "id": 290,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1980 teve o protagonista Max (Jorge Dória), um ex-milionário que se fingia de pobre?",
+    "opcoes": ["Água Viva", "Baila Comigo", "Pecado Capital", "Brilhante", "Sinal de Alerta"],
+    "correta": "Água Viva",
+    "pontuacao": 3
+  },
+  {
+    "id": 291,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Rebu' (1974), qual era a profissão do protagonista, o empresário Conrado (Otávio Augusto), assassinado no início da trama?",
+    "opcoes": ["Corretor de imóveis", "Empresário de festas", "Produtor de TV", "Advogado", "Dono de joalheria"],
+    "correta": "Empresário de festas",
+    "pontuacao": 3
+  },
+  {
+    "id": 292,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1978, de Dias Gomes, abordou a especulação imobiliária e a corrupção em uma cidade fictícia?",
+    "opcoes": ["Sinal de Alerta", "O Astro", "Dancin' Days", "Saramandaia", "O Bem-Amado"],
+    "correta": "Sinal de Alerta",
+    "pontuacao": 3
+  },
+  {
+    "id": 293,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'Ti Ti Ti' (2010), qual era o nome da revista de moda que era o palco da rivalidade entre os estilistas?",
+    "opcoes": ["Moda Brasil", "Style", "Fashion Brasil", "Moda Magazine", "L'Estiliste"],
+    "correta": "Moda Brasil",
+    "pontuacao": 3
+  },
+  {
+    "id": 294,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1993, de Aguinaldo Silva, teve a personagem Linda Inês (Lília Cabral) que tinha uma voz estridente?",
+    "opcoes": ["Fera Ferida", "Pedra sobre Pedra", "A Indomada", "Tieta", "Porto dos Milagres"],
+    "correta": "Fera Ferida",
+    "pontuacao": 3
+  },
+  {
+    "id": 295,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Outro Lado do Paraíso', qual era a profissão de Renato (Rafael Cardoso), que se tornou médico por vingança?",
+    "opcoes": ["Advogado", "Geólogo", "Garimpeiro", "Cozinheiro", "Psiquiatra"],
+    "correta": "Geólogo",
+    "pontuacao": 3
+  },
+  {
+    "id": 296,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1983 teve o protagonista Zé de Arimatéia, um homem que andava de moto e vivia aventuras?",
+    "opcoes": ["Transas e Caretas", "Vereda Tropical", "Guerra dos Sexos", "Pecado Capital", "Amor com Amor Se Paga"],
+    "correta": "Transas e Caretas",
+    "pontuacao": 3
+  },
+  {
+    "id": 297,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'A Gata Comeu', qual era a condição social da protagonista Jô Penteado, que era muito rica e mimada?",
+    "opcoes": ["Herdeira", "Empresária", "Professora", "Modelo", "Escritora"],
+    "correta": "Herdeira",
+    "pontuacao": 3
+  },
+  {
+    "id": 298,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 2015, com dois núcleos distintos (Rio de Janeiro e Paraisópolis), abordou a temática da desigualdade?",
+    "opcoes": ["I Love Paraisópolis", "A Regra do Jogo", "Babilônia", "Sete Vidas", "Além do Tempo"],
+    "correta": "I Love Paraisópolis",
+    "pontuacao": 3
+  },
+  {
+    "id": 299,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Em 'O Salvador da Pátria', quem interpretou o personagem Juca Pirama, um radialista que se envolvia em intrigas políticas?",
+    "opcoes": ["Lima Duarte", "José Wilker", "Francisco Cuoco", "Luís Carlos Arutin", "Tarcísio Meira"],
+    "correta": "Lima Duarte",
+    "pontuacao": 3
+  },
+  {
+    "id": 300,
+    "categoria": "Novelas",
+    "dificuldade": "dificil",
+    "pergunta": "Qual novela de 1991, de Dias Gomes, abordou o assassinato de um político em uma cidade fictícia do Nordeste?",
+    "opcoes": ["Fera Ferida", "Pedra sobre Pedra", "A Indomada", "Tieta", "Porto dos Milagres"],
+    "correta": "Pedra sobre Pedra",
     "pontuacao": 3
   }
 ]

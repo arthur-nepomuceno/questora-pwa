@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useSounds } from '@/hooks/useSounds';
 
 interface RankingScreenProps {
   setScreen: (screen: any) => void;
@@ -14,6 +15,8 @@ interface RankingParticipant {
 }
 
 export default function RankingScreen({ setScreen }: RankingScreenProps) {
+  const { playMainTheme } = useSounds();
+  
   // Estados
   const [participant, setParticipant] = useState<RankingParticipant[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,6 +28,11 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
   // Contador de renders
   const renderCount = useRef(0);
   renderCount.current += 1;
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
   
   console.log('🔵 [RANKING] Componente renderizado:', renderCount.current, 'vezes');
   console.log('🔵 [RANKING] Estado atual - loading:', loading, '| participant:', participant.length, '| error:', error);

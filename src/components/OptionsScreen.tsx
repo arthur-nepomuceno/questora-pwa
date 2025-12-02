@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
 import PurchaseCreditModal from './PurchaseCreditModal';
@@ -11,8 +11,13 @@ interface OptionsScreenProps {
 
 export default function OptionsScreen({ setScreen, selectedModalidade }: OptionsScreenProps) {
   const { user, logout, isLoading } = useAuth();
-  const { playButtonPress } = useSounds();
+  const { playButtonPress, playMainTheme } = useSounds();
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
 
   const handleLogout = async () => {
     await logout();

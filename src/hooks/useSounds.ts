@@ -4,16 +4,8 @@ import { useRef, useEffect, useCallback } from 'react';
 import { useSoundContext } from '@/contexts/SoundContext';
 
 export const useSounds = () => {
-  const { isMuted, endGameAudioRef } = useSoundContext();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { isMuted, endGameAudioRef, playMainTheme, playQuizTheme, stopTheme } = useSoundContext();
   const buttonAudioRef = useRef<HTMLAudioElement | null>(null);
-
-  // Atualizar volume quando mute muda
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : 0.3;
-    }
-  }, [isMuted]);
 
   // Pré-carregar áudios para reduzir latência
   useEffect(() => {
@@ -22,25 +14,16 @@ export const useSounds = () => {
     buttonAudioRef.current.preload = 'auto';
   }, []);
 
-  // Função para tocar a música do quiz
+  // Função para tocar a música do quiz (usa o sistema centralizado)
   const playQuizMusic = () => {
-    console.log('playQuizMusic chamado');
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    
-    audioRef.current = new Audio('/sounds/quiz-theme.mp3');
-    audioRef.current.loop = true;
-    audioRef.current.volume = isMuted ? 0 : 0.3;
-    audioRef.current.play().catch(console.error);
+    playQuizTheme();
   };
 
-  // Função para parar a música
+  // Função para parar a música do quiz
   const stopQuizMusic = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
+    // Quando sair do quiz, para a música tema
+    // A próxima tela que montar vai iniciar sua própria música tema
+    stopTheme();
   };
 
   // Função para tocar som de resposta correta
@@ -86,5 +69,6 @@ export const useSounds = () => {
     playEndGame,
     stopEndGame,
     playButtonPress,
+    playMainTheme,
   };
 };

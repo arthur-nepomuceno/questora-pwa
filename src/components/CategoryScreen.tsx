@@ -3,6 +3,7 @@
 import { Screen } from '@/types/quiz';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
+import { useEffect } from 'react';
 
 interface CategoryScreenProps {
   startQuiz: (category: string) => void;
@@ -14,7 +15,12 @@ interface CategoryScreenProps {
 
 export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade, goToOptions, selectedModalidade }: CategoryScreenProps) {
   const { user, logout, isLoading } = useAuth();
-  const { playButtonPress } = useSounds();
+  const { playButtonPress, playMainTheme } = useSounds();
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
 
   const handleLogout = async () => {
     await logout();

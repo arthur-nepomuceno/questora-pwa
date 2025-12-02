@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { useSounds } from '@/hooks/useSounds';
 
 interface EmailVerificationScreenProps {
   userEmail: string;
@@ -19,6 +20,12 @@ export default function EmailVerificationScreen({
   const [isResending, setIsResending] = useState(false);
   const [resendMessage, setResendMessage] = useState('');
   const { resendEmailVerification } = useAuth();
+  const { playMainTheme } = useSounds();
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
 
   const handleResendEmail = async () => {
     setIsResending(true);

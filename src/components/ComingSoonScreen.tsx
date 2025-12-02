@@ -1,11 +1,20 @@
 "use client";
 
+import { useEffect } from 'react';
+import { useSounds } from '@/hooks/useSounds';
+
 interface ComingSoonScreenProps {
   modalidade: string;
   goBack: () => void;
 }
 
 export default function ComingSoonScreen({ modalidade, goBack }: ComingSoonScreenProps) {
+  const { playMainTheme } = useSounds();
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
   const handleGoBack = () => {
     goBack();
   };

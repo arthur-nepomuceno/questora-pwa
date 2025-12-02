@@ -16,13 +16,18 @@ interface ModalidadeScreenProps {
 export default function ModalidadeScreen({ selectModalidade, goToOptions, setScreen, selectedModalidade }: ModalidadeScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { incrementCounter } = useCounter();
-  const { playButtonPress } = useSounds();
+  const { playButtonPress, playMainTheme } = useSounds();
 
   useEffect(() => {
     if (!user && !isLoading) {
       incrementCounter();
     }
   }, [user, isLoading]);
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
 
   const handleModalidadeClick = (modalidade: string) => {
     playButtonPress(); // Tocar som ao escolher modalidade

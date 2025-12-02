@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
 import { useDailyCredits } from '@/hooks/useDailyCredits';
@@ -15,9 +15,14 @@ interface CreditsScreenProps {
 
 export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions, selectedModalidade }: CreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
-  const { playButtonPress } = useSounds();
+  const { playButtonPress, playMainTheme } = useSounds();
   const { dailyCreditsSpent, spendCredits, canSpendCredits, dailyLimit } = useDailyCredits(selectedModalidade);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
 
   const creditOptions = [
     { value: 100, icon: "💰", label: "100 Créditos" },

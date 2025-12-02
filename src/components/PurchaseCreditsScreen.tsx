@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
 
@@ -46,8 +46,13 @@ interface PixModalData {
 
 export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUserInfo = false, onClose }: PurchaseCreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
-  const { playButtonPress } = useSounds();
+  const { playButtonPress, playMainTheme } = useSounds();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
   const [confirmData, setConfirmData] = useState<ConfirmModalData | null>(null);
   const [isCreatingPayment, setIsCreatingPayment] = useState(false);
   const [showPixModal, setShowPixModal] = useState(false);

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { useSounds } from '@/hooks/useSounds';
 import { LoginCredentials, SignupCredentials } from '@/types/auth';
 import EmailVerificationScreen from './EmailVerificationScreen';
 
@@ -11,6 +12,12 @@ interface AuthScreenProps {
 }
 
 export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
+  const { playMainTheme } = useSounds();
+
+  // Tocar música tema quando a tela monta
+  useEffect(() => {
+    playMainTheme();
+  }, [playMainTheme]);
   const [isLogin, setIsLogin] = useState(true);
   const [loginForm, setLoginForm] = useState<LoginCredentials>({ email: '', password: '' });
   const [signupForm, setSignupForm] = useState<SignupCredentials>({ firstName: '', lastName: '', email: '', phone: '', password: '' });

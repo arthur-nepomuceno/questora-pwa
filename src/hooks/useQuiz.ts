@@ -52,7 +52,7 @@ export const useQuiz = () => {
   const [pendingCategory, setPendingCategory] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
   const creditsRecalculatedRef = useRef(false);
-  const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames } = useAuth();
+  const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames, updateMaxScore } = useAuth();
   const { playCorrectAnswer } = useSounds();
 
   const selectRandomQuestions = useCallback((category: string, forceMedium: boolean = false): Question[] => {
@@ -305,8 +305,9 @@ export const useQuiz = () => {
   const savePoints = useCallback(async () => {
     if (user && quizState.totalPoints > 0) {
       await updateTotalPoints(quizState.totalPoints);
+      await updateMaxScore(quizState.totalPoints);
     }
-  }, [user, quizState.totalPoints, updateTotalPoints]);
+  }, [user, quizState.totalPoints, updateTotalPoints, updateMaxScore]);
 
   const saveGameStats = useCallback(async () => {
     if (user) {

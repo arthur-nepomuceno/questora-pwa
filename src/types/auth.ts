@@ -17,6 +17,7 @@ export interface User {
   cnpjNumber: string;
   purchaseToken?: string;
   chatId?: number;
+  maxScore: number;
   createdAt: Date;
   updatedAt: Date;
 }

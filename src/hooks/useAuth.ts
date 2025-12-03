@@ -50,6 +50,7 @@ export const useAuth = () => {
           cpfNumber: '',
           cnpjNumber: '',
           purchaseToken: '',
+          maxScore: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -90,6 +91,7 @@ export const useAuth = () => {
               cnpjNumber: userData.cnpjNumber || '',
               purchaseToken: userData.purchaseToken || '',
               chatId: userData.chatId,
+              maxScore: userData.maxScore || 0,
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
@@ -232,6 +234,7 @@ export const useAuth = () => {
         cpfNumber: '',
         cnpjNumber: '',
         purchaseToken: '',
+        maxScore: 0,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
@@ -410,6 +413,26 @@ export const useAuth = () => {
     }
   };
 
+  const updateMaxScore = async (currentScore: number) => {
+    if (!authState.user) return;
+    
+    try {
+      if (currentScore > authState.user.maxScore) {
+        await updateDoc(doc(db, 'users', authState.user.id), {
+          maxScore: currentScore,
+          updatedAt: serverTimestamp(),
+        });
+        
+        setAuthState(prev => ({
+          ...prev,
+          user: prev.user ? { ...prev.user, maxScore: currentScore } : null,
+        }));
+      }
+    } catch (error) {
+      console.error('❌ Erro ao atualizar maior pontuação:', error);
+    }
+  };
+
   const updateCreditGames = async (credits: number) => {
     if (!authState.user) return;
     
@@ -548,6 +571,7 @@ export const useAuth = () => {
     updateGameStats,
     updateTotalGames,
     updateCreditGames,
+    updateMaxScore,
     updateDocumentInfo,
   };
 };

@@ -7,7 +7,7 @@ import { adminDb } from '@/lib/firebase-admin';
 interface RankingUser {
   id: string;
   name: string;
-  totalPoints: number;
+  maxScore: number;
 }
 
 interface CacheData {
@@ -64,7 +64,7 @@ async function fetchRankingFromFireStore(): Promise<RankingUser[]> {
 
     const querySnapshot = await adminDb
       .collection('users')
-      .orderBy('totalPoints', 'desc')
+      .orderBy('maxScore', 'desc')
       .limit(50)
       .get();
     
@@ -73,10 +73,10 @@ async function fetchRankingFromFireStore(): Promise<RankingUser[]> {
     const rankingData = querySnapshot.docs.map(doc => ({
       id: doc.id,
       name: doc.data().name,
-      totalPoints: doc.data().totalPoints
+      maxScore: doc.data().maxScore
     }));
     
-    const usersWithPoints = rankingData.filter(user => user.totalPoints > 0).length;
+    const usersWithPoints = rankingData.filter(user => user.maxScore > 0).length;
     console.log(`📊 [Ranking API] Usuários com pontos: ${usersWithPoints} de ${rankingData.length}`);
     console.log('Dados do ranking:', rankingData);
     

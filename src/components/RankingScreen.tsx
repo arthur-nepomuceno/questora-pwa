@@ -10,7 +10,7 @@ interface RankingScreenProps {
 interface RankingParticipant {
   id: string;
   name: string;
-  totalPoints: number;
+  maxScore: number;
   position: number;
 }
 
@@ -154,14 +154,8 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
         {!loading && (
           <div>
             <p>
-              Exibindo os TOP 50 participantes! Continue acumulando pontos para subir de posição! 
-            </p>
-            <p>
-              Última atualização: {lastUpdate}.
-            </p>
-            <p>
-              Próxima atualização do Ranking: {nextUpdate}.<br />
-              (Clique em &quot;Voltar&quot; e &quot;Ver Ranking&quot; para visualizar.)
+              TOP 50 participantes. <br/>
+              Atualização: todo dia as 09:00.
             </p>
           </div>
         )}     
@@ -188,7 +182,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
                 </div>
                 <div className="ranking-info">
                   <div className="ranking-name">{player.name}</div>
-                  <div className="ranking-points">{player.totalPoints} pontos</div>
+                  <div className="ranking-points">Max Score: {player.maxScore} pts</div>
                 </div>
               </div>
             ))}

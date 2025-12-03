@@ -120,7 +120,7 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
                 className="btn btn-primary"
                 onClick={() => {}}
               >
-                Saque
+                Prêmios
               </button>
             </>
           )}

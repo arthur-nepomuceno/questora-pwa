@@ -18,6 +18,7 @@ export interface User {
   purchaseToken?: string;
   chatId?: number;
   maxScore: number;
+  totalCreditsEarned: number;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -52,7 +52,7 @@ export const useQuiz = () => {
   const [pendingCategory, setPendingCategory] = useState<string | null>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
   const creditsRecalculatedRef = useRef(false);
-  const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames, updateMaxScore } = useAuth();
+  const { isAuthenticated, isLoading, user, updateCredits, updateTotalPoints, updateGameStats, updateTotalGames, updateCreditGames, updateMaxScore, updateTotalCreditsEarned } = useAuth();
   const { playCorrectAnswer } = useSounds();
 
   const selectRandomQuestions = useCallback((category: string, forceMedium: boolean = false): Question[] => {
@@ -294,13 +294,18 @@ export const useQuiz = () => {
       // Marcar como já recalculado ANTES (síncrono, imediato)
       creditsRecalculatedRef.current = true;
       
+      // Calcular créditos ganhos nesta partida
+      const creditsEarned = accumulatedScore + timeRemaining;
+      
       // Adicionar accumulatedScore + tempo restante aos créditos atuais (uma vez só)
-      const newCredits = user.totalCredits + accumulatedScore + timeRemaining;
+      const newCredits = user.totalCredits + creditsEarned;
       
       await updateCredits(newCredits);
+      // Atualizar total de créditos ganhos acumulados
+      await updateTotalCreditsEarned(creditsEarned);
     } else {
     }
-  }, [user, timeRemaining, updateCredits]);
+  }, [user, timeRemaining, updateCredits, updateTotalCreditsEarned]);
 
   const savePoints = useCallback(async () => {
     if (user && quizState.totalPoints > 0) {

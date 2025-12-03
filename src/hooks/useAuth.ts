@@ -13,7 +13,8 @@ import {
   setDoc, 
   getDoc, 
   updateDoc, 
-  serverTimestamp
+  serverTimestamp,
+  increment
 } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
 import { User, AuthState, LoginCredentials, SignupCredentials } from '@/types/auth';
@@ -51,6 +52,7 @@ export const useAuth = () => {
           cnpjNumber: '',
           purchaseToken: '',
           maxScore: 0,
+          totalCreditsEarned: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
@@ -92,6 +94,7 @@ export const useAuth = () => {
               purchaseToken: userData.purchaseToken || '',
               chatId: userData.chatId,
               maxScore: userData.maxScore || 0,
+              totalCreditsEarned: userData.totalCreditsEarned || 0,
               createdAt: userData.createdAt?.toDate() || new Date(),
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
@@ -235,6 +238,7 @@ export const useAuth = () => {
         cnpjNumber: '',
         purchaseToken: '',
         maxScore: 0,
+        totalCreditsEarned: 0,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
@@ -433,6 +437,28 @@ export const useAuth = () => {
     }
   };
 
+  const updateTotalCreditsEarned = async (creditsEarned: number) => {
+    if (!authState.user) return;
+    
+    try {
+      await updateDoc(doc(db, 'users', authState.user.id), {
+        totalCreditsEarned: increment(creditsEarned),
+        updatedAt: serverTimestamp(),
+      });
+      
+      // Atualizar estado local após operação atômica
+      setAuthState(prev => ({
+        ...prev,
+        user: prev.user ? { 
+          ...prev.user, 
+          totalCreditsEarned: (prev.user.totalCreditsEarned || 0) + creditsEarned 
+        } : null,
+      }));
+    } catch (error) {
+      console.error('❌ Erro ao atualizar créditos ganhos:', error);
+    }
+  };
+
   const updateCreditGames = async (credits: number) => {
     if (!authState.user) return;
     
@@ -572,6 +598,7 @@ export const useAuth = () => {
     updateTotalGames,
     updateCreditGames,
     updateMaxScore,
+    updateTotalCreditsEarned,
     updateDocumentInfo,
   };
 };

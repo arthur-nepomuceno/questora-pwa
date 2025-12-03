@@ -116,7 +116,13 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
     setScreen("options");
   };
 
-  
+  // Função para obter apenas o primeiro e último nome
+  const getFirstAndLastName = (fullName: string): string => {
+    const names = fullName.trim().split(/\s+/);
+    if (names.length === 0) return fullName;
+    if (names.length === 1) return names[0];
+    return `${names[0]} ${names[names.length - 1]}`;
+  };
 
   return (
     <div className="blue-theme">
@@ -154,7 +160,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
         {!loading && (
           <div>
             <p>
-              TOP 50 participantes. <br/>
+              TOP 40 participantes. <br/>
               Atualização: todo dia as 09:00.
             </p>
           </div>
@@ -181,7 +187,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
                   {index > 2 && `${index + 1}º`}
                 </div>
                 <div className="ranking-info">
-                  <div className="ranking-name">{player.name}</div>
+                  <div className="ranking-name">{getFirstAndLastName(player.name)}</div>
                   <div className="ranking-points">Max Score: {player.maxScore} pts</div>
                 </div>
               </div>

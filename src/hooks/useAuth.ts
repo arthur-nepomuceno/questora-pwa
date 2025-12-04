@@ -38,7 +38,7 @@ export const useAuth = () => {
           email: firebaseUser.email!,
           name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
           phone: '', // valor padrão
-          totalCredits: 5000, // valor padrão
+          totalCredits: 2000, // valor padrão
           totalPoints: 0,
           totalCorrect: 0,
           totalWrong: 0,
@@ -224,7 +224,7 @@ export const useAuth = () => {
         name: fullName,
         email: credentials.email,
         phone: credentials.phone,
-        totalCredits: 5000,
+        totalCredits: 2000,
         totalPoints: 0,
         totalCorrect: 0,
         totalWrong: 0,

@@ -161,7 +161,7 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
           <div>
             <p>
               TOP 40 participantes. <br/>
-              Atualização: todo dia as 09:00.
+              Atualização: todo dia as 09:00 horas.
             </p>
           </div>
         )}     

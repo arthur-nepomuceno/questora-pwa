@@ -65,6 +65,7 @@ async function fetchRankingFromFireStore(): Promise<RankingUser[]> {
     const querySnapshot = await adminDb
       .collection('users')
       .orderBy('maxScore', 'desc')
+      .orderBy('totalPoints', 'desc')
       .limit(40)
       .get();
     

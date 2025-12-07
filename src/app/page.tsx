@@ -13,6 +13,7 @@ import CalculationsScreen from "@/components/CalculationsScreen";
 import AuthScreen from "@/components/AuthScreen";
 import InstallPrompt from "@/components/InstallPrompt";
 import RankingScreen from "@/components/RankingScreen";
+import PremiosScreen from "@/components/PremiosScreen";
 import ModalLivreInfo from "@/components/ModalLivreInfo";
 import ConsentModal from "@/components/ConsentModal";
 
@@ -52,6 +53,7 @@ export default function Home() {
       {quizHook.currentScreen === "review" && <ReviewScreen {...quizHook} />}
       {quizHook.currentScreen === "calculations" && <CalculationsScreen setScreen={quizHook.setScreen} />}
       {quizHook.currentScreen === "ranking" && <RankingScreen setScreen={quizHook.setScreen} />}
+      {quizHook.currentScreen === "premios" && <PremiosScreen {...quizHook} />}
       
       {/* Modal para modalidade Livre */}
       {quizHook.showLivreModal && <ModalLivreInfo onClose={quizHook.closeLivreModal} />}

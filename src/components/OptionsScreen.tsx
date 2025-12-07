@@ -118,7 +118,10 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
               </button>
               <button
                 className="btn btn-primary"
-                onClick={() => {}}
+                onClick={() => {
+                  playButtonPress();
+                  setScreen("premios");
+                }}
               >
                 Prêmios
               </button>

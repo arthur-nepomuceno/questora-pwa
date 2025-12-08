@@ -123,7 +123,7 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
                   setScreen("premios");
                 }}
               >
-                Prêmios
+                Saques
               </button>
             </>
           )}

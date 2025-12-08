@@ -11,6 +11,8 @@ interface PremiosScreenProps {
 export default function PremiosScreen({ setScreen, selectedModalidade }: PremiosScreenProps) {
   const { user, isLoading } = useAuth();
   const { playButtonPress, playMainTheme } = useSounds();
+  const [valorSaque, setValorSaque] = useState<string>('');
+  const [chavePix, setChavePix] = useState<string>('');
 
   // Tocar música tema quando a tela monta
   useEffect(() => {
@@ -19,6 +21,34 @@ export default function PremiosScreen({ setScreen, selectedModalidade }: Premios
 
   const handleBack = () => {
     setScreen("options");
+  };
+
+  const handleCurrencyMask = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    
+    // Remove todos os caracteres que não sejam dígitos
+    value = value.replace(/[^\d]/g, '');
+    
+    // Se estiver vazio, limpa o campo
+    if (value === '') {
+      setValorSaque('');
+      return;
+    }
+    
+    // Converte para centavos (trabalha como inteiro)
+    const centavos = parseInt(value, 10);
+    
+    // Separa os dois últimos dígitos (centavos) do restante (reais)
+    const centavosStr = String(centavos % 100).padStart(2, '0');
+    const reais = Math.floor(centavos / 100);
+    
+    // Formata os reais com pontos para milhares
+    const reaisFormatados = reais.toLocaleString('pt-BR');
+    
+    // Formata no padrão brasileiro: 9.999,99
+    const valorFormatado = `${reaisFormatados},${centavosStr}`;
+    
+    setValorSaque(valorFormatado);
   };
 
   if (isLoading) {
@@ -54,29 +84,53 @@ export default function PremiosScreen({ setScreen, selectedModalidade }: Premios
 
       {/* Main Card */}
       <div className="options-card">
-        <h2>Prêmios</h2>
+        <h2>Insira valor e chave PIX para saque:</h2>
         
         <div className="user-details">
-          <div className="detail-row">
-            <span className="detail-label">Liquidificador:</span>
-            <span className="detail-value">300</span>
-          </div>
-          
-          <div className="detail-row">
-            <span className="detail-label">Geladeira:</span>
-            <span className="detail-value">1500</span>
-          </div>
-          
-          <div className="detail-row">
-            <span className="detail-label">Máquina de Lavar:</span>
-            <span className="detail-value">2000</span>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label htmlFor="valor-saque" className="detail-label" style={{ display: 'block', marginBottom: '0.5rem' }}>
+              Valor do Saque (R$)
+            </label>
+            <input
+              id="valor-saque"
+              type="text"
+              value={valorSaque}
+              onChange={handleCurrencyMask}
+              placeholder="0,00"
+              pattern="^\d+,\d{2}$"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                fontSize: '1rem',
+                border: '2px solid #4a90e2',
+                borderRadius: '8px',
+                backgroundColor: '#fff',
+                color: '#333'
+              }}
+            />
           </div>
 
-          <div className="detail-row">
-            <span className="detail-label">Fogão:</span>
-            <span className="detail-value">700</span>
-          </div>           
-          
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label htmlFor="chave-pix" className="detail-label" style={{ display: 'block', marginBottom: '0.5rem' }}>
+              Chave PIX
+            </label>
+            <input
+              id="chave-pix"
+              type="text"
+              value={chavePix}
+              onChange={(e) => setChavePix(e.target.value)}
+              placeholder="Digite sua chave PIX (CPF, e-mail, telefone ou chave aleatória)"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                fontSize: '1rem',
+                border: '2px solid #4a90e2',
+                borderRadius: '8px',
+                backgroundColor: '#fff',
+                color: '#333'
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

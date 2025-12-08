@@ -81,14 +81,19 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
             </div>*/}
 
             <div className="detail-row">
-              <span className="detail-label">Pontos:</span>
-              <span className="detail-value">{user.totalPoints.toLocaleString()}</span>
+              <span className="detail-label">Créditos:</span>
+              <span className="detail-value">{user.totalCredits.toLocaleString()}</span>
+            </div>  
+
+            <div className="detail-row">
+              <span className="detail-label">Máx Score:</span>
+              <span className="detail-value">{user.maxScore.toLocaleString()}</span>
             </div>
 
             <div className="detail-row">
-              <span className="detail-label">Créditos:</span>
-              <span className="detail-value">{user.totalCredits.toLocaleString()}</span>
-            </div>           
+              <span className="detail-label">Pontos Acumulados:</span>
+              <span className="detail-value">{user.totalPoints.toLocaleString()}</span>
+            </div>         
             
           </div>
         ) : (

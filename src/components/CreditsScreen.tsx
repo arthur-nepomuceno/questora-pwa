@@ -26,9 +26,13 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
 
   const creditOptions = [
     { value: 100, icon: "💰", label: "100 Créditos" },
+    { value: 300, icon: "💰", label: "300 Créditos" },
     { value: 500, icon: "💰", label: "500 Créditos" },
     { value: 700, icon: "💎", label: "700 Créditos" },
-    { value: 1000, icon: "🏆", label: "1000 Créditos" }
+    { value: 1000, icon: "🏆", label: "1000 Créditos" },
+    { value: 1500, icon: "💎", label: "1500 Créditos" },
+    { value: 2000, icon: "🏆", label: "2000 Créditos" },
+    { value: 3000, icon: "🏆", label: "3000 Créditos" }
   ];
 
   const handleCreditSelect = (credits: number) => {

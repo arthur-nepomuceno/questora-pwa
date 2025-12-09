@@ -91,6 +91,16 @@ export async function createCashOutRequest(
     }
     
     const userData = userDoc.data();
+    const totalCredits = userData.totalCredits || userData.credits || 0;
+    
+    // Validar se o valor do saque é menor que (total de créditos - 300)
+    // O usuário deve deixar pelo menos 300 créditos na conta após o saque
+    const maxValueAllowed = totalCredits - 299;
+    if (value > maxValueAllowed) {
+      const maxValueInReais = (maxValueAllowed / 100).toFixed(2).replace('.', ',');
+      throw new Error(`Valor de saque incompatível com o saldo disponível. Você deve deixar pelo menos R$2,99 em créditos na conta. Você pode sacar até R$ ${maxValueInReais}. `);
+    }
+    
     const creditPackages: CreditPackages = {
       creditPackage100: userData.creditPackage100 || userData.creditGames100 || 0,
       creditPackage300: userData.creditPackage300 || userData.creditGames300 || 0,

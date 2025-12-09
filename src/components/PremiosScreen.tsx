@@ -143,8 +143,10 @@ export default function PremiosScreen({ setScreen, selectedModalidade }: Premios
         <div className="user-details">
           {user && (
             <div className="detail-row" style={{ marginBottom: '1.5rem' }}>
-              <span className="detail-label">Créditos Disponíveis:</span>
-              <span className="detail-value">{user.totalCredits.toLocaleString()}</span>
+              <span className="detail-label">Saldo Disponível:</span>
+              <span className="detail-value">
+                R$ {(user.totalCredits / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </span>
             </div>
           )}
           

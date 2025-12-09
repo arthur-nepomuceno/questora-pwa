@@ -14,3 +14,13 @@ export interface Payment {
   updatedAt: Date; // Última atualização
 }
 
+export interface CashOut {
+  id?: string; // ID gerado automaticamente pelo Firestore
+  userId: string; // ID do usuário que está fazendo o saque
+  value: number; // Valor do saque em centavos
+  chavePix: string; // Chave PIX para recebimento
+  status: 'pending' | 'done'; // Status do saque
+  createdAt?: Date; // Data de criação
+  updatedAt?: Date; // Data de atualização
+}
+

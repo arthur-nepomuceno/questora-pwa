@@ -1,6 +1,49 @@
 import { db } from './firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
 import { CashOut } from '@/types/payment';
+
+interface CreditPackages {
+  creditPackage100?: number;
+  creditPackage300?: number;
+  creditPackage500?: number;
+  creditPackage700?: number;
+  creditPackage1000?: number;
+  creditPackage1500?: number;
+  creditPackage2000?: number;
+  creditPackage3000?: number;
+}
+
+/**
+ * Calcula o total de créditos utilizados baseado nos campos creditPackage
+ * @param creditPackages - Objeto com os campos creditPackage do usuário
+ * @returns Total de créditos utilizados
+ */
+function calculateTotalCreditsUsed(creditPackages: CreditPackages): number {
+  const package100 = (creditPackages.creditPackage100 || 0) * 100;
+  const package300 = (creditPackages.creditPackage300 || 0) * 300;
+  const package500 = (creditPackages.creditPackage500 || 0) * 500;
+  const package700 = (creditPackages.creditPackage700 || 0) * 700;
+  const package1000 = (creditPackages.creditPackage1000 || 0) * 1000;
+  const package1500 = (creditPackages.creditPackage1500 || 0) * 1500;
+  const package2000 = (creditPackages.creditPackage2000 || 0) * 2000;
+  const package3000 = (creditPackages.creditPackage3000 || 0) * 3000;
+  
+  const total = package100 + package300 + package500 + package700 + 
+                package1000 + package1500 + package2000 + package3000;
+  
+  console.log('📊 [cashOut] Totais de créditos por pacote:');
+  console.log('  - creditPackage100:', creditPackages.creditPackage100 || 0, 'x 100 =', package100);
+  console.log('  - creditPackage300:', creditPackages.creditPackage300 || 0, 'x 300 =', package300);
+  console.log('  - creditPackage500:', creditPackages.creditPackage500 || 0, 'x 500 =', package500);
+  console.log('  - creditPackage700:', creditPackages.creditPackage700 || 0, 'x 700 =', package700);
+  console.log('  - creditPackage1000:', creditPackages.creditPackage1000 || 0, 'x 1000 =', package1000);
+  console.log('  - creditPackage1500:', creditPackages.creditPackage1500 || 0, 'x 1500 =', package1500);
+  console.log('  - creditPackage2000:', creditPackages.creditPackage2000 || 0, 'x 2000 =', package2000);
+  console.log('  - creditPackage3000:', creditPackages.creditPackage3000 || 0, 'x 3000 =', package3000);
+  console.log('📊 [cashOut] Somatório final:', total);
+  
+  return total;
+}
 
 /**
  * Converte valor formatado brasileiro (9.999,99) para centavos (inteiro)
@@ -39,6 +82,32 @@ export async function createCashOutRequest(
     // Validar se a chave PIX foi preenchida
     if (!chavePix || chavePix.trim() === '') {
       throw new Error('A chave PIX é obrigatória');
+    }
+    
+    // Buscar campos creditPackage do usuário no Firestore
+    const userDoc = await getDoc(doc(db, 'users', userId));
+    if (!userDoc.exists()) {
+      throw new Error('Usuário não encontrado');
+    }
+    
+    const userData = userDoc.data();
+    const creditPackages: CreditPackages = {
+      creditPackage100: userData.creditPackage100 || userData.creditGames100 || 0,
+      creditPackage300: userData.creditPackage300 || userData.creditGames300 || 0,
+      creditPackage500: userData.creditPackage500 || userData.creditGames500 || 0,
+      creditPackage700: userData.creditPackage700 || userData.creditGames700 || 0,
+      creditPackage1000: userData.creditPackage1000 || userData.creditGames1000 || 0,
+      creditPackage1500: userData.creditPackage1500 || userData.creditGames1500 || 0,
+      creditPackage2000: userData.creditPackage2000 || userData.creditGames2000 || 0,
+      creditPackage3000: userData.creditPackage3000 || userData.creditGames3000 || 0,
+    };
+    
+    // Calcular total de créditos utilizados
+    const totalCreditsUsed = calculateTotalCreditsUsed(creditPackages);
+    
+    // Validar se o usuário utilizou no mínimo 2000 créditos
+    if (totalCreditsUsed < 2000) {
+      throw new Error('Você precisa ter utilizado no mínimo 2000 créditos para solicitar um saque');
     }
     
     // Criar documento na coleção cashOut

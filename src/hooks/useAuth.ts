@@ -45,9 +45,13 @@ export const useAuth = () => {
           moedas: 0,
           totalGames: 0,
           creditPackage100: 0,
+          creditPackage300: 0,
           creditPackage500: 0,
           creditPackage700: 0,
           creditPackage1000: 0,
+          creditPackage1500: 0,
+          creditPackage2000: 0,
+          creditPackage3000: 0,
           cpfNumber: '',
           cnpjNumber: '',
           purchaseToken: '',
@@ -86,9 +90,13 @@ export const useAuth = () => {
               moedas: userData.moedas || 0,
               totalGames: userData.totalGames || 0,
               creditPackage100: userData.creditPackage100 || userData.creditGames100 || 0,
+              creditPackage300: userData.creditPackage300 || userData.creditGames300 || 0,
               creditPackage500: userData.creditPackage500 || userData.creditGames500 || 0,
               creditPackage700: userData.creditPackage700 || userData.creditGames700 || 0,
               creditPackage1000: userData.creditPackage1000 || userData.creditGames1000 || 0,
+              creditPackage1500: userData.creditPackage1500 || userData.creditGames1500 || 0,
+              creditPackage2000: userData.creditPackage2000 || userData.creditGames2000 || 0,
+              creditPackage3000: userData.creditPackage3000 || userData.creditGames3000 || 0,
               cpfNumber: userData.cpfNumber || '',
               cnpjNumber: userData.cnpjNumber || '',
               purchaseToken: userData.purchaseToken || '',
@@ -231,9 +239,13 @@ export const useAuth = () => {
         moedas: 0,
         totalGames: 0,
         creditPackage100: 0,
+        creditPackage300: 0,
         creditPackage500: 0,
         creditPackage700: 0,
         creditPackage1000: 0,
+        creditPackage1500: 0,
+        creditPackage2000: 0,
+        creditPackage3000: 0,
         cpfNumber: '',
         cnpjNumber: '',
         purchaseToken: '',
@@ -471,6 +483,10 @@ export const useAuth = () => {
           updateField = 'creditPackage100';
           newValue = authState.user.creditPackage100 + 1;
           break;
+        case 300:
+          updateField = 'creditPackage300';
+          newValue = authState.user.creditPackage300 + 1;
+          break;
         case 500:
           updateField = 'creditPackage500';
           newValue = authState.user.creditPackage500 + 1;
@@ -482,6 +498,18 @@ export const useAuth = () => {
         case 1000:
           updateField = 'creditPackage1000';
           newValue = authState.user.creditPackage1000 + 1;
+          break;
+        case 1500:
+          updateField = 'creditPackage1500';
+          newValue = authState.user.creditPackage1500 + 1;
+          break;
+        case 2000:
+          updateField = 'creditPackage2000';
+          newValue = authState.user.creditPackage2000 + 1;
+          break;
+        case 3000:
+          updateField = 'creditPackage3000';
+          newValue = authState.user.creditPackage3000 + 1;
           break;
         default:
           console.error('❌ Valor de créditos inválido:', credits);

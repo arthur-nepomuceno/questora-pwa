@@ -10,9 +10,13 @@ export interface User {
   moedas: number;
   totalGames: number;
   creditPackage100: number;
+  creditPackage300: number;
   creditPackage500: number;
   creditPackage700: number;
   creditPackage1000: number;
+  creditPackage1500: number;
+  creditPackage2000: number;
+  creditPackage3000: number;
   cpfNumber: string;
   cnpjNumber: string;
   purchaseToken?: string;

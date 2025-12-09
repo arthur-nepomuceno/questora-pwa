@@ -27,7 +27,9 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const [pendingEmail, setPendingEmail] = useState<string>('');
   const [pendingUserName, setPendingUserName] = useState<string>('');
   
-  const { login, signup, sendVerificationEmail, isLoading } = useAuth();
+  const { login, signup, sendVerificationEmail, resendEmailVerification, isLoading } = useAuth();
+  const [isResendingEmail, setIsResendingEmail] = useState(false);
+  const [resendMessage, setResendMessage] = useState<string>('');
 
   // Função para validar se contém apenas letras (e espaços)
   const isOnlyLetters = (str: string): boolean => {
@@ -118,6 +120,33 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
     setIsLogin(true); // Direcionar para a tela de login
   };
 
+  const handleResendEmail = async () => {
+    if (!loginForm.email) {
+      setResendMessage('Por favor, informe seu email no campo acima.');
+      return;
+    }
+
+    setIsResendingEmail(true);
+    setResendMessage('');
+
+    try {
+      // Extrair nome do email (parte antes do @) como fallback
+      const userName = loginForm.email.split('@')[0];
+      
+      const result = await resendEmailVerification(loginForm.email, userName);
+      
+      if (result.success) {
+        setResendMessage('✅ Email reenviado com sucesso! Verifique sua caixa de entrada e spam.');
+      } else {
+        setResendMessage(`❌ ${result.error || 'Erro ao reenviar email'}`);
+      }
+    } catch (error) {
+      setResendMessage('❌ Erro ao reenviar email. Tente novamente.');
+    } finally {
+      setIsResendingEmail(false);
+    }
+  };
+
   const handleEmailVerified = () => {
     setShowEmailVerification(false);
     setPendingEmail('');
@@ -176,6 +205,35 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
                 <div className="spam-instructions">
                   <p><strong>💡 Dica:</strong> Verifique também sua caixa de <strong>spam/lixo eletrônico</strong>!</p>
                   <p>O email de verificação pode ter ido para lá. Procure por &quot;Firebase&quot; ou &quot;Show do Milênio&quot;.</p>
+                  <button
+                    type="button"
+                    onClick={handleResendEmail}
+                    disabled={isResendingEmail}
+                    style={{
+                      marginTop: '10px',
+                      padding: '8px 16px',
+                      backgroundColor: '#ffeb3b',
+                      color: '#1a237e',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: isResendingEmail ? 'not-allowed' : 'pointer',
+                      fontWeight: 'bold',
+                      fontSize: '0.9rem',
+                      opacity: isResendingEmail ? 0.6 : 1
+                    }}
+                  >
+                    {isResendingEmail ? '⏳ Reenviando...' : '🔄 Reenviar Email de Verificação'}
+                  </button>
+                  {resendMessage && (
+                    <p style={{
+                      marginTop: '8px',
+                      fontSize: '0.85rem',
+                      color: resendMessage.includes('✅') ? '#4caf50' : '#f44336',
+                      fontWeight: '500'
+                    }}>
+                      {resendMessage}
+                    </p>
+                  )}
                 </div>
               )}
             </div>

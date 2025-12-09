@@ -5,6 +5,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import { TelegramData, packageMap, sendTelegramData, answerCallbackQuery } from '@/lib/telegram-utils';
 
 export async function POST(request: NextRequest) {
+  console.log("🚨🚨🚨 [TelegramWebhook] FUNÇÃO POST CHAMADA");
   
   let telegramData: TelegramData | null = null;
   
@@ -14,6 +15,8 @@ export async function POST(request: NextRequest) {
   const receivedSecret = request.headers.get("x-telegram-bot-api-secret-token") 
   ?? request.nextUrl.searchParams.get("secret") 
   ?? "";
+
+  console.log("🚨🚨🚨 [TelegramWebhook] Verificando credenciais...");
 
   // VERIFICAÇÃO DE CREDENCIAIS
   if (!configuredSecret) {
@@ -32,10 +35,13 @@ export async function POST(request: NextRequest) {
   }
   ////////////////////////////////////////////////////////////////////
 
+  console.log("🚨🚨🚨 [TelegramWebhook] Credenciais OK, parseando body...");
+
   //RECEBENDO OS DADOS DE RESPOSTA AO ABRIR A URL DO TELEGRAM
   try {
     telegramData = (await request.json()) as TelegramData;
     console.log("✅ Telegram Data:", telegramData);
+    console.log("🚨🚨🚨 [TelegramWebhook] Body parseado com sucesso");
   } catch (error) {
     console.error("[TelegramWebhook] Failed to parse request body", error);
     return NextResponse.json({ ok: true }, { status: 200 });
@@ -113,37 +119,41 @@ export async function POST(request: NextRequest) {
     console.log("✅ User Email:", userEmail);
     console.log("✅ User Total Credits:", userCreditsBeforePurchase);
 
+    // Extrair os 16 primeiros caracteres do token
+    const tokenHash = token ? token.substring(0, 16) : '';
+    console.log("✅ Token Hash (16 primeiros caracteres):", tokenHash);
+
     const welcomeMessage =
       `Olá ${userName}! Selecione um pacote para iniciar sua compra:`;
 
     const inlineKeyboard = {
       inline_keyboard: [  
         [  
-          { text: "50 créditos : R$0,50", callback_data: "pacote_de_50_creditos" },
+          { text: "50 créditos : R$0,50", callback_data: `pacote_de_50_creditos|${tokenHash}` },
         ],
         [  
-          { text: "300 créditos : R$2,99", callback_data: "pacote_de_300_creditos" },
+          { text: "300 créditos : R$2,99", callback_data: `pacote_de_300_creditos|${tokenHash}` },
         ],
         [
-          { text: "500 créditos : R$4,99", callback_data: "pacote_de_500_creditos" },
+          { text: "500 créditos : R$4,99", callback_data: `pacote_de_500_creditos|${tokenHash}` },
         ],
         [
-          { text: "700 créditos : R$6,99", callback_data: "pacote_de_700_creditos" },
+          { text: "700 créditos : R$6,99", callback_data: `pacote_de_700_creditos|${tokenHash}` },
         ],
         [
-          { text: "1000 créditos : R$9,99", callback_data: "pacote_de_1000_creditos" },
+          { text: "1000 créditos : R$9,99", callback_data: `pacote_de_1000_creditos|${tokenHash}` },
         ],
         [
-          { text: "2000 créditos : R$19,99", callback_data: "pacote_de_2000_creditos" },
+          { text: "2000 créditos : R$19,99", callback_data: `pacote_de_2000_creditos|${tokenHash}` },
         ],
         [
-          { text: "3000 créditos : R$29,99", callback_data: "pacote_de_3000_creditos" },
+          { text: "3000 créditos : R$29,99", callback_data: `pacote_de_3000_creditos|${tokenHash}` },
         ],
         [
-          { text: "5000 créditos : R$49,99", callback_data: "pacote_de_5000_creditos" },
+          { text: "5000 créditos : R$49,99", callback_data: `pacote_de_5000_creditos|${tokenHash}` },
         ],
         [
-          { text: "10000 créditos : R$99,99", callback_data: "pacote_de_10000_creditos" },
+          { text: "10000 créditos : R$99,99", callback_data: `pacote_de_10000_creditos|${tokenHash}` },
         ],
       ],
     };  
@@ -159,11 +169,19 @@ export async function POST(request: NextRequest) {
 
   //RECEBE A ESCOLHA DE PACOTE DE CRÉDITOS E PASSA AO PSP
   const callbackQuery = telegramData?.callback_query;  
+  console.log("🚨🚨🚨 [TelegramWebhook] callbackQuery existe?", !!callbackQuery);
+  
   if (botToken && callbackQuery) {
-      const packageId = callbackQuery.data; 
+      console.log("🚨🚨🚨 [TelegramWebhook] Entrando no bloco de callback_query");
+      const callbackData = callbackQuery.data; 
+      console.log("🚨🚨🚨 [TelegramWebhook] callbackData completo:", callbackData);
       const chatId = callbackQuery.message?.chat.id ?? callbackQuery.from.id;
+      
+      // Extrair packageId e tokenHash do callback_data
+      const [packageId, tokenHash] = callbackData?.split('|') || [callbackData, ''];
       const selectedPackage = packageMap[packageId];
       console.log("✅ Escolha:", packageId);
+      console.log("✅ Token Hash recebido:", tokenHash);
 
       // 1. Responde ao Telegram para fechar o loading
       await answerCallbackQuery({
@@ -219,13 +237,38 @@ export async function POST(request: NextRequest) {
             throw new Error("Dados Pix (QR Code ou código) indisponíveis na resposta.");
           }
 
-          // 5. Busca userId do cliente para salvar no Firestore
-          const userSnapshot = await adminDb.collection('users').where('chatId', '==', chatId).get();
-          const userDoc = userSnapshot.docs[0];
-          const userId = userDoc?.id;
-          const userName = userDoc?.data().name;
-          const userEmail = userDoc?.data().email;
-          const userCreditsBeforePurchase = userDoc?.data().totalCredits;
+          // 5. Busca userId do cliente para salvar no Firestore usando tokenHash
+          console.log('🔍 [TelegramWebhook] Buscando usuário pelo tokenHash (16 primeiros caracteres):', tokenHash);
+          
+          // Buscar todos os usuários e filtrar pelos primeiros 16 caracteres do purchaseToken
+          const allUsersSnapshot = await adminDb.collection('users').get();
+          let userDoc = null;
+          
+          for (const doc of allUsersSnapshot.docs) {
+            const userData = doc.data();
+            const userToken = userData.purchaseToken || '';
+            if (userToken.substring(0, 16) === tokenHash) {
+              userDoc = doc;
+              break;
+            }
+          }
+          
+          if (!userDoc) {
+            console.error('❌ [TelegramWebhook] Usuário não encontrado com tokenHash:', tokenHash);
+            await sendTelegramData({
+              botToken,
+              chatId,
+              text: "❌ Não foi possível identificar seu usuário. Por favor, envie /start novamente.",
+            });
+            return NextResponse.json({ ok: true }, { status: 200 });
+          }
+          
+          const userId = userDoc.id;
+          console.log('🔍 [TelegramWebhook] userId encontrado:', userId);
+          const userName = userDoc.data().name;
+          const userEmail = userDoc.data().email;
+          const userCreditsBeforePurchase = userDoc.data().totalCredits;
+          console.log('🔍 [TelegramWebhook] Dados do usuário encontrado:', { userId, userName, userEmail, userCreditsBeforePurchase });
           const paymentRef = adminDb.collection('payments').doc();
 
           // Salvar dados no Firestore

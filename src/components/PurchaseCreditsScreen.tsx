@@ -102,8 +102,6 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
     setIsCreatingPayment(true);
 
     try {
-      console.log('💳 [PurchaseCreditsScreen] Criando pagamento no Firestore...');
-      
       const response = await fetch('/api/payments/create-pix', {
         method: 'POST',
         headers: {

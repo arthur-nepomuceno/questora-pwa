@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, getDoc, query, where, getDocs } from 'firebase/firestore';
 import { CashOut } from '@/types/payment';
 
 interface CreditPackages {
@@ -108,6 +108,32 @@ export async function createCashOutRequest(
     // Validar se o usuário utilizou no mínimo 2000 créditos
     if (totalCreditsUsed < 2000) {
       throw new Error('Você precisa ter utilizado no mínimo 2000 créditos para solicitar um saque');
+    }
+    
+    // Buscar todos os pagamentos do usuário com status "paid"
+    console.log('💳 [cashOut] Buscando pagamentos do usuário com status "paid"...');
+    const paymentsQuery = query(
+      collection(db, 'payments'),
+      where('userId', '==', userId),
+      where('status', '==', 'paid')
+    );
+    
+    const paymentsSnapshot = await getDocs(paymentsQuery);
+    const payments = paymentsSnapshot.docs.map(doc => doc.data());
+    
+    // Somar totalAmount de todos os pagamentos pagos
+    const totalAmountPaid = payments.reduce((sum, payment) => {
+      const amount = payment.totalAmount || 0;
+      return sum + amount;
+    }, 0);
+    
+    console.log('💳 [cashOut] Total de pagamentos encontrados:', payments.length);
+    console.log('💳 [cashOut] Total pago (centavos):', totalAmountPaid);
+    console.log('💳 [cashOut] Total pago (reais):', (totalAmountPaid / 100).toFixed(2));
+    
+    // Validar se o usuário inseriu pelo menos 10 reais (999 centavos)
+    if (totalAmountPaid < 999) {
+      throw new Error('Você precisa ter inserido pelo menos R$ 10,00 em créditos na plataforma para solicitar um saque');
     }
     
     // Criar documento na coleção cashOut

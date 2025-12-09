@@ -288,7 +288,9 @@ export async function POST(request: NextRequest) {
             updatedAt: new Date(),
           };
           
-          await paymentRef.set(paymentData);          
+          console.log('🔍 [TelegramWebhook] paymentData ANTES DE SALVAR:', JSON.stringify(paymentData, null, 2));
+          await paymentRef.set(paymentData);
+          console.log('🔍 [TelegramWebhook] paymentData DEPOIS DE SALVAR - orderId:', paymentData.orderId);          
 
         } catch (error) {
           console.error("[TelegramWebhook] Erro ao criar link PushinPay:", error);

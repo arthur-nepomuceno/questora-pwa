@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, addDoc, serverTimestamp, doc, getDoc, query, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, getDoc, query, where, getDocs, runTransaction, updateDoc } from 'firebase/firestore';
 import { CashOut } from '@/types/payment';
 
 interface CreditPackages {
@@ -146,25 +146,51 @@ export async function createCashOutRequest(
       throw new Error('Você precisa ter inserido pelo menos R$ 10,00 em créditos na plataforma para solicitar um saque');
     }
     
-    // Criar documento na coleção cashOut
-    const cashOutData: Omit<CashOut, 'id'> = {
-      userId,
-      value,
-      chavePix: chavePix.trim(),
-      status: 'pending',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+    // Preparar referências dos documentos
+    const userRef = doc(db, 'users', userId);
+    const cashOutRef = doc(collection(db, 'cashOut'));
     
-    const docRef = await addDoc(collection(db, 'cashOut'), {
-      ...cashOutData,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
+    // Executar transação: criar cashOut e debitar créditos atomicamente
+    await runTransaction(db, async (transaction) => {
+      // Ler documento do usuário dentro da transação para garantir consistência
+      const userSnapshot = await transaction.get(userRef);
+      if (!userSnapshot.exists()) {
+        throw new Error('Usuário não encontrado');
+      }
+      
+      const currentUserData = userSnapshot.data();
+      const currentTotalCredits = currentUserData.totalCredits || currentUserData.credits || 0;
+      
+      // Validar novamente o saldo dentro da transação (pode ter mudado)
+      const maxValueAllowed = currentTotalCredits - 299;
+      if (value > maxValueAllowed) {
+        const maxValueInReais = (maxValueAllowed / 100).toFixed(2).replace('.', ',');
+        throw new Error(`Valor de saque incompatível com o saldo disponível. Você deve deixar pelo menos R$2,99 em créditos na conta. Você pode sacar até R$ ${maxValueInReais}. `);
+      }
+      
+      // Calcular novo total de créditos após o débito
+      const newTotalCredits = currentTotalCredits - value;
+      
+      // Criar documento cashOut
+      transaction.set(cashOutRef, {
+        userId,
+        value,
+        chavePix: chavePix.trim(),
+        status: 'pending',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+      
+      // Debitar créditos do usuário
+      transaction.update(userRef, {
+        totalCredits: newTotalCredits,
+      });
     });
     
-    console.log('✅ [cashOut] Solicitação de saque criada com sucesso. ID:', docRef.id);
+    console.log('✅ [cashOut] Solicitação de saque criada com sucesso. ID:', cashOutRef.id);
+    console.log('✅ [cashOut] Créditos debitados:', value, 'centavos');
     
-    return docRef.id;
+    return cashOutRef.id;
   } catch (error) {
     console.error('❌ [cashOut] Erro ao criar solicitação de saque:', error);
     throw error;

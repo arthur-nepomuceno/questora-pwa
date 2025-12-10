@@ -132,6 +132,16 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
               </button>
             </>
           )}
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              playButtonPress();
+              // Abrir suporte (pode ser um link, modal ou email)
+              window.open('mailto:suporte@showdomilenio.com', '_blank');
+            }}
+          >
+            Suporte
+          </button>
         </div>
       </div>
 

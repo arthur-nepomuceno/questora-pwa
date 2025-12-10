@@ -28,7 +28,7 @@ export default function ModalLivreInfo({ onClose }: ModalLivreInfoProps) {
             <strong> não contabiliza para acúmulo de pontos reais</strong>.
           </p>
           <p>
-            Para receber <strong>R$50 em bônus e acumular pontos</strong>, você precisa 
+            Para receber <strong>R$20 em bônus e acumular pontos</strong>, você precisa 
             fazer o <strong>cadastro no app</strong>.
           </p>
           <p>

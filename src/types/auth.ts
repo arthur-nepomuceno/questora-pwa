@@ -3,6 +3,7 @@ export interface User {
   email: string;
   name: string;
   phone: string;
+  genero: 'masculino' | 'feminino';
   totalCredits: number;
   totalPoints: number;
   totalCorrect: number;
@@ -44,6 +45,7 @@ export interface SignupCredentials {
   email: string;
   phone: string;
   password: string;
+  genero: 'masculino' | 'feminino';
 }
 
 

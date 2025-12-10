@@ -20,7 +20,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   }, [playMainTheme]);
   const [isLogin, setIsLogin] = useState(true);
   const [loginForm, setLoginForm] = useState<LoginCredentials>({ email: '', password: '' });
-  const [signupForm, setSignupForm] = useState<SignupCredentials>({ firstName: '', lastName: '', email: '', phone: '', password: '' });
+  const [signupForm, setSignupForm] = useState<SignupCredentials>({ firstName: '', lastName: '', email: '', phone: '', password: '', genero: 'masculino' });
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [showEmailVerification, setShowEmailVerification] = useState(false);
@@ -327,6 +327,27 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
                   placeholder="(00) 00000-0000"
                   required
                 />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="signup-genero">Gênero</label>
+                <select
+                  id="signup-genero"
+                  value={signupForm.genero}
+                  onChange={(e) => setSignupForm(prev => ({ ...prev, genero: e.target.value as 'masculino' | 'feminino' }))}
+                  required
+                  style={{
+                    padding: '12px 16px',
+                    border: '2px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    background: 'white',
+                    color: '#000000',
+                  }}
+                >
+                  <option value="masculino">Masculino</option>
+                  <option value="feminino">Feminino</option>
+                </select>
               </div>
               
               <div className="form-group">

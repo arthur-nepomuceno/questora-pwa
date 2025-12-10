@@ -38,6 +38,7 @@ export const useAuth = () => {
           email: firebaseUser.email!,
           name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
           phone: '', // valor padrão
+          genero: 'masculino', // valor padrão
           totalCredits: 2000, // valor padrão
           totalPoints: 0,
           totalCorrect: 0,
@@ -83,6 +84,7 @@ export const useAuth = () => {
               email: firebaseUser.email!,
               name: userData.name,
               phone: userData.phone || '',
+              genero: userData.genero || 'masculino',
               totalCredits: userData.totalCredits || userData.credits || 0,
               totalPoints: userData.totalPoints || 0,
               totalCorrect: userData.totalCorrect || 0,
@@ -232,6 +234,7 @@ export const useAuth = () => {
         name: fullName,
         email: credentials.email,
         phone: credentials.phone,
+        genero: credentials.genero,
         totalCredits: 2000,
         totalPoints: 0,
         totalCorrect: 0,

@@ -14,6 +14,7 @@ export default function ConsentModal({ onConfirm, onCancel }: ConsentModalProps)
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
+  const [genero, setGenero] = useState<'masculino' | 'feminino'>('masculino');
   const [isAdult, setIsAdult] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -51,7 +52,8 @@ export default function ConsentModal({ onConfirm, onCancel }: ConsentModalProps)
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         phone: phone.trim(),
-        isAdult
+        isAdult,
+        genero
       });
     }
   };
@@ -128,6 +130,29 @@ export default function ConsentModal({ onConfirm, onCancel }: ConsentModalProps)
               className={errors.phone ? 'error' : ''}
             />
             {errors.phone && <span className="error-message">{errors.phone}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="genero">Gênero *</label>
+            <select
+              id="genero"
+              value={genero}
+              onChange={(e) => setGenero(e.target.value as 'masculino' | 'feminino')}
+              className={errors.genero ? 'error' : ''}
+              style={{
+                padding: '12px 16px',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '10px',
+                fontSize: '1rem',
+                background: 'rgba(255, 255, 255, 0.95)',
+                color: '#000000',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+            </select>
+            {errors.genero && <span className="error-message">{errors.genero}</span>}
           </div>
 
           <div className="modal-actions">
@@ -212,7 +237,8 @@ export default function ConsentModal({ onConfirm, onCancel }: ConsentModalProps)
         }
 
         .form-group input[type="text"],
-        .form-group input[type="tel"] {
+        .form-group input[type="tel"],
+        .form-group select {
           padding: 12px 16px;
           border: 2px solid rgba(255, 255, 255, 0.3);
           border-radius: 10px;
@@ -223,14 +249,16 @@ export default function ConsentModal({ onConfirm, onCancel }: ConsentModalProps)
         }
 
         .form-group input[type="text"]:focus,
-        .form-group input[type="tel"]:focus {
+        .form-group input[type="tel"]:focus,
+        .form-group select:focus {
           outline: none;
           border-color: #ffd700;
           background: white;
           box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
         }
 
-        .form-group input.error {
+        .form-group input.error,
+        .form-group select.error {
           border-color: #ff4444;
           background: #ffe6e6;
         }

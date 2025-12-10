@@ -13,6 +13,7 @@ export interface ConsentData {
   lastName: string;
   phone: string;
   isAdult: boolean;
+  genero: 'masculino' | 'feminino';
 }
 
 export interface QuizState {

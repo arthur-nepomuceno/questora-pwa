@@ -214,6 +214,7 @@ export const useQuiz = () => {
         lastName: consentData.lastName,
         phone: consentData.phone,
         isAdult: consentData.isAdult,
+        genero: consentData.genero,
         category: pendingCategory,
         timestamp: serverTimestamp(),
         createdAt: new Date(),

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useSounds } from '@/hooks/useSounds';
 import PurchaseCreditModal from './PurchaseCreditModal';
+import SuporteModal from './SuporteModal';
 
 interface OptionsScreenProps {
   setScreen: (screen: any) => void;
@@ -13,6 +14,7 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
   const { user, logout, isLoading } = useAuth();
   const { playButtonPress, playMainTheme } = useSounds();
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+  const [showSuporteModal, setShowSuporteModal] = useState(false);
 
   // Tocar música tema quando a tela monta
   useEffect(() => {
@@ -136,8 +138,7 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
             className="btn btn-primary"
             onClick={() => {
               playButtonPress();
-              // Abrir suporte (pode ser um link, modal ou email)
-              window.open('mailto:suporte@showdomilenio.com', '_blank');
+              setShowSuporteModal(true);
             }}
           >
             Suporte
@@ -157,6 +158,18 @@ export default function OptionsScreen({ setScreen, selectedModalidade }: Options
           onCancel={() => setShowPurchaseModal(false)}
         />
       )}
+
+      {/* Suporte Modal */}
+      {showSuporteModal && (
+        <SuporteModal
+          onConfirm={(purchaseToken) => {
+            playButtonPress();
+            setShowSuporteModal(false);
+          }}
+          onCancel={() => setShowSuporteModal(false)}
+        />
+      )}
+
     </div>
   );
 }

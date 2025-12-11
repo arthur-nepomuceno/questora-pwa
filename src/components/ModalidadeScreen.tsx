@@ -15,14 +15,14 @@ interface ModalidadeScreenProps {
 
 export default function ModalidadeScreen({ selectModalidade, goToOptions, setScreen, selectedModalidade }: ModalidadeScreenProps) {
   const { user, logout, isLoading } = useAuth();
-  const { incrementCounter } = useCounter();
+  const { incrementCounter } = useCounter('modalidade-access-guest');
   const { playButtonPress, playMainTheme } = useSounds();
 
   useEffect(() => {
     if (!user && !isLoading) {
       incrementCounter();
     }
-  }, [user, isLoading]);
+  }, [user, isLoading, incrementCounter]);
 
   // Tocar música tema quando a tela monta
   useEffect(() => {

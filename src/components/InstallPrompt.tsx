@@ -1,15 +1,23 @@
 "use client";
 
 import { usePWA } from '@/hooks/usePWA';
+import { useCounter } from '@/hooks/useCounter';
 import { useState } from 'react';
 
 export default function InstallPrompt() {
   const { isInstallable, isInstalled, installApp, shareApp } = usePWA();
+  const { incrementCounter } = useCounter('download-button-clicks');
   const [isVisible, setIsVisible] = useState(true);
 
   if (isInstalled || !isInstallable || !isVisible) {
     return null;
   }
+
+  const handleDownloadClick = async () => {
+    // Incrementar contador antes de instalar
+    await incrementCounter();
+    installApp();
+  };
 
   return (
     <div className="install-prompt">
@@ -22,7 +30,7 @@ export default function InstallPrompt() {
         <div className="install-actions">
           <button 
             className="install-btn"
-            onClick={installApp}
+            onClick={handleDownloadClick}
           >
             Baixar
           </button>

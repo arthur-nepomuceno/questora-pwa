@@ -11,6 +11,38 @@ const COUNTER_DESCRIPTIONS: Record<string, string> = {
   'download-button-clicks': 'Contador de cliques no botão Baixar'
 };
 
+const LOCAL_STORAGE_KEY = 'modalidade-access-guest-count';
+
+// Função para obter o contador do localStorage
+const getLocalCounter = (): number => {
+  if (typeof window === 'undefined') return 0;
+  try {
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return stored ? parseInt(stored, 10) : 0;
+  } catch (error) {
+    console.error('Erro ao ler contador do localStorage:', error);
+    return 0;
+  }
+};
+
+// Função para salvar o contador no localStorage
+const setLocalCounter = (count: number): void => {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, count.toString());
+  } catch (error) {
+    console.error('Erro ao salvar contador no localStorage:', error);
+  }
+};
+
+// Função para incrementar o contador no localStorage
+const incrementLocalCounter = (): number => {
+  const currentCount = getLocalCounter();
+  const newCount = currentCount + 1;
+  setLocalCounter(newCount);
+  return newCount;
+};
+
 export const useCounter = (counterName?: string) => {
   const [isLoading, setIsLoading] = useState(false);
   
@@ -20,6 +52,12 @@ export const useCounter = (counterName?: string) => {
     try {
       setIsLoading(true);
       console.log(`🔢 [useCounter] Iniciando incremento do contador: ${finalCounterName}...`);
+      
+      // Se for modalidade-access-guest, incrementar também no localStorage
+      if (finalCounterName === 'modalidade-access-guest') {
+        const localCount = incrementLocalCounter();
+        console.log(`💾 [useCounter] Contador local incrementado: ${localCount}`);
+      }
       
       const counterRef = doc(db, 'counters', finalCounterName);
       
@@ -57,5 +95,13 @@ export const useCounter = (counterName?: string) => {
     }
   }, [counterName]);
   
-  return { incrementCounter, isLoading };
+  // Função para obter o contador local (apenas para modalidade-access-guest)
+  const getLocalCount = useCallback((): number => {
+    if (counterName === 'modalidade-access-guest' || !counterName) {
+      return getLocalCounter();
+    }
+    return 0;
+  }, [counterName]);
+  
+  return { incrementCounter, isLoading, getLocalCount };
 };

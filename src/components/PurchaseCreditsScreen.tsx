@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { useCounter } from '@/hooks/useCounter';
 import { useSounds } from '@/hooks/useSounds';
 
 interface PurchaseCreditsScreenProps {
@@ -46,6 +47,7 @@ interface PixModalData {
 
 export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUserInfo = false, onClose }: PurchaseCreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
+  const { incrementCounter: incrementLoginCounter } = useCounter('iniciar-sessao');
   const { playButtonPress, playMainTheme } = useSounds();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -319,7 +321,10 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
           </div>
           <button
             className="login-btn"
-            onClick={() => setScreen("auth")}
+            onClick={async () => {
+              await incrementLoginCounter();
+              setScreen("auth");
+            }}
             title="Voltar para escolha de modalidade"
           >
             Iniciar sessão

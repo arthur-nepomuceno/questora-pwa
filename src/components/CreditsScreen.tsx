@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { useCounter } from '@/hooks/useCounter';
 import { useSounds } from '@/hooks/useSounds';
 import { useDailyCredits } from '@/hooks/useDailyCredits';
 import PurchaseCreditModal from './PurchaseCreditModal';
@@ -15,6 +16,7 @@ interface CreditsScreenProps {
 
 export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions, selectedModalidade }: CreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
+  const { incrementCounter: incrementLoginCounter } = useCounter('iniciar-sessao');
   const { playButtonPress, playMainTheme } = useSounds();
   const { dailyCreditsSpent, spendCredits, canSpendCredits, dailyLimit } = useDailyCredits(selectedModalidade);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
@@ -150,7 +152,10 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
           </div>
           <button
             className="login-btn"
-            onClick={() => setScreen("auth")}
+            onClick={async () => {
+              await incrementLoginCounter();
+              setScreen("auth");
+            }}
             title="Voltar para escolha de modalidade"
           >
             Iniciar sessão

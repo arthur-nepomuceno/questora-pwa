@@ -2,6 +2,7 @@
 
 import { Screen } from '@/types/quiz';
 import { useAuth } from '@/hooks/useAuth';
+import { useCounter } from '@/hooks/useCounter';
 import { useSounds } from '@/hooks/useSounds';
 import { useEffect } from 'react';
 
@@ -15,6 +16,7 @@ interface CategoryScreenProps {
 
 export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade, goToOptions, selectedModalidade }: CategoryScreenProps) {
   const { user, logout, isLoading } = useAuth();
+  const { incrementCounter: incrementLoginCounter } = useCounter('iniciar-sessao');
   const { playButtonPress, playMainTheme } = useSounds();
 
   // Tocar música tema quando a tela monta
@@ -119,7 +121,10 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
           {selectedModalidade === 'livre' && (
             <button
               className="login-btn"
-              onClick={() => setScreen("auth")}
+              onClick={async () => {
+                await incrementLoginCounter();
+                setScreen("auth");
+              }}
               title="Iniciar sessão para modalidade Premiação"
             >
               Iniciar sessão

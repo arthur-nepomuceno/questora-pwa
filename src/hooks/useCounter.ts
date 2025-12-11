@@ -8,38 +8,48 @@ interface CounterConfig {
 
 const COUNTER_DESCRIPTIONS: Record<string, string> = {
   'modalidade-access-guest': 'Contador de acessos à tela de modalidades por usuários deslogados',
-  'download-button-clicks': 'Contador de cliques no botão Baixar'
+  'download-button-clicks': 'Contador de cliques no botão Baixar',
+  'iniciar-sessao': 'Contador de cliques no botão Iniciar sessão',
+  'cadastrar': 'Contador de cliques no botão Cadastrar'
 };
 
-const LOCAL_STORAGE_KEY = 'modalidade-access-guest-count';
+// Contadores que devem ser persistidos localmente
+const LOCAL_STORAGE_COUNTERS = ['modalidade-access-guest', 'iniciar-sessao', 'cadastrar'];
+
+// Função para obter a chave do localStorage para um contador
+const getLocalStorageKey = (counterName: string): string => {
+  return `${counterName}-count`;
+};
 
 // Função para obter o contador do localStorage
-const getLocalCounter = (): number => {
+const getLocalCounter = (counterName: string): number => {
   if (typeof window === 'undefined') return 0;
   try {
-    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const key = getLocalStorageKey(counterName);
+    const stored = localStorage.getItem(key);
     return stored ? parseInt(stored, 10) : 0;
   } catch (error) {
-    console.error('Erro ao ler contador do localStorage:', error);
+    console.error(`Erro ao ler contador ${counterName} do localStorage:`, error);
     return 0;
   }
 };
 
 // Função para salvar o contador no localStorage
-const setLocalCounter = (count: number): void => {
+const setLocalCounter = (counterName: string, count: number): void => {
   if (typeof window === 'undefined') return;
   try {
-    localStorage.setItem(LOCAL_STORAGE_KEY, count.toString());
+    const key = getLocalStorageKey(counterName);
+    localStorage.setItem(key, count.toString());
   } catch (error) {
-    console.error('Erro ao salvar contador no localStorage:', error);
+    console.error(`Erro ao salvar contador ${counterName} no localStorage:`, error);
   }
 };
 
 // Função para incrementar o contador no localStorage
-const incrementLocalCounter = (): number => {
-  const currentCount = getLocalCounter();
+const incrementLocalCounter = (counterName: string): number => {
+  const currentCount = getLocalCounter(counterName);
   const newCount = currentCount + 1;
-  setLocalCounter(newCount);
+  setLocalCounter(counterName, newCount);
   return newCount;
 };
 
@@ -53,10 +63,10 @@ export const useCounter = (counterName?: string) => {
       setIsLoading(true);
       console.log(`🔢 [useCounter] Iniciando incremento do contador: ${finalCounterName}...`);
       
-      // Se for modalidade-access-guest, incrementar também no localStorage
-      if (finalCounterName === 'modalidade-access-guest') {
-        const localCount = incrementLocalCounter();
-        console.log(`💾 [useCounter] Contador local incrementado: ${localCount}`);
+      // Se o contador deve ser persistido localmente, incrementar também no localStorage
+      if (LOCAL_STORAGE_COUNTERS.includes(finalCounterName)) {
+        const localCount = incrementLocalCounter(finalCounterName);
+        console.log(`💾 [useCounter] Contador local ${finalCounterName} incrementado: ${localCount}`);
       }
       
       const counterRef = doc(db, 'counters', finalCounterName);
@@ -95,10 +105,11 @@ export const useCounter = (counterName?: string) => {
     }
   }, [counterName]);
   
-  // Função para obter o contador local (apenas para modalidade-access-guest)
+  // Função para obter o contador local (apenas para contadores configurados)
   const getLocalCount = useCallback((): number => {
-    if (counterName === 'modalidade-access-guest' || !counterName) {
-      return getLocalCounter();
+    const finalCounterName = counterName || 'modalidade-access-guest';
+    if (LOCAL_STORAGE_COUNTERS.includes(finalCounterName)) {
+      return getLocalCounter(finalCounterName);
     }
     return 0;
   }, [counterName]);

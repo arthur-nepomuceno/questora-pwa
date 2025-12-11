@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { useCounter } from '@/hooks/useCounter';
 import { useSounds } from '@/hooks/useSounds';
 import { LoginCredentials, SignupCredentials } from '@/types/auth';
 import EmailVerificationScreen from './EmailVerificationScreen';
@@ -28,6 +29,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const [pendingUserName, setPendingUserName] = useState<string>('');
   
   const { login, signup, sendVerificationEmail, resendEmailVerification, isLoading } = useAuth();
+  const { incrementCounter: incrementSignupCounter } = useCounter('cadastrar');
   const [isResendingEmail, setIsResendingEmail] = useState(false);
   const [resendMessage, setResendMessage] = useState<string>('');
 
@@ -188,7 +190,8 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
             </button>
             <button 
               className={!isLogin ? 'active' : ''} 
-              onClick={() => {
+              onClick={async () => {
+                await incrementSignupCounter();
                 setIsLogin(false);
                 setError('');
                 setConfirmPassword('');

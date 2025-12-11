@@ -16,6 +16,7 @@ interface ModalidadeScreenProps {
 export default function ModalidadeScreen({ selectModalidade, goToOptions, setScreen, selectedModalidade }: ModalidadeScreenProps) {
   const { user, logout, isLoading } = useAuth();
   const { incrementCounter } = useCounter('modalidade-access-guest');
+  const { incrementCounter: incrementLoginCounter } = useCounter('iniciar-sessao');
   const { playButtonPress, playMainTheme } = useSounds();
 
   useEffect(() => {
@@ -133,7 +134,10 @@ export default function ModalidadeScreen({ selectModalidade, goToOptions, setScr
           </div>
           <button
             className="login-btn"
-            onClick={() => setScreen("auth")}
+            onClick={async () => {
+              await incrementLoginCounter();
+              setScreen("auth");
+            }}
             title="Iniciar sessão para modalidade Premiação"
           >
             Iniciar sessão

@@ -16,6 +16,8 @@ export default function SuporteModal({ onConfirm, onCancel }: SuporteModalProps)
   const [supportMessage, setSupportMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [suporteId, setSuporteId] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,12 +38,16 @@ export default function SuporteModal({ onConfirm, onCancel }: SuporteModalProps)
 
     try {
       // Criar registro na coleção suporte
-      const suporteId = await createSuporteRequest(user.id, user.email, supportMessage);
+      const newSuporteId = await createSuporteRequest(user.id, user.email, supportMessage);
       
-      // Exibir mensagem de sucesso com o ID do chamado
+      // Armazenar o ID do suporte
+      setSuporteId(newSuporteId);
+      setCopiedId(false);
+      
+      // Exibir mensagem de sucesso
       setSubmitMessage({ 
         type: 'success', 
-        text: `Mensagem enviada com sucesso! Nossa equipe entrará em contato em breve. Anote seu número de protocolo: ${suporteId}` 
+        text: 'Mensagem enviada com sucesso! Nossa equipe entrará em contato em breve. Aperte em cima para copiar seu número de protocolo e salve em um local seguro:' 
       });
       
       // Limpar campo de mensagem
@@ -54,6 +60,41 @@ export default function SuporteModal({ onConfirm, onCancel }: SuporteModalProps)
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleCopyId = async () => {
+    if (!suporteId) return;
+    
+    try {
+      await navigator.clipboard.writeText(suporteId);
+      setCopiedId(true);
+      playButtonPress();
+      
+      // Resetar o feedback após 2 segundos
+      setTimeout(() => {
+        setCopiedId(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Erro ao copiar ID:', error);
+      // Fallback para navegadores mais antigos
+      const textArea = document.createElement('textarea');
+      textArea.value = suporteId;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopiedId(true);
+        playButtonPress();
+        setTimeout(() => {
+          setCopiedId(false);
+        }, 2000);
+      } catch (err) {
+        console.error('Erro ao copiar ID (fallback):', err);
+      }
+      document.body.removeChild(textArea);
     }
   };
 
@@ -104,6 +145,27 @@ export default function SuporteModal({ onConfirm, onCancel }: SuporteModalProps)
               }}
             >
               {submitMessage.text}
+              {submitMessage.type === 'success' && suporteId && (
+                <div style={{ marginTop: '0.5rem' }}>
+                  <span
+                    onClick={handleCopyId}
+                    className="protocol-id"
+                    style={{
+                      display: 'inline-block',
+                      padding: '0.5rem 1rem',
+                      backgroundColor: 'rgba(76, 175, 80, 0.3)',
+                      border: '2px solid #4caf50',
+                      borderRadius: '6px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      userSelect: 'none',
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    {copiedId ? '✓ Copiado!' : suporteId}
+                  </span>
+                </div>
+              )}
             </div>
           )}
 
@@ -114,7 +176,7 @@ export default function SuporteModal({ onConfirm, onCancel }: SuporteModalProps)
               onClick={onCancel}
               disabled={isSubmitting}
             >
-              Cancelar
+              Voltar
             </button>
             <button 
               type="submit" 
@@ -261,6 +323,16 @@ export default function SuporteModal({ onConfirm, onCancel }: SuporteModalProps)
           font-size: 0.85rem;
           font-weight: 500;
           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .protocol-id:hover {
+          background-color: rgba(76, 175, 80, 0.5) !important;
+          transform: scale(1.05);
+          box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+        }
+
+        .protocol-id:active {
+          transform: scale(0.98);
         }
 
         .modal-actions .btn:disabled {

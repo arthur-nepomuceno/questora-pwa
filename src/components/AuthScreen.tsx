@@ -30,6 +30,7 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   
   const { login, signup, sendVerificationEmail, resendEmailVerification, isLoading } = useAuth();
   const { incrementCounter: incrementSignupCounter } = useCounter('cadastrar');
+  const { incrementCounter: incrementCreateAccountCounter } = useCounter('criar-conta');
   const [isResendingEmail, setIsResendingEmail] = useState(false);
   const [resendMessage, setResendMessage] = useState<string>('');
 
@@ -85,6 +86,9 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    
+    // Incrementar contador ao clicar em "Criar Conta"
+    await incrementCreateAccountCounter();
     
     // Validar se as senhas coincidem
     if (signupForm.password !== confirmPassword) {

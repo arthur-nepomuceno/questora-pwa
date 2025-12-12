@@ -16,7 +16,7 @@ interface CreditsScreenProps {
 
 export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOptions, selectedModalidade }: CreditsScreenProps) {
   const { user, logout, isLoading } = useAuth();
-  const { incrementCounter: incrementLoginCounter } = useCounter('iniciar-sessao');
+  const { incrementCounter: incrementLoginCounter, incrementLocalOnly: incrementLoginLocalOnly } = useCounter('iniciar-sessao');
   const { playButtonPress, playMainTheme } = useSounds();
   const { dailyCreditsSpent, spendCredits, canSpendCredits, dailyLimit } = useDailyCredits(selectedModalidade);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
@@ -153,8 +153,18 @@ export default function CreditsScreen({ setScreen, startQuizWithCredits, goToOpt
           <button
             className="login-btn"
             onClick={async () => {
-              await incrementLoginCounter();
+              // 1. Salvar localStorage IMEDIATAMENTE (síncrono)
+              incrementLoginLocalOnly();
+              
+              // 2. Pequeno delay para garantir persistência
+              await new Promise(resolve => setTimeout(resolve, 50));
+              
+              // 3. Navegar imediatamente
               setScreen("auth");
+              
+              // 4. Firestore em background (não bloqueia navegação)
+              // skipLocalStorage: true porque já foi incrementado acima
+              incrementLoginCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar no Firestore:', err));
             }}
             title="Voltar para escolha de modalidade"
           >

@@ -16,7 +16,7 @@ interface CategoryScreenProps {
 
 export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidade, goToOptions, selectedModalidade }: CategoryScreenProps) {
   const { user, logout, isLoading } = useAuth();
-  const { incrementCounter: incrementLoginCounter } = useCounter('iniciar-sessao');
+  const { incrementCounter: incrementLoginCounter, incrementLocalOnly: incrementLoginLocalOnly } = useCounter('iniciar-sessao');
   const { playButtonPress, playMainTheme } = useSounds();
 
   // Tocar música tema quando a tela monta
@@ -122,8 +122,18 @@ export default function CategoryScreen({ startQuiz, setScreen, goBackToModalidad
             <button
               className="login-btn"
               onClick={async () => {
-                await incrementLoginCounter();
+                // 1. Salvar localStorage IMEDIATAMENTE (síncrono)
+                incrementLoginLocalOnly();
+                
+                // 2. Pequeno delay para garantir persistência
+                await new Promise(resolve => setTimeout(resolve, 50));
+                
+                // 3. Navegar imediatamente
                 setScreen("auth");
+                
+                // 4. Firestore em background (não bloqueia navegação)
+                // skipLocalStorage: true porque já foi incrementado acima
+                incrementLoginCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar no Firestore:', err));
               }}
               title="Iniciar sessão para modalidade Premiação"
             >

@@ -4,6 +4,7 @@ import { doc, setDoc, getDoc, updateDoc, runTransaction } from 'firebase/firesto
 
 interface CounterConfig {
   description?: string;
+  skipLocalStorage?: boolean; // Se true, não incrementa localStorage (já foi incrementado)
 }
 
 const COUNTER_DESCRIPTIONS: Record<string, string> = {
@@ -87,6 +88,7 @@ export const useCounter = (counterName?: string) => {
   
   const incrementCounter = useCallback(async (customCounterName?: string, config?: CounterConfig) => {
     const finalCounterName = customCounterName || counterName || 'modalidade-access-guest';
+    const skipLocalStorage = config?.skipLocalStorage || false;
     
     try {
       setIsLoading(true);
@@ -94,7 +96,8 @@ export const useCounter = (counterName?: string) => {
       
       // Se o contador deve ser persistido localmente, incrementar também no localStorage
       // IMPORTANTE: Fazer isso ANTES da operação do Firestore para garantir persistência
-      if (LOCAL_STORAGE_COUNTERS.includes(finalCounterName)) {
+      // Mas pular se já foi incrementado localmente (skipLocalStorage = true)
+      if (LOCAL_STORAGE_COUNTERS.includes(finalCounterName) && !skipLocalStorage) {
         const localCount = incrementLocalCounter(finalCounterName);
         console.log(`💾 [useCounter] Contador local ${finalCounterName} incrementado: ${localCount}`);
         
@@ -112,6 +115,8 @@ export const useCounter = (counterName?: string) => {
             console.warn(`⚠️ [useCounter] Aviso ao sincronizar localStorage:`, error);
           }
         }
+      } else if (skipLocalStorage) {
+        console.log(`⏭️ [useCounter] Pulando incremento local (já foi incrementado): ${finalCounterName}`);
       }
       
       const counterRef = doc(db, 'counters', finalCounterName);
@@ -159,5 +164,14 @@ export const useCounter = (counterName?: string) => {
     return 0;
   }, [counterName]);
   
-  return { incrementCounter, isLoading, getLocalCount };
+  // Função para incrementar APENAS o localStorage (síncrono) - útil antes de navegações
+  const incrementLocalOnly = useCallback((customCounterName?: string): number => {
+    const finalCounterName = customCounterName || counterName || 'modalidade-access-guest';
+    if (LOCAL_STORAGE_COUNTERS.includes(finalCounterName)) {
+      return incrementLocalCounter(finalCounterName);
+    }
+    return 0;
+  }, [counterName]);
+  
+  return { incrementCounter, isLoading, getLocalCount, incrementLocalOnly };
 };

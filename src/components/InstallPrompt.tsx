@@ -14,9 +14,33 @@ export default function InstallPrompt() {
   }
 
   const handleDownloadClick = async () => {
-    // Incrementar contador antes de instalar
-    await incrementCounter();
-    installApp();
+    try {
+      // Incrementar contador ANTES de instalar
+      // Usar await para garantir que o Firestore seja atualizado
+      await incrementCounter();
+      
+      // Verificar se o localStorage foi salvo corretamente
+      if (typeof window !== 'undefined' && 'localStorage' in window) {
+        const key = 'download-button-clicks-count';
+        const saved = localStorage.getItem(key);
+        console.log(`🔍 [InstallPrompt] Verificando localStorage após incremento: ${saved}`);
+        
+        // Pequeno delay para garantir que o localStorage seja persistido
+        // Em produção, alguns navegadores podem precisar de um momento para sincronizar
+        await new Promise(resolve => setTimeout(resolve, 150));
+        
+        // Verificar novamente após o delay
+        const savedAfterDelay = localStorage.getItem(key);
+        console.log(`🔍 [InstallPrompt] Verificando localStorage após delay: ${savedAfterDelay}`);
+      }
+      
+      // Agora chamar installApp
+      installApp();
+    } catch (error) {
+      console.error('❌ [InstallPrompt] Erro ao processar clique no botão Baixar:', error);
+      // Mesmo com erro, tentar instalar o app
+      installApp();
+    }
   };
 
   return (

@@ -48,10 +48,38 @@ const setLocalCounter = (counterName: string, count: number): void => {
 
 // Função para incrementar o contador no localStorage
 const incrementLocalCounter = (counterName: string): number => {
-  const currentCount = getLocalCounter(counterName);
-  const newCount = currentCount + 1;
-  setLocalCounter(counterName, newCount);
-  return newCount;
+  if (typeof window === 'undefined') return 0;
+  
+  try {
+    const currentCount = getLocalCounter(counterName);
+    const newCount = currentCount + 1;
+    
+    // Salvar imediatamente de forma síncrona
+    const key = getLocalStorageKey(counterName);
+    localStorage.setItem(key, newCount.toString());
+    
+    // Verificar se foi salvo corretamente (importante em produção)
+    const verify = localStorage.getItem(key);
+    if (verify !== newCount.toString()) {
+      console.warn(`⚠️ [useCounter] Falha ao verificar localStorage para ${counterName}. Tentando novamente...`);
+      // Tentar novamente
+      localStorage.setItem(key, newCount.toString());
+    }
+    
+    return newCount;
+  } catch (error) {
+    console.error(`❌ [useCounter] Erro ao incrementar contador local ${counterName}:`, error);
+    // Se houver erro (ex: quota excedida), tentar limpar e salvar novamente
+    try {
+      const key = getLocalStorageKey(counterName);
+      localStorage.removeItem(key);
+      localStorage.setItem(key, '1');
+      return 1;
+    } catch (retryError) {
+      console.error(`❌ [useCounter] Erro ao tentar recuperar:`, retryError);
+      return 0;
+    }
+  }
 };
 
 export const useCounter = (counterName?: string) => {
@@ -65,9 +93,25 @@ export const useCounter = (counterName?: string) => {
       console.log(`🔢 [useCounter] Iniciando incremento do contador: ${finalCounterName}...`);
       
       // Se o contador deve ser persistido localmente, incrementar também no localStorage
+      // IMPORTANTE: Fazer isso ANTES da operação do Firestore para garantir persistência
       if (LOCAL_STORAGE_COUNTERS.includes(finalCounterName)) {
         const localCount = incrementLocalCounter(finalCounterName);
         console.log(`💾 [useCounter] Contador local ${finalCounterName} incrementado: ${localCount}`);
+        
+        // Forçar sincronização do localStorage (especialmente importante em produção)
+        if (typeof window !== 'undefined' && 'localStorage' in window) {
+          try {
+            // Forçar flush do localStorage
+            const key = getLocalStorageKey(finalCounterName);
+            const value = localStorage.getItem(key);
+            if (value) {
+              // Re-salvar para garantir persistência
+              localStorage.setItem(key, value);
+            }
+          } catch (error) {
+            console.warn(`⚠️ [useCounter] Aviso ao sincronizar localStorage:`, error);
+          }
+        }
       }
       
       const counterRef = doc(db, 'counters', finalCounterName);

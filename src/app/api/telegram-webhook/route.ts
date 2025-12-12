@@ -129,9 +129,6 @@ export async function POST(request: NextRequest) {
     const inlineKeyboard = {
       inline_keyboard: [  
         [  
-          { text: "50 créditos : R$0,50", callback_data: `pacote_de_50_creditos|${tokenHash}` },
-        ],
-        [  
           { text: "300 créditos : R$2,99", callback_data: `pacote_de_300_creditos|${tokenHash}` },
         ],
         [

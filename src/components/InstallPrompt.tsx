@@ -27,17 +27,23 @@ export default function InstallPrompt() {
       
       // 4. Se o usuário aceitou a instalação, incrementar contador
       if (choiceResult?.outcome === 'accepted') {
-        console.log('✅ [InstallPrompt] Usuário aceitou a instalação!');
+        console.log('🎉 ========================================');
+        console.log('✅ INSTALAÇÃO ACEITA PELO USUÁRIO!');
+        console.log('📱 Plataforma:', choiceResult.platform);
+        console.log('🎉 ========================================');
         
         // 1. Salvar localStorage IMEDIATAMENTE (síncrono)
-        incrementInstallAcceptedLocalOnly();
+        const localCount = incrementInstallAcceptedLocalOnly();
+        console.log('💾 [InstallPrompt] Contador local "instalacoes-aceitas" incrementado:', localCount);
         
         // 2. Pequeno delay para garantir persistência
         await new Promise(resolve => setTimeout(resolve, 50));
         
         // 3. Firestore em background (não bloqueia navegação)
         // skipLocalStorage: true porque já foi incrementado acima
-        incrementInstallAcceptedCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar instalação aceita no Firestore:', err));
+        incrementInstallAcceptedCounter(undefined, { skipLocalStorage: true })
+          .then(() => console.log('✅ [InstallPrompt] Contador "instalacoes-aceitas" salvo no Firestore com sucesso!'))
+          .catch(err => console.error('❌ [InstallPrompt] Erro ao salvar instalação aceita no Firestore:', err));
       } else if (choiceResult?.outcome === 'dismissed') {
         console.log('❌ [InstallPrompt] Usuário cancelou a instalação');
       }

@@ -40,7 +40,6 @@ export const usePayment = () => {
   const createPayment = async (paymentData: CreatePaymentData): Promise<{ success: boolean; error?: string; payment?: Payment }> => {
     try {
       setIsLoading(true);
-      console.log('💳 [usePayment] Criando pagamento com orderId:', paymentData.orderId);
 
       const now = new Date();
       
@@ -69,7 +68,6 @@ export const usePayment = () => {
         updatedAt: now,
       };
 
-      console.log('✅ [usePayment] Pagamento criado com sucesso:', paymentData.orderId);
       return { success: true, payment };
     } catch (error: any) {
       console.error('❌ [usePayment] Erro ao criar pagamento:', error);
@@ -88,12 +86,10 @@ export const usePayment = () => {
   const getPayment = async (orderId: string): Promise<{ success: boolean; error?: string; payment?: Payment }> => {
     try {
       setIsLoading(true);
-      console.log('🔍 [usePayment] Buscando pagamento com orderId:', orderId);
 
       const paymentDoc = await getDoc(doc(db, 'payments', orderId));
 
       if (!paymentDoc.exists()) {
-        console.log('⚠️ [usePayment] Pagamento não encontrado:', orderId);
         return { success: false, error: 'Pagamento não encontrado' };
       }
 
@@ -114,7 +110,6 @@ export const usePayment = () => {
         updatedAt: data.updatedAt?.toDate() || new Date(),
       };
 
-      console.log('✅ [usePayment] Pagamento encontrado:', orderId);
       return { success: true, payment };
     } catch (error: any) {
       console.error('❌ [usePayment] Erro ao buscar pagamento:', error);
@@ -138,7 +133,6 @@ export const usePayment = () => {
   ): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true);
-      console.log('🔄 [usePayment] Atualizando status do pagamento:', orderId, 'Novo status:', updateData.status);
 
       const updateFields: any = {
         status: updateData.status,
@@ -147,7 +141,6 @@ export const usePayment = () => {
 
       await updateDoc(doc(db, 'payments', orderId), updateFields);
 
-      console.log('✅ [usePayment] Status do pagamento atualizado com sucesso:', orderId);
       return { success: true };
     } catch (error: any) {
       console.error('❌ [usePayment] Erro ao atualizar status do pagamento:', error);

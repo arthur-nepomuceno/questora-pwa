@@ -93,14 +93,12 @@ export const useCounter = (counterName?: string) => {
     
     try {
       setIsLoading(true);
-      console.log(`🔢 [useCounter] Iniciando incremento do contador: ${finalCounterName}...`);
       
       // Se o contador deve ser persistido localmente, incrementar também no localStorage
       // IMPORTANTE: Fazer isso ANTES da operação do Firestore para garantir persistência
       // Mas pular se já foi incrementado localmente (skipLocalStorage = true)
       if (LOCAL_STORAGE_COUNTERS.includes(finalCounterName) && !skipLocalStorage) {
-        const localCount = incrementLocalCounter(finalCounterName);
-        console.log(`💾 [useCounter] Contador local ${finalCounterName} incrementado: ${localCount}`);
+        incrementLocalCounter(finalCounterName);
         
         // Forçar sincronização do localStorage (especialmente importante em produção)
         if (typeof window !== 'undefined' && 'localStorage' in window) {
@@ -116,8 +114,6 @@ export const useCounter = (counterName?: string) => {
             console.warn(`⚠️ [useCounter] Aviso ao sincronizar localStorage:`, error);
           }
         }
-      } else if (skipLocalStorage) {
-        console.log(`⏭️ [useCounter] Pulando incremento local (já foi incrementado): ${finalCounterName}`);
       }
       
       const counterRef = doc(db, 'counters', finalCounterName);
@@ -130,13 +126,11 @@ export const useCounter = (counterName?: string) => {
         if (counterDoc.exists()) {
           const currentCount = counterDoc.data()?.count || 0;
           const newCount = currentCount + 1;
-          console.log(`🔢 [useCounter] Documento existe. Contador atual: ${currentCount}, Novo: ${newCount}`);
           transaction.update(counterRef, { 
             count: newCount,
             lastUpdated: new Date()
           });
         } else {
-          console.log(`🔢 [useCounter] Documento não existe. Criando novo com count: 1`);
           transaction.set(counterRef, { 
             count: 1,
             lastUpdated: new Date(),
@@ -146,7 +140,6 @@ export const useCounter = (counterName?: string) => {
         }
       });
       
-      console.log(`✅ [useCounter] Contador ${finalCounterName} incrementado com sucesso!`);
     } catch (error) {
       console.error(`❌ [useCounter] Erro ao incrementar contador ${finalCounterName}:`, error);
       console.error('❌ [useCounter] Tipo do erro:', typeof error);

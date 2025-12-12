@@ -92,8 +92,6 @@ export default function PurchaseCreditModal({ onConfirm, onCancel }: PurchaseCre
         // Salvar no localStorage para uso na PurchaseCreditsScreen
         localStorage.setItem('userPaymentInfo', JSON.stringify(paymentInfo));
 
-        console.log('✅ Informações de pagamento salvas:', paymentInfo);
-
         onConfirm(purchaseToken || undefined);
       } catch (error) {
         console.error('Erro ao atualizar documentos:', error);

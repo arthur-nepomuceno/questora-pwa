@@ -41,8 +41,6 @@ export async function createSuporteRequest(
       id: suporteRef.id
     });
     
-    console.log('✅ [suporte] Solicitação de suporte criada com sucesso. ID:', suporteRef.id);
-    
     return suporteRef.id;
   } catch (error) {
     console.error('❌ [suporte] Erro ao criar solicitação de suporte:', error);

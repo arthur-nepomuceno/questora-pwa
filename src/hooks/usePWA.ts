@@ -77,8 +77,6 @@ export const usePWA = () => {
       await deferredPrompt.prompt();
       const choiceResult = await deferredPrompt.userChoice;
       
-      console.log(`📱 [usePWA] Usuário escolheu: ${choiceResult.outcome} na plataforma ${choiceResult.platform}`);
-      
       setDeferredPrompt(null);
       setIsInstallable(false);
       

@@ -22,12 +22,7 @@ export const db = getFirestore(app);
 
 // Monitorar estado da rede do Firestore
 if (typeof window !== 'undefined') {
-  console.log('🔷 [Firebase Client] Inicializado no navegador');
-  
-  // Verificar conexão periodicamente
-  setInterval(() => {
-    console.log('🔷 [Firebase Client] Status: Online');
-  }, 30000); // A cada 30 segundos
+  // Verificar conexão periodicamente (removido log)
 }
 
 export default app;

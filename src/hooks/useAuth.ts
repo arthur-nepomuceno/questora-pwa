@@ -28,9 +28,7 @@ export const useAuth = () => {
 
   // Escutar mudanças de autenticação
   useEffect(() => {
-    console.log('🔵 [useAuth] useEffect MONTADO - Listener instalado');
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
-      console.log('🔔 [useAuth] onAuthStateChanged DISPARADO - User:', firebaseUser?.uid);
       if (firebaseUser) {
         // Primeiro, mostrar o usuário básico imediatamente (só com email)
         const basicUser: User = {
@@ -62,9 +60,7 @@ export const useAuth = () => {
           updatedAt: new Date(),
         };
         
-        
         // Mostrar usuário imediatamente
-        console.log('⚠️ [useAuth] SETANDO BASIC USER - credits:', basicUser.totalCredits, 'points:', basicUser.totalPoints);
         setAuthState({
           user: basicUser,
           isLoading: false,
@@ -73,9 +69,7 @@ export const useAuth = () => {
 
         // Depois, buscar dados completos do Firestore em background
         try {
-          console.log('🔷 [useAuth] Iniciando busca no Firestore para:', firebaseUser.uid);
           const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
-          console.log('🔷 [useAuth] Resposta do Firestore. Existe?', userDoc.exists());
           if (userDoc.exists()) {
             const userData = userDoc.data();
             
@@ -109,7 +103,6 @@ export const useAuth = () => {
               updatedAt: userData.updatedAt?.toDate() || new Date(),
             };
             
-            console.log('✅ [useAuth] SETANDO COMPLETE USER - credits:', completeUser.totalCredits, 'points:', completeUser.totalPoints);
             // Atualizar com dados completos
             setAuthState({
               user: completeUser,
@@ -117,7 +110,6 @@ export const useAuth = () => {
               isAuthenticated: true,
             });
           } else {
-            console.log('🔶 [useAuth] Documento não existe. Criando novo...');
             // Criar documento do usuário se não existir
             await setDoc(doc(db, 'users', firebaseUser.uid), {
               ...basicUser,
@@ -578,8 +570,6 @@ export const useAuth = () => {
           purchaseToken: purchaseToken,
         } : null,
       }));
-
-      console.log('✅ Dados de documento atualizados com sucesso');
       
       // Verificar se o token foi realmente salvo no Firestore (resolve race condition)
       const tokenVerified = await verifyPurchaseTokenSaved(authState.user.id, purchaseToken);

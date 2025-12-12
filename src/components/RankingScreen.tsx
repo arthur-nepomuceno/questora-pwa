@@ -25,38 +25,24 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [nextUpdate, setNextUpdate] = useState<string>('');
 
-  // Contador de renders
-  const renderCount = useRef(0);
-  renderCount.current += 1;
-
   // Tocar música tema quando a tela monta
   useEffect(() => {
     playMainTheme();
   }, [playMainTheme]);
   
-  console.log('🔵 [RANKING] Componente renderizado:', renderCount.current, 'vezes');
-  console.log('🔵 [RANKING] Estado atual - loading:', loading, '| participant:', participant.length, '| error:', error);
-  
   const fetchRankingData = async () => {
     try {
-      console.log('⏳ [RANKING] ANTES de setLoading(true)');
       setLoading(true);
-      console.log('⏳ [RANKING] DEPOIS de setLoading(true)');
       setError(null);
-      console.log('🟡 [RANKING] Iniciando fetch da API...');
       
       // Delay mínimo de 1 segundo ANTES de chamar a API
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       const response = await fetch('/api/ranking');
       
-      console.log('🟢 [RANKING] Resposta recebida:', response.status);
-      
       const result = await response.json();
-      console.log('🟢 [RANKING] Dados parseados:', result);
       
       if (result.data) {
-        console.log('✅ [RANKING] Setando participant com', result.data.length, 'jogadores');
         setParticipant(result.data);
         
         // Formatar horário da próxima atualização
@@ -79,11 +65,8 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
         throw new Error(result.error || 'Erro desconhecido');
       }
     } catch (error) {
-
-      console.log('❌ [RANKING] Setando error:', error instanceof Error ? error.message : 'Erro ao buscar ranking');
       setError(error instanceof Error ? error.message : 'Erro ao buscar ranking');
     } finally {
-      console.log('⏹️ [RANKING] Setando loading = false');
       setLoading(false);
     }
   };
@@ -99,7 +82,6 @@ export default function RankingScreen({ setScreen }: RankingScreenProps) {
   };
 
   useEffect(() => {
-    console.log('🟣 [RANKING] useEffect executado');
     fetchRankingData();
     
     // Inicializar relógio

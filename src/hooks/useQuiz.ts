@@ -220,7 +220,6 @@ export const useQuiz = () => {
         createdAt: new Date(),
       });
       
-      console.log('✅ Dados salvos na coleção preusers');
     } catch (error) {
       console.error('❌ Erro ao salvar dados na coleção preusers:', error);
       // Continuar mesmo se houver erro ao salvar
@@ -255,7 +254,6 @@ export const useQuiz = () => {
   const clearConsentData = useCallback(() => {
     localStorage.removeItem('consentData');
     setQuizState(prev => ({ ...prev, consentData: undefined }));
-    console.log('✅ Dados de consentimento limpos');
   }, []);
 
   const startQuizWithCredits = useCallback(async (credits: number) => {

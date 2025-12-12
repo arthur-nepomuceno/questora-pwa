@@ -8,11 +8,9 @@ const STATIC_CACHE_URLS = [
 
 // Instalação do Service Worker
 self.addEventListener('install', (event) => {
-  console.log('Service Worker: Instalando nova versão...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Service Worker: Cache aberto');
         return cache.addAll(STATIC_CACHE_URLS);
       })
       .catch((error) => {
@@ -25,13 +23,11 @@ self.addEventListener('install', (event) => {
 
 // Ativação do Service Worker
 self.addEventListener('activate', (event) => {
-  console.log('Service Worker: Ativando...');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Service Worker: Removendo cache antigo:', cacheName);
             return caches.delete(cacheName);
           }
         })

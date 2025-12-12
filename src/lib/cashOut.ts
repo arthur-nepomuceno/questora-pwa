@@ -31,17 +31,6 @@ function calculateTotalCreditsUsed(creditPackages: CreditPackages): number {
   const total = package100 + package300 + package500 + package700 + 
                 package1000 + package1500 + package2000 + package3000;
   
-  console.log('📊 [cashOut] Totais de créditos por pacote:');
-  console.log('  - creditPackage100:', creditPackages.creditPackage100 || 0, 'x 100 =', package100);
-  console.log('  - creditPackage300:', creditPackages.creditPackage300 || 0, 'x 300 =', package300);
-  console.log('  - creditPackage500:', creditPackages.creditPackage500 || 0, 'x 500 =', package500);
-  console.log('  - creditPackage700:', creditPackages.creditPackage700 || 0, 'x 700 =', package700);
-  console.log('  - creditPackage1000:', creditPackages.creditPackage1000 || 0, 'x 1000 =', package1000);
-  console.log('  - creditPackage1500:', creditPackages.creditPackage1500 || 0, 'x 1500 =', package1500);
-  console.log('  - creditPackage2000:', creditPackages.creditPackage2000 || 0, 'x 2000 =', package2000);
-  console.log('  - creditPackage3000:', creditPackages.creditPackage3000 || 0, 'x 3000 =', package3000);
-  console.log('📊 [cashOut] Somatório final:', total);
-  
   return total;
 }
 
@@ -121,7 +110,6 @@ export async function createCashOutRequest(
     }
     
     // Buscar todos os pagamentos do usuário com status "paid"
-    console.log('💳 [cashOut] Buscando pagamentos do usuário com status "paid"...');
     const paymentsQuery = query(
       collection(db, 'payments'),
       where('userId', '==', userId),
@@ -136,10 +124,6 @@ export async function createCashOutRequest(
       const amount = payment.totalAmount || 0;
       return sum + amount;
     }, 0);
-    
-    console.log('💳 [cashOut] Total de pagamentos encontrados:', payments.length);
-    console.log('💳 [cashOut] Total pago (centavos):', totalAmountPaid);
-    console.log('💳 [cashOut] Total pago (reais):', (totalAmountPaid / 100).toFixed(2));
     
     // Validar se o usuário inseriu pelo menos 10 reais (999 centavos)
     if (totalAmountPaid < 999) {
@@ -186,9 +170,6 @@ export async function createCashOutRequest(
         totalCredits: newTotalCredits,
       });
     });
-    
-    console.log('✅ [cashOut] Solicitação de saque criada com sucesso. ID:', cashOutRef.id);
-    console.log('✅ [cashOut] Créditos debitados:', value, 'centavos');
     
     return cashOutRef.id;
   } catch (error) {

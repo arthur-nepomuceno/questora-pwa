@@ -123,15 +123,6 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
       const data = await response.json();
 
       if (!response.ok) {
-        // Exibir informações de debug do token
-        if (data.debug) {
-          console.log('🔑 [PurchaseCreditsScreen] DEBUG - Informações do Token:');
-          console.log('   - Token existe?', data.debug.tokenExists);
-          console.log('   - Comprimento do token:', data.debug.tokenLength);
-          console.log('   - Preview do token:', data.debug.tokenPreview);
-          console.log('   - Token completo:', data.debug.tokenFull);
-        }
-        
         // Exibir detalhes do erro do PagSeguro se disponível
         let errorMessage = data.error || 'Erro ao criar pagamento';
         
@@ -157,17 +148,7 @@ export default function PurchaseCreditsScreen({ setScreen, goToOptions, hideUser
       }
 
             if (data.success) {
-        console.log('✅ [PurchaseCreditsScreen] Pagamento criado com sucesso:', {
-          orderId: data.orderId,
-          referenceId: data.referenceId,
-        });
-
         if (data.pagbankResponse) {
-          console.log('📥 [PurchaseCreditsScreen] ID:', data.pagbankResponse.id);
-          console.log('📥 [PurchaseCreditsScreen] QR Code Text:', data.pagbankResponse.qr_codes?.[0]?.text);
-          console.log('📥 [PurchaseCreditsScreen] QR Code Image URL:', data.pagbankResponse.qr_codes[0].links.find((link: any) => link.rel === 'QRCODE.PNG').href);
-          console.log('📥 [PurchaseCreditsScreen] Resposta completa do PagSeguro:', JSON.stringify(data.pagbankResponse, null, 2));
-
           // Extrair dados do PIX para exibir no modal
           const qrCodeText = data.pagbankResponse.qr_codes?.[0]?.text || '';
           const qrCodeImageUrl = data.pagbankResponse.qr_codes[0].links.find((link: any) => link.rel === 'QRCODE.PNG')?.href || '';

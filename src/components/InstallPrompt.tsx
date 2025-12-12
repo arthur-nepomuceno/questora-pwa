@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export default function InstallPrompt() {
   const { isInstallable, isInstalled, installApp, shareApp } = usePWA();
-  const { incrementCounter } = useCounter('download-button-clicks');
+  const { incrementCounter, incrementLocalOnly } = useCounter('download-button-clicks');
   const [isVisible, setIsVisible] = useState(true);
 
   if (isInstalled || !isInstallable || !isVisible) {
@@ -15,27 +15,18 @@ export default function InstallPrompt() {
 
   const handleDownloadClick = async () => {
     try {
-      // Incrementar contador ANTES de instalar
-      // Usar await para garantir que o Firestore seja atualizado
-      await incrementCounter();
+      // 1. Salvar localStorage IMEDIATAMENTE (síncrono)
+      incrementLocalOnly();
       
-      // Verificar se o localStorage foi salvo corretamente
-      if (typeof window !== 'undefined' && 'localStorage' in window) {
-        const key = 'download-button-clicks-count';
-        const saved = localStorage.getItem(key);
-        console.log(`🔍 [InstallPrompt] Verificando localStorage após incremento: ${saved}`);
-        
-        // Pequeno delay para garantir que o localStorage seja persistido
-        // Em produção, alguns navegadores podem precisar de um momento para sincronizar
-        await new Promise(resolve => setTimeout(resolve, 150));
-        
-        // Verificar novamente após o delay
-        const savedAfterDelay = localStorage.getItem(key);
-        console.log(`🔍 [InstallPrompt] Verificando localStorage após delay: ${savedAfterDelay}`);
-      }
+      // 2. Pequeno delay para garantir persistência
+      await new Promise(resolve => setTimeout(resolve, 50));
       
-      // Agora chamar installApp
+      // 3. Instalar app imediatamente
       installApp();
+      
+      // 4. Firestore em background (não bloqueia navegação)
+      // skipLocalStorage: true porque já foi incrementado acima
+      incrementCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar no Firestore:', err));
     } catch (error) {
       console.error('❌ [InstallPrompt] Erro ao processar clique no botão Baixar:', error);
       // Mesmo com erro, tentar instalar o app

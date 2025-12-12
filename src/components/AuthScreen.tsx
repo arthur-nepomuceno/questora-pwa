@@ -29,8 +29,8 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
   const [pendingUserName, setPendingUserName] = useState<string>('');
   
   const { login, signup, sendVerificationEmail, resendEmailVerification, isLoading } = useAuth();
-  const { incrementCounter: incrementSignupCounter } = useCounter('cadastrar');
-  const { incrementCounter: incrementCreateAccountCounter } = useCounter('criar-conta');
+  const { incrementCounter: incrementSignupCounter, incrementLocalOnly: incrementSignupLocalOnly } = useCounter('cadastrar');
+  const { incrementCounter: incrementCreateAccountCounter, incrementLocalOnly: incrementCreateAccountLocalOnly } = useCounter('criar-conta');
   const [isResendingEmail, setIsResendingEmail] = useState(false);
   const [resendMessage, setResendMessage] = useState<string>('');
 
@@ -87,8 +87,15 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
     e.preventDefault();
     setError('');
     
-    // Incrementar contador ao clicar em "Criar Conta"
-    await incrementCreateAccountCounter();
+    // 1. Salvar localStorage IMEDIATAMENTE (síncrono)
+    incrementCreateAccountLocalOnly();
+    
+    // 2. Pequeno delay para garantir persistência
+    await new Promise(resolve => setTimeout(resolve, 50));
+    
+    // 3. Firestore em background (não bloqueia navegação)
+    // skipLocalStorage: true porque já foi incrementado acima
+    incrementCreateAccountCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar no Firestore:', err));
     
     // Validar se as senhas coincidem
     if (signupForm.password !== confirmPassword) {
@@ -195,10 +202,20 @@ export default function AuthScreen({ onAuthSuccess, onBack }: AuthScreenProps) {
             <button 
               className={!isLogin ? 'active' : ''} 
               onClick={async () => {
-                await incrementSignupCounter();
+                // 1. Salvar localStorage IMEDIATAMENTE (síncrono)
+                incrementSignupLocalOnly();
+                
+                // 2. Pequeno delay para garantir persistência
+                await new Promise(resolve => setTimeout(resolve, 50));
+                
+                // 3. Navegar imediatamente
                 setIsLogin(false);
                 setError('');
                 setConfirmPassword('');
+                
+                // 4. Firestore em background (não bloqueia navegação)
+                // skipLocalStorage: true porque já foi incrementado acima
+                incrementSignupCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar no Firestore:', err));
               }}
             >
               Cadastrar

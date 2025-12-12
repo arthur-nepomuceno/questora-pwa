@@ -7,6 +7,7 @@ import { useState } from 'react';
 export default function InstallPrompt() {
   const { isInstallable, isInstalled, installApp, shareApp } = usePWA();
   const { incrementCounter, incrementLocalOnly } = useCounter('download-button-clicks');
+  const { incrementCounter: incrementInstallAcceptedCounter, incrementLocalOnly: incrementInstallAcceptedLocalOnly } = useCounter('instalacoes-aceitas');
   const [isVisible, setIsVisible] = useState(true);
 
   if (isInstalled || !isInstallable || !isVisible) {
@@ -21,10 +22,27 @@ export default function InstallPrompt() {
       // 2. Pequeno delay para garantir persistência
       await new Promise(resolve => setTimeout(resolve, 50));
       
-      // 3. Instalar app imediatamente
-      installApp();
+      // 3. Instalar app e aguardar escolha do usuário
+      const choiceResult = await installApp();
       
-      // 4. Firestore em background (não bloqueia navegação)
+      // 4. Se o usuário aceitou a instalação, incrementar contador
+      if (choiceResult?.outcome === 'accepted') {
+        console.log('✅ [InstallPrompt] Usuário aceitou a instalação!');
+        
+        // 1. Salvar localStorage IMEDIATAMENTE (síncrono)
+        incrementInstallAcceptedLocalOnly();
+        
+        // 2. Pequeno delay para garantir persistência
+        await new Promise(resolve => setTimeout(resolve, 50));
+        
+        // 3. Firestore em background (não bloqueia navegação)
+        // skipLocalStorage: true porque já foi incrementado acima
+        incrementInstallAcceptedCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar instalação aceita no Firestore:', err));
+      } else if (choiceResult?.outcome === 'dismissed') {
+        console.log('❌ [InstallPrompt] Usuário cancelou a instalação');
+      }
+      
+      // 5. Firestore em background (não bloqueia navegação)
       // skipLocalStorage: true porque já foi incrementado acima
       incrementCounter(undefined, { skipLocalStorage: true }).catch(err => console.error('Erro ao salvar no Firestore:', err));
     } catch (error) {

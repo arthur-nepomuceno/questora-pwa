@@ -12,11 +12,12 @@ const COUNTER_DESCRIPTIONS: Record<string, string> = {
   'download-button-clicks': 'Contador de cliques no botão Baixar',
   'iniciar-sessao': 'Contador de cliques no botão Iniciar sessão',
   'cadastrar': 'Contador de cliques no botão Cadastrar',
-  'criar-conta': 'Contador de cliques no botão Criar Conta'
+  'criar-conta': 'Contador de cliques no botão Criar Conta',
+  'instalacoes-aceitas': 'Contador de instalações aceitas pelo usuário'
 };
 
 // Contadores que devem ser persistidos localmente
-const LOCAL_STORAGE_COUNTERS = ['modalidade-access-guest', 'download-button-clicks', 'iniciar-sessao', 'cadastrar', 'criar-conta'];
+const LOCAL_STORAGE_COUNTERS = ['modalidade-access-guest', 'download-button-clicks', 'iniciar-sessao', 'cadastrar', 'criar-conta', 'instalacoes-aceitas'];
 
 // Função para obter a chave do localStorage para um contador
 const getLocalStorageKey = (counterName: string): string => {

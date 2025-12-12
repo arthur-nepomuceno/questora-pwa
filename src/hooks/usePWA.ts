@@ -70,18 +70,22 @@ export const usePWA = () => {
     };
   }, []);
 
-  const installApp = async () => {
-    if (!deferredPrompt) return;
+  const installApp = async (): Promise<{ outcome: 'accepted' | 'dismissed'; platform: string } | null> => {
+    if (!deferredPrompt) return null;
 
     try {
       await deferredPrompt.prompt();
       const choiceResult = await deferredPrompt.userChoice;
       
+      console.log(`📱 [usePWA] Usuário escolheu: ${choiceResult.outcome} na plataforma ${choiceResult.platform}`);
       
       setDeferredPrompt(null);
       setIsInstallable(false);
+      
+      return choiceResult;
     } catch (error) {
       console.error('Erro ao instalar PWA:', error);
+      return null;
     }
   };
 
